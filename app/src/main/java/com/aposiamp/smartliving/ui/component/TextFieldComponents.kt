@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import com.aposiamp.smartliving.ui.theme.BgColor
 import com.aposiamp.smartliving.ui.theme.PrussianBlue
 import com.aposiamp.smartliving.ui.theme.componentShapes
@@ -19,7 +20,9 @@ import com.aposiamp.smartliving.ui.theme.componentShapes
 @Composable
 fun TextFieldComponent(
     labelValue: String,
-    painterResource: Painter
+    painterResource: Painter,
+    contentDescription: String,
+    keyboardType: KeyboardType
 ) {
     val textValue = remember {
         mutableStateOf("")
@@ -36,7 +39,8 @@ fun TextFieldComponent(
             focusedLabelColor = PrussianBlue,
             cursorColor = PrussianBlue
         ),
-        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next, keyboardType = keyboardType),
         value = textValue.value,
         onValueChange = {
             textValue.value = it
@@ -44,7 +48,7 @@ fun TextFieldComponent(
         leadingIcon = {
             Icon(
                 painter = painterResource,
-                contentDescription = ""
+                contentDescription = contentDescription
             )
         }
     )
