@@ -24,7 +24,7 @@ fun AuthHeadingTextComponent(value: String) {
             .heightIn(min = 80.dp),
         style = TextStyle(
             fontSize = 30.sp,
-            fontFamily = FontFamily(Font(R.font.poppins_bold)),
+            fontFamily = FontFamily(Font(R.font.carlito_bold)),
             fontStyle = FontStyle.Normal
         ),
         color = colorResource(id = R.color.colorText),
@@ -38,7 +38,7 @@ fun TextFieldComponentText(value: String) {
         text = value,
         style = TextStyle(
             fontSize = 16.sp,
-            fontFamily = FontFamily(Font(R.font.poppins_light)),
+            fontFamily = FontFamily(Font(R.font.carlito_regular)),
             fontStyle = FontStyle.Normal
         ),
         color = colorResource(id = R.color.colorText)
