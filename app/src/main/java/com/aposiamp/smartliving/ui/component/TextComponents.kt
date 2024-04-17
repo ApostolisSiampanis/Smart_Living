@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -42,5 +43,17 @@ fun TextFieldComponentText(value: String) {
             fontStyle = FontStyle.Normal
         ),
         color = colorResource(id = R.color.colorText)
+    )
+}
+
+@Composable
+fun AuthButtonTextComponent(value: String) {
+    Text(
+        text = value,
+        style = TextStyle(
+            fontSize = 18.sp,
+            fontFamily = FontFamily(Font(R.font.carlito_bold))
+        ),
+        color = Color.White
     )
 }
