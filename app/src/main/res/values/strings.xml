@@ -9,6 +9,10 @@
     <string name="email_hint">Enter your email</string>
     <string name="password">Password</string>
     <string name="password_hint">Enter your password</string>
-    <string name="hide_password">Hide password </string>
-    <string name="show_password">Show password </string>
+    <string name="hide_password">Hide password</string>
+    <string name="show_password">Show password</string>
+    <string name="terms_and_conditions">By continuing you accept our\u00A0</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="and">\u00A0and\u00A0</string>
+    <string name="terms_of_use">Terms of Use.</string>
 </resources>
