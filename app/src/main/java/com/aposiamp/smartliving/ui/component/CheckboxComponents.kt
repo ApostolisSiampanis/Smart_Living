@@ -17,7 +17,7 @@ import com.aposiamp.smartliving.ui.theme.SkyBlue
 
 @Composable
 fun CheckboxComponent(
-
+    onTextSelected: (String) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -40,6 +40,6 @@ fun CheckboxComponent(
             )
         )
 
-        SignUpClickableTextComponent()
+        SignUpClickableTextComponent(onTextSelected)
     }
 }

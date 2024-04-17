@@ -1,6 +1,5 @@
 package com.aposiamp.smartliving.ui.component
 
-import android.util.Log
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -15,7 +14,7 @@ import com.aposiamp.smartliving.ui.theme.SkyBlue
 
 @Composable
 fun SignUpClickableTextComponent(
-
+    onTextSelected: (String) -> Unit
 ) {
     val acceptTermsPrefixText = stringResource(id = R.string.terms_and_conditions)
     val privacyPolicyText = stringResource(id = R.string.privacy_policy)
@@ -68,7 +67,9 @@ fun SignUpClickableTextComponent(
                 start = offset,
                 end = offset
             ).firstOrNull()?.also {span ->
-                Log.d("SignUpClickableTextComponent", "{${span}}")
+                if (span.item == privacyPolicyText || span.item == termsOfUseText) {
+                    onTextSelected(span.item)
+                }
             }
         }
     )
