@@ -1,6 +1,7 @@
 package com.aposiamp.smartliving.ui.screen.auth
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -68,17 +69,22 @@ fun SignUpScreen() {
                     }
                 }
             )
-            Spacer(modifier = Modifier.height(80.dp))
-            AuthButtonComponent(value = stringResource(R.string.register))
-            Spacer(modifier = Modifier.height(20.dp))
-            DividerTextComponent()
-            HaveAnAccountOrNotClickableTextComponent(
-                onTextSelected = {
-                    if (it == "Login") {
-                        //TODO: Navigate to Login Screen
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Bottom
+            ) {
+                Spacer(modifier = Modifier.weight(1f))
+                AuthButtonComponent(value = stringResource(R.string.register))
+                Spacer(modifier = Modifier.height(20.dp))
+                DividerTextComponent()
+                HaveAnAccountOrNotClickableTextComponent(
+                    onTextSelected = {
+                        if (it == "Login") {
+                            //TODO: Navigate to Login Screen
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }

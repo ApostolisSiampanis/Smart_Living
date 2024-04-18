@@ -13,6 +13,6 @@ fun SmartLivingApp() {
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-
+        SignUpScreen()
     }
 }
