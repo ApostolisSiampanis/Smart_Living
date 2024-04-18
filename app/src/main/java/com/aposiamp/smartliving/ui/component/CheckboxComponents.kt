@@ -40,6 +40,6 @@ fun CheckboxComponent(
             )
         )
 
-        SignUpClickableTextComponent(onTextSelected)
+        PolicyAndTermsClickableTextComponent(onTextSelected)
     }
 }

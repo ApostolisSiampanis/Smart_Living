@@ -1,19 +1,26 @@
 package com.aposiamp.smartliving.ui.component
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.ui.theme.SkyBlue
 
 @Composable
-fun SignUpClickableTextComponent(
+fun PolicyAndTermsClickableTextComponent(
     onTextSelected: (String) -> Unit
 ) {
     val acceptTermsPrefixText = stringResource(id = R.string.terms_and_conditions)
@@ -68,6 +75,57 @@ fun SignUpClickableTextComponent(
                 end = offset
             ).firstOrNull()?.also {span ->
                 if (span.item == privacyPolicyText || span.item == termsOfUseText) {
+                    onTextSelected(span.item)
+                }
+            }
+        }
+    )
+}
+
+@Composable
+fun HaveAnAccountOrNotClickableTextComponent(
+    onTextSelected: (String) -> Unit
+) {
+    val nonClickableText = stringResource(id = R.string.already_have_an_account)
+    val clickableText = stringResource(id = R.string.login)
+
+    val annotatedString = buildAnnotatedString {
+        withStyle(
+            style = SpanStyle(
+                color = Color.Black,
+                fontFamily = FontFamily(Font(R.font.carlito_regular))
+            )
+        ) {
+            append(nonClickableText)
+        }
+        pushStringAnnotation(tag = clickableText, annotation = clickableText)
+        withStyle(
+            style = SpanStyle(
+                color = SkyBlue,
+                fontFamily = FontFamily(Font(R.font.carlito_regular))
+            )
+        ) {
+            append(clickableText)
+        }
+        pop()
+    }
+
+    ClickableText(
+        text = annotatedString,
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 40.dp),
+        style = TextStyle(
+            fontSize = 21.sp,
+            textAlign = TextAlign.Center,
+            fontFamily = FontFamily(Font(R.font.carlito_regular))
+        ),
+        onClick = {offset ->
+            annotatedString.getStringAnnotations(
+                start = offset,
+                end = offset
+            ).firstOrNull()?.also {span ->
+                if (span.item == clickableText) {
                     onTextSelected(span.item)
                 }
             }

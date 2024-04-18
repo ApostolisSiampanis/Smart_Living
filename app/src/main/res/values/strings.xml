@@ -17,4 +17,6 @@
     <string name="terms_of_use">Terms of Use.</string>
     <string name="register">Register</string>
     <string name="or">or</string>
+    <string name="already_have_an_account">Already have an account?\u00A0</string>
+    <string name="login">Login</string>
 </resources>
