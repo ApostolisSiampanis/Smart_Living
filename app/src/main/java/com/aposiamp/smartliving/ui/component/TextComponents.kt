@@ -2,6 +2,7 @@ package com.aposiamp.smartliving.ui.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aposiamp.smartliving.R
+import com.aposiamp.smartliving.ui.theme.GrayColor
 
 @Composable
 fun AuthHeadingTextComponent(value: String) {
@@ -55,5 +57,19 @@ fun AuthButtonTextComponent(value: String) {
             fontFamily = FontFamily(Font(R.font.carlito_bold))
         ),
         color = Color.White
+    )
+}
+
+@Composable
+fun AuthDividerTextComponent(value: String) {
+    Text(
+        modifier = Modifier
+            .padding(8.dp),
+        text = value,
+        style = TextStyle(
+            fontSize = 18.sp,
+            fontFamily = FontFamily(Font(R.font.carlito_regular))
+        ),
+        color = GrayColor
     )
 }
