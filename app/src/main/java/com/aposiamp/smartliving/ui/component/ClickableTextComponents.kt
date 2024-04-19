@@ -84,10 +84,15 @@ fun PolicyAndTermsClickableTextComponent(
 
 @Composable
 fun HaveAnAccountOrNotClickableTextComponent(
+    alreadyHaveAnAccount: Boolean = true,
     onTextSelected: (String) -> Unit
 ) {
-    val nonClickableText = stringResource(id = R.string.already_have_an_account)
-    val clickableText = stringResource(id = R.string.login)
+    val nonClickableText =
+        if (alreadyHaveAnAccount) stringResource(id = R.string.already_have_an_account)
+        else stringResource(id = R.string.dont_have_an_account_yet)
+    val clickableText =
+        if (alreadyHaveAnAccount) stringResource(id = R.string.login)
+        else stringResource(id = R.string.register)
 
     val annotatedString = buildAnnotatedString {
         withStyle(
