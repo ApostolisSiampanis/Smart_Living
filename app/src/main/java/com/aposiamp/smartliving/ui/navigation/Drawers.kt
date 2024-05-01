@@ -32,7 +32,7 @@ fun Drawer(
     scope: CoroutineScope
 ) {
     var selectedItemIndex by rememberSaveable {
-        mutableIntStateOf(0)
+        mutableIntStateOf(-1)
     }
 
     ModalDrawerSheet {

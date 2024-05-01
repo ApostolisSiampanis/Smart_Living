@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.aposiamp.smartliving.ui.component.AuthHeadingTextComponent
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.ui.component.AuthButtonComponent
@@ -26,7 +27,7 @@ import com.aposiamp.smartliving.ui.component.PasswordTextFieldComponent
 import com.aposiamp.smartliving.ui.component.TextFieldComponent
 
 @Composable
-fun SignUpScreen() {
+fun SignUpScreen(navController: NavController? = null) {
     Surface(
         color = Color.White,
         modifier = Modifier
@@ -74,14 +75,19 @@ fun SignUpScreen() {
                 verticalArrangement = Arrangement.Bottom
             ) {
                 Spacer(modifier = Modifier.weight(1f))
-                AuthButtonComponent(value = stringResource(R.string.register))
+                AuthButtonComponent(
+                    value = stringResource(R.string.register),
+                    onButtonClicked = {
+                        //TODO: Check credentials and then Navigate to Next Screen
+                    }
+                )
                 Spacer(modifier = Modifier.height(20.dp))
                 DividerTextComponent()
                 HaveAnAccountOrNotClickableTextComponent(
                     alreadyHaveAnAccount = true,
                     onTextSelected = {
                         if (it == "Login") {
-                            //TODO: Navigate to Login Screen
+                            navController?.navigate("login")
                         }
                     }
                 )
