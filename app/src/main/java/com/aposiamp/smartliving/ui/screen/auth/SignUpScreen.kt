@@ -70,11 +70,12 @@ fun SignUpScreen(navController: NavController? = null) {
                     }
                 }
             )
+
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize(),
                 verticalArrangement = Arrangement.Bottom
             ) {
-                Spacer(modifier = Modifier.weight(1f))
                 AuthButtonComponent(
                     value = stringResource(R.string.register),
                     onButtonClicked = {

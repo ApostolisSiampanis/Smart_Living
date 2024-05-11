@@ -48,11 +48,11 @@ fun LoginScreen(navController: NavController? = null) {
             PasswordTextFieldComponent(
                 labelValue = stringResource(id = R.string.password)
             )
+
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Bottom
             ) {
-                Spacer(modifier = Modifier.weight(1f))
                 AuthButtonComponent(
                     value = stringResource(R.string.login),
                     onButtonClicked = {
