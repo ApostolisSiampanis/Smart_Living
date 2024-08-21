@@ -19,6 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aposiamp.smartliving.R
@@ -59,13 +61,16 @@ fun PermissionCard(
                             modifier = Modifier
                                 .padding(horizontal = 5.dp)
                                 .size(40.dp),
-                            contentDescription = null
+                            contentDescription = permissionName
                         )
                         Text(
                             text = permissionName,
                             modifier = Modifier
                                 .padding(start = 8.dp),
-                            style = TextStyle(fontSize = 20.sp),
+                            style = TextStyle(
+                                fontSize = 20.sp,
+                                fontFamily = FontFamily(Font(R.font.carlito_regular))
+                            ),
                             color = Color.Blue
                         )
                     }
@@ -117,7 +122,10 @@ fun PermissionCard(
                        text = permissionRequestText,
                        modifier = Modifier
                            .padding(start = 8.dp),
-                       style = TextStyle(fontSize = 14.sp)
+                       style = TextStyle(
+                           fontSize = 14.sp,
+                           fontFamily = FontFamily(Font(R.font.carlito_regular))
+                       )
                    )
                 }
             }

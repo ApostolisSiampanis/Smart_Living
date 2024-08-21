@@ -17,10 +17,11 @@ import com.aposiamp.smartliving.ui.theme.PrussianBlue
 
 @Composable
 fun AuthButtonComponent(
-    value: String
+    value: String,
+    onButtonClicked: () -> Unit
 ) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = onButtonClicked,
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(48.dp),

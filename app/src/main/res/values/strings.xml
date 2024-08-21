@@ -21,4 +21,8 @@
     <string name="login">Login</string>
     <string name="welcome_to_smart_living_app">Welcome to \nSmart Living!</string>
     <string name="dont_have_an_account_yet">Don’t have an account yet?\u00A0</string>
+    <string name="settings">Settings</string>
+    <string name="devices">Devices</string>
+    <string name="routines">Routines</string>
+    <string name="energy">Energy</string>
 </resources>
