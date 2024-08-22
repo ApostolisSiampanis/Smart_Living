@@ -61,6 +61,19 @@ fun ErrorSupportingTextComponent(value: String) {
 }
 
 @Composable
+fun ErrorTextComponent(value: String) {
+    Text(
+        text = value,
+        style = TextStyle(
+            fontSize = 12.sp,
+            fontFamily = FontFamily(Font(R.font.carlito_regular)),
+            fontStyle = FontStyle.Normal
+        ),
+        color = MaterialTheme.colorScheme.error
+    )
+}
+
+@Composable
 fun GeneralButtonTextComponent(value: String) {
     Text(
         text = value,
