@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 @Composable
-fun TermsAndConditionsScreen(
+fun PrivacyPolicyScreen(
     navController: NavController
 ) {
     Scaffold(
@@ -33,7 +33,7 @@ fun TermsAndConditionsScreen(
                         .fillMaxSize()
                         .padding(start = 28.dp, end = 28.dp, top = 18.dp)
                 ) {
-                    //TODO: Add Terms and Conditions content
+                    //TODO: Add Privacy Policy content
                 }
             }
         }
