@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.presentation.ui.navigation
+package com.aposiamp.smartliving.presentation.ui.component
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar

@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.presentation.ui.navigation
+package com.aposiamp.smartliving.presentation.ui.component
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
