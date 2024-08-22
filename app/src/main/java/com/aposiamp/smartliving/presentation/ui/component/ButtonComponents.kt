@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -16,15 +17,14 @@ import androidx.compose.ui.unit.dp
 import com.aposiamp.smartliving.presentation.ui.theme.PrussianBlue
 
 @Composable
-fun AuthButtonComponent(
+fun GeneralButtonComponent(
     value: String,
     onButtonClicked: () -> Unit
 ) {
     Button(
         onClick = onButtonClicked,
         modifier = Modifier
-            .fillMaxWidth()
-            .heightIn(48.dp),
+            .width(185.dp),
         contentPadding = PaddingValues(),
         colors = ButtonDefaults.buttonColors(Color.Transparent)
     ) {
@@ -38,7 +38,7 @@ fun AuthButtonComponent(
                 ),
             contentAlignment = Alignment.Center
         ) {
-            AuthButtonTextComponent(value = value)
+            GeneralButtonTextComponent(value = value)
         }
     }
 }
