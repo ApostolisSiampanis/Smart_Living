@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving
+package com.aposiamp.smartliving.presentation.ui.activity.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

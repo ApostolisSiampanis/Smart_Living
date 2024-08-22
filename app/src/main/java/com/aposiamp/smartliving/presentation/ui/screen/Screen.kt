@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.ui.screen
+package com.aposiamp.smartliving.presentation.ui.screen
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.EnergySavingsLeaf

@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.ui.theme
+package com.aposiamp.smartliving.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

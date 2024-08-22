@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.ui.screen
+package com.aposiamp.smartliving.presentation.ui.screen
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding

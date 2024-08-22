@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.ui.component
+package com.aposiamp.smartliving.presentation.ui.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
