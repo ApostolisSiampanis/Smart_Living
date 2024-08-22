@@ -74,6 +74,18 @@ fun ErrorTextComponent(value: String) {
 }
 
 @Composable
+fun GeneralTextComponent(value: String) {
+    Text(
+        text = value,
+        style = TextStyle(
+            fontSize = 18.sp,
+            fontFamily = FontFamily(Font(R.font.carlito_regular)),
+            textAlign = TextAlign.Center
+        )
+    )
+}
+
+@Composable
 fun GeneralButtonTextComponent(value: String) {
     Text(
         text = value,
