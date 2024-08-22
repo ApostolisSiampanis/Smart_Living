@@ -3,7 +3,6 @@ package com.aposiamp.smartliving.presentation.ui.activity.main
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.aposiamp.smartliving.app.SmartLivingApp
 import com.aposiamp.smartliving.presentation.ui.theme.SmartLivingTheme
 
 class MainActivity : ComponentActivity() {
@@ -11,7 +10,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SmartLivingTheme {
-                SmartLivingApp()
+
             }
         }
     }
