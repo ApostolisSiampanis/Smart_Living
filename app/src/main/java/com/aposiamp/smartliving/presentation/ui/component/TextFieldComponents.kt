@@ -5,7 +5,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,57 +19,60 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.presentation.ui.theme.BgColor
-import com.aposiamp.smartliving.presentation.ui.theme.PrussianBlue
 import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
 
 @Composable
-fun TextFieldComponent(
+fun AuthTextFieldComponent(
+    value: String,
+    onValueChange: (String) -> Unit,
     labelValue: String,
     painterResource: Painter,
     contentDescription: String,
-    keyboardType: KeyboardType
+    keyboardType: KeyboardType,
+    supportedTextValue: String,
+    errorStatus: Boolean = false
 ) {
-    val textValue = remember {
-        mutableStateOf("")
-    }
-
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
             .clip(componentShapes.small),
         label = { TextFieldComponentText(value = labelValue) },
-        colors = TextFieldDefaults.colors(
-            unfocusedContainerColor = BgColor,
-            focusedLabelColor = PrussianBlue,
-            cursorColor = PrussianBlue
-        ),
         singleLine = true,
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Next,
             keyboardType = keyboardType
         ),
-        value = textValue.value,
-        onValueChange = {
-            textValue.value = it
-        },
+        value = value,
+        onValueChange = onValueChange,
         leadingIcon = {
             Icon(
                 painter = painterResource,
                 contentDescription = contentDescription
             )
-        }
+        },
+        supportingText = {
+            if (errorStatus) {
+                ErrorSupportingTextComponent(
+                    value = supportedTextValue
+                )
+            } else {
+                Text(
+                    text = ""
+                )
+            }
+        },
+        isError = errorStatus
     )
 }
 
 @Composable
 fun PasswordTextFieldComponent(
-    labelValue: String
+    value: String,
+    onValueChange: (String) -> Unit,
+    labelValue: String,
+    supportedTextValue: String,
+    errorStatus: Boolean = false
 ) {
-    val password = remember {
-        mutableStateOf("")
-    }
-
     val passwordVisible = remember {
         mutableStateOf(false)
     }
@@ -79,20 +82,13 @@ fun PasswordTextFieldComponent(
             .fillMaxWidth()
             .clip(componentShapes.small),
         label = { TextFieldComponentText(value = labelValue) },
-        colors = TextFieldDefaults.colors(
-            unfocusedContainerColor = BgColor,
-            focusedLabelColor = PrussianBlue,
-            cursorColor = PrussianBlue
-        ),
         singleLine = true,
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Done,
             keyboardType = KeyboardType.Password
         ),
-        value = password.value,
-        onValueChange = {
-            password.value = it
-        },
+        value = value,
+        onValueChange = onValueChange,
         leadingIcon = {
             Icon(
                 painter = painterResource(id = R.drawable.password),
@@ -119,6 +115,18 @@ fun PasswordTextFieldComponent(
                 )
             }
         },
-        visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation()
+        visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
+        supportingText = {
+            if (errorStatus) {
+                ErrorSupportingTextComponent(
+                    value = supportedTextValue
+                )
+            } else {
+                Text(
+                    text = ""
+                )
+            }
+        },
+        isError = errorStatus
     )
 }
