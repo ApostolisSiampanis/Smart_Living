@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.WelcomeScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.auth.LoginScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.auth.SignUpScreen
 
@@ -13,9 +14,22 @@ internal fun WelcomeNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = "login" //TODO: Change to "welcome" or "home" after implementing the logic for the start destination
+        startDestination = "welcome" //TODO: Change to method to determine start destination
     ) {
-        composable("login") { LoginScreen(navController) }
-        composable("signUp") { SignUpScreen(navController) }
+        composable("welcome") {
+            WelcomeScreen(
+                navController = navController
+            )
+        }
+        composable("login") {
+            LoginScreen(
+                navController = navController
+            )
+        }
+        composable("signUp") {
+            SignUpScreen(
+                navController = navController
+            )
+        }
     }
 }
