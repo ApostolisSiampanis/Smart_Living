@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.aposiamp.smartliving.R
 import androidx.compose.ui.unit.dp
-import com.aposiamp.smartliving.ui.theme.GrayColor
+import com.aposiamp.smartliving.presentation.ui.theme.GrayColor
 
 @Composable
 fun DividerTextComponent() {

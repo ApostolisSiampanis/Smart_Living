@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.ui.screen.screensInBottom
+import com.aposiamp.smartliving.presentation.ui.screen.screensInBottom
 
 @Composable
 fun BottomBar() {

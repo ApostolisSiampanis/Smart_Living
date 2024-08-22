@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.aposiamp.smartliving.ui.screen.auth.LoginScreen
-import com.aposiamp.smartliving.ui.screen.auth.SignUpScreen
+import com.aposiamp.smartliving.presentation.ui.screen.auth.LoginScreen
+import com.aposiamp.smartliving.presentation.ui.screen.auth.SignUpScreen
 
 @Composable
 fun Navigation() {

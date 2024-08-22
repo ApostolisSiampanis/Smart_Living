@@ -16,7 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.ui.theme.GrayColor
+import com.aposiamp.smartliving.presentation.ui.theme.GrayColor
 
 @Composable
 fun AuthHeadingTextComponent(value: String) {

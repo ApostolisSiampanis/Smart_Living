@@ -21,8 +21,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.ui.screen.Screen
-import com.aposiamp.smartliving.ui.screen.screensInDrawer
+import com.aposiamp.smartliving.presentation.ui.screen.Screen
+import com.aposiamp.smartliving.presentation.ui.screen.screensInDrawer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

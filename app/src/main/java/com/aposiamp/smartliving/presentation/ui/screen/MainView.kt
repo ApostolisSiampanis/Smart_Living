@@ -15,9 +15,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
-import com.aposiamp.smartliving.ui.navigation.BottomBar
-import com.aposiamp.smartliving.ui.navigation.Drawer
-import com.aposiamp.smartliving.ui.navigation.MenuMediumTopAppBar
+import com.aposiamp.smartliving.presentation.ui.navigation.BottomBar
+import com.aposiamp.smartliving.presentation.ui.navigation.Drawer
+import com.aposiamp.smartliving.presentation.ui.navigation.MenuMediumTopAppBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

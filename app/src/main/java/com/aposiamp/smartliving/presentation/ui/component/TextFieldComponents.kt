@@ -19,9 +19,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.ui.theme.BgColor
-import com.aposiamp.smartliving.ui.theme.PrussianBlue
-import com.aposiamp.smartliving.ui.theme.componentShapes
+import com.aposiamp.smartliving.presentation.ui.theme.BgColor
+import com.aposiamp.smartliving.presentation.ui.theme.PrussianBlue
+import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
 
 @Composable
 fun TextFieldComponent(

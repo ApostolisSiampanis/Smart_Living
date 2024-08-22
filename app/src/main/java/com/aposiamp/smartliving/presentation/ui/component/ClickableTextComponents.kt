@@ -17,7 +17,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.ui.theme.SkyBlue
+import com.aposiamp.smartliving.presentation.ui.theme.SkyBlue
 
 @Composable
 fun PolicyAndTermsClickableTextComponent(

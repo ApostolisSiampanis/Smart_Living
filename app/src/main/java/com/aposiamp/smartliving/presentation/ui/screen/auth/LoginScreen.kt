@@ -18,12 +18,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.ui.component.AuthButtonComponent
-import com.aposiamp.smartliving.ui.component.AuthHeadingTextComponent
-import com.aposiamp.smartliving.ui.component.DividerTextComponent
-import com.aposiamp.smartliving.ui.component.HaveAnAccountOrNotClickableTextComponent
-import com.aposiamp.smartliving.ui.component.PasswordTextFieldComponent
-import com.aposiamp.smartliving.ui.component.TextFieldComponent
+import com.aposiamp.smartliving.presentation.ui.component.AuthButtonComponent
+import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextComponent
+import com.aposiamp.smartliving.presentation.ui.component.DividerTextComponent
+import com.aposiamp.smartliving.presentation.ui.component.HaveAnAccountOrNotClickableTextComponent
+import com.aposiamp.smartliving.presentation.ui.component.PasswordTextFieldComponent
+import com.aposiamp.smartliving.presentation.ui.component.TextFieldComponent
 
 @Composable
 fun LoginScreen(navController: NavController? = null) {
