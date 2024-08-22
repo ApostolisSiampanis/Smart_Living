@@ -3,6 +3,7 @@ package com.aposiamp.smartliving.presentation.ui.component
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -45,6 +46,17 @@ fun TextFieldComponentText(value: String) {
             fontStyle = FontStyle.Normal
         ),
         color = colorResource(id = R.color.colorText)
+    )
+}
+
+@Composable
+fun ErrorSupportingTextComponent(value: String) {
+    Text(
+        text = value,
+        style = TextStyle(
+            fontFamily = FontFamily(Font(R.font.carlito_regular))
+        ),
+        color = MaterialTheme.colorScheme.error
     )
 }
 
