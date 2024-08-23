@@ -61,9 +61,9 @@ fun ErrorSupportingTextComponent(value: String) {
 }
 
 @Composable
-fun ErrorTextComponent(value: String) {
+fun ErrorTextComponent(errorMessage: String?) {
     Text(
-        text = value,
+        text = errorMessage ?: "",
         style = TextStyle(
             fontSize = 12.sp,
             fontFamily = FontFamily(Font(R.font.carlito_regular)),
