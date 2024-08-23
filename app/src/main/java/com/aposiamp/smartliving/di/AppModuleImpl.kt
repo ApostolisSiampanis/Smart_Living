@@ -3,6 +3,7 @@ package com.aposiamp.smartliving.di
 import android.content.Context
 import com.aposiamp.smartliving.data.repository.AuthRepositoryImpl
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
+import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
 import com.aposiamp.smartliving.domain.repository.AuthRepository
 import com.aposiamp.smartliving.domain.usecase.user.LoginUseCase
 import com.aposiamp.smartliving.domain.usecase.user.LogoutUseCase
@@ -13,11 +14,12 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLas
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateTerms
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class AppModuleImpl(private val appContext: Context): AppModule {
     // Repositories
     override val authRepository: AuthRepository by lazy {
-        AuthRepositoryImpl(firebaseDataSource)
+        AuthRepositoryImpl(firebaseDataSource, firestoreDataSource)
     }
 
     // Firebase
@@ -25,7 +27,12 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         return FirebaseAuth.getInstance()
     }
 
+    override fun getFirestoreDatabase(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
+    }
+
     private val firebaseDataSource = FirebaseDataSource(getFirebaseAuth())
+    private val firestoreDataSource = FirestoreDataSource(getFirestoreDatabase())
 
     // Profile UseCases
     override val loginUseCase: LoginUseCase by lazy {
