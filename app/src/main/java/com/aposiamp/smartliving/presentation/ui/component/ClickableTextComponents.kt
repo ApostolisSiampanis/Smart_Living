@@ -32,7 +32,8 @@ fun PolicyAndTermsClickableTextComponent(
         withStyle(
             style = SpanStyle(
                 color = Color.Black,
-                fontFamily = FontFamily(Font(R.font.carlito_regular))
+                fontFamily = FontFamily(Font(R.font.carlito_regular)),
+                fontSize = 16.sp
             )
         ) {
             append(acceptTermsPrefixText)
@@ -41,7 +42,8 @@ fun PolicyAndTermsClickableTextComponent(
         withStyle(
             style = SpanStyle(
                 color = SkyBlue,
-                fontFamily = FontFamily(Font(R.font.carlito_regular))
+                fontFamily = FontFamily(Font(R.font.carlito_regular)),
+                fontSize = 16.sp
             )
         ) {
             append(privacyPolicyText)
@@ -50,7 +52,8 @@ fun PolicyAndTermsClickableTextComponent(
         withStyle(
             style = SpanStyle(
                 color = Color.Black,
-                fontFamily = FontFamily(Font(R.font.carlito_regular))
+                fontFamily = FontFamily(Font(R.font.carlito_regular)),
+                fontSize = 16.sp
             )
         ) {
             append(andText)
@@ -59,7 +62,8 @@ fun PolicyAndTermsClickableTextComponent(
         withStyle(
             style = SpanStyle(
                 color = SkyBlue,
-                fontFamily = FontFamily(Font(R.font.carlito_regular))
+                fontFamily = FontFamily(Font(R.font.carlito_regular)),
+                fontSize = 16.sp
             )
         ) {
             append(termsOfUseText)
