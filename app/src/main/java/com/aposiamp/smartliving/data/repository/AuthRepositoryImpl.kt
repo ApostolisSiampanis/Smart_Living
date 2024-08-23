@@ -1,11 +1,17 @@
 package com.aposiamp.smartliving.data.repository
 
+import com.aposiamp.smartliving.data.model.UserFirestore
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
+import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
 import com.aposiamp.smartliving.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseUser
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 class AuthRepositoryImpl(
-    private val firebaseDataSource: FirebaseDataSource
+    private val firebaseDataSource: FirebaseDataSource,
+    private val firestoreDataSource: FirestoreDataSource
 ) : AuthRepository {
     override val currentUser: FirebaseUser?
         get() = firebaseDataSource.currentUser
@@ -20,10 +26,24 @@ class AuthRepositoryImpl(
         email: String,
         password: String
     ): FirebaseUser {
-        return firebaseDataSource.signup(email, password)
+        val user = firebaseDataSource.signup(email, password)
+        val uid = user.uid
+        val userProfile = UserFirestore(
+            firstName = firstName,
+            lastName = lastName,
+            dateRegistered = getCurrentDateUTC()
+        )
+        firestoreDataSource.setUserProfile(uid, userProfile)
+        return user
     }
 
     override fun logout() {
         firebaseDataSource.logout()
+    }
+
+    private fun getCurrentDateUTC(): String {
+        val now = Instant.now()
+        val formatter = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.of("UTC"))
+        return formatter.format(now)
     }
 }
