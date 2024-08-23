@@ -10,6 +10,7 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLas
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateTerms
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 interface AppModule {
     // Repositories
@@ -17,6 +18,7 @@ interface AppModule {
 
     // Firebase
     fun getFirebaseAuth(): FirebaseAuth
+    fun getFirestoreDatabase(): FirebaseFirestore
 
     // Profile UseCases
     val loginUseCase: LoginUseCase
