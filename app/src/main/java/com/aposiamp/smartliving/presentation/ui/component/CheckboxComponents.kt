@@ -50,7 +50,7 @@ fun TermsCheckboxComponent(
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
-                ErrorTextComponent(value = errorMessageValue)
+                ErrorTextComponent(errorMessage = errorMessageValue)
             }
         }
     }
