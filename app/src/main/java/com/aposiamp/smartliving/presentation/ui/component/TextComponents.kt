@@ -110,3 +110,37 @@ fun AuthDividerTextComponent(value: String) {
         color = GrayColor
     )
 }
+
+@Composable
+fun GeneralNormalText(value: String) {
+    Text(
+        text = value,
+        style = TextStyle(
+            fontSize = 18.sp,
+            fontFamily = FontFamily(Font(R.font.carlito_regular))
+        )
+    )
+}
+
+@Composable
+fun GeneralBoldText(value: String) {
+    Text(
+        text = value,
+        style = TextStyle(
+            fontSize = 18.sp,
+            fontFamily = FontFamily(Font(R.font.carlito_bold))
+        )
+    )
+}
+
+@Composable
+fun HeaderText(value: String) {
+    Text(
+        text = value,
+        style = TextStyle(
+            fontSize = 24.sp,
+            fontFamily = FontFamily(Font(R.font.carlito_regular))
+        ),
+        color = MaterialTheme.colorScheme.onPrimaryContainer
+    )
+}
