@@ -57,6 +57,7 @@
     <string name="privacy_policy_contact_us">\n7. Contact Us:</string>
     <string name="privacy_policy_contact_us_text">If you have any questions or concerns about this Privacy Policy or our privacy practices, please contact us at info@smartliving.gr.</string>
     <string name="privacy_policy_acknowledgement">\nBy using the App, you consent to the collection, use, and disclosure of your information in accordance with this Privacy Policy.</string>
+    <string name="go_back">Go back</string>
     <string name="settings">Settings</string>
     <string name="devices">Devices</string>
     <string name="routines">Routines</string>
