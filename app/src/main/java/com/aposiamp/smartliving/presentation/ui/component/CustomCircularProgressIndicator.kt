@@ -170,8 +170,10 @@ fun ThermostatCircularIndicator(
 
             val outerRadius = circleRadius + circleThickness/2f
             val gap = 15f
-            for (i in 0 .. (maxValue-minValue)){
-                val color = if(i < positionValue-minValue) arcColor else arcColor.copy(alpha = 0.3f)
+            for (i in 0..(maxValue - minValue)) {
+                val isCurrentValue = i == positionValue - minValue
+                val strokeWidth = 1.dp.toPx()  // Keep all lines with the same thickness
+
                 val angleInDegrees = i * 290f / (maxValue - minValue).toFloat() + 35f
                 val angleInRad = angleInDegrees * PI / 180f + PI / 2f
 
@@ -188,15 +190,30 @@ fun ThermostatCircularIndicator(
                     y = (outerRadius * sin(angleInRad) + circleThickness + circleCenter.y + yGapAdjustment).toFloat()
                 )
 
-                rotate(
-                    angleInDegrees,
-                    pivot = start
-                ) {
-                    drawLine(
-                        color = color,
-                        start = start,
-                        end = end,
-                        strokeWidth = 1.dp.toPx()
+                // Draw a line for non-current values
+                if (!isCurrentValue) {
+                    rotate(
+                        angleInDegrees,
+                        pivot = start
+                    ) {
+                        drawLine(
+                            color = arcColor,
+                            start = start,
+                            end = end,
+                            strokeWidth = strokeWidth  // Use the regular stroke width
+                        )
+                    }
+                } else {
+                    // Draw a dot at the current value position
+                    val dotRadius = 9.dp.toPx()  // Size of the dot
+
+                    drawCircle(
+                        color = arcColor,
+                        radius = dotRadius,
+                        center = Offset(
+                            x = (outerRadius * cos(angleInRad) + circleCenter.x + xGapAdjustment*2f).toFloat(),
+                            y = (outerRadius * sin(angleInRad) + circleCenter.y + yGapAdjustment*2f).toFloat()
+                        )
                     )
                 }
             }
