@@ -23,3 +23,9 @@ val WhiteColor = Color(0xFFFFFFFF)
 val PrussianBlue = Color(0xFF023047)
 val SkyBlue = Color(0xFF8BD3E6)
 val BgColor = Color(0xFFF7F8F8)
+
+// Thermostat Colors
+val Orange = Color(0xFFdb660d)
+val RedOrange = Color(0xFFe84a23)
+val Blue = Color(0xFF140ddb)
+val BrightBlue = Color(0xFF027cf5)
