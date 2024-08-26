@@ -41,9 +41,9 @@ import kotlin.math.sin
 @Composable
 fun ThermostatCircularIndicator(
     modifier: Modifier = Modifier,
-    initialValue: Int,
-    minValue: Int = 0,
-    maxValue: Int = 100,
+    initialValue: Int = 29,
+    minValue: Int = 10,
+    maxValue: Int = 30,
     circleRadius: Float,
     onPositionChange: (Int) -> Unit
 ){
@@ -73,22 +73,17 @@ fun ThermostatCircularIndicator(
                                 x = circleCenter.y - change.position.y,
                                 y = circleCenter.x - change.position.x
                             ) * (180f / PI).toFloat()
-                            touchAngle = (touchAngle + 180f).mod(360f)
 
-                            val currentAngle = oldPositionValue * 360f / (maxValue - minValue)
-                            changeAngle = touchAngle - currentAngle
+                            // Adjust touchAngle relative to the start angle (125 degrees)
+                            touchAngle = (touchAngle + 360f + 140f).mod(360f)
 
-                            val lowerThreshold = currentAngle - (360f / (maxValue - minValue) * 5)
-                            val higherThreshold = currentAngle + (360f / (maxValue - minValue) * 5)
+                            // Calculate the new position value based on the touch angle
+                            val newValue = (minValue + ((touchAngle / 290f) * (maxValue - minValue)).roundToInt()).coerceIn(minValue, maxValue)
 
-                            if (dragStartedAngle in lowerThreshold..higherThreshold) {
-                                val newValue = (oldPositionValue + (changeAngle / (360f / (maxValue - minValue))).roundToInt()).coerceIn(minValue, maxValue)
-
-                                if ((positionValue == maxValue && newValue < positionValue) ||
-                                    (positionValue == minValue && newValue > positionValue) ||
-                                    (positionValue > minValue && positionValue < maxValue)) {
-                                    positionValue = newValue
-                                }
+                            if ((positionValue == maxValue && newValue < positionValue) ||
+                                (positionValue == minValue && newValue > positionValue) ||
+                                (positionValue in (minValue + 1)..maxValue)) {
+                                positionValue = newValue
                             }
                         },
                         onDragEnd = {
@@ -103,7 +98,7 @@ fun ThermostatCircularIndicator(
             val circleThickness = width / 25f
             circleCenter = Offset(x = width/2f, y = height/2f)
 
-            // Inner Circle as Arc
+            // Inner filled Circle as Arc
             drawArc(
                brush = Brush.radialGradient(
                    listOf(
@@ -124,7 +119,7 @@ fun ThermostatCircularIndicator(
                 )
             )
 
-            // Outer Circle as Arc
+            // Inner Circle as Arc
             drawArc(
                 style = Stroke(width = circleThickness),
                 color = RedOrange,
@@ -142,9 +137,9 @@ fun ThermostatCircularIndicator(
             )
 
             val arcColor = when {
-                positionValue < 25 -> BrightBlue
-                positionValue < 50 -> Blue
-                positionValue < 75 -> Orange
+                positionValue < 15 -> BrightBlue
+                positionValue < 20 -> Blue
+                positionValue < 25 -> Orange
                 else -> RedOrange
             }
 
@@ -152,7 +147,7 @@ fun ThermostatCircularIndicator(
             drawArc(
                 color = arcColor,
                 startAngle = 125f,
-                sweepAngle = (290f/maxValue) * positionValue.toFloat(),
+                sweepAngle = (290f / (maxValue - minValue)) * (positionValue - minValue).toFloat(),
                 style = Stroke(
                     width = circleThickness,
                     cap = StrokeCap.Round
@@ -221,7 +216,7 @@ fun ThermostatCircularIndicator(
             drawContext.canvas.nativeCanvas.apply {
                 drawIntoCanvas {
                     drawText(
-                        "$positionValue %",
+                        "$positionValue °C",
                         circleCenter.x,
                         circleCenter.y + 45.dp.toPx()/3f,
                         Paint().apply {
