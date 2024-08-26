@@ -27,7 +27,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.aposiamp.smartliving.presentation.ui.theme.Blue
+import com.aposiamp.smartliving.presentation.ui.theme.BrightBlue
 import com.aposiamp.smartliving.presentation.ui.theme.Orange
+import com.aposiamp.smartliving.presentation.ui.theme.RedOrange
 import com.aposiamp.smartliving.presentation.ui.theme.WhiteColor
 import kotlin.math.PI
 import kotlin.math.atan2
@@ -39,8 +42,6 @@ import kotlin.math.sin
 fun ThermostatCircularIndicator(
     modifier: Modifier = Modifier,
     initialValue: Int,
-    primaryColor: Color,
-    secondaryColor: Color,
     minValue: Int = 0,
     maxValue: Int = 100,
     circleRadius: Float,
@@ -80,8 +81,14 @@ fun ThermostatCircularIndicator(
                             val lowerThreshold = currentAngle - (360f / (maxValue - minValue) * 5)
                             val higherThreshold = currentAngle + (360f / (maxValue - minValue) * 5)
 
-                            if(dragStartedAngle in lowerThreshold..higherThreshold){
-                                positionValue = (oldPositionValue + (changeAngle / (360f / (maxValue - minValue))).roundToInt())
+                            if (dragStartedAngle in lowerThreshold..higherThreshold) {
+                                val newValue = (oldPositionValue + (changeAngle / (360f / (maxValue - minValue))).roundToInt()).coerceIn(minValue, maxValue)
+
+                                if ((positionValue == maxValue && newValue < positionValue) ||
+                                    (positionValue == minValue && newValue > positionValue) ||
+                                    (positionValue > minValue && positionValue < maxValue)) {
+                                    positionValue = newValue
+                                }
                             }
                         },
                         onDragEnd = {
@@ -96,30 +103,56 @@ fun ThermostatCircularIndicator(
             val circleThickness = width / 25f
             circleCenter = Offset(x = width/2f, y = height/2f)
 
-            drawCircle(
+            // Inner Circle as Arc
+            drawArc(
                brush = Brush.radialGradient(
                    listOf(
-                          primaryColor.copy(0.45f),
-                          secondaryColor.copy(0.15f)
+                       Orange.copy(0.45f),
+                       RedOrange.copy(0.15f)
                    )
                ),
-                radius = circleRadius,
-                center = circleCenter
-            )
-
-            drawCircle(
-                style = Stroke(
-                    width = circleThickness
+                startAngle = 125f,
+                sweepAngle = 290f,
+                useCenter = true,
+                size = Size(
+                    width = circleRadius * 2f,
+                    height = circleRadius * 2f
                 ),
-                color = secondaryColor,
-                radius = circleRadius,
-                center = circleCenter
+                topLeft = Offset(
+                    (width - circleRadius * 2f) / 2f,
+                    (height - circleRadius * 2f) / 2f
+                )
             )
 
+            // Outer Circle as Arc
             drawArc(
-                color = primaryColor,
-                startAngle = 90f,
-                sweepAngle = (360f/maxValue) * positionValue.toFloat(),
+                style = Stroke(width = circleThickness),
+                color = RedOrange,
+                startAngle = 125f,
+                sweepAngle = 290f,
+                useCenter = false,
+                size = Size(
+                    width = circleRadius * 2f,
+                    height = circleRadius * 2f
+                ),
+                topLeft = Offset(
+                    (width - circleRadius * 2f) / 2f,
+                    (height - circleRadius * 2f) / 2f
+                )
+            )
+
+            val arcColor = when {
+                positionValue < 25 -> BrightBlue
+                positionValue < 50 -> Blue
+                positionValue < 75 -> Orange
+                else -> RedOrange
+            }
+
+            // Value Arc
+            drawArc(
+                color = arcColor,
+                startAngle = 125f,
+                sweepAngle = (290f/maxValue) * positionValue.toFloat(),
                 style = Stroke(
                     width = circleThickness,
                     cap = StrokeCap.Round
@@ -138,8 +171,8 @@ fun ThermostatCircularIndicator(
             val outerRadius = circleRadius + circleThickness/2f
             val gap = 15f
             for (i in 0 .. (maxValue-minValue)){
-                val color = if(i < positionValue-minValue) primaryColor else primaryColor.copy(alpha = 0.3f)
-                val angleInDegrees = i * 360f / (maxValue - minValue).toFloat()
+                val color = if(i < positionValue-minValue) arcColor else arcColor.copy(alpha = 0.3f)
+                val angleInDegrees = i * 290f / (maxValue - minValue).toFloat() + 35f
                 val angleInRad = angleInDegrees * PI / 180f + PI / 2f
 
                 val yGapAdjustment = cos(angleInDegrees * PI / 180f) * gap
@@ -186,21 +219,4 @@ fun ThermostatCircularIndicator(
 
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun Preview() {
-    ThermostatCircularIndicator(
-        modifier = Modifier
-            .size(250.dp)
-            .background(Color.DarkGray),
-        initialValue = 50,
-        primaryColor = Orange,
-        secondaryColor = Color.Gray,
-        circleRadius = 230f,
-        onPositionChange = {
-
-        }
-    )
 }
