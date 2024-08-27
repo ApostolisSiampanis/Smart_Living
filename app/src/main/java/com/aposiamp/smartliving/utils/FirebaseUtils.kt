@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.data
+package com.aposiamp.smartliving.utils
 
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.ExperimentalCoroutinesApi
