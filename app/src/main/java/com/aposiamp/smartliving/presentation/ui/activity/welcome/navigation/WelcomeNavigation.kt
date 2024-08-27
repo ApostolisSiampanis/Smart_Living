@@ -75,5 +75,5 @@ fun determineStartDestination(
     } catch (e: Exception) {
         return "welcome"
     }
-    return ""
+    return "welcome"
 }
