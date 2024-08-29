@@ -4,23 +4,23 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.aposiamp.smartliving.presentation.ui.activity.main.screens.HomeScreen
-import com.aposiamp.smartliving.presentation.viewmodel.main.HomeViewModel
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.DevicesScreen
+import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
 
 @Composable
 internal fun MainNavigation(
-    homeViewModel: HomeViewModel
+    devicesViewModel: DevicesViewModel
 ) {
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
-        startDestination = "home"
+        startDestination = "devices"
     ) {
-        composable("home"){
-            HomeScreen(
+        composable("devices"){
+            DevicesScreen(
                 navController = navController,
-                viewModel = homeViewModel
+                viewModel = devicesViewModel
             )
         }
     }
