@@ -144,3 +144,16 @@ fun HeaderText(value: String) {
         color = MaterialTheme.colorScheme.onPrimaryContainer
     )
 }
+
+@Composable
+fun DrawerItemTextComponent(
+    text: String,
+    color: Color
+) {
+    Text(
+        text = text,
+        fontSize = 18.sp,
+        fontFamily = FontFamily(Font(R.font.carlito_regular)),
+        color = color
+    )
+}
