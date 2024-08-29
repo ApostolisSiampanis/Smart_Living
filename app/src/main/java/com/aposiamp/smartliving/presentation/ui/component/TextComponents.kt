@@ -157,3 +157,13 @@ fun DrawerItemTextComponent(
         color = color
     )
 }
+
+@Composable
+fun BottomMenuItemTextComponent(
+    text: String
+) {
+    Text(
+        text = text,
+        fontFamily = FontFamily(Font(R.font.carlito_regular))
+    )
+}
