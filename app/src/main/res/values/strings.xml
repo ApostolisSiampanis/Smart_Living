@@ -59,7 +59,11 @@
     <string name="privacy_policy_acknowledgement">\nBy using the App, you consent to the collection, use, and disclosure of your information in accordance with this Privacy Policy.</string>
     <string name="go_back">Go back</string>
     <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
     <string name="devices">Devices</string>
     <string name="routines">Routines</string>
     <string name="energy">Energy</string>
+    <string name="power_off">Power Off</string>
+    <string name="cool">Cool</string>
+    <string name="heat">Heat</string>
 </resources>
