@@ -1,15 +1,15 @@
 package com.aposiamp.smartliving.presentation.ui.component
 
-import androidx.compose.material3.Icon
+import androidx.compose.foundation.Image
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
-import com.aposiamp.smartliving.presentation.ui.screen.screensInBottom
 
 @Composable
 fun BottomBar(
@@ -26,7 +26,7 @@ fun BottomBar(
     val selectedItemIndex = remember { mutableIntStateOf(getCurrentRouteIndex()) }
 
     NavigationBar {
-        screensInBottom.forEachIndexed { index, item ->
+        screensInBottomMenu.forEachIndexed { index, item ->
             NavigationBarItem(
                 selected = selectedItemIndex.intValue == index,
                 onClick = {
@@ -39,12 +39,14 @@ fun BottomBar(
                     )
                 },
                 icon = {
-                    Icon(
-                        imageVector = if(index == selectedItemIndex.intValue) {
-                            item.selectedIcon
-                        } else {
-                            item.unselectedIcon
-                        },
+                    val iconId = if(index == selectedItemIndex.intValue && item.selectedIcon != null) {
+                        item.selectedIcon
+                    } else {
+                        item.unselectedIcon
+                    }
+
+                    Image(
+                        painter = painterResource(id = iconId),
                         contentDescription = stringResource(id = item.titleResId)
                     )
                 }
