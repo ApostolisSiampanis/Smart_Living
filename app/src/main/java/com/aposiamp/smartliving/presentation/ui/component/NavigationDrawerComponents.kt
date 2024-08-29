@@ -74,7 +74,7 @@ fun NavigationDrawer(
         ) {
             DrawerItem(
                 item = NavigationDrawerUiItem(
-                    title = stringResource(id = R.string.logout),
+                    titleResId = R.string.logout,
                     unselectedIcon = R.drawable.logout
                 ),
                 isSelected = selectedItemIndex.intValue == screensInDrawer.size,
@@ -103,7 +103,7 @@ fun DrawerItem(
     item: NavigationDrawerUiItem,
     isSelected: Boolean,
     isEnabled: Boolean = true,
-    textColor: Color = if (item.title == "Logout") Color.Red else Color.Black,
+    textColor: Color = if (item.titleResId == R.string.logout) Color.Red else Color.Black,
     onItemClick: () -> Unit
 ) {
     val iconId = if (isSelected && item.selectedIcon != null) {
@@ -116,12 +116,12 @@ fun DrawerItem(
         icon = {
             Image(
                 painter = painterResource(id = iconId),
-                contentDescription = item.title
+                contentDescription = stringResource(id = item.titleResId)
             )
         },
         label = {
             DrawerItemTextComponent(
-                text = item.title,
+                text = stringResource(id = item.titleResId),
                 color = textColor.copy(alpha = if (isSelected) 1f else 0.6f)
             )
         },
