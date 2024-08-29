@@ -1,7 +1,7 @@
 package com.aposiamp.smartliving.domain.repository
 
-import com.aposiamp.smartliving.presentation.model.NavigationDrawerUiItem
+import com.aposiamp.smartliving.presentation.model.NavigationUiItem
 
 interface NavigationDrawerRepository {
-    fun getNavigationDrawerItems(): List<NavigationDrawerUiItem>
+    fun getNavigationDrawerItems(): List<NavigationUiItem>
 }

@@ -24,7 +24,7 @@ import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.domain.usecase.main.GetNavigationDrawerItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.user.LogoutUseCase
-import com.aposiamp.smartliving.presentation.model.NavigationDrawerUiItem
+import com.aposiamp.smartliving.presentation.model.NavigationUiItem
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.WelcomeActivity
 import kotlinx.coroutines.launch
 
@@ -73,7 +73,7 @@ fun NavigationDrawer(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             DrawerItem(
-                item = NavigationDrawerUiItem(
+                item = NavigationUiItem(
                     titleResId = R.string.logout,
                     unselectedIcon = R.drawable.logout
                 ),
@@ -100,7 +100,7 @@ fun NavigationDrawer(
 
 @Composable
 fun DrawerItem(
-    item: NavigationDrawerUiItem,
+    item: NavigationUiItem,
     isSelected: Boolean,
     isEnabled: Boolean = true,
     textColor: Color = if (item.titleResId == R.string.logout) Color.Red else Color.Black,
