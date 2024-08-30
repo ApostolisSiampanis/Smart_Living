@@ -65,9 +65,12 @@
     <string name="energy">Energy</string>
     <string name="indoor_temperature">Indoor Temperature</string>
     <string name="indoor_humidity">Indoor Humidity</string>
+    <string name="heat_set_to">Heat set to</string>
+    <string name="cool_set_to">Cool set to</string>
     <string name="degree_celcius">°C</string>
     <string name="percentage">%</string>
     <string name="turn_off">Turn Off</string>
+    <string name="off">OFF</string>
     <string name="cool">Cool</string>
     <string name="heat">Heat</string>
 </resources>
