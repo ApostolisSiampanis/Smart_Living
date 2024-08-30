@@ -167,3 +167,33 @@ fun BottomMenuItemTextComponent(
         fontFamily = FontFamily(Font(R.font.carlito_regular))
     )
 }
+
+@Composable
+fun ThermostatRegularTextComponent(
+    text: String,
+    color: Color,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontSize = 22.sp,
+        color = color,
+        fontFamily = FontFamily(Font(R.font.carlito_regular)),
+        modifier = modifier
+    )
+}
+
+@Composable
+fun ThermostatBoldTextComponent(
+    text: String,
+    color: Color,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontSize = 38.sp,
+        color = color,
+        fontFamily = FontFamily(Font(R.font.carlito_bold)),
+        modifier = modifier
+    )
+}
