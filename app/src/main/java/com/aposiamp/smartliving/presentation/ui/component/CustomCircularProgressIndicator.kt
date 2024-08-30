@@ -174,7 +174,7 @@ fun ThermostatCircularIndicator(
                         pivot = start
                     ) {
                         drawLine(
-                            color = arcColor,
+                            color = if (selectedMode.mode != ThermostatMode.OFF && i <= positionValue - minValue) arcColor else Color.LightGray,
                             start = start,
                             end = end,
                             strokeWidth = strokeWidth  // Use the regular stroke width
