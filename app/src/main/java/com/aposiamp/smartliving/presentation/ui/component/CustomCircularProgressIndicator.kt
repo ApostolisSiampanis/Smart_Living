@@ -1,37 +1,33 @@
 package com.aposiamp.smartliving.presentation.ui.component
 
-import android.graphics.Paint
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.aposiamp.smartliving.presentation.ui.theme.Blue
-import com.aposiamp.smartliving.presentation.ui.theme.BrightBlue
-import com.aposiamp.smartliving.presentation.ui.theme.Orange
-import com.aposiamp.smartliving.presentation.ui.theme.RedOrange
-import com.aposiamp.smartliving.presentation.ui.theme.WhiteColor
+import com.aposiamp.smartliving.R
+import com.aposiamp.smartliving.domain.model.ThermostatMode
+import com.aposiamp.smartliving.presentation.model.ThermostatModeUiItem
 import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.cos
@@ -45,52 +41,66 @@ fun ThermostatCircularIndicator(
     minValue: Int = 10,
     maxValue: Int = 30,
     circleRadius: Float,
+    selectedMode: ThermostatModeUiItem,
     onPositionChange: (Int) -> Unit
 ){
     var circleCenter by remember { mutableStateOf(Offset.Zero) }
-    var positionValue by remember { mutableStateOf(initialValue) }
-    var changeAngle by remember { mutableStateOf(0f) }
-    var dragStartedAngle by remember { mutableStateOf(0f) }
-    var oldPositionValue by remember { mutableStateOf(initialValue) }
+    var positionValue by remember { mutableIntStateOf(initialValue) }
+    var dragStartedAngle by remember { mutableFloatStateOf(0f) }
+    var oldPositionValue by remember { mutableIntStateOf(initialValue) }
 
     Box(
         modifier = modifier
+            .fillMaxWidth(),
+        contentAlignment = Alignment.Center
     ) {
+        val arcColor = when {
+            positionValue < 24 -> selectedMode.primaryColor
+            else -> selectedMode.secondaryColor
+        }
+
         Canvas(
             modifier = Modifier
                 .fillMaxSize()
-                .pointerInput(true){
-                    detectDragGestures(
-                        onDragStart = { offset ->
-                            dragStartedAngle = -atan2(
-                                x = circleCenter.y - offset.y,
-                                y = circleCenter.x - offset.x
-                            ) * (180f / PI).toFloat()
-                            dragStartedAngle = (dragStartedAngle + 180f).mod(360f)
-                        },
-                        onDrag = { change, _ ->
-                            var touchAngle = -atan2(
-                                x = circleCenter.y - change.position.y,
-                                y = circleCenter.x - change.position.x
-                            ) * (180f / PI).toFloat()
+                .pointerInput(selectedMode) {
+                    if (selectedMode.mode != ThermostatMode.OFF) {
+                        detectDragGestures(
+                            onDragStart = { offset ->
+                                dragStartedAngle = -atan2(
+                                    x = circleCenter.y - offset.y,
+                                    y = circleCenter.x - offset.x
+                                ) * (180f / PI).toFloat()
+                                dragStartedAngle = (dragStartedAngle + 180f).mod(360f)
+                            },
+                            onDrag = { change, _ ->
+                                var touchAngle = -atan2(
+                                    x = circleCenter.y - change.position.y,
+                                    y = circleCenter.x - change.position.x
+                                ) * (180f / PI).toFloat()
 
-                            // Adjust touchAngle relative to the start angle (125 degrees)
-                            touchAngle = (touchAngle + 360f + 140f).mod(360f)
+                                // Adjust touchAngle relative to the start angle (125 degrees)
+                                touchAngle = (touchAngle + 360f + 140f).mod(360f)
 
-                            // Calculate the new position value based on the touch angle
-                            val newValue = (minValue + ((touchAngle / 290f) * (maxValue - minValue)).roundToInt()).coerceIn(minValue, maxValue)
+                                // Calculate the new position value based on the touch angle
+                                val newValue =
+                                    (minValue + ((touchAngle / 290f) * (maxValue - minValue)).roundToInt()).coerceIn(
+                                        minValue,
+                                        maxValue
+                                    )
 
-                            if ((positionValue == maxValue && newValue < positionValue) ||
-                                (positionValue == minValue && newValue > positionValue) ||
-                                (positionValue in (minValue + 1)..maxValue)) {
-                                positionValue = newValue
+                                if ((positionValue == maxValue && newValue < positionValue) ||
+                                    (positionValue == minValue && newValue > positionValue) ||
+                                    (positionValue in (minValue + 1)..maxValue)
+                                ) {
+                                    positionValue = newValue
+                                }
+                            },
+                            onDragEnd = {
+                                oldPositionValue = positionValue
+                                onPositionChange(positionValue)
                             }
-                        },
-                        onDragEnd = {
-                            oldPositionValue = positionValue
-                            onPositionChange(positionValue)
-                        }
-                    )
+                        )
+                    }
                 }
         ) {
             val width = size.width
@@ -98,31 +108,10 @@ fun ThermostatCircularIndicator(
             val circleThickness = width / 25f
             circleCenter = Offset(x = width/2f, y = height/2f)
 
-            // Inner filled Circle as Arc
-            drawArc(
-               brush = Brush.radialGradient(
-                   listOf(
-                       Orange.copy(0.45f),
-                       RedOrange.copy(0.15f)
-                   )
-               ),
-                startAngle = 125f,
-                sweepAngle = 290f,
-                useCenter = true,
-                size = Size(
-                    width = circleRadius * 2f,
-                    height = circleRadius * 2f
-                ),
-                topLeft = Offset(
-                    (width - circleRadius * 2f) / 2f,
-                    (height - circleRadius * 2f) / 2f
-                )
-            )
-
             // Inner Circle as Arc
             drawArc(
                 style = Stroke(width = circleThickness),
-                color = RedOrange,
+                color = Color.Transparent,
                 startAngle = 125f,
                 sweepAngle = 290f,
                 useCenter = false,
@@ -135,13 +124,6 @@ fun ThermostatCircularIndicator(
                     (height - circleRadius * 2f) / 2f
                 )
             )
-
-            val arcColor = when {
-                positionValue < 15 -> BrightBlue
-                positionValue < 20 -> Blue
-                positionValue < 25 -> Orange
-                else -> RedOrange
-            }
 
             // Value Arc
             drawArc(
@@ -213,22 +195,44 @@ fun ThermostatCircularIndicator(
                 }
             }
 
-            drawContext.canvas.nativeCanvas.apply {
-                drawIntoCanvas {
-                    drawText(
-                        "$positionValue °C",
-                        circleCenter.x,
-                        circleCenter.y + 45.dp.toPx()/3f,
-                        Paint().apply {
-                            textSize = 38.sp.toPx()
-                            textAlign = Paint.Align.CENTER
-                            color = WhiteColor.toArgb()
-                            isFakeBoldText = true
-                        }
+
+        }
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.align(Alignment.Center)
+        ) {
+            when (selectedMode.mode) {
+                ThermostatMode.OFF -> {
+                    ThermostatBoldTextComponent(
+                        text = stringResource(id = R.string.off),
+                        color = arcColor,
+                        modifier = Modifier.padding(top = 8.dp)
+                    )
+                }
+                ThermostatMode.COOL -> {
+                    ThermostatRegularTextComponent(
+                        text = stringResource(id = R.string.cool_set_to),
+                        color = arcColor,
+                        modifier = Modifier.padding(bottom = 2.dp)
+                    )
+                    ThermostatBoldTextComponent(
+                        text = "$positionValue ${stringResource(id = R.string.degree_celcius)}",
+                        color = arcColor
+                    )
+                }
+                ThermostatMode.HEAT -> {
+                    ThermostatRegularTextComponent(
+                        text = stringResource(id = R.string.heat_set_to),
+                        color = arcColor,
+                        modifier = Modifier.padding(bottom = 2.dp)
+                    )
+                    ThermostatBoldTextComponent(
+                        text = "$positionValue ${stringResource(id = R.string.degree_celcius)}",
+                        color = arcColor
                     )
                 }
             }
-
         }
     }
 }
