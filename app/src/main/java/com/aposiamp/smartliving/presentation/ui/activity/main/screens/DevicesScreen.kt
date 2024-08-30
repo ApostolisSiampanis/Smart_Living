@@ -3,6 +3,7 @@ package com.aposiamp.smartliving.presentation.ui.activity.main.screens
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalNavigationDrawer
@@ -20,6 +21,7 @@ import com.aposiamp.smartliving.presentation.ui.component.BottomBar
 import com.aposiamp.smartliving.presentation.ui.component.MenuMediumTopAppBar
 import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,9 +29,6 @@ fun DevicesScreen(
     navController: NavController,
     viewModel: DevicesViewModel
 ) {
-    val temperature = viewModel.temperature
-    val humidity = viewModel.humidity
-
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     //to be changed
@@ -72,8 +71,14 @@ fun DevicesScreen(
                     .padding(values)
             ) {
                 item {
-                    Text(text = "Temperature: ${temperature.value}°C")
-                    Text(text = "Humidity: ${humidity.value}%")
+                    // TODO: Add the devices here, remove the button
+                    Button(
+                        onClick = {
+                            navController.navigate("thermostat")
+                        }
+                    ) {
+                        Text(text = "Thermostat")
+                    }
                 }
             }
         }
