@@ -48,6 +48,8 @@ class WelcomeActivity : ComponentActivity() {
                     )
 
                     WelcomeNavigation(
+                        context = this,
+                        getCurrentUserUseCase = SmartLiving.appModule.getCurrentUserUseCase,
                         loginViewModel = loginViewModel,
                         signUpViewModel = signUpViewModel
                     )

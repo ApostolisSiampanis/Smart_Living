@@ -144,3 +144,56 @@ fun HeaderText(value: String) {
         color = MaterialTheme.colorScheme.onPrimaryContainer
     )
 }
+
+@Composable
+fun DrawerItemTextComponent(
+    text: String,
+    color: Color
+) {
+    Text(
+        text = text,
+        fontSize = 18.sp,
+        fontFamily = FontFamily(Font(R.font.carlito_regular)),
+        color = color
+    )
+}
+
+@Composable
+fun BottomMenuItemTextComponent(
+    text: String
+) {
+    Text(
+        text = text,
+        fontFamily = FontFamily(Font(R.font.carlito_regular))
+    )
+}
+
+@Composable
+fun ThermostatRegularTextComponent(
+    text: String,
+    color: Color,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontSize = 22.sp,
+        color = color,
+        fontFamily = FontFamily(Font(R.font.carlito_regular)),
+        modifier = modifier
+    )
+}
+
+@Composable
+fun ThermostatBoldTextComponent(
+    text: String,
+    color: Color,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontSize = 38.sp,
+        color = color,
+        fontFamily = FontFamily(Font(R.font.carlito_bold)),
+        modifier = modifier
+    )
+}

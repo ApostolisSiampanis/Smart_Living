@@ -1,6 +1,7 @@
 package com.aposiamp.smartliving.presentation.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardDefaults.cardElevation
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Switch
@@ -18,11 +20,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.LiveData
 import com.aposiamp.smartliving.R
 
 @Composable
@@ -129,6 +133,40 @@ fun PermissionCard(
                    )
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun IndoorEnvironmentalDataCard(
+    indoorTemperature: LiveData<Float>,
+    indoorHumidity: LiveData<Float>
+){
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(0.8f),
+        elevation = cardElevation(defaultElevation = 8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        )
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 4.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            GeneralNormalText(value = stringResource(id = R.string.indoor_temperature))
+            GeneralNormalText(value = "${indoorTemperature.value} " + stringResource(id = R.string.degree_celcius))
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            GeneralNormalText(value = stringResource(id = R.string.indoor_humidity))
+            GeneralNormalText(value = "${indoorHumidity.value} " + stringResource(id = R.string.percentage))
         }
     }
 }

@@ -1,8 +1,9 @@
-package com.aposiamp.smartliving.presentation.ui.screen
+package com.aposiamp.smartliving.presentation.ui.activity.main.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalNavigationDrawer
@@ -14,23 +15,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.aposiamp.smartliving.SmartLiving
 import com.aposiamp.smartliving.presentation.ui.component.BottomBar
-import com.aposiamp.smartliving.presentation.ui.component.Drawer
 import com.aposiamp.smartliving.presentation.ui.component.MenuMediumTopAppBar
+import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
+import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainView() {
-    val scope = rememberCoroutineScope()
+fun DevicesScreen(
+    navController: NavController,
+    viewModel: DevicesViewModel
+) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    //to be changed
+    val scope = rememberCoroutineScope()
 
     ModalNavigationDrawer(
         drawerContent = {
-            Drawer(
+            NavigationDrawer(
+                navController = navController,
                 drawerState = drawerState,
-                scope = scope
+                getNavigationDrawerItemsUseCase = SmartLiving.appModule.getNavigationDrawerItemsUseCase,
+                logoutUseCase = SmartLiving.appModule.logoutUseCase
             )
         },
         drawerState = drawerState
@@ -40,6 +50,7 @@ fun MainView() {
                 .fillMaxSize()
                 .nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
+                //to be changed
                 MenuMediumTopAppBar(
                     title = "My Home",
                     drawerState = drawerState,
@@ -48,7 +59,10 @@ fun MainView() {
                 )
             },
             bottomBar = {
-                BottomBar()
+                BottomBar(
+                    navController = navController,
+                    getBottomNavigationItemsUseCase = SmartLiving.appModule.getBottomMenuItemsUseCase
+                )
             }
         ) { values ->
             LazyColumn(
@@ -56,11 +70,15 @@ fun MainView() {
                     .fillMaxSize()
                     .padding(values)
             ) {
-                items(100) {
-                    Text(
-                        text = "Item $it",
-                        modifier = Modifier.padding(16.dp)
-                    )
+                item {
+                    // TODO: Add the devices here, remove the button
+                    Button(
+                        onClick = {
+                            navController.navigate("thermostat")
+                        }
+                    ) {
+                        Text(text = "Thermostat")
+                    }
                 }
             }
         }

@@ -1,6 +1,6 @@
 package com.aposiamp.smartliving.data.source.remote
 
-import com.aposiamp.smartliving.data.await
+import com.aposiamp.smartliving.utils.await
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 

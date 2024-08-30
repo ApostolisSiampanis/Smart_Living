@@ -59,7 +59,18 @@
     <string name="privacy_policy_acknowledgement">\nBy using the App, you consent to the collection, use, and disclosure of your information in accordance with this Privacy Policy.</string>
     <string name="go_back">Go back</string>
     <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
     <string name="devices">Devices</string>
     <string name="routines">Routines</string>
     <string name="energy">Energy</string>
+    <string name="indoor_temperature">Indoor Temperature</string>
+    <string name="indoor_humidity">Indoor Humidity</string>
+    <string name="heat_set_to">Heat set to</string>
+    <string name="cool_set_to">Cool set to</string>
+    <string name="degree_celcius">°C</string>
+    <string name="percentage">%</string>
+    <string name="turn_off">Turn Off</string>
+    <string name="off">OFF</string>
+    <string name="cool">Cool</string>
+    <string name="heat">Heat</string>
 </resources>

@@ -1,0 +1,16 @@
+package com.aposiamp.smartliving.data.repository
+
+import com.aposiamp.smartliving.R
+import com.aposiamp.smartliving.domain.repository.NavigationDrawerRepository
+import com.aposiamp.smartliving.presentation.model.NavigationUiItem
+
+class NavigationDrawerRepositoryImpl : NavigationDrawerRepository {
+    override fun getNavigationDrawerItems() = listOf(
+        NavigationUiItem(
+            titleResId = R.string.settings,
+            unselectedIcon = R.drawable.settings_outlined,
+            selectedIcon = R.drawable.settings_outlined,
+            route = "settings"
+        )
+    )
+}
