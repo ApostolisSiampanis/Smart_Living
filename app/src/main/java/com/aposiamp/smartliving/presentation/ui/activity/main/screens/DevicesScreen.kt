@@ -71,13 +71,20 @@ fun DevicesScreen(
                     .padding(values)
             ) {
                 item {
-                    // TODO: Add the devices here, remove the button
+                    // TODO: Add the devices here, remove the buttons
                     Button(
                         onClick = {
                             navController.navigate("thermostat")
                         }
                     ) {
                         Text(text = "Thermostat")
+                    }
+                    Button(
+                        onClick = {
+                            navController.navigate("airCondition")
+                        }
+                    ) {
+                        Text(text = "Air Condition")
                     }
                 }
             }
