@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LiveData
 import com.aposiamp.smartliving.R
+import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
 
 @Composable
 fun PermissionCard(
@@ -134,6 +136,25 @@ fun PermissionCard(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun DeviceIndicatorCard(
+    modifier : Modifier = Modifier,
+    content : @Composable () -> Unit
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth(0.8f)
+            .aspectRatio(1f)
+            .background(
+                shape = componentShapes.large,
+                color = Color.White
+            ),
+        elevation = cardElevation(defaultElevation = 4.dp)
+    ) {
+        content()
     }
 }
 
