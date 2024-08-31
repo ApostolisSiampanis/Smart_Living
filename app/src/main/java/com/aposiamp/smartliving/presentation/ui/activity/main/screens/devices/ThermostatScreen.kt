@@ -83,7 +83,7 @@ fun ThermostatScreen(
                                         shape = componentShapes.large,
                                         color = Color.White
                                     ),
-                                elevation = CardDefaults.cardElevation(8.dp)
+                                elevation = CardDefaults.cardElevation(4.dp)
                             ) {
                                 ThermostatCircularIndicator(
                                     modifier = Modifier

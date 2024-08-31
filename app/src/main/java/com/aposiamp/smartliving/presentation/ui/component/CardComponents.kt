@@ -145,7 +145,7 @@ fun IndoorEnvironmentalDataCard(
     Card(
         modifier = Modifier
             .fillMaxWidth(0.8f),
-        elevation = cardElevation(defaultElevation = 8.dp),
+        elevation = cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         )
