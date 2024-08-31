@@ -4,15 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -25,13 +21,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
+import com.aposiamp.smartliving.presentation.ui.component.DeviceCircularIndicator
+import com.aposiamp.smartliving.presentation.ui.component.DeviceIndicatorCard
 import com.aposiamp.smartliving.presentation.ui.component.IndoorEnvironmentalDataCard
-import com.aposiamp.smartliving.presentation.ui.component.ThermostatButtonsRowComponent
-import com.aposiamp.smartliving.presentation.ui.component.ThermostatCircularIndicator
-import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
+import com.aposiamp.smartliving.presentation.ui.component.DeviceModeButtonsRowComponent
+import com.aposiamp.smartliving.presentation.ui.component.DeviceOnOffButton
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.ThermostatViewModel
 
@@ -41,8 +37,10 @@ fun ThermostatScreen(
     sharedViewModel: MainSharedViewModel
 ){
     val viewModel = ThermostatViewModel()
-    val uiModes = viewModel.uiModes
-    var selectedMode by remember { mutableStateOf(uiModes[0]) }
+    val uiDeviceStates = viewModel.uiDeviceStates
+    val uiDeviceModes = viewModel.uiDeviceModes
+    var selectedState by remember { mutableStateOf(uiDeviceStates[0]) }
+    var selectedMode by remember { mutableStateOf(uiDeviceModes[0]) }
 
     Scaffold(
         modifier = Modifier
@@ -75,21 +73,15 @@ fun ThermostatScreen(
                                 .fillMaxWidth(),
                             horizontalArrangement = Arrangement.Center
                         ) {
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxWidth(0.8f)
-                                    .aspectRatio(1f)
-                                    .background(
-                                        shape = componentShapes.large,
-                                        color = Color.White
-                                    ),
-                                elevation = CardDefaults.cardElevation(4.dp)
-                            ) {
-                                ThermostatCircularIndicator(
+                            DeviceIndicatorCard {
+                                DeviceCircularIndicator(
                                     modifier = Modifier
                                         .fillMaxSize()
                                         .background(Color.White),
+                                    minValue = 10,
+                                    maxValue = 30,
                                     circleRadius = 230f,
+                                    selectedState = selectedState,
                                     selectedMode = selectedMode,
                                     onPositionChange = { position ->
 
@@ -103,8 +95,16 @@ fun ThermostatScreen(
                             indoorHumidity = sharedViewModel.indoorHumidity
                         )
                         Spacer(modifier = Modifier.height(16.dp))
-                        ThermostatButtonsRowComponent(
-                            modes = uiModes,
+                        DeviceOnOffButton(
+                            initialState = selectedState,
+                            color = selectedMode.secondaryColor,
+                            onButtonClicked = { state ->
+                                selectedState = uiDeviceStates.first { it.state == state }
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        DeviceModeButtonsRowComponent(
+                            modes = uiDeviceModes,
                             selectedMode = selectedMode,
                             onButtonClicked = { mode ->
                                 selectedMode = mode
