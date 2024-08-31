@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.aposiamp.smartliving.SmartLiving
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.DevicesScreen
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.AirConditionScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.ThermostatScreen
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
@@ -30,6 +31,12 @@ internal fun MainNavigation(
 
         composable("thermostat"){
             ThermostatScreen(
+                navController = navController,
+                sharedViewModel = mainSharedViewModel
+            )
+        }
+        composable("airCondition"){
+            AirConditionScreen(
                 navController = navController,
                 sharedViewModel = mainSharedViewModel
             )
