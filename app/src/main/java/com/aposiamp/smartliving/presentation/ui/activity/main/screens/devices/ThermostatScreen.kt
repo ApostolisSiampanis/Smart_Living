@@ -40,7 +40,7 @@ fun ThermostatScreen(
     navController: NavController,
     sharedViewModel: MainSharedViewModel
 ){
-    val viewModel = viewModel<ThermostatViewModel>()
+    val viewModel = ThermostatViewModel()
     val uiModes = viewModel.uiModes
     var selectedMode by remember { mutableStateOf(uiModes[0]) }
 
