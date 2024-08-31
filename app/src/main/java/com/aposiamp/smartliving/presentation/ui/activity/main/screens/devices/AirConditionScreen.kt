@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.aposiamp.smartliving.presentation.ui.component.AirConditionCircularIndicator
+import com.aposiamp.smartliving.presentation.ui.component.DeviceCircularIndicator
 import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
 import com.aposiamp.smartliving.presentation.ui.component.DeviceIndicatorCard
 import com.aposiamp.smartliving.presentation.ui.component.DeviceModeButtonsRowComponent
@@ -74,10 +74,12 @@ fun AirConditionScreen(
                             horizontalArrangement = Arrangement.Center
                         ) {
                             DeviceIndicatorCard {
-                                AirConditionCircularIndicator(
+                                DeviceCircularIndicator(
                                     modifier = Modifier
                                         .fillMaxSize()
                                         .background(Color.White),
+                                    minValue = 16,
+                                    maxValue = 30,
                                     circleRadius = 230f,
                                     selectedState = selectedState,
                                     selectedMode = selectedMode,
