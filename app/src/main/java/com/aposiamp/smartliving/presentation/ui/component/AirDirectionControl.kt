@@ -5,8 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -14,6 +12,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.aposiamp.smartliving.R
 import kotlin.math.cos
@@ -38,26 +37,34 @@ fun AirDirectionControl(
         if (showDrawable) {
             Image(
                 painter = painterResource(id = R.drawable.swing),
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.swing),
                 modifier = Modifier
                     .size(width = 60.dp, height = 48.dp)
-                    .background(shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp), color = Color.LightGray)
+                    .background(
+                        shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp),
+                        color = Color.LightGray
+                    )
                     .padding(8.dp)
             )
         } else {
             Canvas(
                 modifier = Modifier
                     .size(width = 60.dp, height = 48.dp)
-                    .background(shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp), color = Color.LightGray)
+                    .background(
+                        shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp),
+                        color = Color.LightGray
+                    )
                     .padding(8.dp)
             ) {
                 drawAirDirectionLine(selectedDirection - 1, Color.Black)
             }
         }
 
-        Button(
-            modifier = Modifier
-                .heightIn(48.dp),
+        AirDirectionControlButton(
+            painter = painterResource(id = R.drawable.change_direction),
+            contentDescription = stringResource(id = R.string.change_direction),
+            color = color,
+            shape = RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp),
             onClick = {
                 if (selectedDirection == 4) {
                     selectedDirection = 0
@@ -67,17 +74,8 @@ fun AirDirectionControl(
                     onDirectionChange(selectedDirection)
                     showDrawable = false
                 }
-            },
-            shape = RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = color)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.change_direction),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(28.dp)
-            )
-        }
+            }
+        )
     }
 }
 
