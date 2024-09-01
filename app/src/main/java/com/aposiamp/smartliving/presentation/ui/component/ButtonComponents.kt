@@ -153,15 +153,17 @@ fun FanSpeedButton(
 }
 
 @Composable
-fun AutoButton(
+fun AutoFanButton(
     text: String,
     color: Color,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(containerColor = color),
         shape = componentShapes.large,
+        enabled = enabled,
         elevation = ButtonDefaults.buttonElevation(2.dp)
     ) {
         GeneralNormalBlackText(value = text)
