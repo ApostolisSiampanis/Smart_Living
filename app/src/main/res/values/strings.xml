@@ -85,4 +85,6 @@
     <string name="humidity">Humidity</string>
     <string name="silent">Silent</string>
     <string name="continuous">Continuous</string>
+    <string name="set_to">Set to</string>
+    <string name="max">Max</string>
 </resources>
