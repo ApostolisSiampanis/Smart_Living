@@ -129,3 +129,38 @@ fun DeviceModeButtonsRowComponent(
         }
     }
 }
+
+@Composable
+fun FanSpeedButton(
+    text: String,
+    color: Color,
+    shape: RoundedCornerShape,
+    enabled: Boolean,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(containerColor = color),
+        shape = shape,
+        elevation = ButtonDefaults.buttonElevation(2.dp),
+        enabled = enabled
+    ) {
+        GeneralNormalBlackText(value = text)
+    }
+}
+
+@Composable
+fun AutoButton(
+    text: String,
+    color: Color,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(containerColor = color),
+        shape = componentShapes.large,
+        elevation = ButtonDefaults.buttonElevation(2.dp)
+    ) {
+        GeneralNormalBlackText(value = text)
+    }
+}
