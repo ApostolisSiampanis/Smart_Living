@@ -27,6 +27,7 @@ import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
 import com.aposiamp.smartliving.presentation.ui.component.DeviceIndicatorCard
 import com.aposiamp.smartliving.presentation.ui.component.DeviceModeButtonsRowComponent
 import com.aposiamp.smartliving.presentation.ui.component.DeviceOnOffButton
+import com.aposiamp.smartliving.presentation.ui.component.FanSpeedControl
 import com.aposiamp.smartliving.presentation.ui.component.IndoorEnvironmentalDataCard
 import com.aposiamp.smartliving.presentation.viewmodel.main.AirConditionViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
@@ -100,6 +101,15 @@ fun AirConditionScreen(
                             color = selectedMode.secondaryColor,
                             onButtonClicked = { state ->
                                 selectedState = uiDeviceStates.first { it.state == state }
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        FanSpeedControl(
+                            initialSpeed = 0,
+                            maxSpeed = 5,
+                            color = selectedMode.secondaryColor,
+                            onSpeedChange = { speed ->
+
                             }
                         )
                         Spacer(modifier = Modifier.height(16.dp))
