@@ -205,7 +205,7 @@ fun DeviceCircularIndicator(
         ) {
             when (selectedState.state) {
                 DeviceState.OFF -> {
-                    ThermostatBoldTextComponent(
+                    IndicatorBoldTextComponent(
                         text = stringResource(id = R.string.off),
                         color = arcColor,
                         modifier = Modifier.padding(top = 8.dp)
@@ -214,45 +214,45 @@ fun DeviceCircularIndicator(
                 DeviceState.ON -> {
                     when (selectedMode.mode) {
                         DeviceMode.AUTO -> {
-                            ThermostatRegularTextComponent(
+                            IndicatorRegularTextComponent(
                                 text = stringResource(id = R.string.auto_set_to),
                                 color = arcColor,
                                 modifier = Modifier.padding(bottom = 2.dp)
                             )
-                            ThermostatBoldTextComponent(
+                            IndicatorBoldTextComponent(
                                 text = "$positionValue ${stringResource(id = R.string.degree_celcius)}",
                                 color = arcColor
                             )
                         }
                         DeviceMode.COOL -> {
-                            ThermostatRegularTextComponent(
+                            IndicatorRegularTextComponent(
                                 text = stringResource(id = R.string.cool_set_to),
                                 color = arcColor,
                                 modifier = Modifier.padding(bottom = 2.dp)
                             )
-                            ThermostatBoldTextComponent(
+                            IndicatorBoldTextComponent(
                                 text = "$positionValue ${stringResource(id = R.string.degree_celcius)}",
                                 color = arcColor
                             )
                         }
                         DeviceMode.HEAT -> {
-                            ThermostatRegularTextComponent(
+                            IndicatorRegularTextComponent(
                                 text = stringResource(id = R.string.heat_set_to),
                                 color = arcColor,
                                 modifier = Modifier.padding(bottom = 2.dp)
                             )
-                            ThermostatBoldTextComponent(
+                            IndicatorBoldTextComponent(
                                 text = "$positionValue ${stringResource(id = R.string.degree_celcius)}",
                                 color = arcColor
                             )
                         }
                         DeviceMode.DRY -> {
-                            ThermostatRegularTextComponent(
+                            IndicatorRegularTextComponent(
                                 text = stringResource(id = R.string.dry_set_to),
                                 color = arcColor,
                                 modifier = Modifier.padding(bottom = 2.dp)
                             )
-                            ThermostatBoldTextComponent(
+                            IndicatorBoldTextComponent(
                                 text = "$positionValue ${stringResource(id = R.string.degree_celcius)}",
                                 color = arcColor
                             )
