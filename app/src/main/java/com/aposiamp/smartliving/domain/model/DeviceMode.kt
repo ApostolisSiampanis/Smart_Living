@@ -4,5 +4,7 @@ enum class DeviceMode {
     AUTO,
     COOL,
     HEAT,
-    DRY
+    DRY,
+    HUMIDITY,
+    SILENT
 }
