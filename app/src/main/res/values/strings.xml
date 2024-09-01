@@ -78,4 +78,6 @@
     <string name="cool">Cool</string>
     <string name="heat">Heat</string>
     <string name="dry">Dry</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
 </resources>
