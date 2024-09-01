@@ -82,4 +82,7 @@
     <string name="minus">-</string>
     <string name="swing">Swing</string>
     <string name="change_direction">Change Direction</string>
+    <string name="humidity">Humidity</string>
+    <string name="silent">Silent</string>
+    <string name="continuous">Continuous</string>
 </resources>
