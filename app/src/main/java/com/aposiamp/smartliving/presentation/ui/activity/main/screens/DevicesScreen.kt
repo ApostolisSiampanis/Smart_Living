@@ -86,6 +86,13 @@ fun DevicesScreen(
                     ) {
                         Text(text = "Air Condition")
                     }
+                    Button(
+                        onClick = {
+                            navController.navigate("dehumidifier")
+                        }
+                    ) {
+                        Text(text = "Dehumidifier")
+                    }
                 }
             }
         }
