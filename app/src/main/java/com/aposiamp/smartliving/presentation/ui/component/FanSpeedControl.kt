@@ -84,7 +84,7 @@ fun FanSpeedControl(
                         modifier = Modifier
                             .height((24 * i / maxSpeed).dp) // Ascending height
                             .width(4.dp)
-                            .background(if (i <= selectedSpeed) color else Color.Gray)
+                            .background(if (i <= selectedSpeed) Color.Black else Color.Gray)
                     )
                 }
             }
