@@ -80,4 +80,6 @@
     <string name="dry">Dry</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
+    <string name="swing">Swing</string>
+    <string name="change_direction">Change Direction</string>
 </resources>
