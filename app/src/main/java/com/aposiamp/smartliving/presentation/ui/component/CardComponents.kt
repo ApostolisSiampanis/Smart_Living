@@ -146,8 +146,6 @@ fun DeviceIndicatorCard(
 ) {
     Card(
         modifier = modifier
-            .fillMaxWidth(0.8f)
-            .aspectRatio(1f)
             .background(
                 shape = componentShapes.large,
                 color = Color.White
