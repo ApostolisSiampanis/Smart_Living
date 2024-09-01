@@ -78,7 +78,8 @@ fun DeviceOnOffButton(
             .heightIn(48.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = if(initialState.state == DeviceState.ON) color else Color.LightGray
-        )
+        ),
+        elevation = ButtonDefaults.buttonElevation(2.dp)
     ) {
         Image(
             painter = painterResource(id = value.icon),
@@ -117,7 +118,8 @@ fun DeviceModeButtonsRowComponent(
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = if (value == item) item.secondaryColor else Color.LightGray
-                )
+                ),
+                elevation = ButtonDefaults.buttonElevation(2.dp)
             ) {
                 Image(
                     painter = painterResource(id = item.icon),
