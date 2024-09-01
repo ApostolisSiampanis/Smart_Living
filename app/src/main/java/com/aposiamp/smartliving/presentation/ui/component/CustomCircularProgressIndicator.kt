@@ -257,6 +257,7 @@ fun DeviceCircularIndicator(
                                 color = arcColor
                             )
                         }
+                        else -> null
                     }
                 }
             }
