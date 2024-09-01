@@ -105,7 +105,7 @@ fun AirConditionScreen(
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         FanSpeedControl(
-                            initialSpeed = 0,
+                            initialSpeed = 1,
                             maxSpeed = 5,
                             color = selectedMode.secondaryColor,
                             onSpeedChange = { speed ->
