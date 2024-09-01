@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -111,7 +112,7 @@ fun DeviceModeButtonsRowComponent(
                 },
                 modifier = Modifier
                     .weight(1f)
-                    .heightIn(48.dp),
+                    .height(48.dp),
                 contentPadding = PaddingValues(),
                 shape = when (index) {
                     0 -> RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp)
