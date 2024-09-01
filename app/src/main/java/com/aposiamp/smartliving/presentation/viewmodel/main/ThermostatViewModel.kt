@@ -41,7 +41,7 @@ class ThermostatViewModel : ViewModel() {
         DeviceModeItem(DeviceMode.HEAT)
     )
 
-    val uiDeviceModes: List<DeviceModeUiItem> = deviceModes.map {
+    val uiDeviceModes: List<DeviceModeUiItem> = deviceModes.mapNotNull {
         when (it.mode) {
             DeviceMode.AUTO -> DeviceModeUiItem(
                 icon = R.drawable.auto,
@@ -66,5 +66,5 @@ class ThermostatViewModel : ViewModel() {
             )
             else -> null
         }
-    }.filterNotNull()
+    }
 }
