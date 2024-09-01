@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.aposiamp.smartliving.presentation.ui.component.AirDirectionControl
 import com.aposiamp.smartliving.presentation.ui.component.DeviceCircularIndicator
 import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
 import com.aposiamp.smartliving.presentation.ui.component.DeviceIndicatorCard
@@ -96,13 +97,25 @@ fun AirConditionScreen(
                             indoorHumidity = sharedViewModel.indoorHumidity
                         )
                         Spacer(modifier = Modifier.height(16.dp))
-                        DeviceOnOffButton(
-                            initialState = selectedState,
-                            color = selectedMode.secondaryColor,
-                            onButtonClicked = { state ->
-                                selectedState = uiDeviceStates.first { it.state == state }
-                            }
-                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            DeviceOnOffButton(
+                                initialState = selectedState,
+                                color = selectedMode.secondaryColor,
+                                onButtonClicked = { state ->
+                                    selectedState = uiDeviceStates.first { it.state == state }
+                                }
+                            )
+                            AirDirectionControl(
+                                color = selectedMode.secondaryColor,
+                                onDirectionChange = { direction ->
+
+                                }
+                            )
+                        }
                         Spacer(modifier = Modifier.height(16.dp))
                         FanSpeedControl(
                             initialSpeed = 1,
