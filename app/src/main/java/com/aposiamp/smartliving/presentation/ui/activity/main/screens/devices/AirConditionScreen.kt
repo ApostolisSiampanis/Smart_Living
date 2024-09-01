@@ -126,6 +126,8 @@ fun AirConditionScreen(
                             initialSpeed = 1,
                             maxSpeed = 5,
                             color = selectedMode.secondaryColor,
+                            selectedState = selectedState,
+                            selectedMode = selectedMode,
                             onSpeedChange = { speed ->
 
                             }
