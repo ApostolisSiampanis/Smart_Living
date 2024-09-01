@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.presentation.ui.component
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -19,9 +21,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.aposiamp.smartliving.presentation.model.ThermostatModeUiItem
+import com.aposiamp.smartliving.domain.model.DeviceState
+import com.aposiamp.smartliving.presentation.model.DeviceModeUiItem
+import com.aposiamp.smartliving.presentation.model.DeviceStateUiItem
 import com.aposiamp.smartliving.presentation.ui.theme.PrussianBlue
 import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
 
@@ -53,10 +59,42 @@ fun GeneralButtonComponent(
 }
 
 @Composable
-fun ThermostatButtonsRowComponent(
-    modes: List<ThermostatModeUiItem>,
-    selectedMode: ThermostatModeUiItem,
-    onButtonClicked: (ThermostatModeUiItem) -> Unit
+fun DeviceOnOffButton(
+    initialState: DeviceStateUiItem,
+    color: Color,
+    onButtonClicked: (DeviceState) -> Unit
+) {
+    val value by remember { mutableStateOf(initialState) }
+
+    Button(
+        onClick = {
+            if (initialState.state == DeviceState.OFF) {
+                onButtonClicked(DeviceState.ON)
+            } else {
+                onButtonClicked(DeviceState.OFF)
+            }
+        },
+        shape = componentShapes.large,
+        modifier = Modifier
+            .fillMaxWidth(0.4f)
+            .heightIn(48.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = if(initialState.state == DeviceState.ON) color else Color.LightGray
+        ),
+        elevation = ButtonDefaults.buttonElevation(2.dp)
+    ) {
+        Image(
+            painter = painterResource(id = value.icon),
+            contentDescription = stringResource(id = value.text)
+        )
+    }
+}
+
+@Composable
+fun DeviceModeButtonsRowComponent(
+    modes: List<DeviceModeUiItem>,
+    selectedMode: DeviceModeUiItem,
+    onButtonClicked: (DeviceModeUiItem) -> Unit
 ) {
     var value by remember { mutableStateOf(selectedMode) }
 
@@ -82,12 +120,74 @@ fun ThermostatButtonsRowComponent(
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = if (value == item) item.secondaryColor else Color.LightGray
-                )
+                ),
+                elevation = ButtonDefaults.buttonElevation(2.dp)
             ) {
-                GeneralBoldText(
-                    value = stringResource(id = item.text)
+                Image(
+                    painter = painterResource(id = item.icon),
+                    contentDescription = stringResource(id = item.text)
                 )
             }
         }
+    }
+}
+
+@Composable
+fun FanSpeedButton(
+    text: String,
+    color: Color,
+    shape: RoundedCornerShape,
+    enabled: Boolean,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(containerColor = color),
+        shape = shape,
+        elevation = ButtonDefaults.buttonElevation(2.dp),
+        enabled = enabled
+    ) {
+        GeneralNormalBlackText(value = text)
+    }
+}
+
+@Composable
+fun AutoButton(
+    text: String,
+    color: Color,
+    onClick: () -> Unit
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(containerColor = color),
+        shape = componentShapes.large,
+        elevation = ButtonDefaults.buttonElevation(2.dp)
+    ) {
+        GeneralNormalBlackText(value = text)
+    }
+}
+
+@Composable
+fun AirDirectionControlButton(
+    painter: Painter,
+    contentDescription: String,
+    color: Color,
+    shape: RoundedCornerShape,
+    onClick: () -> Unit
+) {
+    Button(
+        modifier = Modifier
+            .heightIn(48.dp),
+        onClick = onClick,
+        shape = shape,
+        colors = ButtonDefaults.buttonColors(containerColor = color),
+        elevation = ButtonDefaults.buttonElevation(2.dp)
+    ) {
+        Image(
+            painter = painter,
+            contentDescription = contentDescription,
+            modifier = Modifier
+                .size(28.dp)
+        )
     }
 }

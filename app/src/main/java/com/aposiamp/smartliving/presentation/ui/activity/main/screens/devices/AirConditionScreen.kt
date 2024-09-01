@@ -22,21 +22,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
+import com.aposiamp.smartliving.presentation.ui.component.AirDirectionControl
 import com.aposiamp.smartliving.presentation.ui.component.DeviceCircularIndicator
+import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
 import com.aposiamp.smartliving.presentation.ui.component.DeviceIndicatorCard
-import com.aposiamp.smartliving.presentation.ui.component.IndoorEnvironmentalDataCard
 import com.aposiamp.smartliving.presentation.ui.component.DeviceModeButtonsRowComponent
 import com.aposiamp.smartliving.presentation.ui.component.DeviceOnOffButton
+import com.aposiamp.smartliving.presentation.ui.component.FanSpeedControl
+import com.aposiamp.smartliving.presentation.ui.component.IndoorEnvironmentalDataCard
+import com.aposiamp.smartliving.presentation.viewmodel.main.AirConditionViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
-import com.aposiamp.smartliving.presentation.viewmodel.main.ThermostatViewModel
 
 @Composable
-fun ThermostatScreen(
+fun AirConditionScreen(
     navController: NavController,
     sharedViewModel: MainSharedViewModel
-){
-    val viewModel = ThermostatViewModel()
+) {
+    val viewModel = AirConditionViewModel()
     val uiDeviceStates = viewModel.uiDeviceStates
     val uiDeviceModes = viewModel.uiDeviceModes
     var selectedState by remember { mutableStateOf(uiDeviceStates[0]) }
@@ -47,7 +49,7 @@ fun ThermostatScreen(
             .fillMaxSize(),
         topBar = {
             BackAppTopBar(
-                title = "Thermostat",
+                title = "Air Condition",
                 color = MaterialTheme.colorScheme.primaryContainer,
                 onBackClick = {
                     navController.navigateUp()
@@ -78,7 +80,7 @@ fun ThermostatScreen(
                                     modifier = Modifier
                                         .fillMaxSize()
                                         .background(Color.White),
-                                    minValue = 10,
+                                    minValue = 16,
                                     maxValue = 30,
                                     circleRadius = 230f,
                                     selectedState = selectedState,
@@ -95,11 +97,32 @@ fun ThermostatScreen(
                             indoorHumidity = sharedViewModel.indoorHumidity
                         )
                         Spacer(modifier = Modifier.height(16.dp))
-                        DeviceOnOffButton(
-                            initialState = selectedState,
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            DeviceOnOffButton(
+                                initialState = selectedState,
+                                color = selectedMode.secondaryColor,
+                                onButtonClicked = { state ->
+                                    selectedState = uiDeviceStates.first { it.state == state }
+                                }
+                            )
+                            AirDirectionControl(
+                                color = selectedMode.secondaryColor,
+                                onDirectionChange = { direction ->
+
+                                }
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(16.dp))
+                        FanSpeedControl(
+                            initialSpeed = 1,
+                            maxSpeed = 5,
                             color = selectedMode.secondaryColor,
-                            onButtonClicked = { state ->
-                                selectedState = uiDeviceStates.first { it.state == state }
+                            onSpeedChange = { speed ->
+
                             }
                         )
                         Spacer(modifier = Modifier.height(16.dp))

@@ -10,11 +10,12 @@ import com.aposiamp.smartliving.presentation.model.DeviceModeUiItem
 import com.aposiamp.smartliving.presentation.model.DeviceStateUiItem
 import com.aposiamp.smartliving.presentation.ui.theme.Blue
 import com.aposiamp.smartliving.presentation.ui.theme.BrightBlue
+import com.aposiamp.smartliving.presentation.ui.theme.DryBlue
 import com.aposiamp.smartliving.presentation.ui.theme.LightOrange
 import com.aposiamp.smartliving.presentation.ui.theme.Orange
 import com.aposiamp.smartliving.presentation.ui.theme.RedOrange
 
-class ThermostatViewModel : ViewModel() {
+class AirConditionViewModel : ViewModel() {
     private val deviceStates = listOf(
         DeviceStateItem(DeviceState.OFF),
         DeviceStateItem(DeviceState.ON)
@@ -38,7 +39,8 @@ class ThermostatViewModel : ViewModel() {
     private val deviceModes = listOf(
         DeviceModeItem(DeviceMode.AUTO),
         DeviceModeItem(DeviceMode.COOL),
-        DeviceModeItem(DeviceMode.HEAT)
+        DeviceModeItem(DeviceMode.HEAT),
+        DeviceModeItem(DeviceMode.DRY)
     )
 
     val uiDeviceModes: List<DeviceModeUiItem> = deviceModes.map {
@@ -64,7 +66,14 @@ class ThermostatViewModel : ViewModel() {
                 primaryColor = Orange,
                 secondaryColor = RedOrange
             )
-            else -> null
+            DeviceMode.DRY -> DeviceModeUiItem(
+                icon = R.drawable.dry,
+                text = R.string.dry,
+                mode = it.mode,
+                primaryColor = DryBlue,
+                secondaryColor = DryBlue
+            )
         }
-    }.filterNotNull()
+    }
+
 }

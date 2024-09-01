@@ -134,6 +134,15 @@ fun GeneralBoldText(value: String) {
 }
 
 @Composable
+fun GeneralNormalBlackText(value: String) {
+    Text(
+        text = value,
+        color = Color.Black,
+        fontFamily = FontFamily(Font(R.font.carlito_regular))
+    )
+}
+
+@Composable
 fun HeaderText(value: String) {
     Text(
         text = value,

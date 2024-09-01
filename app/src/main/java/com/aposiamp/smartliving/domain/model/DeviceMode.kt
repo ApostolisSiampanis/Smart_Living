@@ -1,7 +1,8 @@
 package com.aposiamp.smartliving.domain.model
 
-enum class ThermostatMode {
-    OFF,
+enum class DeviceMode {
+    AUTO,
+    COOL,
     HEAT,
-    COOL
+    DRY
 }
