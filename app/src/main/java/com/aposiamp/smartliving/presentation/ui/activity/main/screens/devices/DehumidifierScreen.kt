@@ -1,8 +1,5 @@
 package com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,20 +21,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
-import com.aposiamp.smartliving.presentation.ui.component.DeviceCircularIndicator
+import com.aposiamp.smartliving.presentation.ui.component.DehumidifierIndicator
 import com.aposiamp.smartliving.presentation.ui.component.DeviceIndicatorCard
-import com.aposiamp.smartliving.presentation.ui.component.IndoorEnvironmentalDataCard
 import com.aposiamp.smartliving.presentation.ui.component.DeviceModeButtonsRowComponent
 import com.aposiamp.smartliving.presentation.ui.component.DeviceOnOffButton
+import com.aposiamp.smartliving.presentation.ui.component.FanSpeedControl
+import com.aposiamp.smartliving.presentation.ui.component.IndoorEnvironmentalDataCard
+import com.aposiamp.smartliving.presentation.viewmodel.main.DehumidifierViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
-import com.aposiamp.smartliving.presentation.viewmodel.main.ThermostatViewModel
 
 @Composable
-fun ThermostatScreen(
+fun DehumidifierScreen(
     navController: NavController,
     sharedViewModel: MainSharedViewModel
-){
-    val viewModel = ThermostatViewModel()
+) {
+    val viewModel = DehumidifierViewModel()
     val uiDeviceStates = viewModel.uiDeviceStates
     val uiDeviceModes = viewModel.uiDeviceModes
     var selectedState by remember { mutableStateOf(uiDeviceStates[0]) }
@@ -48,7 +46,7 @@ fun ThermostatScreen(
             .fillMaxSize(),
         topBar = {
             BackAppTopBar(
-                title = "Thermostat",
+                title = "Dehumidifier",
                 color = MaterialTheme.colorScheme.primaryContainer,
                 onBackClick = {
                     navController.navigateUp()
@@ -69,30 +67,19 @@ fun ThermostatScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     item {
-                        Row(
+                        DeviceIndicatorCard(
                             modifier = Modifier
-                                .fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Center
+                                .fillMaxWidth(0.8f)
                         ) {
-                            DeviceIndicatorCard(
-                                modifier = Modifier
-                                    .fillMaxWidth(0.8f)
-                                    .aspectRatio(1f)
-                            ) {
-                                DeviceCircularIndicator(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .background(Color.White),
-                                    minValue = 10,
-                                    maxValue = 30,
-                                    circleRadius = 230f,
-                                    selectedState = selectedState,
-                                    selectedMode = selectedMode,
-                                    onPositionChange = { position ->
+                            DehumidifierIndicator(
+                                minValue = 40,
+                                maxValue = 95,
+                                selectedState = selectedState,
+                                selectedMode = selectedMode,
+                                onSetValue = { value ->
 
-                                    }
-                                )
-                            }
+                                }
+                            )
                         }
                         Spacer(modifier = Modifier.height(16.dp))
                         IndoorEnvironmentalDataCard(
@@ -105,6 +92,18 @@ fun ThermostatScreen(
                             color = selectedMode.secondaryColor,
                             onButtonClicked = { state ->
                                 selectedState = uiDeviceStates.first { it.state == state }
+                            }
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        FanSpeedControl(
+                            initialSpeed = 1,
+                            maxSpeed = 5,
+                            color = selectedMode.secondaryColor,
+                            isDehumidifier = true,
+                            selectedState = selectedState,
+                            selectedMode = selectedMode,
+                            onSpeedChange = { speed ->
+
                             }
                         )
                         Spacer(modifier = Modifier.height(16.dp))

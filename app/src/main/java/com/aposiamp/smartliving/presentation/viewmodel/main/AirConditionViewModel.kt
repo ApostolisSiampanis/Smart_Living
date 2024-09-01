@@ -43,7 +43,7 @@ class AirConditionViewModel : ViewModel() {
         DeviceModeItem(DeviceMode.DRY)
     )
 
-    val uiDeviceModes: List<DeviceModeUiItem> = deviceModes.map {
+    val uiDeviceModes: List<DeviceModeUiItem> = deviceModes.mapNotNull {
         when (it.mode) {
             DeviceMode.AUTO -> DeviceModeUiItem(
                 icon = R.drawable.auto,
@@ -73,7 +73,7 @@ class AirConditionViewModel : ViewModel() {
                 primaryColor = DryBlue,
                 secondaryColor = DryBlue
             )
+            else -> null
         }
     }
-
 }

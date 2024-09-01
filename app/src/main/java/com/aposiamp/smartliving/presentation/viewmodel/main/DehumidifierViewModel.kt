@@ -8,13 +8,12 @@ import com.aposiamp.smartliving.domain.model.DeviceState
 import com.aposiamp.smartliving.domain.model.DeviceStateItem
 import com.aposiamp.smartliving.presentation.model.DeviceModeUiItem
 import com.aposiamp.smartliving.presentation.model.DeviceStateUiItem
-import com.aposiamp.smartliving.presentation.ui.theme.Blue
-import com.aposiamp.smartliving.presentation.ui.theme.BrightBlue
+import com.aposiamp.smartliving.presentation.ui.theme.DryBlue
 import com.aposiamp.smartliving.presentation.ui.theme.LightOrange
-import com.aposiamp.smartliving.presentation.ui.theme.Orange
-import com.aposiamp.smartliving.presentation.ui.theme.RedOrange
+import com.aposiamp.smartliving.presentation.ui.theme.PrussianBlue
+import com.aposiamp.smartliving.presentation.ui.theme.Purple40
 
-class ThermostatViewModel : ViewModel() {
+class DehumidifierViewModel : ViewModel() {
     private val deviceStates = listOf(
         DeviceStateItem(DeviceState.OFF),
         DeviceStateItem(DeviceState.ON)
@@ -37,8 +36,9 @@ class ThermostatViewModel : ViewModel() {
 
     private val deviceModes = listOf(
         DeviceModeItem(DeviceMode.AUTO),
-        DeviceModeItem(DeviceMode.COOL),
-        DeviceModeItem(DeviceMode.HEAT)
+        DeviceModeItem(DeviceMode.HUMIDITY),
+        DeviceModeItem(DeviceMode.DRY),
+        DeviceModeItem(DeviceMode.SILENT)
     )
 
     val uiDeviceModes: List<DeviceModeUiItem> = deviceModes.mapNotNull {
@@ -50,19 +50,26 @@ class ThermostatViewModel : ViewModel() {
                 primaryColor = LightOrange,
                 secondaryColor = LightOrange
             )
-            DeviceMode.COOL -> DeviceModeUiItem(
-                icon = R.drawable.cool,
-                text = R.string.cool,
+            DeviceMode.HUMIDITY -> DeviceModeUiItem(
+                icon = R.drawable.dry,
+                text = R.string.humidity,
                 mode = it.mode,
-                primaryColor = Blue,
-                secondaryColor = BrightBlue
+                primaryColor = DryBlue,
+                secondaryColor = DryBlue
             )
-            DeviceMode.HEAT -> DeviceModeUiItem(
-                icon = R.drawable.heat,
-                text = R.string.heat,
+            DeviceMode.DRY -> DeviceModeUiItem(
+                icon = R.drawable.clothes,
+                text = R.string.dry,
                 mode = it.mode,
-                primaryColor = Orange,
-                secondaryColor = RedOrange
+                primaryColor = Purple40,
+                secondaryColor = Purple40
+            )
+            DeviceMode.SILENT -> DeviceModeUiItem(
+                icon = R.drawable.silent,
+                text = R.string.silent,
+                mode = it.mode,
+                primaryColor = PrussianBlue,
+                secondaryColor = PrussianBlue
             )
             else -> null
         }
