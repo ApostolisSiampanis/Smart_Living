@@ -12,9 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -26,21 +23,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
+import com.aposiamp.smartliving.domain.model.DeviceMode
+import com.aposiamp.smartliving.domain.model.DeviceState
+import com.aposiamp.smartliving.presentation.model.DeviceModeUiItem
+import com.aposiamp.smartliving.presentation.model.DeviceStateUiItem
 
 @Composable
 fun FanSpeedControl(
     initialSpeed: Int = 1,
     maxSpeed: Int = 5,
     color: Color,
+    isDehumidifier: Boolean = false,
+    selectedState: DeviceStateUiItem,
+    selectedMode: DeviceModeUiItem,
     onSpeedChange: (Int) -> Unit
 ) {
     var selectedSpeed by remember { mutableIntStateOf(initialSpeed) }
     var isAuto by remember { mutableStateOf(false) }
+    val areButtonsDisabled = isDehumidifier && selectedState.state == DeviceState.ON && selectedMode.mode == DeviceMode.DRY
+
+    if (areButtonsDisabled) {
+        selectedSpeed = maxSpeed
+    }
 
     Row(
         modifier = Modifier
@@ -51,7 +57,7 @@ fun FanSpeedControl(
             text = stringResource(id = R.string.minus),
             color = color,
             shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp),
-            enabled = selectedSpeed > 1,
+            enabled = !areButtonsDisabled && selectedSpeed > 1,
             onClick = {
                 if (selectedSpeed > 1) {
                     selectedSpeed--
@@ -94,7 +100,7 @@ fun FanSpeedControl(
             text = stringResource(id = R.string.plus),
             color = color,
             shape = RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp),
-            enabled = selectedSpeed < maxSpeed,
+            enabled = !areButtonsDisabled && selectedSpeed < maxSpeed,
             onClick = {
                 if (selectedSpeed < maxSpeed) {
                     selectedSpeed++
@@ -106,9 +112,14 @@ fun FanSpeedControl(
 
         Spacer(modifier = Modifier.width(8.dp))
 
-        AutoButton(
-            text = stringResource(id = R.string.auto),
+        AutoFanButton(
+            text = if (isDehumidifier && selectedState.state == DeviceState.ON && selectedMode.mode == DeviceMode.DRY) {
+                stringResource(id = R.string.max)
+            } else {
+                stringResource(id = R.string.auto)
+            },
             color = color,
+            enabled = !areButtonsDisabled,
             onClick = {
                 selectedSpeed = 0
                 isAuto = true
