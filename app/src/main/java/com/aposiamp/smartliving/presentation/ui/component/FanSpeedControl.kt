@@ -17,6 +17,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -33,12 +34,12 @@ import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
 
 @Composable
 fun FanSpeedControl(
-    initialSpeed: Int = 0,
+    initialSpeed: Int = 1,
     maxSpeed: Int = 5,
     color: Color,
     onSpeedChange: (Int) -> Unit
 ) {
-    var selectedSpeed by remember { mutableStateOf(initialSpeed) }
+    var selectedSpeed by remember { mutableIntStateOf(initialSpeed) }
     var isAuto by remember { mutableStateOf(false) }
 
     Row(
@@ -46,26 +47,19 @@ fun FanSpeedControl(
             .fillMaxWidth(0.65f),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Button(
+        FanSpeedButton(
+            text = stringResource(id = R.string.minus),
+            color = color,
+            shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp),
+            enabled = selectedSpeed > 1,
             onClick = {
-                if (selectedSpeed > 0) {
+                if (selectedSpeed > 1) {
                     selectedSpeed--
                     onSpeedChange(selectedSpeed)
                     isAuto = false
                 }
-            },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = color
-            ),
-            shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp),
-            elevation = ButtonDefaults.buttonElevation(2.dp),
-            enabled = selectedSpeed > 0
-        ) {
-            Text(
-                text = stringResource(id = R.string.minus),
-                color = Color.Black
-            )
-        }
+            }
+        )
 
         Row(
             modifier = Modifier
@@ -96,44 +90,30 @@ fun FanSpeedControl(
             }
         }
 
-        Button(
+        FanSpeedButton(
+            text = stringResource(id = R.string.plus),
+            color = color,
+            shape = RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp),
+            enabled = selectedSpeed < maxSpeed,
             onClick = {
                 if (selectedSpeed < maxSpeed) {
                     selectedSpeed++
                     onSpeedChange(selectedSpeed)
                     isAuto = false
                 }
-            },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = color
-            ),
-            shape = RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp),
-            elevation = ButtonDefaults.buttonElevation(2.dp),
-            enabled = selectedSpeed < maxSpeed
-        ) {
-            Text(
-                text = stringResource(id = R.string.plus),
-                color = Color.Black
-            )
-        }
+            }
+        )
+
         Spacer(modifier = Modifier.width(8.dp))
-        Button(
+
+        AutoButton(
+            text = stringResource(id = R.string.auto),
+            color = color,
             onClick = {
-                selectedSpeed = -1
+                selectedSpeed = 0
                 isAuto = true
                 onSpeedChange(selectedSpeed)
-            },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = color
-            ),
-            shape = componentShapes.large,
-            elevation = ButtonDefaults.buttonElevation(2.dp)
-        ) {
-            Text(
-                text = stringResource(id = R.string.auto),
-                color = Color.Black,
-                fontFamily = FontFamily(Font(R.font.carlito_regular))
-            )
-        }
+            }
+        )
     }
 }
