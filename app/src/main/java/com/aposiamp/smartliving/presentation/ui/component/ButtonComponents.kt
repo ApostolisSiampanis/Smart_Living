@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -20,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -162,5 +164,30 @@ fun AutoButton(
         elevation = ButtonDefaults.buttonElevation(2.dp)
     ) {
         GeneralNormalBlackText(value = text)
+    }
+}
+
+@Composable
+fun AirDirectionControlButton(
+    painter: Painter,
+    contentDescription: String,
+    color: Color,
+    shape: RoundedCornerShape,
+    onClick: () -> Unit
+) {
+    Button(
+        modifier = Modifier
+            .heightIn(48.dp),
+        onClick = onClick,
+        shape = shape,
+        colors = ButtonDefaults.buttonColors(containerColor = color),
+        elevation = ButtonDefaults.buttonElevation(2.dp)
+    ) {
+        Image(
+            painter = painter,
+            contentDescription = contentDescription,
+            modifier = Modifier
+                .size(28.dp)
+        )
     }
 }
