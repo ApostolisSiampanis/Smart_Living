@@ -178,7 +178,7 @@ fun BottomMenuItemTextComponent(
 }
 
 @Composable
-fun ThermostatRegularTextComponent(
+fun IndicatorRegularTextComponent(
     text: String,
     color: Color,
     modifier: Modifier = Modifier
@@ -193,7 +193,7 @@ fun ThermostatRegularTextComponent(
 }
 
 @Composable
-fun ThermostatBoldTextComponent(
+fun IndicatorBoldTextComponent(
     text: String,
     color: Color,
     modifier: Modifier = Modifier
