@@ -90,4 +90,5 @@
     <string name="open_menu">Open Menu</string>
     <string name="close_menu">Close Menu</string>
     <string name="add">Add</string>
+    <string name="about">About</string>
 </resources>
