@@ -161,14 +161,14 @@ fun DrawerItemTextComponent(
 ) {
     Text(
         text = text,
-        fontSize = 18.sp,
+        fontSize = 22.sp,
         fontFamily = FontFamily(Font(R.font.carlito_regular)),
         color = color
     )
 }
 
 @Composable
-fun BottomMenuItemTextComponent(
+fun NormalNavigationTextComponent(
     text: String
 ) {
     Text(
