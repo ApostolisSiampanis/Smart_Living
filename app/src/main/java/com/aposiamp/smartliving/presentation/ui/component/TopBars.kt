@@ -1,15 +1,11 @@
 package com.aposiamp.smartliving.presentation.ui.component
 
 import androidx.compose.foundation.Image
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MediumTopAppBar
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
@@ -17,46 +13,47 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import com.aposiamp.smartliving.R
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuMediumTopAppBar(
     title: String,
+    color: Color,
+    onMenuClick: () -> Unit,
     drawerState: DrawerState,
-    scope: CoroutineScope,
     scrollBehavior: TopAppBarScrollBehavior
 ) {
     MediumTopAppBar(
         title = {
-            Text(
-                text = title,
-                fontFamily = FontFamily(Font(R.font.carlito_regular))
-            )
+            NormalNavigationTextComponent(text = title)
         },
         navigationIcon = {
-            IconButton(onClick = {
-                scope.launch {
-                    drawerState.open()
+            IconButton(
+                onClick = {
+                    onMenuClick()
+                },
+                content = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.menu),
+                        contentDescription = stringResource(id = if (drawerState.isOpen) R.string.close_menu else R.string.open_menu)
+                    )
                 }
-            }) {
-                Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = "Menu"
-                )
-            }
+            )
         },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = color
+        ),
         actions = {
-            IconButton(onClick = { /*TODO*/}) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Add a Device or a Scenario"
-                )
-            }
+            IconButton(
+                onClick = { /*TODO*/},
+                content = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.add),
+                        contentDescription = stringResource(id = R.string.add)
+                    )
+                }
+            )
         },
         scrollBehavior = scrollBehavior
     )
