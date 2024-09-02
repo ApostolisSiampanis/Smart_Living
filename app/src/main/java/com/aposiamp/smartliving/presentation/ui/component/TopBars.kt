@@ -61,6 +61,37 @@ fun MenuMediumTopAppBar(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+fun MenuAppTopBar(
+    title: String,
+    color: Color,
+    onMenuClick: () -> Unit,
+    drawerState: DrawerState
+) {
+    TopAppBar(
+        title = {
+            NormalNavigationTextComponent(text = title)
+        },
+        navigationIcon = {
+            IconButton(
+                onClick = {
+                    onMenuClick()
+                },
+                content = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.menu),
+                        contentDescription = stringResource(id = if (drawerState.isOpen) R.string.close_menu else R.string.open_menu)
+                    )
+                }
+            )
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = color
+        )
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
 fun BackAppTopBar(
     title: String,
     color: Color,
@@ -76,7 +107,7 @@ fun BackAppTopBar(
                     onBackClick()
                 },
                 content = {
-                    Image(
+                    Icon(
                         painter = painterResource(id = R.drawable.arrow_back),
                         contentDescription = stringResource(id = R.string.go_back)
                     )
