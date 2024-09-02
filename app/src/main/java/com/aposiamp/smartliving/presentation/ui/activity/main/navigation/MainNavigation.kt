@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AboutScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.DevicesScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.AirConditionScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.DehumidifierScreen
@@ -26,6 +27,12 @@ internal fun MainNavigation(
             DevicesScreen(
                 navController = navController,
                 viewModel = devicesViewModel
+            )
+        }
+
+        composable("about"){
+            AboutScreen(
+                navController = navController
             )
         }
 
