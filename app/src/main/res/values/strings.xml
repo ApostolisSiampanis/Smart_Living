@@ -87,4 +87,7 @@
     <string name="continuous">Continuous</string>
     <string name="set_to">Set to</string>
     <string name="max">Max</string>
+    <string name="open_menu">Open Menu</string>
+    <string name="close_menu">Close Menu</string>
+    <string name="add">Add</string>
 </resources>
