@@ -34,7 +34,7 @@ fun BottomBar(
                     item.route?.let { navController.navigate(it) }
                 },
                 label = {
-                    BottomMenuItemTextComponent(
+                    NormalNavigationTextComponent(
                         text = stringResource(id = item.titleResId)
                     )
                 },
