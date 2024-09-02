@@ -91,4 +91,16 @@
     <string name="close_menu">Close Menu</string>
     <string name="add">Add</string>
     <string name="about">About</string>
+    <string name="about_intro">At Smart Living, our goal is to empower you to create a more efficient, comfortable, and sustainable home. Our app offers a seamless way to manage your smart home devices while providing valuable insights into your energy consumption.</string>
+    <string name="about_our_features">\nOur Features:</string>
+    <string name="about_unified_control">\n• Unified Control:</string>
+    <string name="about_unified_control_text">Easily control and monitor all your smart home devices from a single, intuitive interface.</string>
+    <string name="about_energy_monitoring">\n• Energy Monitoring:</string>
+    <string name="about_energy_monitoring_text">Stay informed about your energy usage with real-time data on the power consumption of your devices.</string>
+    <string name="about_user_friendly">\n• User-Friendly Design:</string>
+    <string name="about_user_friendly_text">Navigate your smart home effortlessly with a clean, user-focused design that makes managing your devices a breeze.</string>
+    <string name="about_our_vision">\nOur Vision:</string>
+    <string name="about_our_vision_text">We envision a future where technology enhances your everyday life by making your home smarter, more connected, and energy-efficient. Our dedicated team is committed to providing you with innovative tools and insights that help you take control of your smart home and make informed decisions to reduce energy consumption and live more sustainably.</string>
+    <string name="apostolis_siampanis">ApostolisSiampanis</string>
+    <string name="github_profile">GitHub Profile</string>
 </resources>
