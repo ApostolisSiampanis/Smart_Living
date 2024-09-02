@@ -72,38 +72,39 @@ fun DevicesScreen(
                     navController = navController,
                     getBottomNavigationItemsUseCase = SmartLiving.appModule.getBottomMenuItemsUseCase
                 )
-            }
-        ) { values ->
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(values)
-            ) {
-                item {
-                    // TODO: Add the devices here, remove the buttons
-                    Button(
-                        onClick = {
-                            navController.navigate("thermostat")
+            },
+            content = { padding ->
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(padding)
+                ) {
+                    item {
+                        // TODO: Add the devices here, remove the buttons
+                        Button(
+                            onClick = {
+                                navController.navigate("thermostat")
+                            }
+                        ) {
+                            Text(text = "Thermostat")
                         }
-                    ) {
-                        Text(text = "Thermostat")
-                    }
-                    Button(
-                        onClick = {
-                            navController.navigate("airCondition")
+                        Button(
+                            onClick = {
+                                navController.navigate("airCondition")
+                            }
+                        ) {
+                            Text(text = "Air Condition")
                         }
-                    ) {
-                        Text(text = "Air Condition")
-                    }
-                    Button(
-                        onClick = {
-                            navController.navigate("dehumidifier")
+                        Button(
+                            onClick = {
+                                navController.navigate("dehumidifier")
+                            }
+                        ) {
+                            Text(text = "Dehumidifier")
                         }
-                    ) {
-                        Text(text = "Dehumidifier")
                     }
                 }
             }
-        }
+        )
     }
 }
