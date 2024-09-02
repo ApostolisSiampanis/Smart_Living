@@ -112,12 +112,16 @@ fun AuthDividerTextComponent(value: String) {
 }
 
 @Composable
-fun GeneralNormalText(value: String) {
+fun GeneralNormalText(
+    value: String,
+    color: Color = Color.Unspecified
+) {
     Text(
         text = value,
         style = TextStyle(
             fontSize = 18.sp,
-            fontFamily = FontFamily(Font(R.font.carlito_regular))
+            fontFamily = FontFamily(Font(R.font.carlito_regular)),
+            color = color
         )
     )
 }
@@ -161,14 +165,14 @@ fun DrawerItemTextComponent(
 ) {
     Text(
         text = text,
-        fontSize = 18.sp,
+        fontSize = 22.sp,
         fontFamily = FontFamily(Font(R.font.carlito_regular)),
         color = color
     )
 }
 
 @Composable
-fun BottomMenuItemTextComponent(
+fun NormalNavigationTextComponent(
     text: String
 ) {
     Text(

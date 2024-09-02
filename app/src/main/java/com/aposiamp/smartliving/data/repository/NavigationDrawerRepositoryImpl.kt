@@ -9,8 +9,14 @@ class NavigationDrawerRepositoryImpl : NavigationDrawerRepository {
         NavigationUiItem(
             titleResId = R.string.settings,
             unselectedIcon = R.drawable.settings_outlined,
-            selectedIcon = R.drawable.settings_outlined,
+            selectedIcon = R.drawable.settings_filled,
             route = "settings"
+        ),
+        NavigationUiItem(
+            titleResId = R.string.about,
+            unselectedIcon = R.drawable.about_outlined,
+            selectedIcon = R.drawable.about_filled,
+            route = "about"
         )
     )
 }
