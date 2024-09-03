@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.presentation.ui.activity.main.navigation
 
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,6 +15,7 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 
 @Composable
 internal fun MainNavigation(
+    context: Context,
     devicesViewModel: DevicesViewModel,
     mainSharedViewModel: MainSharedViewModel
 ) {
@@ -26,7 +28,8 @@ internal fun MainNavigation(
         composable("devices"){
             DevicesScreen(
                 navController = navController,
-                viewModel = devicesViewModel
+                viewModel = devicesViewModel,
+                context = context
             )
         }
 

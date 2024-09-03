@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.presentation.ui.activity.main.screens
 
+import android.content.Context
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -28,11 +29,15 @@ import kotlinx.coroutines.launch
 @Composable
 fun DevicesScreen(
     navController: NavController,
-    viewModel: DevicesViewModel
+    viewModel: DevicesViewModel,
+    context: Context
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+
+    // Retrieve the dropdown menu items
+    val dropdownMenuItems = viewModel.getDropdownMenuItems(context = context, navController = navController)
 
     ModalNavigationDrawer(
         drawerContent = {
@@ -64,7 +69,8 @@ fun DevicesScreen(
                         }
                     },
                     drawerState = drawerState,
-                    scrollBehavior = scrollBehavior
+                    scrollBehavior = scrollBehavior,
+                    dropdownMenuItems = dropdownMenuItems
                 )
             },
             bottomBar = {

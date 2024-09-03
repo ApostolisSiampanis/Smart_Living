@@ -103,4 +103,6 @@
     <string name="about_our_vision_text">We envision a future where technology enhances your everyday life by making your home smarter, more connected, and energy-efficient. Our dedicated team is committed to providing you with innovative tools and insights that help you take control of your smart home and make informed decisions to reduce energy consumption and live more sustainably.</string>
     <string name="apostolis_siampanis">ApostolisSiampanis</string>
     <string name="github_profile">GitHub Profile</string>
+    <string name="add_a_new_room">Add a New Room</string>
+    <string name="add_a_new_device">Add a New Device</string>
 </resources>

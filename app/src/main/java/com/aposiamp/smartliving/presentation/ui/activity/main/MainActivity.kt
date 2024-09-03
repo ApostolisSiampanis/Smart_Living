@@ -24,7 +24,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val devicesViewModel = viewModel<DevicesViewModel>()
+                    val context = this
+
+                    val devicesViewModel = viewModel<DevicesViewModel>(
+                        factory = viewModelFactory {
+                            DevicesViewModel(
+                                getDropdownMenuItemsUseCase = SmartLiving.appModule.getDropdownMenuItemsUseCase
+                            )
+                        }
+                    )
 
                     val mainSharedViewModel = viewModel<MainSharedViewModel>(
                         factory = viewModelFactory {
@@ -35,6 +43,7 @@ class MainActivity : ComponentActivity() {
                     )
 
                     MainNavigation(
+                        context = context,
                         devicesViewModel = devicesViewModel,
                         mainSharedViewModel = mainSharedViewModel
                     )
