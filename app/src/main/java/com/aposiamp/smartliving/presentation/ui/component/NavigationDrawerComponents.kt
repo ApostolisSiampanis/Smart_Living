@@ -52,16 +52,18 @@ fun NavigationDrawer(
                 .padding(8.dp)
         ) {
             screensInDrawer.forEachIndexed { index, item ->
-                DrawerItem(
-                    item = item,
-                    isSelected = selectedItemIndex.intValue == index,
-                    isEnabled = selectedItemIndex.intValue != index,
-                    onItemClick = {
-                        scope.launch { drawerState.close() }
-                        selectedItemIndex.intValue = index
-                        item.route?.let { navController.navigate(it) }
-                    }
-                )
+                if (item.titleResId != R.string.logout) {
+                    DrawerItem(
+                        item = item,
+                        isSelected = selectedItemIndex.intValue == index,
+                        isEnabled = selectedItemIndex.intValue != index,
+                        onItemClick = {
+                            scope.launch { drawerState.close() }
+                            selectedItemIndex.intValue = index
+                            item.route?.let { navController.navigate(it) }
+                        }
+                    )
+                }
             }
         }
 
@@ -72,28 +74,28 @@ fun NavigationDrawer(
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            DrawerItem(
-                item = NavigationUiItem(
-                    titleResId = R.string.logout,
-                    unselectedIcon = R.drawable.logout
-                ),
-                isSelected = selectedItemIndex.intValue == screensInDrawer.size,
-                textColor = Color.Red,
-                onItemClick = {
-                    scope.launch {
-                        drawerState.close()
+            val logoutItem = screensInDrawer.find { it.titleResId == R.string.logout }
+            logoutItem?.let {
+                DrawerItem(
+                    item = it,
+                    isSelected = selectedItemIndex.intValue == screensInDrawer.size,
+                    textColor = Color.Red,
+                    onItemClick = {
+                        scope.launch {
+                            drawerState.close()
 
-                        selectedItemIndex.intValue = screensInDrawer.size
+                            selectedItemIndex.intValue = screensInDrawer.size
 
-                        logoutUseCase.execute()
+                            logoutUseCase.execute()
 
-                        val intent = Intent(context, WelcomeActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            val intent = Intent(context, WelcomeActivity::class.java).apply {
+                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            }
+                            context.startActivity(intent)
                         }
-                        context.startActivity(intent)
                     }
-                }
-            )
+                )
+            }
         }
     }
 }
