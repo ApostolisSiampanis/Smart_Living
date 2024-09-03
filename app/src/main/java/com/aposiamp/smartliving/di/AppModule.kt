@@ -5,6 +5,7 @@ import com.aposiamp.smartliving.domain.repository.BottomMenuRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.repository.NavigationDrawerRepository
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetNavigationDrawerItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.sensor.GetEnvironmentalDataUseCase
 import com.aposiamp.smartliving.domain.usecase.user.GetCurrentUserUseCase
@@ -35,6 +36,9 @@ interface AppModule {
 
     // BottomMenu UseCase
     val getBottomMenuItemsUseCase: GetBottomNavigationItemsUseCase
+
+    // DropDownMenu UseCase
+    val getDropdownMenuItemsUseCase: GetDropdownMenuItemsUseCase
 
     // Sensor UseCases
     val getEnvironmentalDataUseCase: GetEnvironmentalDataUseCase

@@ -11,6 +11,7 @@ import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
 import com.aposiamp.smartliving.domain.repository.AuthRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetNavigationDrawerItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.sensor.GetEnvironmentalDataUseCase
 import com.aposiamp.smartliving.domain.usecase.user.GetCurrentUserUseCase
@@ -65,6 +66,11 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     // BottomMenu UseCase
     override val getBottomMenuItemsUseCase: GetBottomNavigationItemsUseCase by lazy {
         GetBottomNavigationItemsUseCase(bottomMenuRepository)
+    }
+
+    // DropDownMenu UseCase
+    override val getDropdownMenuItemsUseCase: GetDropdownMenuItemsUseCase by lazy {
+        GetDropdownMenuItemsUseCase()
     }
 
     // Sensor UseCases
