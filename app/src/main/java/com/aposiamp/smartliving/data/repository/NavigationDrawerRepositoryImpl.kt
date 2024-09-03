@@ -17,6 +17,12 @@ class NavigationDrawerRepositoryImpl : NavigationDrawerRepository {
             unselectedIcon = R.drawable.about_outlined,
             selectedIcon = R.drawable.about_filled,
             route = "about"
+        ),
+        NavigationUiItem(
+            titleResId = R.string.logout,
+            unselectedIcon = R.drawable.logout,
+            selectedIcon = R.drawable.logout,
+            route = null
         )
     )
 }
