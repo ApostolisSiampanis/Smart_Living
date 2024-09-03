@@ -1,6 +1,6 @@
 package com.aposiamp.smartliving.presentation.ui.component
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -10,10 +10,15 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.aposiamp.smartliving.R
+import com.aposiamp.smartliving.presentation.model.DropdownMenuItemUiModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,8 +27,13 @@ fun MenuMediumTopAppBar(
     color: Color,
     onMenuClick: () -> Unit,
     drawerState: DrawerState,
-    scrollBehavior: TopAppBarScrollBehavior
+    scrollBehavior: TopAppBarScrollBehavior,
+    dropdownMenuItems: List<DropdownMenuItemUiModel>
 ) {
+    var isContextMenuVisible by rememberSaveable {
+        mutableStateOf(false)
+    }
+
     MediumTopAppBar(
         title = {
             NormalNavigationTextComponent(text = title)
@@ -45,15 +55,25 @@ fun MenuMediumTopAppBar(
             containerColor = color
         ),
         actions = {
-            IconButton(
-                onClick = { /*TODO*/},
-                content = {
-                    Icon(
-                        painter = painterResource(id = R.drawable.add),
-                        contentDescription = stringResource(id = R.string.add)
-                    )
-                }
-            )
+            Box {
+                IconButton(
+                    onClick = {
+                        isContextMenuVisible = true
+                    },
+                    content = {
+                        Icon(
+                            painter = painterResource(id = R.drawable.add),
+                            contentDescription = stringResource(id = R.string.add)
+                        )
+                    }
+                )
+
+                DropdownMenuComponent(
+                    isContextMenuVisible = isContextMenuVisible,
+                    onDismissRequest = { isContextMenuVisible = false },
+                    items = dropdownMenuItems
+                )
+            }
         },
         scrollBehavior = scrollBehavior
     )
