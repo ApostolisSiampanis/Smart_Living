@@ -158,8 +158,8 @@ fun DeviceIndicatorCard(
 
 @Composable
 fun IndoorEnvironmentalDataCard(
-    indoorTemperature: LiveData<Float>,
-    indoorHumidity: LiveData<Float>
+    indoorTemperature: Float?,
+    indoorHumidity: Float?
 ){
     Card(
         modifier = Modifier
@@ -176,7 +176,7 @@ fun IndoorEnvironmentalDataCard(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             GeneralNormalText(value = stringResource(id = R.string.indoor_temperature))
-            GeneralNormalText(value = "${indoorTemperature.value} " + stringResource(id = R.string.degree_celcius))
+            GeneralNormalText(value = "$indoorTemperature " + stringResource(id = R.string.degree_celcius))
         }
         Row(
             modifier = Modifier
@@ -185,7 +185,7 @@ fun IndoorEnvironmentalDataCard(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             GeneralNormalText(value = stringResource(id = R.string.indoor_humidity))
-            GeneralNormalText(value = "${indoorHumidity.value} " + stringResource(id = R.string.percentage))
+            GeneralNormalText(value = "$indoorHumidity " + stringResource(id = R.string.percentage))
         }
     }
 }
