@@ -1,12 +1,13 @@
 package com.aposiamp.smartliving.domain.usecase.main
 
-import com.aposiamp.smartliving.domain.repository.NavigationDrawerRepository
-import com.aposiamp.smartliving.presentation.model.NavigationUiItem
+import com.aposiamp.smartliving.domain.model.NavigationItemData
 
-class GetNavigationDrawerItemsUseCase(
-    private val repository: NavigationDrawerRepository
-) {
-    fun execute(): List<NavigationUiItem> {
-        return repository.getNavigationDrawerItems()
+class GetNavigationDrawerItemsUseCase {
+    fun execute(settingsTitle: String, aboutTitle: String, logoutTitle: String): List<NavigationItemData> {
+        return listOf(
+            NavigationItemData(title = settingsTitle),
+            NavigationItemData(title = aboutTitle),
+            NavigationItemData(title = logoutTitle)
+        )
     }
 }
