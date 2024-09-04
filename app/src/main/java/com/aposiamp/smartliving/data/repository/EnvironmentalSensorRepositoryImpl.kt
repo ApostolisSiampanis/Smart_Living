@@ -11,10 +11,14 @@ class EnvironmentalSensorRepositoryImpl(
     private val firestoreDataSource: FirestoreDataSource
 ) : EnvironmentalSensorRepository {
     override suspend fun getEnvironmentalData(): EnvironmentalDataDTO {
+        val temperature = environmentalSensorDataSource.getTemperatureData()
+        val humidity = environmentalSensorDataSource.getHumidityData()
+        val timestamp = DateUtils.getCurrentDateUTC()
+
         return EnvironmentalDataDTO(
-            temperature = environmentalSensorDataSource.getTemperatureData(),
-            humidity = environmentalSensorDataSource.getHumidityData(),
-            timestamp = DateUtils.getCurrentDateUTC()
+            temperature = temperature,
+            humidity = humidity,
+            timestamp = timestamp
         )
     }
 

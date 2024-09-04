@@ -96,8 +96,8 @@ fun ThermostatScreen(
                         }
                         Spacer(modifier = Modifier.height(16.dp))
                         IndoorEnvironmentalDataCard(
-                            indoorTemperature = sharedViewModel.indoorTemperature,
-                            indoorHumidity = sharedViewModel.indoorHumidity
+                            indoorTemperature = sharedViewModel.environmentalData.value?.temperature,
+                            indoorHumidity = sharedViewModel.environmentalData.value?.humidity
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         DeviceOnOffButton(
