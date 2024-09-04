@@ -12,12 +12,14 @@ import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.De
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.ThermostatScreen
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 
 @Composable
 internal fun MainNavigation(
     context: Context,
     devicesViewModel: DevicesViewModel,
-    mainSharedViewModel: MainSharedViewModel
+    mainSharedViewModel: MainSharedViewModel,
+    navigationViewModel: NavigationViewModel
 ) {
     val navController = rememberNavController()
 
@@ -29,13 +31,15 @@ internal fun MainNavigation(
             DevicesScreen(
                 navController = navController,
                 viewModel = devicesViewModel,
+                navigationViewModel = navigationViewModel,
                 context = context
             )
         }
 
         composable("about"){
             AboutScreen(
-                navController = navController
+                navController = navController,
+                navigationViewModel = navigationViewModel
             )
         }
 
