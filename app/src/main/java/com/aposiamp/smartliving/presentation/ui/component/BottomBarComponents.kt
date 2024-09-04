@@ -9,24 +9,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
-import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
+import com.aposiamp.smartliving.presentation.model.NavigationItemUiModel
 
 @Composable
 fun BottomBar(
     navController: NavController,
-    getBottomNavigationItemsUseCase: GetBottomNavigationItemsUseCase
+    bottomMenuItems: List<NavigationItemUiModel>
 ) {
-    val screensInBottomMenu = getBottomNavigationItemsUseCase.execute()
-
     fun getCurrentRouteIndex(): Int {
         val currentRoute = navController.currentDestination?.route
-        return screensInBottomMenu.indexOfFirst { it.route == currentRoute }
+        return bottomMenuItems.indexOfFirst { it.route == currentRoute }
     }
 
     val selectedItemIndex = remember { mutableIntStateOf(getCurrentRouteIndex()) }
 
     NavigationBar {
-        screensInBottomMenu.forEachIndexed { index, item ->
+        bottomMenuItems.forEachIndexed { index, item ->
             NavigationBarItem(
                 selected = selectedItemIndex.intValue == index,
                 onClick = {
@@ -45,10 +43,12 @@ fun BottomBar(
                         item.unselectedIcon
                     }
 
-                    Image(
-                        painter = painterResource(id = iconId),
-                        contentDescription = stringResource(id = item.titleResId)
-                    )
+                    iconId?.let { painterResource(id = it) }?.let {
+                        Image(
+                            painter = it,
+                            contentDescription = stringResource(id = item.titleResId)
+                        )
+                    }
                 }
             )
         }

@@ -22,9 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.domain.usecase.main.GetNavigationDrawerItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.user.LogoutUseCase
-import com.aposiamp.smartliving.presentation.model.NavigationUiItem
+import com.aposiamp.smartliving.presentation.model.NavigationItemUiModel
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.WelcomeActivity
 import kotlinx.coroutines.launch
 
@@ -32,16 +31,15 @@ import kotlinx.coroutines.launch
 fun NavigationDrawer(
     navController: NavController,
     drawerState: DrawerState,
-    getNavigationDrawerItemsUseCase: GetNavigationDrawerItemsUseCase,
+    navigationDrawerItems: List<NavigationItemUiModel>,
     logoutUseCase: LogoutUseCase,
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val screensInDrawer = getNavigationDrawerItemsUseCase.execute()
 
     fun getCurrentRouteIndex(): Int {
         val currentRoute = navController.currentDestination?.route
-        return screensInDrawer.indexOfFirst { it.route == currentRoute }
+        return navigationDrawerItems.indexOfFirst { it.route == currentRoute }
     }
 
     val selectedItemIndex = remember { mutableIntStateOf(getCurrentRouteIndex()) }
@@ -51,17 +49,19 @@ fun NavigationDrawer(
             modifier = Modifier
                 .padding(8.dp)
         ) {
-            screensInDrawer.forEachIndexed { index, item ->
-                DrawerItem(
-                    item = item,
-                    isSelected = selectedItemIndex.intValue == index,
-                    isEnabled = selectedItemIndex.intValue != index,
-                    onItemClick = {
-                        scope.launch { drawerState.close() }
-                        selectedItemIndex.intValue = index
-                        item.route?.let { navController.navigate(it) }
-                    }
-                )
+            navigationDrawerItems.forEachIndexed { index, item ->
+                if (item.titleResId != R.string.logout) {
+                    DrawerItem(
+                        item = item,
+                        isSelected = selectedItemIndex.intValue == index,
+                        isEnabled = selectedItemIndex.intValue != index,
+                        onItemClick = {
+                            scope.launch { drawerState.close() }
+                            selectedItemIndex.intValue = index
+                            item.route?.let { navController.navigate(it) }
+                        }
+                    )
+                }
             }
         }
 
@@ -72,35 +72,35 @@ fun NavigationDrawer(
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            DrawerItem(
-                item = NavigationUiItem(
-                    titleResId = R.string.logout,
-                    unselectedIcon = R.drawable.logout
-                ),
-                isSelected = selectedItemIndex.intValue == screensInDrawer.size,
-                textColor = Color.Red,
-                onItemClick = {
-                    scope.launch {
-                        drawerState.close()
+            val logoutItem = navigationDrawerItems.find { it.titleResId == R.string.logout }
+            logoutItem?.let {
+                DrawerItem(
+                    item = it,
+                    isSelected = selectedItemIndex.intValue == navigationDrawerItems.size,
+                    textColor = Color.Red,
+                    onItemClick = {
+                        scope.launch {
+                            drawerState.close()
 
-                        selectedItemIndex.intValue = screensInDrawer.size
+                            selectedItemIndex.intValue = navigationDrawerItems.size
 
-                        logoutUseCase.execute()
+                            logoutUseCase.execute()
 
-                        val intent = Intent(context, WelcomeActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            val intent = Intent(context, WelcomeActivity::class.java).apply {
+                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            }
+                            context.startActivity(intent)
                         }
-                        context.startActivity(intent)
                     }
-                }
-            )
+                )
+            }
         }
     }
 }
 
 @Composable
 fun DrawerItem(
-    item: NavigationUiItem,
+    item: NavigationItemUiModel,
     isSelected: Boolean,
     isEnabled: Boolean = true,
     textColor: Color = if (item.titleResId == R.string.logout) Color.Red else Color.Black,
@@ -114,10 +114,12 @@ fun DrawerItem(
 
     NavigationDrawerItem(
         icon = {
-            Image(
-                painter = painterResource(id = iconId),
-                contentDescription = stringResource(id = item.titleResId)
-            )
+            iconId?.let { painterResource(id = it) }?.let {
+                Image(
+                    painter = it,
+                    contentDescription = stringResource(id = item.titleResId)
+                )
+            }
         },
         label = {
             DrawerItemTextComponent(

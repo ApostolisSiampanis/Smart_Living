@@ -32,22 +32,27 @@ import com.aposiamp.smartliving.presentation.ui.component.GeneralBoldText
 import com.aposiamp.smartliving.presentation.ui.component.GeneralNormalText
 import com.aposiamp.smartliving.presentation.ui.component.MenuAppTopBar
 import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
+import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun AboutScreen(
-    navController: NavController
+    navController: NavController,
+    navigationViewModel: NavigationViewModel
 ) {
     val context = LocalContext.current
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+
+    // Retrieve the Navigation Drawer Items
+    val navigationDrawerItems = navigationViewModel.getNavigationDrawerItems(context = context)
 
     ModalNavigationDrawer(
         drawerContent = {
             NavigationDrawer(
                 navController = navController,
                 drawerState = drawerState,
-                getNavigationDrawerItemsUseCase = SmartLiving.appModule.getNavigationDrawerItemsUseCase,
+                navigationDrawerItems = navigationDrawerItems,
                 logoutUseCase = SmartLiving.appModule.logoutUseCase
             )
         },

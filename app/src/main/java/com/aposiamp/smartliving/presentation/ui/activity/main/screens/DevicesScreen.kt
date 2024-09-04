@@ -23,6 +23,7 @@ import com.aposiamp.smartliving.presentation.ui.component.BottomBar
 import com.aposiamp.smartliving.presentation.ui.component.MenuMediumTopAppBar
 import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,21 +31,26 @@ import kotlinx.coroutines.launch
 fun DevicesScreen(
     navController: NavController,
     viewModel: DevicesViewModel,
+    navigationViewModel: NavigationViewModel,
     context: Context
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
+    // Retrieve the Navigation Drawer Items
+    val navigationDrawerItems = navigationViewModel.getNavigationDrawerItems(context = context)
+    // Retrieve the Bottom Navigation Items
+    val bottomNavigationItems = navigationViewModel.getBottomNavigationItems(context = context)
     // Retrieve the dropdown menu items
-    val dropdownMenuItems = viewModel.getDropdownMenuItems(context = context, navController = navController)
+    val dropdownMenuItems = navigationViewModel.getDropdownMenuItems(context = context, navController = navController)
 
     ModalNavigationDrawer(
         drawerContent = {
             NavigationDrawer(
                 navController = navController,
                 drawerState = drawerState,
-                getNavigationDrawerItemsUseCase = SmartLiving.appModule.getNavigationDrawerItemsUseCase,
+                navigationDrawerItems = navigationDrawerItems,
                 logoutUseCase = SmartLiving.appModule.logoutUseCase
             )
         },
@@ -76,7 +82,7 @@ fun DevicesScreen(
             bottomBar = {
                 BottomBar(
                     navController = navController,
-                    getBottomNavigationItemsUseCase = SmartLiving.appModule.getBottomMenuItemsUseCase
+                    bottomMenuItems = bottomNavigationItems
                 )
             },
             content = { padding ->

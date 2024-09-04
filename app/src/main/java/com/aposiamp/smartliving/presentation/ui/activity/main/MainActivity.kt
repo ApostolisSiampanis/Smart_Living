@@ -13,6 +13,7 @@ import com.aposiamp.smartliving.presentation.ui.activity.main.navigation.MainNav
 import com.aposiamp.smartliving.presentation.ui.theme.SmartLivingTheme
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.viewModelFactory
 
 class MainActivity : ComponentActivity() {
@@ -28,9 +29,7 @@ class MainActivity : ComponentActivity() {
 
                     val devicesViewModel = viewModel<DevicesViewModel>(
                         factory = viewModelFactory {
-                            DevicesViewModel(
-                                getDropdownMenuItemsUseCase = SmartLiving.appModule.getDropdownMenuItemsUseCase
-                            )
+                            DevicesViewModel()
                         }
                     )
 
@@ -42,10 +41,21 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
+                    val navigationViewModel = viewModel<NavigationViewModel>(
+                        factory = viewModelFactory {
+                            NavigationViewModel(
+                                getBottomNavigationItemsUseCase = SmartLiving.appModule.getBottomMenuItemsUseCase,
+                                getDropdownMenuItemsUseCase = SmartLiving.appModule.getDropdownMenuItemsUseCase,
+                                getNavigationDrawerItemsUseCase = SmartLiving.appModule.getNavigationDrawerItemsUseCase
+                            )
+                        }
+                    )
+
                     MainNavigation(
                         context = context,
                         devicesViewModel = devicesViewModel,
-                        mainSharedViewModel = mainSharedViewModel
+                        mainSharedViewModel = mainSharedViewModel,
+                        navigationViewModel = navigationViewModel
                     )
                 }
             }
