@@ -5,30 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aposiamp.smartliving.domain.usecase.sensor.GetEnvironmentalDataUseCase
+import com.aposiamp.smartliving.presentation.mapper.EnvironmentalDataUiMapper
+import com.aposiamp.smartliving.presentation.model.EnvironmentalDataUiModel
 import kotlinx.coroutines.launch
 
 class MainSharedViewModel(
     private val getEnvironmentalDataUseCase: GetEnvironmentalDataUseCase
 ) : ViewModel() {
-    private val _indoorTemperature = MutableLiveData<Float>()
-    val indoorTemperature: LiveData<Float> = _indoorTemperature
-
-    private val _indoorHumidity = MutableLiveData<Float>()
-    val indoorHumidity: LiveData<Float> = _indoorHumidity
-
-    fun setIndoorTemperature(temperature: Float) {
-        _indoorTemperature.value = temperature
-    }
-
-    fun setIndoorHumidity(humidity: Float) {
-        _indoorHumidity.value = humidity
-    }
+    private val _environmentalData = MutableLiveData<EnvironmentalDataUiModel>()
+    val environmentalData: LiveData<EnvironmentalDataUiModel> = _environmentalData
 
     init {
         viewModelScope.launch {
             val environmentalData = getEnvironmentalDataUseCase.execute()
-            setIndoorTemperature(environmentalData.temperature!!)
-            setIndoorHumidity(environmentalData.humidity!!)
+            _environmentalData.value = EnvironmentalDataUiMapper.fromDomain(environmentalData)
         }
     }
 }
