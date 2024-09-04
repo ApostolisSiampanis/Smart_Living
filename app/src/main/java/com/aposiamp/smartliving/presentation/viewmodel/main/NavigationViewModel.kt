@@ -7,7 +7,8 @@ import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetNavigationDrawerItemsUseCase
-import com.aposiamp.smartliving.presentation.mapper.toUiModelList
+import com.aposiamp.smartliving.presentation.mapper.DropdownMenuItemUiMapper.toUiModelList
+import com.aposiamp.smartliving.presentation.mapper.NavigationItemUiMapper.toUiModelList
 import com.aposiamp.smartliving.presentation.model.DropdownMenuItemUiModel
 import com.aposiamp.smartliving.presentation.model.NavigationItemUiModel
 
