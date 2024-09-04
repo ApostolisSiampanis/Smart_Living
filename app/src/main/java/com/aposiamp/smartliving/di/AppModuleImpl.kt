@@ -2,9 +2,7 @@ package com.aposiamp.smartliving.di
 
 import android.content.Context
 import com.aposiamp.smartliving.data.repository.AuthRepositoryImpl
-import com.aposiamp.smartliving.data.repository.BottomMenuRepositoryImpl
 import com.aposiamp.smartliving.data.repository.EnvironmentalSensorRepositoryImpl
-import com.aposiamp.smartliving.data.repository.NavigationDrawerRepositoryImpl
 import com.aposiamp.smartliving.data.source.local.EnvironmentalSensorDataSource
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
 import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
@@ -41,14 +39,6 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         EnvironmentalSensorRepositoryImpl(environmentalSensorDataSource, firestoreDataSource)
     }
 
-    override val navigationDrawerRepository: NavigationDrawerRepositoryImpl by lazy {
-        NavigationDrawerRepositoryImpl()
-    }
-
-    override val bottomMenuRepository: BottomMenuRepositoryImpl by lazy {
-        BottomMenuRepositoryImpl()
-    }
-
     // Firebase
     override fun getFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
@@ -60,12 +50,12 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     // NavigationDrawer UseCase
     override val getNavigationDrawerItemsUseCase: GetNavigationDrawerItemsUseCase by lazy {
-        GetNavigationDrawerItemsUseCase(navigationDrawerRepository)
+        GetNavigationDrawerItemsUseCase()
     }
 
     // BottomMenu UseCase
     override val getBottomMenuItemsUseCase: GetBottomNavigationItemsUseCase by lazy {
-        GetBottomNavigationItemsUseCase(bottomMenuRepository)
+        GetBottomNavigationItemsUseCase()
     }
 
     // DropDownMenu UseCase
