@@ -1,12 +1,13 @@
 package com.aposiamp.smartliving.domain.usecase.main
 
-import com.aposiamp.smartliving.domain.repository.BottomMenuRepository
-import com.aposiamp.smartliving.presentation.model.NavigationUiItem
+import com.aposiamp.smartliving.domain.model.NavigationItemData
 
-class GetBottomNavigationItemsUseCase(
-    private val repository: BottomMenuRepository
-) {
-    fun execute(): List<NavigationUiItem> {
-        return repository.getBottomMenuItems()
+class GetBottomNavigationItemsUseCase {
+    fun execute(devicesTitle: String, routinesTitle: String, energyTitle: String): List<NavigationItemData> {
+        return listOf(
+            NavigationItemData(title = devicesTitle),
+            NavigationItemData(title = routinesTitle),
+            NavigationItemData(title = energyTitle)
+        )
     }
 }
