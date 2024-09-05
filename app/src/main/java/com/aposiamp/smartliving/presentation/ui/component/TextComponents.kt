@@ -113,10 +113,12 @@ fun AuthDividerTextComponent(value: String) {
 
 @Composable
 fun GeneralNormalText(
+    modifier: Modifier = Modifier,
     value: String,
     color: Color = Color.Unspecified
 ) {
     Text(
+        modifier = modifier,
         text = value,
         style = TextStyle(
             fontSize = 18.sp,
@@ -127,12 +129,19 @@ fun GeneralNormalText(
 }
 
 @Composable
-fun GeneralBoldText(value: String) {
+fun GeneralBoldText(
+    modifier: Modifier = Modifier,
+    value: String,
+    fontSize: Int = 18,
+    color: Color = Color.Unspecified
+) {
     Text(
+        modifier = modifier,
         text = value,
         style = TextStyle(
-            fontSize = 18.sp,
-            fontFamily = FontFamily(Font(R.font.carlito_bold))
+            fontSize = fontSize.sp,
+            fontFamily = FontFamily(Font(R.font.carlito_bold)),
+            color = color
         )
     )
 }
