@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.aposiamp.smartliving.domain.usecase.user.GetCurrentUserUseCase
 import com.aposiamp.smartliving.presentation.ui.activity.main.MainActivity
+import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.PermissionsScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.PrivacyPolicyScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.TermsAndConditionsScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.WelcomeScreen
@@ -59,9 +60,14 @@ internal fun WelcomeNavigation(
                 navController = navController
             )
         }
+        composable("permissions") {
+            PermissionsScreen(
+                navController = navController
+            )
+        }
     }
 }
-
+//TODO: Update it to use the permissionsScreen and CreateANewSpaceScreen
 fun determineStartDestination(
     context: Context,
     getCurrentUserUseCase: GetCurrentUserUseCase
