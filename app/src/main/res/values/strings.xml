@@ -59,6 +59,12 @@
     <string name="privacy_policy_acknowledgement">\nBy using the App, you consent to the collection, use, and disclosure of your information in accordance with this Privacy Policy.</string>
     <string name="go_back">Go back</string>
     <string name="settings">Settings</string>
+    <string name="location">Location</string>
+    <string name="location_pin">Location Pin</string>
+    <string name="allow_smart_living_to_access_your_location">Allow Smart Living to access your location.</string>
+    <string name="expand">Expand</string>
+    <string name="collapse">Collapse</string>
+    <string name="next">Next</string>
     <string name="logout">Logout</string>
     <string name="devices">Devices</string>
     <string name="routines">Routines</string>
