@@ -64,6 +64,11 @@
     <string name="allow_smart_living_to_access_your_location">Allow Smart Living to access your location.</string>
     <string name="expand">Expand</string>
     <string name="collapse">Collapse</string>
+    <string name="permission_required">Permission Required</string>
+    <string name="grant_permission">Grant Permission</string>
+    <string name="ok">OK</string>
+    <string name="location_permission_is_permanently_denied">Location permission is required to get your current location. Please go to app settings and enable the location permission.</string>
+    <string name="location_permission_is_not_permanently_denied">Location permission is required to get your current location. Please enable the location permission.</string>
     <string name="next">Next</string>
     <string name="logout">Logout</string>
     <string name="devices">Devices</string>
