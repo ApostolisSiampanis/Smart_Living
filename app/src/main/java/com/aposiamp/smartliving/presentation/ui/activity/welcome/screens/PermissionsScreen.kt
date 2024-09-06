@@ -72,7 +72,7 @@ fun PermissionsScreen(
     ) {
         Image(
             painter = painterResource(id = R.drawable.permissions),
-            contentDescription = null,
+            contentDescription = stringResource(id = R.string.permission_screen_image),
             modifier = Modifier.fillMaxSize(0.8f)
         )
 
