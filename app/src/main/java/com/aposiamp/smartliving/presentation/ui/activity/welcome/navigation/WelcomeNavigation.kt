@@ -14,6 +14,7 @@ import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.TermsAn
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.WelcomeScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.auth.LoginScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.auth.SignUpScreen
+import com.aposiamp.smartliving.presentation.viewmodel.welcome.PermissionsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.LoginViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.SignUpViewModel
 
@@ -22,7 +23,8 @@ internal fun WelcomeNavigation(
     context: Context,
     getCurrentUserUseCase: GetCurrentUserUseCase,
     loginViewModel: LoginViewModel,
-    signUpViewModel: SignUpViewModel
+    signUpViewModel: SignUpViewModel,
+    permissionsViewModel: PermissionsViewModel
 ) {
     val navController = rememberNavController()
 
@@ -62,7 +64,8 @@ internal fun WelcomeNavigation(
         }
         composable("permissions") {
             PermissionsScreen(
-                navController = navController
+                navController = navController,
+                viewModel = permissionsViewModel
             )
         }
     }
