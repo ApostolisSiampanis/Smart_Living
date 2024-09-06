@@ -96,7 +96,8 @@ fun PermissionCard(
                             } else {
                                 switchState.value = false
                             }
-                        }
+                        },
+                        enabled = !switchState.value
                     )
                 }
             }
