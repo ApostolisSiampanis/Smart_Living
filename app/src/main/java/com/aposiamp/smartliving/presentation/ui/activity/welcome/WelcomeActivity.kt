@@ -12,6 +12,7 @@ import com.aposiamp.smartliving.SmartLiving
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.navigation.WelcomeNavigation
 import com.aposiamp.smartliving.presentation.ui.theme.SmartLivingTheme
 import com.aposiamp.smartliving.presentation.viewmodel.viewModelFactory
+import com.aposiamp.smartliving.presentation.viewmodel.welcome.PermissionsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.LoginViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.SignUpViewModel
 
@@ -47,11 +48,14 @@ class WelcomeActivity : ComponentActivity() {
                         }
                     )
 
+                    val permissionsViewModel = viewModel<PermissionsViewModel>()
+
                     WelcomeNavigation(
                         context = this,
                         getCurrentUserUseCase = SmartLiving.appModule.getCurrentUserUseCase,
                         loginViewModel = loginViewModel,
-                        signUpViewModel = signUpViewModel
+                        signUpViewModel = signUpViewModel,
+                        permissionsViewModel = permissionsViewModel
                     )
                 }
             }
