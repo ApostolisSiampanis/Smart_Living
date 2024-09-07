@@ -8,12 +8,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.aposiamp.smartliving.domain.usecase.user.GetCurrentUserUseCase
 import com.aposiamp.smartliving.presentation.ui.activity.main.MainActivity
+import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.CreateANewSpace
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.PermissionsScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.PrivacyPolicyScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.TermsAndConditionsScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.WelcomeScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.auth.LoginScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.auth.SignUpScreen
+import com.aposiamp.smartliving.presentation.viewmodel.welcome.CreateANewSpaceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.PermissionsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.LoginViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.SignUpViewModel
@@ -24,7 +26,8 @@ internal fun WelcomeNavigation(
     getCurrentUserUseCase: GetCurrentUserUseCase,
     loginViewModel: LoginViewModel,
     signUpViewModel: SignUpViewModel,
-    permissionsViewModel: PermissionsViewModel
+    permissionsViewModel: PermissionsViewModel,
+    createANewSpaceViewModel: CreateANewSpaceViewModel
 ) {
     val navController = rememberNavController()
 
@@ -66,6 +69,12 @@ internal fun WelcomeNavigation(
             PermissionsScreen(
                 navController = navController,
                 viewModel = permissionsViewModel
+            )
+        }
+        composable("createANewSpace") {
+            CreateANewSpace(
+                navController = navController,
+                viewModel = createANewSpaceViewModel
             )
         }
     }
