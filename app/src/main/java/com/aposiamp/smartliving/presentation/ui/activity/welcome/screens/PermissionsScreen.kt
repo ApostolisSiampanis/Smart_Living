@@ -3,6 +3,7 @@ package com.aposiamp.smartliving.presentation.ui.activity.welcome.screens
 import android.Manifest
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -35,7 +36,8 @@ import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.PermissionCard
 import com.aposiamp.smartliving.presentation.ui.component.PermissionDialog
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.PermissionsViewModel
-import com.aposiamp.smartliving.utils.AppSettingsUtils.openAppSettings
+import com.aposiamp.smartliving.utils.PermissionsUtils.areAllPermissionsGranted
+import com.aposiamp.smartliving.utils.PermissionsUtils.openAppSettings
 
 @Composable
 fun PermissionsScreen(
@@ -118,8 +120,11 @@ fun PermissionsScreen(
                     GeneralButtonComponent(
                         value = stringResource(id = R.string.next),
                         onButtonClicked = {
-                            //TODO: Navigate to next screen
-                            navController.navigate("")
+                            if (areAllPermissionsGranted(context, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION))) {
+                                navController.navigate("createANewSpace")
+                            } else {
+                                Toast.makeText(context, context.getString(R.string.please_grant_all_permissions), Toast.LENGTH_SHORT).show()
+                            }
                         }
                     )
                 }
