@@ -71,6 +71,7 @@
     <string name="location_permission_is_not_permanently_denied">Location permission is required to get your current location. Please enable the location permission.</string>
     <string name="next">Next</string>
     <string name="permission_screen_image">Permission Screen Image</string>
+    <string name="please_grant_all_permissions">Please grant all permissions</string>
     <string name="logout">Logout</string>
     <string name="devices">Devices</string>
     <string name="routines">Routines</string>
