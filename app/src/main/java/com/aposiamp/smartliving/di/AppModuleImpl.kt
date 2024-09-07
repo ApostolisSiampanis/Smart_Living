@@ -20,6 +20,7 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEma
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFirstName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLastName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateTerms
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -87,22 +88,26 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     // For the SignIn and SignUp screens
     override val validateFirstName: ValidateFirstName by lazy {
-        ValidateFirstName()
+        ValidateFirstName(context = appContext)
     }
 
     override val validateLastName: ValidateLastName by lazy {
-        ValidateLastName()
+        ValidateLastName(context = appContext)
     }
 
     override val validateEmail: ValidateEmail by lazy {
-        ValidateEmail()
+        ValidateEmail(context = appContext)
     }
 
     override val validatePassword: ValidatePassword by lazy {
-        ValidatePassword()
+        ValidatePassword(context = appContext)
     }
 
     override val validateTerms: ValidateTerms by lazy {
-        ValidateTerms()
+        ValidateTerms(context = appContext)
+    }
+
+    override val validateSpaceName: ValidateSpaceName by lazy {
+        ValidateSpaceName(context = appContext)
     }
 }
