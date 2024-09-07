@@ -14,6 +14,7 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEma
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFirstName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLastName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateTerms
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -45,10 +46,12 @@ interface AppModule {
     val logoutUseCase: LogoutUseCase
     val getCurrentUserUseCase: GetCurrentUserUseCase
 
-    // For the SignIn and SignUp screens
+    // For SignIn and SignUp screens
     val validateFirstName: ValidateFirstName
     val validateLastName: ValidateLastName
     val validateEmail: ValidateEmail
     val validatePassword: ValidatePassword
     val validateTerms: ValidateTerms
+    // For CreateANewSpace screen
+    val validateSpaceName: ValidateSpaceName
 }
