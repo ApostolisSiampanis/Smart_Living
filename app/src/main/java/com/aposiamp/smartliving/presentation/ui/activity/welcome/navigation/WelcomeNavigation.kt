@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.aposiamp.smartliving.domain.usecase.user.GetCurrentUserUseCase
 import com.aposiamp.smartliving.presentation.ui.activity.main.MainActivity
-import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.CreateANewSpace
+import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.CreateANewSpaceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.PermissionsScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.PrivacyPolicyScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.TermsAndConditionsScreen
@@ -72,7 +72,7 @@ internal fun WelcomeNavigation(
             )
         }
         composable("createANewSpace") {
-            CreateANewSpace(
+            CreateANewSpaceScreen(
                 viewModel = createANewSpaceViewModel
             )
         }
