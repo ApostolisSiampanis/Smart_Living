@@ -54,7 +54,8 @@ class WelcomeActivity : ComponentActivity() {
                     val createANewSpaceViewModel = viewModel<CreateANewSpaceViewModel>(
                         factory = viewModelFactory {
                             CreateANewSpaceViewModel(
-                                validateSpaceName = SmartLiving.appModule.validateSpaceName
+                                validateSpaceName = SmartLiving.appModule.validateSpaceName,
+                                setSpaceDataUseCase = SmartLiving.appModule.setSpaceDataUseCase
                             )
                         }
                     )
