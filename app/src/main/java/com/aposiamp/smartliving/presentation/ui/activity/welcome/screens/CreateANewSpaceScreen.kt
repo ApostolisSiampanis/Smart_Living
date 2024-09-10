@@ -27,7 +27,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.ui.activity.main.MainActivity
 import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextComponent
@@ -39,7 +38,7 @@ import com.aposiamp.smartliving.presentation.ui.state.CreateSpaceFormState
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.CreateANewSpaceViewModel
 
 @Composable
-fun CreateANewSpace(
+fun CreateANewSpaceScreen(
     viewModel: CreateANewSpaceViewModel,
     state: CreateSpaceFormState = viewModel.formState
 ) {
