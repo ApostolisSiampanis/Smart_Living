@@ -1,6 +1,7 @@
 package com.aposiamp.smartliving.di
 
 import com.aposiamp.smartliving.domain.repository.AuthRepository
+import com.aposiamp.smartliving.domain.repository.DeviceAndSpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
@@ -10,6 +11,7 @@ import com.aposiamp.smartliving.domain.usecase.user.GetCurrentUserUseCase
 import com.aposiamp.smartliving.domain.usecase.user.LoginUseCase
 import com.aposiamp.smartliving.domain.usecase.user.LogoutUseCase
 import com.aposiamp.smartliving.domain.usecase.user.SignUpUseCase
+import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFirstName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLastName
@@ -17,15 +19,18 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePas
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateTerms
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 
 interface AppModule {
     // Repositories
     val authRepository: AuthRepository
     val environmentalSensorRepository: EnvironmentalSensorRepository
+    val deviceAndSpaceRepository: DeviceAndSpaceRepository
 
     // Firebase
     fun getFirebaseAuth(): FirebaseAuth
+    fun getFirebaseDatabase(): FirebaseDatabase
     fun getFirestoreDatabase(): FirebaseFirestore
 
     // NavigationDrawer UseCase
@@ -39,6 +44,9 @@ interface AppModule {
 
     // Sensor UseCases
     val getEnvironmentalDataUseCase: GetEnvironmentalDataUseCase
+
+    // Space UseCases
+    val setSpaceDataUseCase: SetSpaceDataUseCase
 
     // Profile UseCases
     val loginUseCase: LoginUseCase
