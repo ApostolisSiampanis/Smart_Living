@@ -73,7 +73,6 @@ internal fun WelcomeNavigation(
         }
         composable("createANewSpace") {
             CreateANewSpace(
-                navController = navController,
                 viewModel = createANewSpaceViewModel
             )
         }
