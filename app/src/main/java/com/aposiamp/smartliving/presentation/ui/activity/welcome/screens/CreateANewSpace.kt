@@ -40,7 +40,6 @@ import com.aposiamp.smartliving.presentation.viewmodel.welcome.CreateANewSpaceVi
 
 @Composable
 fun CreateANewSpace(
-    navController: NavController,
     viewModel: CreateANewSpaceViewModel,
     state: CreateSpaceFormState = viewModel.formState
 ) {
