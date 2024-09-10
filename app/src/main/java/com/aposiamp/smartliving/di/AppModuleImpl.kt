@@ -2,11 +2,13 @@ package com.aposiamp.smartliving.di
 
 import android.content.Context
 import com.aposiamp.smartliving.data.repository.AuthRepositoryImpl
+import com.aposiamp.smartliving.data.repository.DeviceAndSpaceRepositoryImpl
 import com.aposiamp.smartliving.data.repository.EnvironmentalSensorRepositoryImpl
 import com.aposiamp.smartliving.data.source.local.EnvironmentalSensorDataSource
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
 import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
 import com.aposiamp.smartliving.domain.repository.AuthRepository
+import com.aposiamp.smartliving.domain.repository.DeviceAndSpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
@@ -16,6 +18,7 @@ import com.aposiamp.smartliving.domain.usecase.user.GetCurrentUserUseCase
 import com.aposiamp.smartliving.domain.usecase.user.LoginUseCase
 import com.aposiamp.smartliving.domain.usecase.user.LogoutUseCase
 import com.aposiamp.smartliving.domain.usecase.user.SignUpUseCase
+import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFirstName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLastName
@@ -23,11 +26,12 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePas
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateTerms
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AppModuleImpl(private val appContext: Context): AppModule {
     // DataSources
-    private val firebaseDataSource = FirebaseDataSource(getFirebaseAuth())
+    private val firebaseDataSource = FirebaseDataSource(getFirebaseAuth(), getFirebaseDatabase())
     private val firestoreDataSource = FirestoreDataSource(getFirestoreDatabase())
     private val environmentalSensorDataSource = EnvironmentalSensorDataSource(appContext)
 
@@ -40,9 +44,17 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         EnvironmentalSensorRepositoryImpl(environmentalSensorDataSource, firestoreDataSource)
     }
 
+    override val deviceAndSpaceRepository: DeviceAndSpaceRepository by lazy {
+        DeviceAndSpaceRepositoryImpl(firebaseDataSource)
+    }
+
     // Firebase
     override fun getFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
+    }
+
+    override fun getFirebaseDatabase() : FirebaseDatabase {
+        return FirebaseDatabase.getInstance()
     }
 
     override fun getFirestoreDatabase(): FirebaseFirestore {
@@ -67,6 +79,11 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     // Sensor UseCases
     override val getEnvironmentalDataUseCase: GetEnvironmentalDataUseCase by lazy {
         GetEnvironmentalDataUseCase(environmentalSensorRepository, getCurrentUserUseCase)
+    }
+
+    // Space UseCases
+    override val setSpaceDataUseCase: SetSpaceDataUseCase by lazy {
+        SetSpaceDataUseCase(deviceAndSpaceRepository, getCurrentUserUseCase)
     }
 
     // Profile UseCases
