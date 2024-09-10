@@ -1,6 +1,5 @@
 package com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.auth
 
-import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.domain.Result
-import com.aposiamp.smartliving.presentation.ui.activity.main.MainActivity
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.TermsCheckboxComponent
@@ -66,10 +64,7 @@ fun SignUpScreen(
             is Result.Success -> {
                 loadingState = false
                 Toast.makeText(context, "Sign Up Successful", Toast.LENGTH_SHORT).show()
-                val intent = Intent(context, MainActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                }
-                context.startActivity(intent)
+                navController.navigate("permissions")
             }
 
             null -> {}
