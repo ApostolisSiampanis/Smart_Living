@@ -1,11 +1,14 @@
 package com.aposiamp.smartliving.data.source.remote
 
+import com.aposiamp.smartliving.data.model.SpaceDataDTO
 import com.aposiamp.smartliving.utils.await
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
 
 class FirebaseDataSource(
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
+    private val firebase: FirebaseDatabase
 ) {
     val currentUser: FirebaseUser?
         get() = firebaseAuth.currentUser
@@ -22,5 +25,9 @@ class FirebaseDataSource(
 
     fun logout() {
         firebaseAuth.signOut()
+    }
+
+    suspend fun setDevicesSpaceData(userId: String, spaceDataDTO: SpaceDataDTO) {
+        firebase.getReference("devices").child(userId).setValue(spaceDataDTO).await()
     }
 }
