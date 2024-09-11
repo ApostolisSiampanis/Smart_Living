@@ -8,6 +8,7 @@ import com.aposiamp.smartliving.domain.usecase.main.GetDevicesSpaceNameUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetNavigationDrawerItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.sensor.GetEnvironmentalDataUseCase
+import com.aposiamp.smartliving.domain.usecase.sensor.SetEnvironmentalDataUseCase
 import com.aposiamp.smartliving.domain.usecase.user.GetCurrentUserUseCase
 import com.aposiamp.smartliving.domain.usecase.user.LoginUseCase
 import com.aposiamp.smartliving.domain.usecase.user.LogoutUseCase
@@ -46,6 +47,7 @@ interface AppModule {
 
     // Sensor UseCases
     val getEnvironmentalDataUseCase: GetEnvironmentalDataUseCase
+    val setEnvironmentalDataUseCase: SetEnvironmentalDataUseCase
 
     // Space UseCases
     val setSpaceDataUseCase: SetSpaceDataUseCase
