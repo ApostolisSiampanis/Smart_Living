@@ -38,7 +38,8 @@ class MainActivity : ComponentActivity() {
                     val mainSharedViewModel = viewModel<MainSharedViewModel>(
                         factory = viewModelFactory {
                             MainSharedViewModel(
-                                getEnvironmentalDataUseCase = SmartLiving.appModule.getEnvironmentalDataUseCase
+                                getEnvironmentalDataUseCase = SmartLiving.appModule.getEnvironmentalDataUseCase,
+                                setEnvironmentalDataUseCase = SmartLiving.appModule.setEnvironmentalDataUseCase
                             )
                         }
                     )
