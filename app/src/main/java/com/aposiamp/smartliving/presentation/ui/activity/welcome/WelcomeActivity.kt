@@ -31,6 +31,7 @@ class WelcomeActivity : ComponentActivity() {
                         factory = viewModelFactory {
                             LoginViewModel(
                                 loginUseCase = SmartLiving.appModule.loginUseCase,
+                                checkIfSpaceDataExistsUseCase = SmartLiving.appModule.checkIfSpaceDataExistsUseCase,
                                 validateEmail = SmartLiving.appModule.validateEmail,
                                 validatePassword = SmartLiving.appModule.validatePassword
                             )
