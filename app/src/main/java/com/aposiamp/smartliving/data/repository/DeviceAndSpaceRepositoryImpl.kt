@@ -10,4 +10,8 @@ class DeviceAndSpaceRepositoryImpl(
     override suspend fun setDevicesSpaceData(userId: String, spaceDataDTO: SpaceDataDTO) {
         firebaseDataSource.setDevicesSpaceData(userId, spaceDataDTO)
     }
+
+    override suspend fun checkIfSpaceDataExists(userId: String): Boolean {
+        return firebaseDataSource.checkIfSpaceDataExists(userId)
+    }
 }
