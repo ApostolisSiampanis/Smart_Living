@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.data.source.remote
 
+import android.util.Log
 import com.aposiamp.smartliving.data.model.SpaceDataDTO
 import com.aposiamp.smartliving.utils.await
 import com.google.firebase.auth.FirebaseAuth
@@ -29,5 +30,11 @@ class FirebaseDataSource(
 
     suspend fun setDevicesSpaceData(userId: String, spaceDataDTO: SpaceDataDTO) {
         firebase.getReference("devices").child(userId).setValue(spaceDataDTO).await()
+    }
+
+    suspend fun checkIfSpaceDataExists(userId: String): Boolean {
+        Log.d("FirebaseDataSource", "Checking if space data exists for user: $userId")
+        val snapshot = firebase.getReference("devices").child(userId).get().await()
+        return snapshot.exists()
     }
 }
