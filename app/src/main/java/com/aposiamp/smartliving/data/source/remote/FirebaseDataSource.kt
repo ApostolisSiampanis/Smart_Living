@@ -32,6 +32,15 @@ class FirebaseDataSource(
         firebase.getReference("devices").child(userId).setValue(spaceDataDTO).await()
     }
 
+    suspend fun getDevicesSpaceName(userId: String): SpaceDataDTO {
+        val snapshot = firebase.getReference("devices").child(userId).get().await()
+        if (snapshot.exists()) {
+            val spaceName = snapshot.child("space_name").getValue(String::class.java)
+            return SpaceDataDTO(spaceName = spaceName)
+        }
+        return SpaceDataDTO(spaceName = "")
+    }
+
     suspend fun checkIfSpaceDataExists(userId: String): Boolean {
         Log.d("FirebaseDataSource", "Checking if space data exists for user: $userId")
         val snapshot = firebase.getReference("devices").child(userId).get().await()
