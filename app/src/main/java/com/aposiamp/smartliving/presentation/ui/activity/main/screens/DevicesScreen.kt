@@ -64,7 +64,6 @@ fun DevicesScreen(
                 .fillMaxSize()
                 .nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
-                //TODO: to be changed, use the name of the "house"
                 MenuMediumTopAppBar(
                     title = spaceName,
                     color = MaterialTheme.colorScheme.primaryContainer,
