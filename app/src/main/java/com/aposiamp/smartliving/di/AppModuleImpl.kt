@@ -11,6 +11,7 @@ import com.aposiamp.smartliving.domain.repository.AuthRepository
 import com.aposiamp.smartliving.domain.repository.DeviceAndSpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetDevicesSpaceNameUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetNavigationDrawerItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.sensor.GetEnvironmentalDataUseCase
@@ -85,6 +86,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     // Space UseCases
     override val setSpaceDataUseCase: SetSpaceDataUseCase by lazy {
         SetSpaceDataUseCase(deviceAndSpaceRepository, getCurrentUserUseCase)
+    }
+
+    override val getDevicesSpaceNameUseCase: GetDevicesSpaceNameUseCase by lazy {
+        GetDevicesSpaceNameUseCase(deviceAndSpaceRepository, getCurrentUserUseCase)
     }
 
     override val checkIfSpaceDataExistsUseCase: CheckIfSpaceDataExistsUseCase by lazy {
