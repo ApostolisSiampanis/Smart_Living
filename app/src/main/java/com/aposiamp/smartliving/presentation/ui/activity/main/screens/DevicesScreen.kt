@@ -14,6 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -37,6 +39,7 @@ fun DevicesScreen(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    val spaceName by viewModel.spaceName.collectAsState()
 
     // Retrieve the Navigation Drawer Items
     val navigationDrawerItems = navigationViewModel.getNavigationDrawerItems(context = context)
@@ -63,7 +66,7 @@ fun DevicesScreen(
             topBar = {
                 //TODO: to be changed, use the name of the "house"
                 MenuMediumTopAppBar(
-                    title = "My Home",
+                    title = spaceName,
                     color = MaterialTheme.colorScheme.primaryContainer,
                     onMenuClick = {
                         scope.launch {
