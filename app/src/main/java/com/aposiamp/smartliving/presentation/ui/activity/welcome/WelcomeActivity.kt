@@ -14,6 +14,7 @@ import com.aposiamp.smartliving.presentation.ui.theme.SmartLivingTheme
 import com.aposiamp.smartliving.presentation.viewmodel.viewModelFactory
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.CreateANewSpaceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.PermissionsViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.welcome.WelcomeNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.LoginViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.SignUpViewModel
 
@@ -60,9 +61,18 @@ class WelcomeActivity : ComponentActivity() {
                         }
                     )
 
+                    val welcomeNavigationViewModel = viewModel<WelcomeNavigationViewModel>(
+                        factory = viewModelFactory {
+                            WelcomeNavigationViewModel(
+                                context = this,
+                                getCurrentUserUseCase = SmartLiving.appModule.getCurrentUserUseCase,
+                                checkIfSpaceDataExistsUseCase = SmartLiving.appModule.checkIfSpaceDataExistsUseCase
+                            )
+                        }
+                    )
+
                     WelcomeNavigation(
-                        context = this,
-                        getCurrentUserUseCase = SmartLiving.appModule.getCurrentUserUseCase,
+                        welcomeNavigationViewModel = welcomeNavigationViewModel,
                         loginViewModel = loginViewModel,
                         signUpViewModel = signUpViewModel,
                         permissionsViewModel = permissionsViewModel,
