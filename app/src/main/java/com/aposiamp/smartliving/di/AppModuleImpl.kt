@@ -18,6 +18,7 @@ import com.aposiamp.smartliving.domain.usecase.user.GetCurrentUserUseCase
 import com.aposiamp.smartliving.domain.usecase.user.LoginUseCase
 import com.aposiamp.smartliving.domain.usecase.user.LogoutUseCase
 import com.aposiamp.smartliving.domain.usecase.user.SignUpUseCase
+import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFirstName
@@ -84,6 +85,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     // Space UseCases
     override val setSpaceDataUseCase: SetSpaceDataUseCase by lazy {
         SetSpaceDataUseCase(deviceAndSpaceRepository, getCurrentUserUseCase)
+    }
+
+    override val checkIfSpaceDataExistsUseCase: CheckIfSpaceDataExistsUseCase by lazy {
+        CheckIfSpaceDataExistsUseCase(deviceAndSpaceRepository, getCurrentUserUseCase)
     }
 
     // Profile UseCases
