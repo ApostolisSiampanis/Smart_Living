@@ -1,5 +1,7 @@
 package com.aposiamp.smartliving.di
 
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import com.aposiamp.smartliving.domain.repository.AuthRepository
 import com.aposiamp.smartliving.domain.repository.DeviceAndSpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
@@ -35,6 +37,11 @@ interface AppModule {
     fun getFirebaseAuth(): FirebaseAuth
     fun getFirebaseDatabase(): FirebaseDatabase
     fun getFirestoreDatabase(): FirebaseFirestore
+
+    // SensorManager and Sensors
+    fun getSensorManager(): SensorManager
+    fun getTemperatureSensor(): Sensor?
+    fun getHumiditySensor(): Sensor?
 
     // NavigationDrawer UseCase
     val getNavigationDrawerItemsUseCase: GetNavigationDrawerItemsUseCase
