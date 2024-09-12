@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.utils
+package com.aposiamp.smartliving.presentation.utils
 
 import android.content.Context
 import android.content.Intent
