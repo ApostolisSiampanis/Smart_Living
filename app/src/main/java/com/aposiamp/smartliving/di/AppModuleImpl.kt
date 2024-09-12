@@ -1,6 +1,8 @@
 package com.aposiamp.smartliving.di
 
 import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import com.aposiamp.smartliving.data.repository.AuthRepositoryImpl
 import com.aposiamp.smartliving.data.repository.DeviceAndSpaceRepositoryImpl
 import com.aposiamp.smartliving.data.repository.EnvironmentalSensorRepositoryImpl
@@ -36,7 +38,7 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     // DataSources
     private val firebaseDataSource = FirebaseDataSource(getFirebaseAuth(), getFirebaseDatabase())
     private val firestoreDataSource = FirestoreDataSource(getFirestoreDatabase())
-    private val environmentalSensorDataSource = EnvironmentalSensorDataSource(appContext)
+    private val environmentalSensorDataSource = EnvironmentalSensorDataSource(getSensorManager(), getTemperatureSensor(), getHumiditySensor())
 
     // Repositories
     override val authRepository: AuthRepository by lazy {
@@ -62,6 +64,19 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override fun getFirestoreDatabase(): FirebaseFirestore {
         return FirebaseFirestore.getInstance()
+    }
+
+    // SensorManager and Sensors
+    override fun getSensorManager(): SensorManager {
+        return appContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+    }
+
+    override fun getTemperatureSensor(): Sensor? {
+        return getSensorManager().getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
+    }
+
+    override fun getHumiditySensor(): Sensor? {
+        return getSensorManager().getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY)
     }
 
     // NavigationDrawer UseCase
