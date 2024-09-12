@@ -27,7 +27,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.domain.Result
+import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.TermsCheckboxComponent

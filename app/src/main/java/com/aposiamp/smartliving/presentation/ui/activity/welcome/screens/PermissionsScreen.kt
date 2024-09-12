@@ -36,8 +36,8 @@ import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.PermissionCard
 import com.aposiamp.smartliving.presentation.ui.component.PermissionDialog
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.PermissionsViewModel
-import com.aposiamp.smartliving.utils.PermissionsUtils.areAllPermissionsGranted
-import com.aposiamp.smartliving.utils.PermissionsUtils.openAppSettings
+import com.aposiamp.smartliving.presentation.utils.PermissionsUtils.areAllPermissionsGranted
+import com.aposiamp.smartliving.presentation.utils.PermissionsUtils.openAppSettings
 
 @Composable
 fun PermissionsScreen(

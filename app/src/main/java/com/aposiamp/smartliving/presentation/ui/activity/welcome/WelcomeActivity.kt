@@ -11,7 +11,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aposiamp.smartliving.SmartLiving
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.navigation.WelcomeNavigation
 import com.aposiamp.smartliving.presentation.ui.theme.SmartLivingTheme
-import com.aposiamp.smartliving.presentation.viewmodel.viewModelFactory
+import com.aposiamp.smartliving.presentation.utils.viewModelFactory
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.CreateANewSpaceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.PermissionsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.WelcomeNavigationViewModel

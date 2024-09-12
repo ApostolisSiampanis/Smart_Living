@@ -2,7 +2,7 @@ package com.aposiamp.smartliving.data.source.remote
 
 import android.util.Log
 import com.aposiamp.smartliving.data.model.SpaceDataDTO
-import com.aposiamp.smartliving.utils.await
+import com.aposiamp.smartliving.data.utils.await
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase

@@ -1,6 +1,6 @@
 package com.aposiamp.smartliving.data.source.remote
 
-import com.aposiamp.smartliving.utils.await
+import com.aposiamp.smartliving.data.utils.await
 import com.aposiamp.smartliving.data.model.EnvironmentalDataDTO
 import com.aposiamp.smartliving.data.model.UserFirestore
 import com.google.firebase.firestore.FirebaseFirestore

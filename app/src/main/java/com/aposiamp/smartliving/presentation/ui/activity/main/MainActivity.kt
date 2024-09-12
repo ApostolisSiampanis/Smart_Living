@@ -14,7 +14,7 @@ import com.aposiamp.smartliving.presentation.ui.theme.SmartLivingTheme
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
-import com.aposiamp.smartliving.presentation.viewmodel.viewModelFactory
+import com.aposiamp.smartliving.presentation.utils.viewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
