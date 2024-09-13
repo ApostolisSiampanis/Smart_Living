@@ -6,12 +6,16 @@ import android.hardware.SensorManager
 import com.aposiamp.smartliving.data.repository.AuthRepositoryImpl
 import com.aposiamp.smartliving.data.repository.DeviceAndSpaceRepositoryImpl
 import com.aposiamp.smartliving.data.repository.EnvironmentalSensorRepositoryImpl
+import com.aposiamp.smartliving.data.repository.LocationRepositoryImpl
 import com.aposiamp.smartliving.data.source.local.EnvironmentalSensorDataSource
+import com.aposiamp.smartliving.data.source.local.LocationDataSource
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
 import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
 import com.aposiamp.smartliving.domain.repository.AuthRepository
 import com.aposiamp.smartliving.domain.repository.DeviceAndSpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
+import com.aposiamp.smartliving.domain.repository.LocationRepository
+import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDevicesSpaceNameUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
@@ -30,6 +34,8 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLas
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateTerms
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -39,6 +45,7 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     private val firebaseDataSource = FirebaseDataSource(getFirebaseAuth(), getFirebaseDatabase())
     private val firestoreDataSource = FirestoreDataSource(getFirestoreDatabase())
     private val environmentalSensorDataSource = EnvironmentalSensorDataSource(getSensorManager(), getTemperatureSensor(), getHumiditySensor())
+    private val locationDataSource = LocationDataSource(appContext, getFusedLocationProviderClient())
 
     // Repositories
     override val authRepository: AuthRepository by lazy {
@@ -48,6 +55,11 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     override val environmentalSensorRepository: EnvironmentalSensorRepository by lazy {
         EnvironmentalSensorRepositoryImpl(environmentalSensorDataSource, firestoreDataSource)
     }
+
+    override val locationRepository: LocationRepository by lazy {
+        LocationRepositoryImpl(locationDataSource)
+    }
+
 
     override val deviceAndSpaceRepository: DeviceAndSpaceRepository by lazy {
         DeviceAndSpaceRepositoryImpl(firebaseDataSource)
@@ -79,6 +91,11 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         return getSensorManager().getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY)
     }
 
+    // FusedLocationProviderClient
+    override fun getFusedLocationProviderClient(): FusedLocationProviderClient {
+        return LocationServices.getFusedLocationProviderClient(appContext)
+    }
+
     // NavigationDrawer UseCase
     override val getNavigationDrawerItemsUseCase: GetNavigationDrawerItemsUseCase by lazy {
         GetNavigationDrawerItemsUseCase()
@@ -103,6 +120,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         SetEnvironmentalDataUseCase(environmentalSensorRepository, getCurrentUserUseCase)
     }
 
+    // Location UseCases
+    override val getLocationDataUseCase: GetLocationDataUseCase by lazy {
+        GetLocationDataUseCase(locationRepository)
+    }
 
     // Space UseCases
     override val setSpaceDataUseCase: SetSpaceDataUseCase by lazy {
