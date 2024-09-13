@@ -84,6 +84,8 @@ dependencies {
     implementation(libs.firebase.database)
     // Location
     implementation(libs.play.services.location)
+    // Places API
+    implementation(libs.places)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
