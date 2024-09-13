@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.presentation.permission
+package com.aposiamp.smartliving.domain.permissions
 
 import androidx.compose.runtime.Composable
 
