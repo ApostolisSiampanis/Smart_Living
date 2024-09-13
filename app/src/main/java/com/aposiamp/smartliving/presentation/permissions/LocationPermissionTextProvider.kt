@@ -1,8 +1,9 @@
-package com.aposiamp.smartliving.presentation.permission
+package com.aposiamp.smartliving.presentation.permissions
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.aposiamp.smartliving.R
+import com.aposiamp.smartliving.domain.permissions.PermissionTextProvider
 
 class LocationPermissionTextProvider : PermissionTextProvider {
     @Composable
