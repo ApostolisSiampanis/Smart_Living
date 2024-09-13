@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.presentation.permission.PermissionTextProvider
+import com.aposiamp.smartliving.domain.permissions.PermissionTextProvider
 
 @Composable
 fun PermissionDialog(
