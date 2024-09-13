@@ -5,6 +5,8 @@ import android.hardware.SensorManager
 import com.aposiamp.smartliving.domain.repository.AuthRepository
 import com.aposiamp.smartliving.domain.repository.DeviceAndSpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
+import com.aposiamp.smartliving.domain.repository.LocationRepository
+import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDevicesSpaceNameUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
@@ -23,6 +25,7 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLas
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateTerms
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -31,6 +34,7 @@ interface AppModule {
     // Repositories
     val authRepository: AuthRepository
     val environmentalSensorRepository: EnvironmentalSensorRepository
+    val locationRepository: LocationRepository
     val deviceAndSpaceRepository: DeviceAndSpaceRepository
 
     // Firebase
@@ -42,6 +46,9 @@ interface AppModule {
     fun getSensorManager(): SensorManager
     fun getTemperatureSensor(): Sensor?
     fun getHumiditySensor(): Sensor?
+
+    // FusedLocationProviderClient
+    fun getFusedLocationProviderClient(): FusedLocationProviderClient
 
     // NavigationDrawer UseCase
     val getNavigationDrawerItemsUseCase: GetNavigationDrawerItemsUseCase
@@ -55,6 +62,9 @@ interface AppModule {
     // Sensor UseCases
     val getEnvironmentalDataUseCase: GetEnvironmentalDataUseCase
     val setEnvironmentalDataUseCase: SetEnvironmentalDataUseCase
+
+    // Location UseCases
+    val getLocationDataUseCase: GetLocationDataUseCase
 
     // Space UseCases
     val setSpaceDataUseCase: SetSpaceDataUseCase
