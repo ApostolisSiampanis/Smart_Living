@@ -31,7 +31,7 @@ import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.presentation.permission.LocationPermissionTextProvider
+import com.aposiamp.smartliving.presentation.permissions.LocationPermissionTextProvider
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.PermissionCard
 import com.aposiamp.smartliving.presentation.ui.component.PermissionDialog
