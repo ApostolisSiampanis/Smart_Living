@@ -6,11 +6,13 @@ import com.aposiamp.smartliving.domain.repository.AuthRepository
 import com.aposiamp.smartliving.domain.repository.DeviceAndSpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.repository.LocationRepository
+import com.aposiamp.smartliving.domain.repository.PlacesRepository
 import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDevicesSpaceNameUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetNavigationDrawerItemsUseCase
+import com.aposiamp.smartliving.domain.usecase.places.GetAutoCompleteSuggestionsUseCase
 import com.aposiamp.smartliving.domain.usecase.sensor.GetEnvironmentalDataUseCase
 import com.aposiamp.smartliving.domain.usecase.sensor.SetEnvironmentalDataUseCase
 import com.aposiamp.smartliving.domain.usecase.user.GetCurrentUserUseCase
@@ -26,6 +28,7 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePas
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateTerms
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -36,11 +39,15 @@ interface AppModule {
     val environmentalSensorRepository: EnvironmentalSensorRepository
     val locationRepository: LocationRepository
     val deviceAndSpaceRepository: DeviceAndSpaceRepository
+    val placesRepository: PlacesRepository
 
     // Firebase
     fun getFirebaseAuth(): FirebaseAuth
     fun getFirebaseDatabase(): FirebaseDatabase
     fun getFirestoreDatabase(): FirebaseFirestore
+
+    // Places API
+    fun getPlacesClient(): PlacesClient
 
     // SensorManager and Sensors
     fun getSensorManager(): SensorManager
@@ -65,6 +72,9 @@ interface AppModule {
 
     // Location UseCases
     val getLocationDataUseCase: GetLocationDataUseCase
+
+    // Places UseCases
+    val getAutoCompleteSuggestionsUseCase: GetAutoCompleteSuggestionsUseCase
 
     // Space UseCases
     val setSpaceDataUseCase: SetSpaceDataUseCase
