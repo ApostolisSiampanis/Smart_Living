@@ -20,6 +20,8 @@
     <string name="already_have_an_account">Already have an account?\u00A0</string>
     <string name="space_name">Space Name</string>
     <string name="space_name_hint">Enter the name of your space</string>
+    <string name="space_address">Space Address</string>
+    <string name="space_address_hint">Enter the address of your space</string>
     <string name="login">Login</string>
     <string name="welcome_to_smart_living_app">Welcome to \nSmart Living!</string>
     <string name="welcome_text">Welcome to Smart Living – Your ultimate smart home companion! Seamlessly control your connected devices, create personalized routines, and receive smart suggestions for energy-saving practices. Whether you\'re optimizing your lighting, adjusting your devices, or your thermostat, Smart Living empowers you to manage your home effortlessly while reducing energy consumption. Experience the future of home automation today!</string>
