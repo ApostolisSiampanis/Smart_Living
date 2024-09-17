@@ -2,16 +2,16 @@ package com.aposiamp.smartliving.data.repository
 
 import com.aposiamp.smartliving.data.model.SpaceDataDTO
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
-import com.aposiamp.smartliving.domain.repository.DeviceAndSpaceRepository
+import com.aposiamp.smartliving.domain.repository.SpaceRepository
 
-class DeviceAndSpaceRepositoryImpl(
+class SpaceRepositoryImpl(
     private val firebaseDataSource: FirebaseDataSource
-) : DeviceAndSpaceRepository {
-    override suspend fun setDevicesSpaceData(userId: String, spaceDataDTO: SpaceDataDTO) {
-        firebaseDataSource.setDevicesSpaceData(userId, spaceDataDTO)
+) : SpaceRepository {
+    override suspend fun setSpaceData(userId: String, spaceDataDTO: SpaceDataDTO) {
+        firebaseDataSource.setSpaceData(userId, spaceDataDTO)
     }
 
-    override suspend fun getDevicesSpaceName(userId: String): SpaceDataDTO {
+    override suspend fun getSpaceData(userId: String): SpaceDataDTO {
         return firebaseDataSource.getDevicesSpaceName(userId)
     }
 
