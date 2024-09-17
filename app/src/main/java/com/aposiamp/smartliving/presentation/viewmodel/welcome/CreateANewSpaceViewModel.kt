@@ -5,9 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aposiamp.smartliving.domain.model.AutoCompletePrediction
 import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.domain.model.SpaceData
+import com.aposiamp.smartliving.domain.usecase.places.GetAutoCompleteSuggestionsUseCase
+import com.aposiamp.smartliving.domain.usecase.places.GetLocationFromPlaceIdUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePlaceData
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceAddress
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
 import com.aposiamp.smartliving.presentation.model.CreateSpaceResult
 import com.aposiamp.smartliving.presentation.ui.event.CreateSpaceFormEvent
@@ -18,7 +23,11 @@ import kotlinx.coroutines.launch
 
 class CreateANewSpaceViewModel(
     private val validateSpaceName: ValidateSpaceName,
-    private val setSpaceDataUseCase: SetSpaceDataUseCase
+    private val validateSpaceAddress: ValidateSpaceAddress,
+    private val validatePlaceData: ValidatePlaceData,
+    private val setSpaceDataUseCase: SetSpaceDataUseCase,
+    private val getAutoCompleteSuggestionsUseCase: GetAutoCompleteSuggestionsUseCase,
+    private val getLocationFromPlaceIdUseCase: GetLocationFromPlaceIdUseCase
 ): ViewModel() {
     private var _formState by mutableStateOf(CreateSpaceFormState())
     val formState: CreateSpaceFormState get() = _formState
@@ -26,10 +35,21 @@ class CreateANewSpaceViewModel(
     private val _createSpaceFlow = MutableStateFlow<Result<CreateSpaceResult>?>(null)
     val createSpaceFlow: StateFlow<Result<CreateSpaceResult>?> = _createSpaceFlow
 
-    fun onEvent(event: CreateSpaceFormEvent) {
+    private var _addressPredictions by mutableStateOf(emptyList<AutoCompletePrediction>())
+    val addressPredictions: List<AutoCompletePrediction> get() = _addressPredictions
+
+    suspend fun onEvent(event: CreateSpaceFormEvent) {
         when (event) {
             is CreateSpaceFormEvent.SpaceNameChanged -> {
                 _formState = _formState.copy(spaceName = event.spaceName)
+            }
+
+            is CreateSpaceFormEvent.SpaceAddressChanged -> {
+                _formState = _formState.copy(spaceAddress = event.spaceAddress)
+            }
+
+            is CreateSpaceFormEvent.PlaceIdSelected -> {
+                _formState = _formState.copy(spaceId = event.placeId)
             }
 
             is CreateSpaceFormEvent.Submit -> {
@@ -38,30 +58,47 @@ class CreateANewSpaceViewModel(
         }
     }
 
-    private fun submitData() {
+    private suspend fun submitData() {
         val spaceNameResult = validateSpaceName.execute(_formState.spaceName)
+        val spaceAddressResult = validateSpaceAddress.execute(_formState.spaceAddress)
+        val spaceIdResult = validatePlaceData.execute(_formState.spaceId)
 
         val hasError = listOf(
-            spaceNameResult
+            spaceNameResult,
+            spaceAddressResult,
+            spaceIdResult
         ).any { it.errorMessage != null }
 
         if (hasError) {
             _formState = _formState.copy(
-                spaceNameError = spaceNameResult.errorMessage
+                spaceNameError = spaceNameResult.errorMessage,
+                spaceAddressError = spaceAddressResult.errorMessage,
+                spaceIdError = spaceIdResult.errorMessage
             )
             return
         }
-        createSpace(_formState.spaceName)
+        createSpace(_formState.spaceId)
     }
 
-    private fun createSpace(spaceName: String) = viewModelScope.launch {
+    private fun createSpace(spaceId: String) = viewModelScope.launch {
         try {
-            val spaceData = SpaceData(spaceName, listOf())
+            val placeData = getLocationFromPlaceIdUseCase.execute(spaceId)
+            val spaceData = SpaceData(
+                placeId = placeData.placeId,
+                spaceName = placeData.name,
+                fullAddress = placeData.fullAddress,
+                location = placeData.location
+            )
             setSpaceDataUseCase.execute(spaceData)
             _createSpaceFlow.value = Result.Success(CreateSpaceResult(success = true))
         } catch (e: Exception) {
             _formState = _formState.copy(spaceNameError = e.message)
             _createSpaceFlow.value = Result.Error(e)
         }
+    }
+
+    fun fetchAddressSuggestions(query: String) = viewModelScope.launch {
+        val predictions = getAutoCompleteSuggestionsUseCase.execute(query)
+        _addressPredictions = predictions
     }
 }
