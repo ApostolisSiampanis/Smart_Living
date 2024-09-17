@@ -35,6 +35,8 @@
     <string name="the_password_must_be_at_least_8_characters">The password must be at least 8 characters</string>
     <string name="the_password_must_contain_at_least_one_letter_and_one_digit">The password must contain at least one letter and one digit</string>
     <string name="you_need_to_accept_the_terms">You need to accept the terms</string>
+    <string name="the_space_address_can_not_be_blank">The space address can\'t be blank</string>
+    <string name="the_space_address_is_not_nearby">The space address is not nearby</string>
     <string name="the_space_name_can_not_be_blank">The space name can\'t be blank</string>
     <string name="the_space_name_must_be_at_least_3_characters">The space name must be at least 3 characters</string>
     <string name="creator">Created by @ApostolisSiampanis</string>
