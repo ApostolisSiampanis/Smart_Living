@@ -6,14 +6,19 @@ import com.aposiamp.smartliving.domain.model.SpaceData
 object SpaceDataMapper {
     fun fromDto(dto: SpaceDataDTO): SpaceData {
         return SpaceData(
+            placeId = dto.placeId,
             spaceName = dto.spaceName,
-            rooms = listOf()
+            fullAddress = dto.fullAddress,
+            location = dto.location?.let { LocationDataMapper.fromDto(it) }
         )
     }
 
     fun toDto(domain: SpaceData): SpaceDataDTO {
         return SpaceDataDTO(
-            spaceName = domain.spaceName
+            placeId = domain.placeId,
+            spaceName = domain.spaceName,
+            fullAddress = domain.fullAddress,
+            location = domain.location?.let { LocationDataMapper.toDto(it) }
         )
     }
 }
