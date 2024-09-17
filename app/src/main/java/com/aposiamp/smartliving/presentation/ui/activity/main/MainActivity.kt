@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                     val devicesViewModel = viewModel<DevicesViewModel>(
                         factory = viewModelFactory {
                             DevicesViewModel(
-                                getDevicesSpaceNameUseCase = SmartLiving.appModule.getDevicesSpaceNameUseCase
+                                getSpaceNameUseCase = SmartLiving.appModule.getSpaceNameUseCase
                             )
                         }
                     )
