@@ -10,4 +10,11 @@ object LocationDataMapper {
             longitude = dto.longitude
         )
     }
+
+    fun toDto(domain: LocationData): LocationDataDTO {
+        return LocationDataDTO(
+            latitude = domain.latitude,
+            longitude = domain.longitude
+        )
+    }
 }
