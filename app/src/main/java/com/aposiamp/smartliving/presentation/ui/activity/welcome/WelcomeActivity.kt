@@ -57,7 +57,11 @@ class WelcomeActivity : ComponentActivity() {
                         factory = viewModelFactory {
                             CreateANewSpaceViewModel(
                                 validateSpaceName = SmartLiving.appModule.validateSpaceName,
-                                setSpaceDataUseCase = SmartLiving.appModule.setSpaceDataUseCase
+                                validateSpaceAddress = SmartLiving.appModule.validateSpaceAddress,
+                                validatePlaceData = SmartLiving.appModule.validatePlaceData,
+                                setSpaceDataUseCase = SmartLiving.appModule.setSpaceDataUseCase,
+                                getAutoCompleteSuggestionsUseCase = SmartLiving.appModule.getAutoCompleteSuggestionsUseCase,
+                                getLocationFromPlaceIdUseCase = SmartLiving.appModule.getLocationFromPlaceIdUseCase
                             )
                         }
                     )
