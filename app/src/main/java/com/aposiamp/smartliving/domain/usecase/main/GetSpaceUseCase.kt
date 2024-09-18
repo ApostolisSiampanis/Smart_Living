@@ -5,7 +5,7 @@ import com.aposiamp.smartliving.domain.model.SpaceData
 import com.aposiamp.smartliving.domain.repository.SpaceRepository
 import com.aposiamp.smartliving.domain.usecase.user.GetCurrentUserUseCase
 
-class GetSpaceNameUseCase(
+class GetSpaceUseCase(
     private val spaceRepository: SpaceRepository,
     private val getCurrentUserUseCase: GetCurrentUserUseCase
 ) {
