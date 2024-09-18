@@ -31,13 +31,10 @@ class FirebaseDataSource(
         firebase.getReference("spaces").child(userId).setValue(spaceDataDTO).await()
     }
 
-    suspend fun getDevicesSpaceName(userId: String): SpaceDataDTO {
-        val snapshot = firebase.getReference("devices").child(userId).get().await()
-        if (snapshot.exists()) {
-            val spaceName = snapshot.child("space_name").getValue(String::class.java)
-            return SpaceDataDTO(spaceName = spaceName)
-        }
-        return SpaceDataDTO(spaceName = "")
+    suspend fun getSpaceData(userId: String): SpaceDataDTO {
+        val snapshot = firebase.getReference("spaces").child(userId).get().await()
+        val spaceDataDTO = snapshot.getValue(SpaceDataDTO::class.java)
+        return spaceDataDTO ?: throw Exception("Space data not found")
     }
 
     suspend fun checkIfSpaceDataExists(userId: String): Boolean {
