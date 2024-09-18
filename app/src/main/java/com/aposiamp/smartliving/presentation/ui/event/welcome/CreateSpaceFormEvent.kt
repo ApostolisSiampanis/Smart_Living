@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.presentation.ui.event
+package com.aposiamp.smartliving.presentation.ui.event.welcome
 
 sealed class CreateSpaceFormEvent{
     data class SpaceNameChanged(val spaceName: String) : CreateSpaceFormEvent()
