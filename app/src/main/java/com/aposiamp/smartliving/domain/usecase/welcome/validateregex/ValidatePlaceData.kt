@@ -2,7 +2,7 @@ package com.aposiamp.smartliving.domain.usecase.welcome.validateregex
 
 import android.content.Context
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.domain.usecase.welcome.ValidateAddressProximityUseCase
+import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
 
 class ValidatePlaceData(
     private val context: Context,
