@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.presentation.ui.event.auth
+package com.aposiamp.smartliving.presentation.ui.event.welcome.auth
 
 sealed class LoginFormEvent {
     data class EmailChanged(val email: String) : LoginFormEvent()
