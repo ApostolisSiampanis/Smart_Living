@@ -12,8 +12,8 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFir
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLastName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateTerms
-import com.aposiamp.smartliving.presentation.ui.event.auth.SignUpFormEvent
-import com.aposiamp.smartliving.presentation.ui.state.auth.SignUpFormState
+import com.aposiamp.smartliving.presentation.ui.event.welcome.auth.SignUpFormEvent
+import com.aposiamp.smartliving.presentation.ui.state.welcome.auth.SignUpFormState
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

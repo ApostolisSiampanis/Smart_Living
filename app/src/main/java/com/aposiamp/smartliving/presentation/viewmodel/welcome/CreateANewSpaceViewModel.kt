@@ -15,8 +15,8 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePla
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceAddress
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
 import com.aposiamp.smartliving.presentation.model.CreateSpaceResult
-import com.aposiamp.smartliving.presentation.ui.event.CreateSpaceFormEvent
-import com.aposiamp.smartliving.presentation.ui.state.CreateSpaceFormState
+import com.aposiamp.smartliving.presentation.ui.event.welcome.CreateSpaceFormEvent
+import com.aposiamp.smartliving.presentation.ui.state.welcome.CreateSpaceFormState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

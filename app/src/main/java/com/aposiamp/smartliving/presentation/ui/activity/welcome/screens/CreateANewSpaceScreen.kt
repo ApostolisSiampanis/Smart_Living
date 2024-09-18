@@ -39,8 +39,8 @@ import com.aposiamp.smartliving.presentation.ui.component.AuthTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.ErrorSupportingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
-import com.aposiamp.smartliving.presentation.ui.event.CreateSpaceFormEvent
-import com.aposiamp.smartliving.presentation.ui.state.CreateSpaceFormState
+import com.aposiamp.smartliving.presentation.ui.event.welcome.CreateSpaceFormEvent
+import com.aposiamp.smartliving.presentation.ui.state.welcome.CreateSpaceFormState
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.CreateANewSpaceViewModel
 import kotlinx.coroutines.launch
 

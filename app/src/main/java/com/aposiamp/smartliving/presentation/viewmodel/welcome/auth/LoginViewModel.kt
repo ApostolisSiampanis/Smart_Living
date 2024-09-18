@@ -10,8 +10,8 @@ import com.aposiamp.smartliving.domain.usecase.user.LoginUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
-import com.aposiamp.smartliving.presentation.ui.event.auth.LoginFormEvent
-import com.aposiamp.smartliving.presentation.ui.state.auth.LoginFormState
+import com.aposiamp.smartliving.presentation.ui.event.welcome.auth.LoginFormEvent
+import com.aposiamp.smartliving.presentation.ui.state.welcome.auth.LoginFormState
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
