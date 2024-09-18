@@ -4,5 +4,5 @@ import com.aposiamp.smartliving.data.model.EnvironmentalDataDTO
 
 interface EnvironmentalSensorRepository {
     suspend fun getEnvironmentalData(): EnvironmentalDataDTO
-    suspend fun setEnvironmentalData(uid: String, environmentalDataDTO: EnvironmentalDataDTO)
+    suspend fun setEnvironmentalData(uid: String, placeId: String, environmentalDataDTO: EnvironmentalDataDTO)
 }
