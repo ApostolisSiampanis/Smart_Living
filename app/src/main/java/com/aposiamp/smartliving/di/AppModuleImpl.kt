@@ -21,7 +21,7 @@ import com.aposiamp.smartliving.domain.repository.LocationRepository
 import com.aposiamp.smartliving.domain.repository.PlacesRepository
 import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
-import com.aposiamp.smartliving.domain.usecase.main.GetSpaceNameUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetNavigationDrawerItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.places.GetAutoCompleteSuggestionsUseCase
@@ -165,8 +165,8 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         SetSpaceDataUseCase(spaceRepository, getCurrentUserUseCase)
     }
 
-    override val getSpaceNameUseCase: GetSpaceNameUseCase by lazy {
-        GetSpaceNameUseCase(spaceRepository, getCurrentUserUseCase)
+    override val getSpaceUseCase: GetSpaceUseCase by lazy {
+        GetSpaceUseCase(spaceRepository, getCurrentUserUseCase)
     }
 
     override val checkIfSpaceDataExistsUseCase: CheckIfSpaceDataExistsUseCase by lazy {
