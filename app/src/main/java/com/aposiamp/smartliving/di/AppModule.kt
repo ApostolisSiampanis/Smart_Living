@@ -105,4 +105,6 @@ interface AppModule {
     val validateSpaceName: ValidateSpaceName
     val validateSpaceAddress: ValidateSpaceAddress
     val validatePlaceData: ValidatePlaceData
+    // For CreateANewRoom screen
+    val validateRoomName: ValidateSpaceName
 }
