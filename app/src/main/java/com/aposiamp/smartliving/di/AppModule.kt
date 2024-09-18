@@ -9,7 +9,7 @@ import com.aposiamp.smartliving.domain.repository.LocationRepository
 import com.aposiamp.smartliving.domain.repository.PlacesRepository
 import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
-import com.aposiamp.smartliving.domain.usecase.main.GetSpaceNameUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetNavigationDrawerItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.places.GetAutoCompleteSuggestionsUseCase
@@ -84,7 +84,7 @@ interface AppModule {
 
     // Space UseCases
     val setSpaceDataUseCase: SetSpaceDataUseCase
-    val getSpaceNameUseCase: GetSpaceNameUseCase
+    val getSpaceUseCase: GetSpaceUseCase
     val checkIfSpaceDataExistsUseCase: CheckIfSpaceDataExistsUseCase
 
     // Profile UseCases
