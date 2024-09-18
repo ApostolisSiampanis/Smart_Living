@@ -22,7 +22,8 @@ import com.aposiamp.smartliving.domain.usecase.user.LogoutUseCase
 import com.aposiamp.smartliving.domain.usecase.user.SignUpUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
-import com.aposiamp.smartliving.domain.usecase.welcome.ValidateAddressProximityUseCase
+import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
+import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFirstName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLastName
@@ -86,6 +87,7 @@ interface AppModule {
     val setSpaceDataUseCase: SetSpaceDataUseCase
     val getSpaceUseCase: GetSpaceUseCase
     val checkIfSpaceDataExistsUseCase: CheckIfSpaceDataExistsUseCase
+    val checkIfUserIsInSpaceUseCase: CheckIfUserIsInSpaceUseCase
 
     // Profile UseCases
     val loginUseCase: LoginUseCase
