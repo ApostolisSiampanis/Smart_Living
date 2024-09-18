@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,34 +13,38 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardDefaults.cardElevation
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Switch
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.lifecycle.LiveData
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
 
 @Composable
 fun PermissionCard(
-    iconResId: Int,
     permissionName: String,
+    permissionRequestText: String,
+    painter: Painter,
+    contentDescription: String,
     isExpanded: MutableState<Boolean>,
     switchState: MutableState<Boolean>,
-    onToggleClick: () -> Unit = {}
+    onToggleClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
-            .padding(8.dp),
+            .padding(8.dp)
+            .background(
+                shape = componentShapes.medium,
+                color = Color.White
+            ),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
         elevation = cardElevation(defaultElevation = 4.dp)
     ) {
         Column(
@@ -63,27 +66,24 @@ fun PermissionCard(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Image(
-                            painter = painterResource(id = iconResId),
+                            painter = painter,
                             modifier = Modifier
                                 .padding(horizontal = 5.dp)
-                                .size(40.dp),
-                            contentDescription = permissionName
+                                .size(30.dp),
+                            contentDescription = contentDescription
                         )
-                        Text(
-                            text = permissionName,
+                        GeneralBoldText(
                             modifier = Modifier
                                 .padding(start = 8.dp),
-                            style = TextStyle(
-                                fontSize = 20.sp,
-                                fontFamily = FontFamily(Font(R.font.carlito_regular))
-                            ),
-                            color = Color.Blue
+                            value = permissionName,
+                            fontSize = 22,
+                            color = Color.Black
                         )
                     }
                 }
                 Column(
                     modifier = Modifier
-                        .padding(start = 8.dp),
+                        .padding(end = 8.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -96,7 +96,8 @@ fun PermissionCard(
                             } else {
                                 switchState.value = false
                             }
-                        }
+                        },
+                        enabled = !switchState.value
                     )
                 }
             }
@@ -107,32 +108,30 @@ fun PermissionCard(
             ) {
                 IconButton(onClick = { isExpanded.value = !isExpanded.value }) {
                     Image(
-                        painter =
-                        if (isExpanded.value) painterResource(
-                            id = R.drawable.arrow_up
-                        )
-                        else painterResource(
-                            id = R.drawable.arrow_down
-                        ),
-                        modifier = Modifier
-                            .padding(horizontal = 5.dp),
-                        contentDescription = null
+                        painter = if (isExpanded.value) {
+                            painterResource(id = R.drawable.arrow_up)
+                        } else {
+                            painterResource(id = R.drawable.arrow_down)
+                        },
+                        contentDescription = if (isExpanded.value) {
+                            stringResource(id = R.string.expand)
+                        } else {
+                            stringResource(id = R.string.collapse)
+                        }
                     )
                 }
             }
             if (isExpanded.value) {
-                //TODO Locale Settings
-                val permissionRequestText = "Test"
-                Row {
-                   Text(
-                       text = permissionRequestText,
-                       modifier = Modifier
-                           .padding(start = 8.dp),
-                       style = TextStyle(
-                           fontSize = 14.sp,
-                           fontFamily = FontFamily(Font(R.font.carlito_regular))
-                       )
-                   )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    GeneralNormalText(
+                        value = permissionRequestText,
+                        modifier = Modifier
+                            .padding(start = 8.dp),
+                        color = Color.Black
+                    )
                 }
             }
         }

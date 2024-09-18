@@ -1,6 +1,5 @@
 package com.aposiamp.smartliving.data.source.local
 
-import android.content.Context
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -8,11 +7,11 @@ import android.hardware.SensorManager
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 
-class EnvironmentalSensorDataSource(private val context: Context) {
-    private val sensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-    private val temperatureSensor: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
-    private val humiditySensor: Sensor? = sensorManager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY)
-
+class EnvironmentalSensorDataSource(
+    private val sensorManager: SensorManager,
+    private val temperatureSensor: Sensor?,
+    private val humiditySensor: Sensor?
+) {
     @OptIn(ExperimentalCoroutinesApi::class)
     suspend fun getTemperatureData(): Float? {
         return suspendCancellableCoroutine { continuation ->

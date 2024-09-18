@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aposiamp.smartliving.domain.Result
+import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.domain.usecase.user.SignUpUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFirstName

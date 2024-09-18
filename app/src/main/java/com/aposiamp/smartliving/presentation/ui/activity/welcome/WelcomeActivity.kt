@@ -11,7 +11,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aposiamp.smartliving.SmartLiving
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.navigation.WelcomeNavigation
 import com.aposiamp.smartliving.presentation.ui.theme.SmartLivingTheme
-import com.aposiamp.smartliving.presentation.viewmodel.viewModelFactory
+import com.aposiamp.smartliving.presentation.utils.viewModelFactory
+import com.aposiamp.smartliving.presentation.viewmodel.welcome.CreateANewSpaceViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.welcome.PermissionsViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.welcome.WelcomeNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.LoginViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.SignUpViewModel
 
@@ -28,6 +31,7 @@ class WelcomeActivity : ComponentActivity() {
                         factory = viewModelFactory {
                             LoginViewModel(
                                 loginUseCase = SmartLiving.appModule.loginUseCase,
+                                checkIfSpaceDataExistsUseCase = SmartLiving.appModule.checkIfSpaceDataExistsUseCase,
                                 validateEmail = SmartLiving.appModule.validateEmail,
                                 validatePassword = SmartLiving.appModule.validatePassword
                             )
@@ -47,11 +51,37 @@ class WelcomeActivity : ComponentActivity() {
                         }
                     )
 
+                    val permissionsViewModel = viewModel<PermissionsViewModel>()
+
+                    val createANewSpaceViewModel = viewModel<CreateANewSpaceViewModel>(
+                        factory = viewModelFactory {
+                            CreateANewSpaceViewModel(
+                                validateSpaceName = SmartLiving.appModule.validateSpaceName,
+                                validateSpaceAddress = SmartLiving.appModule.validateSpaceAddress,
+                                validatePlaceData = SmartLiving.appModule.validatePlaceData,
+                                setSpaceDataUseCase = SmartLiving.appModule.setSpaceDataUseCase,
+                                getAutoCompleteSuggestionsUseCase = SmartLiving.appModule.getAutoCompleteSuggestionsUseCase,
+                                getLocationFromPlaceIdUseCase = SmartLiving.appModule.getLocationFromPlaceIdUseCase
+                            )
+                        }
+                    )
+
+                    val welcomeNavigationViewModel = viewModel<WelcomeNavigationViewModel>(
+                        factory = viewModelFactory {
+                            WelcomeNavigationViewModel(
+                                context = this,
+                                getCurrentUserUseCase = SmartLiving.appModule.getCurrentUserUseCase,
+                                checkIfSpaceDataExistsUseCase = SmartLiving.appModule.checkIfSpaceDataExistsUseCase
+                            )
+                        }
+                    )
+
                     WelcomeNavigation(
-                        context = this,
-                        getCurrentUserUseCase = SmartLiving.appModule.getCurrentUserUseCase,
+                        welcomeNavigationViewModel = welcomeNavigationViewModel,
                         loginViewModel = loginViewModel,
-                        signUpViewModel = signUpViewModel
+                        signUpViewModel = signUpViewModel,
+                        permissionsViewModel = permissionsViewModel,
+                        createANewSpaceViewModel = createANewSpaceViewModel
                     )
                 }
             }

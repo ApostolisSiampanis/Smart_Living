@@ -31,9 +31,7 @@ fun PolicyAndTermsClickableTextComponent(
     val annotatedString = buildAnnotatedString {
         withStyle(
             style = SpanStyle(
-                color = Color.Black,
-                fontFamily = FontFamily(Font(R.font.carlito_regular)),
-                fontSize = 16.sp
+                color = Color.Black
             )
         ) {
             append(acceptTermsPrefixText)
@@ -41,9 +39,7 @@ fun PolicyAndTermsClickableTextComponent(
         pushStringAnnotation(tag = privacyPolicyText, annotation = privacyPolicyText)
         withStyle(
             style = SpanStyle(
-                color = SkyBlue,
-                fontFamily = FontFamily(Font(R.font.carlito_regular)),
-                fontSize = 16.sp
+                color = SkyBlue
             )
         ) {
             append(privacyPolicyText)
@@ -51,9 +47,7 @@ fun PolicyAndTermsClickableTextComponent(
         pop()
         withStyle(
             style = SpanStyle(
-                color = Color.Black,
-                fontFamily = FontFamily(Font(R.font.carlito_regular)),
-                fontSize = 16.sp
+                color = Color.Black
             )
         ) {
             append(andText)
@@ -61,9 +55,7 @@ fun PolicyAndTermsClickableTextComponent(
         pushStringAnnotation(tag = termsOfUseText, annotation = termsOfUseText)
         withStyle(
             style = SpanStyle(
-                color = SkyBlue,
-                fontFamily = FontFamily(Font(R.font.carlito_regular)),
-                fontSize = 16.sp
+                color = SkyBlue
             )
         ) {
             append(termsOfUseText)
@@ -73,6 +65,10 @@ fun PolicyAndTermsClickableTextComponent(
 
     ClickableText(
         text = annotatedString,
+        style = TextStyle(
+            fontSize = 16.sp,
+            fontFamily = FontFamily(Font(R.font.carlito_regular))
+        ),
         onClick = {offset ->
             annotatedString.getStringAnnotations(
                 start = offset,
@@ -135,6 +131,59 @@ fun HaveAnAccountOrNotClickableTextComponent(
                 end = offset
             ).firstOrNull()?.also {span ->
                 if (span.item == clickableText) {
+                    onTextSelected(span.item)
+                }
+            }
+        }
+    )
+}
+
+@Composable
+fun UseDifferentAccountLogoutAndLoginAgain(
+    onTextSelected: (String) -> Unit
+) {
+    val startingText = stringResource(id = R.string.if_you_want_to_login_with_another_account)
+    val logoutText = stringResource(id = R.string.logout_lower_case)
+    val closingText = stringResource(id = R.string.first_and_then_login_again)
+
+    val annotatedString = buildAnnotatedString {
+        withStyle(
+            style = SpanStyle(
+                color = Color.Black
+            )
+        ) {
+            append(startingText)
+        }
+        pushStringAnnotation(tag = logoutText, annotation = logoutText)
+        withStyle(
+            style = SpanStyle(
+                color = SkyBlue
+            )
+        ) {
+            append(logoutText)
+        }
+        pop()
+        withStyle(
+            style = SpanStyle(
+                color = Color.Black
+            )
+        ) {
+            append(closingText)
+        }
+    }
+
+    ClickableText(
+        text = annotatedString,
+        style = TextStyle(
+            fontSize = 16.sp,
+            fontFamily = FontFamily(Font(R.font.carlito_regular))
+        ),
+        onClick = {offset ->
+            annotatedString.getStringAnnotations(
+                start = offset,
+                end = offset
+            ).firstOrNull()?.also {span ->
+                if (span.item == logoutText) {
                     onTextSelected(span.item)
                 }
             }

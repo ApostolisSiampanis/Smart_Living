@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.domain
+package com.aposiamp.smartliving.domain.utils
 
 sealed class Result<out T> {
     data class Success<out T>(val result: T) : Result<T>()

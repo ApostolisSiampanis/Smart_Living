@@ -4,7 +4,7 @@ import com.aposiamp.smartliving.data.model.EnvironmentalDataDTO
 import com.aposiamp.smartliving.data.source.local.EnvironmentalSensorDataSource
 import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
-import com.aposiamp.smartliving.utils.DateUtils
+import com.aposiamp.smartliving.data.utils.DateUtils
 
 class EnvironmentalSensorRepositoryImpl(
     private val environmentalSensorDataSource: EnvironmentalSensorDataSource,
@@ -22,7 +22,7 @@ class EnvironmentalSensorRepositoryImpl(
         )
     }
 
-    override suspend fun setEnvironmentalData(uid: String, environmentalDataDTO: EnvironmentalDataDTO) {
-        firestoreDataSource.setEnvironmentalData(uid, environmentalDataDTO)
+    override suspend fun setEnvironmentalData(uid: String, placeId: String, environmentalDataDTO: EnvironmentalDataDTO) {
+        firestoreDataSource.setEnvironmentalData(uid, placeId, environmentalDataDTO)
     }
 }

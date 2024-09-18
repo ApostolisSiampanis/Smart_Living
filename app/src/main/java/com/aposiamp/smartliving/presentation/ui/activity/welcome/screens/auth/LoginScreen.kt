@@ -28,7 +28,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.domain.Result
+import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.presentation.ui.activity.main.MainActivity
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextComponent
@@ -65,10 +65,15 @@ fun LoginScreen(
             is Result.Success -> {
                 loadingState = false
                 Toast.makeText(context, "Successfully Logged In", Toast.LENGTH_SHORT).show()
-                val intent = Intent(context, MainActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                val destination = viewModel.determineDestination()
+                if (destination == "permissions") {
+                    navController.navigate("permissions")
+                } else {
+                    val intent = Intent(context, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    context.startActivity(intent)
                 }
-                context.startActivity(intent)
             }
 
             null -> {}

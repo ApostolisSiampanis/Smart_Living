@@ -5,8 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aposiamp.smartliving.domain.Result
+import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.domain.usecase.user.LoginUseCase
+import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
 import com.aposiamp.smartliving.presentation.ui.event.auth.LoginFormEvent
@@ -18,6 +19,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val loginUseCase: LoginUseCase,
+    private val checkIfSpaceDataExistsUseCase: CheckIfSpaceDataExistsUseCase,
     private val validateEmail: ValidateEmail,
     private val validatePassword: ValidatePassword
 ): ViewModel() {
@@ -69,6 +71,14 @@ class LoginViewModel(
         } catch (e: Exception) {
             _state = _state.copy(errorMessage = e.message)
             _loginFlow.value = Result.Error(e)
+        }
+    }
+
+    suspend fun determineDestination(): String {
+        return try {
+            if (checkIfSpaceDataExistsUseCase.execute()) "mainActivity" else "permissions"
+        } catch (e: Exception) {
+            "permissions"
         }
     }
 }

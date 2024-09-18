@@ -14,6 +14,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -23,6 +25,7 @@ import com.aposiamp.smartliving.presentation.ui.component.BottomBar
 import com.aposiamp.smartliving.presentation.ui.component.MenuMediumTopAppBar
 import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import kotlinx.coroutines.launch
 
@@ -31,12 +34,14 @@ import kotlinx.coroutines.launch
 fun DevicesScreen(
     navController: NavController,
     viewModel: DevicesViewModel,
+    mainSharedViewModel: MainSharedViewModel,
     navigationViewModel: NavigationViewModel,
     context: Context
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    val space by mainSharedViewModel.space.collectAsState()
 
     // Retrieve the Navigation Drawer Items
     val navigationDrawerItems = navigationViewModel.getNavigationDrawerItems(context = context)
@@ -61,9 +66,8 @@ fun DevicesScreen(
                 .fillMaxSize()
                 .nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
-                //TODO: to be changed, use the name of the "house"
                 MenuMediumTopAppBar(
-                    title = "My Home",
+                    title = space?.spaceName ?: "",
                     color = MaterialTheme.colorScheme.primaryContainer,
                     onMenuClick = {
                         scope.launch {

@@ -23,6 +23,7 @@ import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
 
 @Composable
 fun AuthTextFieldComponent(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
     labelValue: String,
@@ -33,7 +34,7 @@ fun AuthTextFieldComponent(
     errorStatus: Boolean = false
 ) {
     OutlinedTextField(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clip(componentShapes.small),
         label = { TextFieldComponentText(value = labelValue) },

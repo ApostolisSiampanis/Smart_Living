@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.utils
+package com.aposiamp.smartliving.data.utils
 
 import java.time.Instant
 import java.time.ZoneId

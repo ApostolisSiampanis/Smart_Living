@@ -1,6 +1,6 @@
 package com.aposiamp.smartliving.data.source.remote
 
-import com.aposiamp.smartliving.utils.await
+import com.aposiamp.smartliving.data.utils.await
 import com.aposiamp.smartliving.data.model.EnvironmentalDataDTO
 import com.aposiamp.smartliving.data.model.UserFirestore
 import com.google.firebase.firestore.FirebaseFirestore
@@ -11,11 +11,11 @@ class FirestoreDataSource(private val db: FirebaseFirestore) {
         db.collection("users").document(uid).set(user.toMap()).await()
     }
 
-    suspend fun setEnvironmentalData(uid: String, environmentalDataDTO: EnvironmentalDataDTO) {
+    suspend fun setEnvironmentalData(uid: String, placeId: String, environmentalDataDTO: EnvironmentalDataDTO) {
         db.collection("environmental_data")
             .document(uid)
-            .collection(environmentalDataDTO.timestamp.toString())
-            .document("data")
+            .collection(placeId)
+            .document(environmentalDataDTO.timestamp.toString())
             .set(mapOf(
                 "temperature" to environmentalDataDTO.temperature,
                 "humidity" to environmentalDataDTO.humidity

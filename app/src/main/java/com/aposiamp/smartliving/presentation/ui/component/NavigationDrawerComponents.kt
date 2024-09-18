@@ -3,8 +3,13 @@ package com.aposiamp.smartliving.presentation.ui.component
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ModalDrawerSheet
@@ -49,6 +54,20 @@ fun NavigationDrawer(
             modifier = Modifier
                 .padding(8.dp)
         ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Image(
+                    modifier = Modifier.aspectRatio(1f),
+                    painter = painterResource(id = R.drawable.drawer_image),
+                    contentDescription = stringResource(id = R.string.drawer_image)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
             navigationDrawerItems.forEachIndexed { index, item ->
                 if (item.titleResId != R.string.logout) {
                     DrawerItem(

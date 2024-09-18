@@ -4,7 +4,7 @@ import com.aposiamp.smartliving.data.model.UserFirestore
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
 import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
 import com.aposiamp.smartliving.domain.repository.AuthRepository
-import com.aposiamp.smartliving.utils.DateUtils
+import com.aposiamp.smartliving.data.utils.DateUtils
 import com.google.firebase.auth.FirebaseUser
 
 class AuthRepositoryImpl(
