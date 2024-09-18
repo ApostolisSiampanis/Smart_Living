@@ -12,7 +12,7 @@ class SpaceRepositoryImpl(
     }
 
     override suspend fun getSpaceData(userId: String): SpaceDataDTO {
-        return firebaseDataSource.getDevicesSpaceName(userId)
+        return firebaseDataSource.getSpaceData(userId)
     }
 
     override suspend fun checkIfSpaceDataExists(userId: String): Boolean {
