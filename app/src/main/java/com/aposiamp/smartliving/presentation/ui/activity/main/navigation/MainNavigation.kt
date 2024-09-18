@@ -31,6 +31,7 @@ internal fun MainNavigation(
             DevicesScreen(
                 navController = navController,
                 viewModel = devicesViewModel,
+                mainSharedViewModel = mainSharedViewModel,
                 navigationViewModel = navigationViewModel,
                 context = context
             )
