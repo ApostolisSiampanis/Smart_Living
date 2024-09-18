@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.domain.usecase.welcome
+package com.aposiamp.smartliving.domain.usecase
 
 import com.aposiamp.smartliving.domain.model.PlaceData
 import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
