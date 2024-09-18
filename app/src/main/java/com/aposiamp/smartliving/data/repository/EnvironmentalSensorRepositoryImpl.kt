@@ -22,7 +22,7 @@ class EnvironmentalSensorRepositoryImpl(
         )
     }
 
-    override suspend fun setEnvironmentalData(uid: String, environmentalDataDTO: EnvironmentalDataDTO) {
-        firestoreDataSource.setEnvironmentalData(uid, environmentalDataDTO)
+    override suspend fun setEnvironmentalData(uid: String, placeId: String, environmentalDataDTO: EnvironmentalDataDTO) {
+        firestoreDataSource.setEnvironmentalData(uid, placeId, environmentalDataDTO)
     }
 }
