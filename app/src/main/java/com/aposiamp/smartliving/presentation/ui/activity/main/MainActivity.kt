@@ -15,6 +15,8 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import com.aposiamp.smartliving.presentation.utils.viewModelFactory
+import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,11 +51,30 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
+                    val mainNavigationViewModel = viewModel<MainNavigationViewModel>(
+                        factory = viewModelFactory {
+                            MainNavigationViewModel(
+                                getSpaceUseCase = SmartLiving.appModule.getSpaceUseCase,
+                                checkIfUserIsInSpaceUseCase = SmartLiving.appModule.checkIfUserIsInSpaceUseCase
+                            )
+                        }
+                    )
+
+                    val userNotInSpaceViewModel = viewModel<UserNotInSpaceViewModel>(
+                        factory = viewModelFactory {
+                            UserNotInSpaceViewModel(
+                                logoutUseCase = SmartLiving.appModule.logoutUseCase
+                            )
+                        }
+                    )
+
                     MainNavigation(
                         context = context,
                         devicesViewModel = devicesViewModel,
                         mainSharedViewModel = mainSharedViewModel,
-                        navigationViewModel = navigationViewModel
+                        navigationViewModel = navigationViewModel,
+                        mainNavigationViewModel = mainNavigationViewModel,
+                        userNotInSpaceViewModel = userNotInSpaceViewModel
                     )
                 }
             }
