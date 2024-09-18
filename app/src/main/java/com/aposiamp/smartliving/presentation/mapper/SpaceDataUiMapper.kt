@@ -7,6 +7,7 @@ object SpaceDataUiMapper {
     fun fromDomain(domain: SpaceData): SpaceDataUiModel {
         return SpaceDataUiModel(
             placeId = domain.placeId,
+            placeName = domain.placeName,
             spaceName = domain.spaceName,
             fullAddress = domain.fullAddress,
             location = domain.location?.let { LocationDataUiMapper.fromDomain(it) }
