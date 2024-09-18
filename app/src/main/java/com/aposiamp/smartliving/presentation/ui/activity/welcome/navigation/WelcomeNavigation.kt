@@ -7,10 +7,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.CreateANewSpaceScreen
+import com.aposiamp.smartliving.presentation.ui.activity.LoadingScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.PermissionsScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.PrivacyPolicyScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.TermsAndConditionsScreen
-import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.WelcomeLoadingScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.WelcomeScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.auth.LoginScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.auth.SignUpScreen
@@ -32,7 +32,7 @@ internal fun WelcomeNavigation(
     val startDestination by welcomeNavigationViewModel.startDestination.collectAsState()
 
     if (startDestination == null) {
-        WelcomeLoadingScreen()
+        LoadingScreen()
     } else {
         NavHost(
             navController = navController,
