@@ -27,17 +27,12 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val context = this
 
-                    val devicesViewModel = viewModel<DevicesViewModel>(
-                        factory = viewModelFactory {
-                            DevicesViewModel(
-                                getSpaceNameUseCase = SmartLiving.appModule.getSpaceNameUseCase
-                            )
-                        }
-                    )
+                    val devicesViewModel = viewModel<DevicesViewModel>()
 
                     val mainSharedViewModel = viewModel<MainSharedViewModel>(
                         factory = viewModelFactory {
                             MainSharedViewModel(
+                                getSpaceUseCase = SmartLiving.appModule.getSpaceUseCase,
                                 getEnvironmentalDataUseCase = SmartLiving.appModule.getEnvironmentalDataUseCase,
                                 setEnvironmentalDataUseCase = SmartLiving.appModule.setEnvironmentalDataUseCase
                             )
