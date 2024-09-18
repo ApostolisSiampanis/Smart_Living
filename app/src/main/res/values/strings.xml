@@ -90,6 +90,12 @@
     <string name="next">Next</string>
     <string name="permission_screen_image">Permission Screen Image</string>
     <string name="please_grant_all_permissions">Please grant all permissions</string>
+    <string name="user_not_in_space">User not in space</string>
+    <string name="you_are_not_in_your_space">You are not in your space.</string>
+    <string name="you_need_to_be_in_your_space_to_use_the_app">You need to be in your space to use the app.</string>
+    <string name="if_you_want_to_login_with_another_account">If you want to login with another account, please</string>
+    <string name="logout_lower_case">\u00A0logout\u00A0</string>
+    <string name="first_and_then_login_again">first and then login again.</string>
     <string name="create_a_new_space">Create a New Space</string>
     <string name="create_a_new_space_hint">Enter the name of your new space</string>
     <string name="create">Create</string>
