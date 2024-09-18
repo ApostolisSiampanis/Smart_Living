@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.presentation.ui.state
+package com.aposiamp.smartliving.presentation.ui.state.welcome
 
 data class CreateSpaceFormState(
     val spaceName: String = "",
