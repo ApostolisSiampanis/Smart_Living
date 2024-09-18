@@ -100,6 +100,7 @@
     <string name="create_a_new_space_hint">Enter the name of your new space</string>
     <string name="create">Create</string>
     <string name="create_new_space_screen_image">Create New Space Screen Image</string>
+    <string name="create_your_first_room_image">Create Your First Room Image</string>
     <string name="logout">Logout</string>
     <string name="devices">Devices</string>
     <string name="routines">Routines</string>
