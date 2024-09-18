@@ -195,7 +195,7 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         GetCurrentUserUseCase(authRepository)
     }
 
-    // For the SignIn and SignUp screens
+    // For SignIn and SignUp screens
     override val validateFirstName: ValidateFirstName by lazy {
         ValidateFirstName(context = appContext)
     }
@@ -215,7 +215,7 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     override val validateTerms: ValidateTerms by lazy {
         ValidateTerms(context = appContext)
     }
-
+    // For CreateANewSpace screen
     override val validateSpaceName: ValidateSpaceName by lazy {
         ValidateSpaceName(context = appContext)
     }
@@ -226,5 +226,9 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val validatePlaceData: ValidatePlaceData by lazy {
         ValidatePlaceData(context = appContext, validateAddressProximityUseCase = validateAddressProximityUseCase)
+    }
+    // For CreateANewRoom screen
+    override val validateRoomName: ValidateSpaceName by lazy {
+        ValidateSpaceName(context = appContext)
     }
 }
