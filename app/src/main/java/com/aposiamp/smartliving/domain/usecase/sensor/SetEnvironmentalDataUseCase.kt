@@ -9,12 +9,13 @@ class SetEnvironmentalDataUseCase(
     private val environmentalSensorRepository: EnvironmentalSensorRepository,
     private val getCurrentUserUseCase: GetCurrentUserUseCase
 ) {
-    suspend fun execute(environmentalData: EnvironmentalData) {
+    suspend fun execute(placeId: String, environmentalData: EnvironmentalData) {
         val currentUser = getCurrentUserUseCase.execute()
         val uid = currentUser?.uid ?: throw Exception("User not logged in")
 
         environmentalSensorRepository.setEnvironmentalData(
             uid,
+            placeId,
             EnvironmentalDataMapper.toDto(environmentalData)
         )
     }
