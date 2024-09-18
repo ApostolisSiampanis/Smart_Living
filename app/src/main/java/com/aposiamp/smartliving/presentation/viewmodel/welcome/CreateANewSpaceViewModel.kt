@@ -85,7 +85,8 @@ class CreateANewSpaceViewModel(
             val placeData = getLocationFromPlaceIdUseCase.execute(spaceId)
             val spaceData = SpaceData(
                 placeId = placeData.placeId,
-                spaceName = placeData.name,
+                placeName = placeData.name,
+                spaceName = _formState.spaceName,
                 fullAddress = placeData.fullAddress,
                 location = placeData.location
             )
