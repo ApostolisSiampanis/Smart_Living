@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.presentation.ui.state.auth
+package com.aposiamp.smartliving.presentation.ui.state.welcome.auth
 
 data class LoginFormState(
     val email: String = "",
