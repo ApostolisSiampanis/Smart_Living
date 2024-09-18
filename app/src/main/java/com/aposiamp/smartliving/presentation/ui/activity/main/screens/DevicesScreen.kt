@@ -25,6 +25,7 @@ import com.aposiamp.smartliving.presentation.ui.component.BottomBar
 import com.aposiamp.smartliving.presentation.ui.component.MenuMediumTopAppBar
 import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import kotlinx.coroutines.launch
 
@@ -33,13 +34,14 @@ import kotlinx.coroutines.launch
 fun DevicesScreen(
     navController: NavController,
     viewModel: DevicesViewModel,
+    mainSharedViewModel: MainSharedViewModel,
     navigationViewModel: NavigationViewModel,
     context: Context
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    val spaceName by viewModel.spaceName.collectAsState()
+    val space by mainSharedViewModel.space.collectAsState()
 
     // Retrieve the Navigation Drawer Items
     val navigationDrawerItems = navigationViewModel.getNavigationDrawerItems(context = context)
@@ -65,7 +67,7 @@ fun DevicesScreen(
                 .nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
                 MenuMediumTopAppBar(
-                    title = spaceName,
+                    title = space?.spaceName ?: "",
                     color = MaterialTheme.colorScheme.primaryContainer,
                     onMenuClick = {
                         scope.launch {
