@@ -1,6 +1,6 @@
 package com.aposiamp.smartliving.presentation.model
 
-data class CreateSpaceResult(
+data class CreateFormResult(
     val success: Boolean,
     val message: String? = null
 )
