@@ -38,8 +38,8 @@ import com.aposiamp.smartliving.presentation.ui.component.PasswordTextFieldCompo
 import com.aposiamp.smartliving.presentation.ui.component.AuthTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.ErrorTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
-import com.aposiamp.smartliving.presentation.ui.event.auth.LoginFormEvent
-import com.aposiamp.smartliving.presentation.ui.state.auth.LoginFormState
+import com.aposiamp.smartliving.presentation.ui.event.welcome.auth.LoginFormEvent
+import com.aposiamp.smartliving.presentation.ui.state.welcome.auth.LoginFormState
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.LoginViewModel
 
 @Composable

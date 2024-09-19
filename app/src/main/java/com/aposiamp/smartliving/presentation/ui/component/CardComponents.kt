@@ -175,7 +175,7 @@ fun IndoorEnvironmentalDataCard(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             GeneralNormalText(value = stringResource(id = R.string.indoor_temperature))
-            GeneralNormalText(value = "$indoorTemperature " + stringResource(id = R.string.degree_celcius))
+            GeneralNormalText(value = "$indoorTemperature " + stringResource(id = R.string.degree_celsius))
         }
         Row(
             modifier = Modifier

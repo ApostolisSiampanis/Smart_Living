@@ -39,6 +39,8 @@
     <string name="the_space_address_is_not_nearby">The space address is not nearby</string>
     <string name="the_space_name_can_not_be_blank">The space name can\'t be blank</string>
     <string name="the_space_name_must_be_at_least_3_characters">The space name must be at least 3 characters</string>
+    <string name="the_room_name_can_not_be_blank">The room name can\'t be blank</string>
+    <string name="the_room_name_must_be_at_least_3_characters">The room name must be at least 3 characters</string>
     <string name="creator">Created by @ApostolisSiampanis</string>
     <string name="smart_living_logo">Smart Living Logo</string>
     <string name="dont_have_an_account_yet">Don’t have an account yet?\u00A0</string>
@@ -99,7 +101,13 @@
     <string name="create_a_new_space">Create a New Space</string>
     <string name="create_a_new_space_hint">Enter the name of your new space</string>
     <string name="create">Create</string>
-    <string name="create_new_space_screen_image">Create New Space Screen Image</string>
+    <string name="create_new_space_image">Create New Space Image</string>
+    <string name="create_your_first_room_image">Create Your First Room Image</string>
+    <string name="create_a_new_room">Create a New Room</string>
+    <string name="create_a_new_room_hint">Enter the name of your new room</string>
+    <string name="create_new_room_image">Create New Room Image</string>
+    <string name="room_name">Room Name</string>
+    <string name="room_name_hint">Enter the name of your room</string>
     <string name="logout">Logout</string>
     <string name="devices">Devices</string>
     <string name="routines">Routines</string>
@@ -110,7 +118,7 @@
     <string name="cool_set_to">Cool set to</string>
     <string name="auto_set_to">Auto set to</string>
     <string name="dry_set_to">Dry set to</string>
-    <string name="degree_celcius">°C</string>
+    <string name="degree_celsius">°C</string>
     <string name="percentage">%</string>
     <string name="turn_on">Turn On</string>
     <string name="turn_off">Turn Off</string>

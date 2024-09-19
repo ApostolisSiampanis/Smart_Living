@@ -7,6 +7,7 @@ import com.aposiamp.smartliving.domain.repository.SpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.repository.LocationRepository
 import com.aposiamp.smartliving.domain.repository.PlacesRepository
+import com.aposiamp.smartliving.domain.repository.RoomRepository
 import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSpaceUseCase
@@ -24,11 +25,13 @@ import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUse
 import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
+import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFirstName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLastName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePlaceData
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceAddress
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateTerms
@@ -44,6 +47,7 @@ interface AppModule {
     val environmentalSensorRepository: EnvironmentalSensorRepository
     val locationRepository: LocationRepository
     val spaceRepository: SpaceRepository
+    val roomRepository: RoomRepository
     val placesRepository: PlacesRepository
 
     // Firebase
@@ -89,6 +93,9 @@ interface AppModule {
     val checkIfSpaceDataExistsUseCase: CheckIfSpaceDataExistsUseCase
     val checkIfUserIsInSpaceUseCase: CheckIfUserIsInSpaceUseCase
 
+    // Room UseCases
+    val setRoomDataUseCase: SetRoomDataUseCase
+
     // Profile UseCases
     val loginUseCase: LoginUseCase
     val signUpUseCase: SignUpUseCase
@@ -105,4 +112,6 @@ interface AppModule {
     val validateSpaceName: ValidateSpaceName
     val validateSpaceAddress: ValidateSpaceAddress
     val validatePlaceData: ValidatePlaceData
+    // For CreateANewRoom screen
+    val validateRoomName: ValidateRoomName
 }

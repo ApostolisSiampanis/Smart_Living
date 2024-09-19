@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.data.source.remote
 
+import com.aposiamp.smartliving.data.model.RoomDataDTO
 import com.aposiamp.smartliving.data.model.SpaceDataDTO
 import com.aposiamp.smartliving.data.utils.await
 import com.google.firebase.auth.FirebaseAuth
@@ -40,5 +41,10 @@ class FirebaseDataSource(
     suspend fun checkIfSpaceDataExists(userId: String): Boolean {
         val snapshot = firebase.getReference("spaces").child(userId).get().await()
         return snapshot.exists()
+    }
+
+    suspend fun setRoomData(userId: String, spaceId: String, roomDataDTO: RoomDataDTO) {
+        val reference = firebase.getReference("rooms").child(userId).child(spaceId).push()
+        reference.setValue(roomDataDTO).await()
     }
 }

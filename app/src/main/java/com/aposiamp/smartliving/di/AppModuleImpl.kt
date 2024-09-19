@@ -9,6 +9,7 @@ import com.aposiamp.smartliving.data.repository.SpaceRepositoryImpl
 import com.aposiamp.smartliving.data.repository.EnvironmentalSensorRepositoryImpl
 import com.aposiamp.smartliving.data.repository.LocationRepositoryImpl
 import com.aposiamp.smartliving.data.repository.PlacesRepositoryImpl
+import com.aposiamp.smartliving.data.repository.RoomRepositoryImpl
 import com.aposiamp.smartliving.data.source.local.EnvironmentalSensorDataSource
 import com.aposiamp.smartliving.data.source.local.LocationDataSource
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
@@ -19,6 +20,7 @@ import com.aposiamp.smartliving.domain.repository.SpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.repository.LocationRepository
 import com.aposiamp.smartliving.domain.repository.PlacesRepository
+import com.aposiamp.smartliving.domain.repository.RoomRepository
 import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSpaceUseCase
@@ -36,11 +38,13 @@ import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUse
 import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
+import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFirstName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLastName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePlaceData
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceAddress
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateTerms
@@ -73,9 +77,12 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         LocationRepositoryImpl(locationDataSource)
     }
 
-
     override val spaceRepository: SpaceRepository by lazy {
         SpaceRepositoryImpl(firebaseDataSource)
+    }
+
+    override val roomRepository: RoomRepository by lazy {
+        RoomRepositoryImpl(firebaseDataSource)
     }
 
     override val placesRepository: PlacesRepository by lazy {
@@ -178,6 +185,11 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         CheckIfUserIsInSpaceUseCase(validateAddressProximityUseCase)
     }
 
+    // Room UseCases
+    override val setRoomDataUseCase: SetRoomDataUseCase by lazy {
+        SetRoomDataUseCase(roomRepository, getCurrentUserUseCase)
+    }
+
     // Profile UseCases
     override val loginUseCase: LoginUseCase by lazy {
         LoginUseCase(authRepository)
@@ -195,7 +207,7 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         GetCurrentUserUseCase(authRepository)
     }
 
-    // For the SignIn and SignUp screens
+    // For SignIn and SignUp screens
     override val validateFirstName: ValidateFirstName by lazy {
         ValidateFirstName(context = appContext)
     }
@@ -215,7 +227,7 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     override val validateTerms: ValidateTerms by lazy {
         ValidateTerms(context = appContext)
     }
-
+    // For CreateANewSpace screen
     override val validateSpaceName: ValidateSpaceName by lazy {
         ValidateSpaceName(context = appContext)
     }
@@ -226,5 +238,9 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val validatePlaceData: ValidatePlaceData by lazy {
         ValidatePlaceData(context = appContext, validateAddressProximityUseCase = validateAddressProximityUseCase)
+    }
+    // For CreateANewRoom screen
+    override val validateRoomName: ValidateRoomName by lazy {
+        ValidateRoomName(context = appContext)
     }
 }

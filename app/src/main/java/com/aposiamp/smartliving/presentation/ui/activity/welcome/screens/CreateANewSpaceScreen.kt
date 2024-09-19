@@ -39,8 +39,8 @@ import com.aposiamp.smartliving.presentation.ui.component.AuthTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.ErrorSupportingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
-import com.aposiamp.smartliving.presentation.ui.event.CreateSpaceFormEvent
-import com.aposiamp.smartliving.presentation.ui.state.CreateSpaceFormState
+import com.aposiamp.smartliving.presentation.ui.event.welcome.CreateSpaceFormEvent
+import com.aposiamp.smartliving.presentation.ui.state.welcome.CreateSpaceFormState
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.CreateANewSpaceViewModel
 import kotlinx.coroutines.launch
 
@@ -92,7 +92,7 @@ fun CreateANewSpaceScreen(
 
         Image(
             painter = painterResource(id = R.drawable.space),
-            contentDescription = stringResource(id = R.string.create_new_space_screen_image),
+            contentDescription = stringResource(id = R.string.create_new_space_image),
             modifier = Modifier.fillMaxSize(0.8f)
         )
 
@@ -108,7 +108,7 @@ fun CreateANewSpaceScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 item {
-                    AuthHeadingTextComponent(value = stringResource(id = R.string.welcome_to_smart_living_app))
+                    AuthHeadingTextComponent(value = stringResource(id = R.string.create_a_new_space))
 
                     Row(
                         modifier = Modifier
@@ -116,7 +116,6 @@ fun CreateANewSpaceScreen(
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Column {
-                            // Using ExposedDropdownMenuBox for proper alignment and focus handling
                             ExposedDropdownMenuBox(
                                 expanded = isDropdownExpanded,
                                 onExpandedChange = { isDropdownExpanded = !isDropdownExpanded }
@@ -128,7 +127,7 @@ fun CreateANewSpaceScreen(
                                             viewModel.onEvent(CreateSpaceFormEvent.SpaceAddressChanged(it))
                                         }
                                         isDropdownExpanded = true
-                                        viewModel.fetchAddressSuggestions(it) // Fetch address suggestions
+                                        viewModel.fetchAddressSuggestions(it)
                                     },
                                     labelValue = stringResource(id = R.string.space_address),
                                     painterResource = painterResource(id = R.drawable.location_pin),
@@ -136,10 +135,9 @@ fun CreateANewSpaceScreen(
                                     keyboardType = KeyboardType.Text,
                                     supportedTextValue = state.spaceAddressError ?: "",
                                     errorStatus = state.spaceAddressError != null,
-                                    modifier = Modifier.menuAnchor() // Ensure correct anchor for dropdown
+                                    modifier = Modifier.menuAnchor()
                                 )
 
-                                // Dropdown Menu for Address Suggestions
                                 ExposedDropdownMenu(
                                     expanded = isDropdownExpanded && addressPredictions.isNotEmpty(),
                                     onDismissRequest = { isDropdownExpanded = false }
