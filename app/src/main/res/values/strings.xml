@@ -105,6 +105,7 @@
     <string name="create_your_first_room_image">Create Your First Room Image</string>
     <string name="create_a_new_room">Create a New Room</string>
     <string name="create_a_new_room_hint">Enter the name of your new room</string>
+    <string name="create_new_room_image">Create New Room Image</string>
     <string name="room_name">Room Name</string>
     <string name="room_name_hint">Enter the name of your room</string>
     <string name="logout">Logout</string>
