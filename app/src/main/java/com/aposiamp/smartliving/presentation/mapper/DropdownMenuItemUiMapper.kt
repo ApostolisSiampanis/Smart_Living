@@ -7,7 +7,7 @@ import com.aposiamp.smartliving.presentation.model.DropdownMenuItemUiModel
 object DropdownMenuItemUiMapper {
     private fun toUiModel(domain: DropdownMenuItemData, navController: NavController): DropdownMenuItemUiModel {
         val onClick: () -> Unit = when (domain.text) {
-            "Add a New Room" -> { { navController.navigate("") } } //TODO: Add the correct route
+            "Add a New Room" -> { { navController.navigate("createANewRoom") } } //TODO: Add the correct route
             "Add a New Device" -> { { navController.navigate("") }} //TODO: Add the correct route
             else -> { { } }
         }
