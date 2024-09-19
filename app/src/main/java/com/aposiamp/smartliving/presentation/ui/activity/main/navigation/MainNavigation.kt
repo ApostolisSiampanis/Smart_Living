@@ -9,11 +9,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.aposiamp.smartliving.presentation.ui.activity.LoadingScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AboutScreen
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.CreateANewRoomScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.DevicesScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.UserNotInSpaceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.AirConditionScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.DehumidifierScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.ThermostatScreen
+import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
@@ -27,7 +29,8 @@ internal fun MainNavigation(
     mainSharedViewModel: MainSharedViewModel,
     navigationViewModel: NavigationViewModel,
     mainNavigationViewModel: MainNavigationViewModel,
-    userNotInSpaceViewModel: UserNotInSpaceViewModel
+    userNotInSpaceViewModel: UserNotInSpaceViewModel,
+    createANewRoomViewModel: CreateANewRoomViewModel
 ) {
     val navController = rememberNavController()
     val startDestination by mainNavigationViewModel.startDestination.collectAsState()
@@ -52,6 +55,14 @@ internal fun MainNavigation(
                     mainSharedViewModel = mainSharedViewModel,
                     navigationViewModel = navigationViewModel,
                     context = context
+                )
+            }
+
+            composable("createANewRoom"){
+                CreateANewRoomScreen(
+                    navController = navController,
+                    viewModel = createANewRoomViewModel,
+                    mainSharedViewModel = mainSharedViewModel
                 )
             }
 
