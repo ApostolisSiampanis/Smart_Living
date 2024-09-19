@@ -15,6 +15,7 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import com.aposiamp.smartliving.presentation.utils.viewModelFactory
+import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
 
@@ -68,13 +69,23 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
+                    val createANewRoomViewModel = viewModel<CreateANewRoomViewModel>(
+                        factory = viewModelFactory {
+                            CreateANewRoomViewModel(
+                                validateRoomName = SmartLiving.appModule.validateRoomName,
+                                setRoomDataUseCase = SmartLiving.appModule.setRoomDataUseCase
+                            )
+                        }
+                    )
+
                     MainNavigation(
                         context = context,
                         devicesViewModel = devicesViewModel,
                         mainSharedViewModel = mainSharedViewModel,
                         navigationViewModel = navigationViewModel,
                         mainNavigationViewModel = mainNavigationViewModel,
-                        userNotInSpaceViewModel = userNotInSpaceViewModel
+                        userNotInSpaceViewModel = userNotInSpaceViewModel,
+                        createANewRoomViewModel = createANewRoomViewModel
                     )
                 }
             }
