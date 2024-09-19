@@ -220,7 +220,7 @@ fun DeviceCircularIndicator(
                                 modifier = Modifier.padding(bottom = 2.dp)
                             )
                             IndicatorBoldTextComponent(
-                                text = "$positionValue ${stringResource(id = R.string.degree_celcius)}",
+                                text = "$positionValue ${stringResource(id = R.string.degree_celsius)}",
                                 color = arcColor
                             )
                         }
@@ -231,7 +231,7 @@ fun DeviceCircularIndicator(
                                 modifier = Modifier.padding(bottom = 2.dp)
                             )
                             IndicatorBoldTextComponent(
-                                text = "$positionValue ${stringResource(id = R.string.degree_celcius)}",
+                                text = "$positionValue ${stringResource(id = R.string.degree_celsius)}",
                                 color = arcColor
                             )
                         }
@@ -242,7 +242,7 @@ fun DeviceCircularIndicator(
                                 modifier = Modifier.padding(bottom = 2.dp)
                             )
                             IndicatorBoldTextComponent(
-                                text = "$positionValue ${stringResource(id = R.string.degree_celcius)}",
+                                text = "$positionValue ${stringResource(id = R.string.degree_celsius)}",
                                 color = arcColor
                             )
                         }
@@ -253,7 +253,7 @@ fun DeviceCircularIndicator(
                                 modifier = Modifier.padding(bottom = 2.dp)
                             )
                             IndicatorBoldTextComponent(
-                                text = "$positionValue ${stringResource(id = R.string.degree_celcius)}",
+                                text = "$positionValue ${stringResource(id = R.string.degree_celsius)}",
                                 color = arcColor
                             )
                         }
