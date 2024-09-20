@@ -41,6 +41,9 @@
     <string name="the_space_name_must_be_at_least_3_characters">The space name must be at least 3 characters</string>
     <string name="the_room_name_can_not_be_blank">The room name can\'t be blank</string>
     <string name="the_room_name_must_be_at_least_3_characters">The room name must be at least 3 characters</string>
+    <string name="the_device_name_can_not_be_blank">The device name can\'t be blank</string>
+    <string name="the_device_name_must_be_at_least_3_characters">The device name must be at least 3 characters</string>
+    <string name="the_device_id_can_not_be_blank">The device ID can\'t be blank</string>
     <string name="creator">Created by @ApostolisSiampanis</string>
     <string name="smart_living_logo">Smart Living Logo</string>
     <string name="dont_have_an_account_yet">Don’t have an account yet?\u00A0</string>
@@ -108,6 +111,11 @@
     <string name="create_new_room_image">Create New Room Image</string>
     <string name="room_name">Room Name</string>
     <string name="room_name_hint">Enter the name of your room</string>
+    <string name="device_id">Device ID</string>
+    <string name="device_id_hint">Enter the ID of your device</string>
+    <string name="device_name">Device Name</string>
+    <string name="device_name_hint">Enter the name of your device</string>
+    <string name="device_type">Device Type</string>
     <string name="logout">Logout</string>
     <string name="devices">Devices</string>
     <string name="routines">Routines</string>
@@ -155,4 +163,7 @@
     <string name="add_a_new_room">Add a New Room</string>
     <string name="add_a_new_device">Add a New Device</string>
     <string name="drawer_image">Drawer Image</string>
+    <string name="air_conditioner">Air Conditioner</string>
+    <string name="thermostat">Thermostat</string>
+    <string name="dehumidifier">Dehumidifier</string>
 </resources>
