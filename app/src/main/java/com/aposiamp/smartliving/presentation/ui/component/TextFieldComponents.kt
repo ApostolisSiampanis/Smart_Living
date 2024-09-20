@@ -22,7 +22,7 @@ import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
 
 @Composable
-fun AuthTextFieldComponent(
+fun FormTextFieldComponent(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
