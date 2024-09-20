@@ -35,7 +35,7 @@ import androidx.lifecycle.viewModelScope
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.ui.activity.main.MainActivity
 import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextComponent
-import com.aposiamp.smartliving.presentation.ui.component.AuthTextFieldComponent
+import com.aposiamp.smartliving.presentation.ui.component.FormTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.ErrorSupportingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
@@ -120,7 +120,7 @@ fun CreateANewSpaceScreen(
                                 expanded = isDropdownExpanded,
                                 onExpandedChange = { isDropdownExpanded = !isDropdownExpanded }
                             ) {
-                                AuthTextFieldComponent(
+                                FormTextFieldComponent(
                                     value = state.spaceAddress,
                                     onValueChange = {
                                         viewModel.viewModelScope.launch {
@@ -164,7 +164,7 @@ fun CreateANewSpaceScreen(
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.Center
                     ) {
-                        AuthTextFieldComponent(
+                        FormTextFieldComponent(
                             value = state.spaceName,
                             onValueChange = {
                                 viewModel.viewModelScope.launch {
