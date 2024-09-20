@@ -35,7 +35,7 @@ import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextCompone
 import com.aposiamp.smartliving.presentation.ui.component.DividerTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.HaveAnAccountOrNotClickableTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.PasswordTextFieldComponent
-import com.aposiamp.smartliving.presentation.ui.component.AuthTextFieldComponent
+import com.aposiamp.smartliving.presentation.ui.component.FormTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.ErrorTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
 import com.aposiamp.smartliving.presentation.ui.event.welcome.auth.LoginFormEvent
@@ -101,7 +101,7 @@ fun LoginScreen(
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    AuthTextFieldComponent(
+                    FormTextFieldComponent(
                         value = state.email,
                         onValueChange = { viewModel.onEvent(LoginFormEvent.EmailChanged(it)) },
                         labelValue = stringResource(id = R.string.email),
