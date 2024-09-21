@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.google.secretsgradle.plugin)
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -86,6 +87,12 @@ dependencies {
     implementation(libs.play.services.location)
     // Places API
     implementation(libs.places)
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.okhttpLoggingInterceptor)
+    // Add Gson dependencies
+    implementation(libs.gson)
+    implementation(libs.retrofitGsonConverter)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

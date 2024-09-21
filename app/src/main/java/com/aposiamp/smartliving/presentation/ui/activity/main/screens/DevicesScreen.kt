@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -55,6 +56,7 @@ fun DevicesScreen(
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val space by mainSharedViewModel.space.collectAsState()
+    val isAnyRoomExists by viewModel.isAnyRoomExists.collectAsState()
 
     // Retrieve the Navigation Drawer Items
     val navigationDrawerItems = navigationViewModel.getNavigationDrawerItems(context = context)
@@ -62,6 +64,10 @@ fun DevicesScreen(
     val bottomNavigationItems = navigationViewModel.getBottomNavigationItems(context = context)
     // Retrieve the dropdown menu items
     val dropdownMenuItems = navigationViewModel.getDropdownMenuItems(context = context, navController = navController)
+
+    LaunchedEffect(space?.placeId) {
+        space?.placeId?.let { viewModel.checkIfAnyRoomExists(it) }
+    }
 
     ModalNavigationDrawer(
         drawerContent = {
@@ -109,53 +115,54 @@ fun DevicesScreen(
                         .padding(padding)
                 ) {
                     item {
-                        // TODO: Create a usecase to check the case
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Center
-                        ) {
-                            Box(
+                        if (isAnyRoomExists == false) {
+                            Row(
                                 modifier = Modifier
-                                    .fillMaxSize(0.8f)
-                                    .aspectRatio(1f)
-                                    .clickable{
-                                        navController.navigate("createANewRoom")
-                                    },
-                                contentAlignment = Alignment.Center
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.Center
                             ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.add_room),
-                                    contentDescription = stringResource(id = R.string.create_your_first_room_image)
-                                )
-                                Surface(
-                                    color = Color.White.copy(alpha = 0.4f),
-                                    modifier = Modifier.fillMaxSize()
-                                ) {}
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize(0.8f)
+                                        .aspectRatio(1f)
+                                        .clickable{
+                                            navController.navigate("createANewRoom")
+                                        },
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.add_room),
+                                        contentDescription = stringResource(id = R.string.create_your_first_room_image)
+                                    )
+                                    Surface(
+                                        color = Color.White.copy(alpha = 0.4f),
+                                        modifier = Modifier.fillMaxSize()
+                                    ) {}
+                                }
                             }
-                        }
-
-                        // TODO: Add the devices here, remove the buttons
-                        Button(
-                            onClick = {
-                                navController.navigate("thermostat")
+                        } else {
+                            // TODO: Add the devices here, remove the buttons
+                            Button(
+                                onClick = {
+                                    navController.navigate("thermostat")
+                                }
+                            ) {
+                                Text(text = "Thermostat")
                             }
-                        ) {
-                            Text(text = "Thermostat")
-                        }
-                        Button(
-                            onClick = {
-                                navController.navigate("airCondition")
+                            Button(
+                                onClick = {
+                                    navController.navigate("airCondition")
+                                }
+                            ) {
+                                Text(text = "Air Condition")
                             }
-                        ) {
-                            Text(text = "Air Condition")
-                        }
-                        Button(
-                            onClick = {
-                                navController.navigate("dehumidifier")
+                            Button(
+                                onClick = {
+                                    navController.navigate("dehumidifier")
+                                }
+                            ) {
+                                Text(text = "Dehumidifier")
                             }
-                        ) {
-                            Text(text = "Dehumidifier")
                         }
                     }
                 }

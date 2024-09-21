@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.data.source.remote
 
+import com.aposiamp.smartliving.data.model.DeviceDataDTO
 import com.aposiamp.smartliving.data.model.RoomDataDTO
 import com.aposiamp.smartliving.data.model.SpaceDataDTO
 import com.aposiamp.smartliving.data.utils.await
@@ -46,5 +47,36 @@ class FirebaseDataSource(
     suspend fun setRoomData(userId: String, spaceId: String, roomDataDTO: RoomDataDTO) {
         val reference = firebase.getReference("rooms").child(userId).child(spaceId).push()
         reference.setValue(roomDataDTO).await()
+    }
+
+    suspend fun getRoomList(userId: String, spaceId: String): List<RoomDataDTO>? {
+        val snapshot = firebase.getReference("rooms").child(userId).child(spaceId).get().await()
+
+        if (!snapshot.exists() || !snapshot.hasChildren()) {
+            return null
+        }
+
+        val roomList = mutableListOf<RoomDataDTO>()
+        for (roomSnapshot in snapshot.children) {
+            val roomId = roomSnapshot.key
+            val roomName = roomSnapshot.child("room_name").getValue(String::class.java)
+            if (roomId != null && roomName != null) {
+                roomList.add(RoomDataDTO(roomId, roomName))
+            }
+        }
+        return roomList
+    }
+
+    suspend fun checkIfAnyRoomExists(userId: String, spaceId: String): Boolean {
+        val snapshot = firebase.getReference("rooms").child(userId).child(spaceId).get().await()
+        return snapshot.exists()
+    }
+
+    suspend fun setDeviceData(userId: String, spaceId: String, roomId: String, deviceDataDTO: DeviceDataDTO) {
+        val deviceDataMap = mapOf(
+            "device_name" to deviceDataDTO.deviceName,
+            "device_type" to deviceDataDTO.deviceType
+        )
+        firebase.getReference("devices").child(userId).child(spaceId).child(roomId).child(deviceDataDTO.deviceId).setValue(deviceDataMap).await()
     }
 }

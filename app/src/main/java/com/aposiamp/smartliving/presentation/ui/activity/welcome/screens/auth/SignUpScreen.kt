@@ -34,7 +34,7 @@ import com.aposiamp.smartliving.presentation.ui.component.TermsCheckboxComponent
 import com.aposiamp.smartliving.presentation.ui.component.DividerTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.HaveAnAccountOrNotClickableTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.PasswordTextFieldComponent
-import com.aposiamp.smartliving.presentation.ui.component.AuthTextFieldComponent
+import com.aposiamp.smartliving.presentation.ui.component.FormTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.ErrorTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
 import com.aposiamp.smartliving.presentation.ui.event.welcome.auth.SignUpFormEvent
@@ -92,7 +92,7 @@ fun SignUpScreen(
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    AuthTextFieldComponent(
+                    FormTextFieldComponent(
                         value = state.firstName,
                         onValueChange = { viewModel.onEvent(SignUpFormEvent.FirstNameChanged(it)) },
                         labelValue = stringResource(id = R.string.first_name),
@@ -108,7 +108,7 @@ fun SignUpScreen(
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    AuthTextFieldComponent(
+                    FormTextFieldComponent(
                         value = state.lastName,
                         onValueChange = { viewModel.onEvent(SignUpFormEvent.LastNameChanged(it)) },
                         labelValue = stringResource(id = R.string.last_name),
@@ -124,7 +124,7 @@ fun SignUpScreen(
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    AuthTextFieldComponent(
+                    FormTextFieldComponent(
                         value = state.email,
                         onValueChange = { viewModel.onEvent(SignUpFormEvent.EmailChanged(it)) },
                         labelValue = stringResource(id = R.string.email),

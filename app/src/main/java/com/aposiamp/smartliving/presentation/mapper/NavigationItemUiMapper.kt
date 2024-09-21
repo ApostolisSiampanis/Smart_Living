@@ -12,6 +12,7 @@ object NavigationItemUiMapper {
             "Routines" -> R.string.routines
             "Energy" -> R.string.energy
             // Navigation Drawer
+            "Home" -> R.string.home
             "Settings" -> R.string.settings
             "About" -> R.string.about
             "Logout" -> R.string.logout
@@ -24,6 +25,7 @@ object NavigationItemUiMapper {
             "Routines" -> R.drawable.routines_filled
             "Energy" -> R.drawable.energy_filled
             // Navigation Drawer
+            "Home" -> R.drawable.home_filled
             "Settings" -> R.drawable.settings_filled
             "About" -> R.drawable.about_filled
             "Logout" -> R.drawable.logout
@@ -36,6 +38,7 @@ object NavigationItemUiMapper {
             "Routines" -> R.drawable.routines_outlined
             "Energy" -> R.drawable.energy_outlined
             // Navigation Drawer
+            "Home" -> R.drawable.home_outlined
             "Settings" -> R.drawable.settings_outlined
             "About" -> R.drawable.about_outlined
             "Logout" -> R.drawable.logout
@@ -48,6 +51,7 @@ object NavigationItemUiMapper {
             "Routines" -> "routines"
             "Energy" -> "energy"
             // Navigation Drawer
+            "Home" -> "devices"
             "Settings" -> "settings"
             "About" -> "about"
             "Logout" -> null

@@ -4,4 +4,5 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.google.gms.google.services) apply false
     alias(libs.plugins.google.secretsgradle.plugin) apply false
+    alias(libs.plugins.serialization) apply false
 }

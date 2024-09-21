@@ -10,4 +10,15 @@ object RoomDataMapper {
             roomName = domain.roomName
         )
     }
+
+    private fun fromDto(dto: RoomDataDTO): RoomData {
+        return RoomData(
+            roomId = dto.roomId,
+            roomName = dto.roomName
+        )
+    }
+
+    fun fromDtoList(dtoList: List<RoomDataDTO>): List<RoomData> {
+        return dtoList.map { fromDto(it) }
+    }
 }

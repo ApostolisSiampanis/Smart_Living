@@ -30,8 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.domain.utils.Result
-import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextComponent
-import com.aposiamp.smartliving.presentation.ui.component.AuthTextFieldComponent
+import com.aposiamp.smartliving.presentation.ui.component.FormTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
@@ -104,7 +103,7 @@ fun CreateANewRoomScreen(
                                     .fillMaxWidth(),
                                 horizontalArrangement = Arrangement.Center
                             ) {
-                                AuthTextFieldComponent(
+                                FormTextFieldComponent(
                                     value = state.roomName,
                                     onValueChange = {
                                         viewModel.onEvent(CreateRoomFormEvent.RoomNameChanged(it))
@@ -148,7 +147,6 @@ fun CreateANewRoomScreen(
                                 value = stringResource(id = R.string.create),
                                 onButtonClicked = {
                                     viewModel.onEvent(CreateRoomFormEvent.Submit(placeId = placeId))
-                                    navController.navigateUp()
                                 }
                             )
                         }

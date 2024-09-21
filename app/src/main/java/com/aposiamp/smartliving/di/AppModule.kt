@@ -2,7 +2,9 @@ package com.aposiamp.smartliving.di
 
 import android.hardware.Sensor
 import android.hardware.SensorManager
+import com.aposiamp.smartliving.data.source.remote.DeviceApiService
 import com.aposiamp.smartliving.domain.repository.AuthRepository
+import com.aposiamp.smartliving.domain.repository.DeviceRepository
 import com.aposiamp.smartliving.domain.repository.SpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.repository.LocationRepository
@@ -24,13 +26,21 @@ import com.aposiamp.smartliving.domain.usecase.user.SignUpUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
+import com.aposiamp.smartliving.domain.usecase.device.CheckIfDeviceExistsUseCase
+import com.aposiamp.smartliving.domain.usecase.device.SetDeviceDataUseCase
+import com.aposiamp.smartliving.domain.usecase.device.ValidateDeviceExistence
+import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFirstName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLastName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePlaceData
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceAddress
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
@@ -48,6 +58,7 @@ interface AppModule {
     val locationRepository: LocationRepository
     val spaceRepository: SpaceRepository
     val roomRepository: RoomRepository
+    val deviceRepository: DeviceRepository
     val placesRepository: PlacesRepository
 
     // Firebase
@@ -57,6 +68,9 @@ interface AppModule {
 
     // Places API
     fun getPlacesClient(): PlacesClient
+
+    // Retrofit API
+    fun getRetrofitApi(): DeviceApiService
 
     // SensorManager and Sensors
     fun getSensorManager(): SensorManager
@@ -95,6 +109,12 @@ interface AppModule {
 
     // Room UseCases
     val setRoomDataUseCase: SetRoomDataUseCase
+    val getRoomListUseCase: GetRoomListUseCase
+    val checkIfAnyRoomExistsUseCase: CheckIfAnyRoomExistsUseCase
+
+    // Device UseCases
+    val checkIfDeviceExistsUseCase: CheckIfDeviceExistsUseCase
+    val setDeviceDataUseCase: SetDeviceDataUseCase
 
     // Profile UseCases
     val loginUseCase: LoginUseCase
@@ -114,4 +134,9 @@ interface AppModule {
     val validatePlaceData: ValidatePlaceData
     // For CreateANewRoom screen
     val validateRoomName: ValidateRoomName
+    // For AddANewDevice screen
+    val validateDeviceName: ValidateDeviceName
+    val validateDeviceId: ValidateDeviceId
+    val validateRoomId: ValidateRoomId
+    val validateDeviceExistence: ValidateDeviceExistence
 }

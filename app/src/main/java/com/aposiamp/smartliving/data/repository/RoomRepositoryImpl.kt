@@ -10,4 +10,12 @@ class RoomRepositoryImpl(
     override suspend fun setRoomData(userId: String, spaceId: String, roomDataDTO: RoomDataDTO) {
         firebaseDataSource.setRoomData(userId, spaceId, roomDataDTO)
     }
+
+    override suspend fun getRoomList(userId: String, spaceId: String): List<RoomDataDTO>? {
+        return firebaseDataSource.getRoomList(userId, spaceId)
+    }
+
+    override suspend fun checkIfAnyRoomExists(userId: String, spaceId: String): Boolean {
+        return firebaseDataSource.checkIfAnyRoomExists(userId, spaceId)
+    }
 }

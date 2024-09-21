@@ -5,6 +5,7 @@ import android.hardware.Sensor
 import android.hardware.SensorManager
 import com.aposiamp.smartliving.BuildConfig
 import com.aposiamp.smartliving.data.repository.AuthRepositoryImpl
+import com.aposiamp.smartliving.data.repository.DeviceRepositoryImpl
 import com.aposiamp.smartliving.data.repository.SpaceRepositoryImpl
 import com.aposiamp.smartliving.data.repository.EnvironmentalSensorRepositoryImpl
 import com.aposiamp.smartliving.data.repository.LocationRepositoryImpl
@@ -12,10 +13,14 @@ import com.aposiamp.smartliving.data.repository.PlacesRepositoryImpl
 import com.aposiamp.smartliving.data.repository.RoomRepositoryImpl
 import com.aposiamp.smartliving.data.source.local.EnvironmentalSensorDataSource
 import com.aposiamp.smartliving.data.source.local.LocationDataSource
+import com.aposiamp.smartliving.data.source.remote.DeviceApiService
+import com.aposiamp.smartliving.data.source.remote.DeviceDataSource
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
 import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
 import com.aposiamp.smartliving.data.source.remote.PlacesDataSource
+import com.aposiamp.smartliving.data.utils.RetrofitClient
 import com.aposiamp.smartliving.domain.repository.AuthRepository
+import com.aposiamp.smartliving.domain.repository.DeviceRepository
 import com.aposiamp.smartliving.domain.repository.SpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.repository.LocationRepository
@@ -37,13 +42,21 @@ import com.aposiamp.smartliving.domain.usecase.user.SignUpUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
+import com.aposiamp.smartliving.domain.usecase.device.CheckIfDeviceExistsUseCase
+import com.aposiamp.smartliving.domain.usecase.device.SetDeviceDataUseCase
+import com.aposiamp.smartliving.domain.usecase.device.ValidateDeviceExistence
+import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFirstName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLastName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePlaceData
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceAddress
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
@@ -62,6 +75,7 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     private val firestoreDataSource = FirestoreDataSource(getFirestoreDatabase())
     private val environmentalSensorDataSource = EnvironmentalSensorDataSource(getSensorManager(), getTemperatureSensor(), getHumiditySensor())
     private val locationDataSource = LocationDataSource(appContext, getFusedLocationProviderClient())
+    private val deviceDataSource = DeviceDataSource(getRetrofitApi())
     private val placesDataSource = PlacesDataSource(getPlacesClient())
 
     // Repositories
@@ -85,6 +99,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         RoomRepositoryImpl(firebaseDataSource)
     }
 
+    override val deviceRepository: DeviceRepository by lazy {
+        DeviceRepositoryImpl(deviceDataSource, firebaseDataSource)
+    }
+
     override val placesRepository: PlacesRepository by lazy {
         PlacesRepositoryImpl(placesDataSource)
     }
@@ -106,6 +124,11 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     override fun getPlacesClient(): PlacesClient {
         Places.initialize(appContext, BuildConfig.MAPS_API_KEY)
         return Places.createClient(appContext)
+    }
+
+    // Retrofit API
+    override fun getRetrofitApi(): DeviceApiService {
+        return RetrofitClient.create()
     }
 
     // SensorManager and Sensors
@@ -190,6 +213,23 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         SetRoomDataUseCase(roomRepository, getCurrentUserUseCase)
     }
 
+    override val getRoomListUseCase: GetRoomListUseCase by lazy {
+        GetRoomListUseCase(roomRepository, getCurrentUserUseCase)
+    }
+
+    override val checkIfAnyRoomExistsUseCase: CheckIfAnyRoomExistsUseCase by lazy {
+        CheckIfAnyRoomExistsUseCase(roomRepository, getCurrentUserUseCase)
+    }
+
+    // Device UseCases
+    override val checkIfDeviceExistsUseCase: CheckIfDeviceExistsUseCase by lazy {
+        CheckIfDeviceExistsUseCase(deviceRepository)
+    }
+
+    override val setDeviceDataUseCase: SetDeviceDataUseCase by lazy {
+        SetDeviceDataUseCase(deviceRepository, getCurrentUserUseCase)
+    }
+
     // Profile UseCases
     override val loginUseCase: LoginUseCase by lazy {
         LoginUseCase(authRepository)
@@ -209,38 +249,55 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     // For SignIn and SignUp screens
     override val validateFirstName: ValidateFirstName by lazy {
-        ValidateFirstName(context = appContext)
+        ValidateFirstName(appContext)
     }
 
     override val validateLastName: ValidateLastName by lazy {
-        ValidateLastName(context = appContext)
+        ValidateLastName(appContext)
     }
 
     override val validateEmail: ValidateEmail by lazy {
-        ValidateEmail(context = appContext)
+        ValidateEmail(appContext)
     }
 
     override val validatePassword: ValidatePassword by lazy {
-        ValidatePassword(context = appContext)
+        ValidatePassword(appContext)
     }
 
     override val validateTerms: ValidateTerms by lazy {
-        ValidateTerms(context = appContext)
+        ValidateTerms(appContext)
     }
     // For CreateANewSpace screen
     override val validateSpaceName: ValidateSpaceName by lazy {
-        ValidateSpaceName(context = appContext)
+        ValidateSpaceName(appContext)
     }
 
     override val validateSpaceAddress: ValidateSpaceAddress by lazy {
-        ValidateSpaceAddress(context = appContext)
+        ValidateSpaceAddress(appContext)
     }
 
     override val validatePlaceData: ValidatePlaceData by lazy {
-        ValidatePlaceData(context = appContext, validateAddressProximityUseCase = validateAddressProximityUseCase)
+        ValidatePlaceData(appContext, validateAddressProximityUseCase)
     }
     // For CreateANewRoom screen
     override val validateRoomName: ValidateRoomName by lazy {
-        ValidateRoomName(context = appContext)
+        ValidateRoomName(appContext)
+    }
+
+    // For AddANewDevice screen
+    override val validateDeviceName: ValidateDeviceName by lazy {
+        ValidateDeviceName(appContext)
+    }
+
+    override val validateDeviceId: ValidateDeviceId by lazy {
+        ValidateDeviceId(appContext)
+    }
+
+    override val validateRoomId: ValidateRoomId by lazy {
+        ValidateRoomId(appContext)
+    }
+
+    override val validateDeviceExistence: ValidateDeviceExistence by lazy {
+        ValidateDeviceExistence(appContext)
     }
 }

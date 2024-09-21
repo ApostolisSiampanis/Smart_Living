@@ -14,7 +14,6 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.aposiamp.smartliving.domain.utils.Result
 import androidx.compose.runtime.LaunchedEffect
@@ -35,9 +34,10 @@ import androidx.lifecycle.viewModelScope
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.ui.activity.main.MainActivity
 import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextComponent
-import com.aposiamp.smartliving.presentation.ui.component.AuthTextFieldComponent
+import com.aposiamp.smartliving.presentation.ui.component.FormTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.ErrorSupportingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
+import com.aposiamp.smartliving.presentation.ui.component.GeneralNormalBlackText
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
 import com.aposiamp.smartliving.presentation.ui.event.welcome.CreateSpaceFormEvent
 import com.aposiamp.smartliving.presentation.ui.state.welcome.CreateSpaceFormState
@@ -120,7 +120,7 @@ fun CreateANewSpaceScreen(
                                 expanded = isDropdownExpanded,
                                 onExpandedChange = { isDropdownExpanded = !isDropdownExpanded }
                             ) {
-                                AuthTextFieldComponent(
+                                FormTextFieldComponent(
                                     value = state.spaceAddress,
                                     onValueChange = {
                                         viewModel.viewModelScope.launch {
@@ -144,7 +144,7 @@ fun CreateANewSpaceScreen(
                                 ) {
                                     addressPredictions.forEach { prediction ->
                                         DropdownMenuItem(
-                                            text = { Text(text = prediction.fullAddress) },
+                                            text = { GeneralNormalBlackText(value = prediction.fullAddress) },
                                             onClick = {
                                                 viewModel.viewModelScope.launch {
                                                     viewModel.onEvent(CreateSpaceFormEvent.SpaceAddressChanged(prediction.fullAddress))
@@ -164,7 +164,7 @@ fun CreateANewSpaceScreen(
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.Center
                     ) {
-                        AuthTextFieldComponent(
+                        FormTextFieldComponent(
                             value = state.spaceName,
                             onValueChange = {
                                 viewModel.viewModelScope.launch {
@@ -180,12 +180,14 @@ fun CreateANewSpaceScreen(
                         )
                     }
 
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        ErrorSupportingTextComponent(value = state.spaceIdError ?: "")
+                    if (state.spaceIdError != null) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            ErrorSupportingTextComponent(value = state.spaceIdError)
+                        }
                     }
                 }
             }
