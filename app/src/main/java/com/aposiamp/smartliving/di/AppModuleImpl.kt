@@ -56,6 +56,7 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFir
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLastName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePlaceData
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceAddress
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
@@ -290,6 +291,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val validateDeviceId: ValidateDeviceId by lazy {
         ValidateDeviceId(appContext)
+    }
+
+    override val validateRoomId: ValidateRoomId by lazy {
+        ValidateRoomId(appContext)
     }
 
     override val validateDeviceExistence: ValidateDeviceExistence by lazy {
