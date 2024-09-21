@@ -96,6 +96,8 @@ fun AboutScreen(
                             GeneralNormalText(value = stringResource(id = R.string.about_unified_control_text))
                             GeneralBoldText(value = stringResource(id = R.string.about_energy_monitoring))
                             GeneralNormalText(value = stringResource(id = R.string.about_energy_monitoring_text))
+                            GeneralBoldText(value = stringResource(id = R.string.about_environmental_monitoring))
+                            GeneralNormalText(value = stringResource(id = R.string.about_environmental_monitoring_text))
                             GeneralBoldText(value = stringResource(id = R.string.about_user_friendly))
                             GeneralNormalText(value = stringResource(id = R.string.about_user_friendly_text))
                             GeneralBoldText(value = stringResource(id = R.string.about_our_vision))
