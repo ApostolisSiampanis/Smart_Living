@@ -15,6 +15,7 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import com.aposiamp.smartliving.presentation.utils.viewModelFactory
+import com.aposiamp.smartliving.presentation.viewmodel.main.AddANewDeviceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
@@ -78,6 +79,19 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
+                    val addANewDeviceViewModel = viewModel<AddANewDeviceViewModel>(
+                        factory = viewModelFactory {
+                            AddANewDeviceViewModel(
+                                validateDeviceName = SmartLiving.appModule.validateDeviceName,
+                                validateDeviceId = SmartLiving.appModule.validateDeviceId,
+                                validateDeviceExistence = SmartLiving.appModule.validateDeviceExistence,
+                                checkIfDeviceExistsUseCase = SmartLiving.appModule.checkIfDeviceExistsUseCase,
+                                getRoomListUseCase = SmartLiving.appModule.getRoomListUseCase,
+                                setDeviceDataUseCase = SmartLiving.appModule.setDeviceDataUseCase
+                            )
+                        }
+                    )
+
                     MainNavigation(
                         context = context,
                         devicesViewModel = devicesViewModel,
@@ -85,7 +99,8 @@ class MainActivity : ComponentActivity() {
                         navigationViewModel = navigationViewModel,
                         mainNavigationViewModel = mainNavigationViewModel,
                         userNotInSpaceViewModel = userNotInSpaceViewModel,
-                        createANewRoomViewModel = createANewRoomViewModel
+                        createANewRoomViewModel = createANewRoomViewModel,
+                        addANewDeviceViewModel = addANewDeviceViewModel
                     )
                 }
             }
