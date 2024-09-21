@@ -90,6 +90,7 @@ class MainActivity : ComponentActivity() {
                             AddANewDeviceViewModel(
                                 validateDeviceName = SmartLiving.appModule.validateDeviceName,
                                 validateDeviceId = SmartLiving.appModule.validateDeviceId,
+                                validateRoomId = SmartLiving.appModule.validateRoomId,
                                 validateDeviceExistence = SmartLiving.appModule.validateDeviceExistence,
                                 checkIfDeviceExistsUseCase = SmartLiving.appModule.checkIfDeviceExistsUseCase,
                                 getRoomListUseCase = SmartLiving.appModule.getRoomListUseCase,
