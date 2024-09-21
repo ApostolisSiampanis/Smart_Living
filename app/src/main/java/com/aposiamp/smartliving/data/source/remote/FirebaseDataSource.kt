@@ -47,4 +47,22 @@ class FirebaseDataSource(
         val reference = firebase.getReference("rooms").child(userId).child(spaceId).push()
         reference.setValue(roomDataDTO).await()
     }
+
+    suspend fun getRoomList(userId: String, spaceId: String): List<RoomDataDTO>? {
+        val snapshot = firebase.getReference("rooms").child(userId).child(spaceId).get().await()
+
+        if (!snapshot.exists() || !snapshot.hasChildren()) {
+            return null
+        }
+
+        val roomList = mutableListOf<RoomDataDTO>()
+        for (roomSnapshot in snapshot.children) {
+            val roomId = roomSnapshot.key
+            val roomName = roomSnapshot.child("room_name").getValue(String::class.java)
+            if (roomId != null && roomName != null) {
+                roomList.add(RoomDataDTO(roomId, roomName))
+            }
+        }
+        return roomList
+    }
 }
