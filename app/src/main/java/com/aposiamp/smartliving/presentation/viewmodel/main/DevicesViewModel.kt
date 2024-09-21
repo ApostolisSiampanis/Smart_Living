@@ -1,14 +1,17 @@
 package com.aposiamp.smartliving.presentation.viewmodel.main
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.aposiamp.smartliving.domain.model.SpaceData
-import com.aposiamp.smartliving.domain.usecase.main.GetSpaceUseCase
+import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
 class DevicesViewModel(
+    private val checkIfAnyRoomExistsUseCase: CheckIfAnyRoomExistsUseCase
 ) : ViewModel() {
+    private val _isAnyRoomExists = MutableStateFlow<Boolean?>(null)
+    val isAnyRoomExists: StateFlow<Boolean?> get() = _isAnyRoomExists
 
+    suspend fun checkIfAnyRoomExists(spaceId: String) {
+        _isAnyRoomExists.value = checkIfAnyRoomExistsUseCase.execute(spaceId)
+    }
 }
