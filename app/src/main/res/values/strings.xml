@@ -113,6 +113,7 @@
     <string name="create_new_room_image">Create New Room Image</string>
     <string name="room_name">Room Name</string>
     <string name="room_name_hint">Enter the name of your room</string>
+    <string name="add_a_new_device_image">Add a New Device Image</string>
     <string name="device_id">Device ID</string>
     <string name="device_id_hint">Enter the ID of your device</string>
     <string name="device_name">Device Name</string>
