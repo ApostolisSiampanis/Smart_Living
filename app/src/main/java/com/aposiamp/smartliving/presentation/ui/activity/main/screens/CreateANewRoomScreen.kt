@@ -147,7 +147,6 @@ fun CreateANewRoomScreen(
                                 value = stringResource(id = R.string.create),
                                 onButtonClicked = {
                                     viewModel.onEvent(CreateRoomFormEvent.Submit(placeId = placeId))
-                                    navController.navigateUp()
                                 }
                             )
                         }
