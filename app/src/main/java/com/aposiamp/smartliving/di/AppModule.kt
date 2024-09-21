@@ -29,6 +29,7 @@ import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
 import com.aposiamp.smartliving.domain.usecase.device.CheckIfDeviceExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.device.SetDeviceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.device.ValidateDeviceExistence
+import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
@@ -108,6 +109,7 @@ interface AppModule {
     // Room UseCases
     val setRoomDataUseCase: SetRoomDataUseCase
     val getRoomListUseCase: GetRoomListUseCase
+    val checkIfAnyRoomExistsUseCase: CheckIfAnyRoomExistsUseCase
 
     // Device UseCases
     val checkIfDeviceExistsUseCase: CheckIfDeviceExistsUseCase
