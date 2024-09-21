@@ -243,7 +243,16 @@ fun AddANewDeviceScreen(
 
                             Spacer(modifier = Modifier.height(16.dp))
 
-                            if (state.deviceExistenceError != null) {
+                            if (state.roomIdError != null) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.Center
+                                ) {
+                                    ErrorSupportingTextComponent(value = state.roomIdError)
+                                }
+                            }
+                            if (state.deviceExistenceError != null && (state.deviceNameError == null && state.deviceIdError == null)) {
                                 Row(
                                     modifier = Modifier
                                         .fillMaxWidth(),
