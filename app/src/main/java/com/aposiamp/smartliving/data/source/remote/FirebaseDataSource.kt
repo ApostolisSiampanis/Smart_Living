@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.data.source.remote
 
+import com.aposiamp.smartliving.data.model.DeviceDataDTO
 import com.aposiamp.smartliving.data.model.RoomDataDTO
 import com.aposiamp.smartliving.data.model.SpaceDataDTO
 import com.aposiamp.smartliving.data.utils.await
@@ -64,5 +65,13 @@ class FirebaseDataSource(
             }
         }
         return roomList
+    }
+
+    suspend fun setDeviceData(userId: String, spaceId: String, roomId: String, deviceDataDTO: DeviceDataDTO) {
+        val deviceDataMap = mapOf(
+            "device_name" to deviceDataDTO.deviceName,
+            "device_type" to deviceDataDTO.deviceType
+        )
+        firebase.getReference("devices").child(userId).child(spaceId).child(roomId).child(deviceDataDTO.deviceId).setValue(deviceDataMap).await()
     }
 }
