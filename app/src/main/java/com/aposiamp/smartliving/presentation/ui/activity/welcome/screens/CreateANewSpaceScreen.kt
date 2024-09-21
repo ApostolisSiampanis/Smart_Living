@@ -180,12 +180,14 @@ fun CreateANewSpaceScreen(
                         )
                     }
 
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        ErrorSupportingTextComponent(value = state.spaceIdError ?: "")
+                    if (state.spaceIdError != null) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            ErrorSupportingTextComponent(value = state.spaceIdError)
+                        }
                     }
                 }
             }
