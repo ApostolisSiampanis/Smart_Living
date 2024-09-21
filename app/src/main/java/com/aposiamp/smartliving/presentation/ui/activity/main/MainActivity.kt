@@ -31,7 +31,13 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val context = this
 
-                    val devicesViewModel = viewModel<DevicesViewModel>()
+                    val devicesViewModel = viewModel<DevicesViewModel>(
+                        factory = viewModelFactory {
+                            DevicesViewModel(
+                                checkIfAnyRoomExistsUseCase = SmartLiving.appModule.checkIfAnyRoomExistsUseCase
+                            )
+                        }
+                    )
 
                     val mainSharedViewModel = viewModel<MainSharedViewModel>(
                         factory = viewModelFactory {
