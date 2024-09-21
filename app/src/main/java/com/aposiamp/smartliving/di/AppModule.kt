@@ -40,6 +40,7 @@ import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateFir
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateLastName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePlaceData
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceAddress
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
@@ -136,5 +137,6 @@ interface AppModule {
     // For AddANewDevice screen
     val validateDeviceName: ValidateDeviceName
     val validateDeviceId: ValidateDeviceId
+    val validateRoomId: ValidateRoomId
     val validateDeviceExistence: ValidateDeviceExistence
 }
