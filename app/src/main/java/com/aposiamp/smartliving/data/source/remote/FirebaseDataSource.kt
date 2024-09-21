@@ -67,6 +67,11 @@ class FirebaseDataSource(
         return roomList
     }
 
+    suspend fun checkIfAnyRoomExists(userId: String, spaceId: String): Boolean {
+        val snapshot = firebase.getReference("rooms").child(userId).child(spaceId).get().await()
+        return snapshot.exists()
+    }
+
     suspend fun setDeviceData(userId: String, spaceId: String, roomId: String, deviceDataDTO: DeviceDataDTO) {
         val deviceDataMap = mapOf(
             "device_name" to deviceDataDTO.deviceName,
