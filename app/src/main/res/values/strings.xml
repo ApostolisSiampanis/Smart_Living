@@ -44,6 +44,7 @@
     <string name="the_device_name_can_not_be_blank">The device name can\'t be blank</string>
     <string name="the_device_name_must_be_at_least_3_characters">The device name must be at least 3 characters</string>
     <string name="the_device_id_can_not_be_blank">The device ID can\'t be blank</string>
+    <string name="you_must_select_a_room">You must select a room</string>
     <string name="creator">Created by @ApostolisSiampanis</string>
     <string name="smart_living_logo">Smart Living Logo</string>
     <string name="dont_have_an_account_yet">Don’t have an account yet?\u00A0</string>
