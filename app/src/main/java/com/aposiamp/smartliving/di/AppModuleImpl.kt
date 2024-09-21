@@ -45,6 +45,7 @@ import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
 import com.aposiamp.smartliving.domain.usecase.device.CheckIfDeviceExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.device.SetDeviceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.device.ValidateDeviceExistence
+import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
@@ -213,6 +214,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val getRoomListUseCase: GetRoomListUseCase by lazy {
         GetRoomListUseCase(roomRepository, getCurrentUserUseCase)
+    }
+
+    override val checkIfAnyRoomExistsUseCase: CheckIfAnyRoomExistsUseCase by lazy {
+        CheckIfAnyRoomExistsUseCase(roomRepository, getCurrentUserUseCase)
     }
 
     // Device UseCases
