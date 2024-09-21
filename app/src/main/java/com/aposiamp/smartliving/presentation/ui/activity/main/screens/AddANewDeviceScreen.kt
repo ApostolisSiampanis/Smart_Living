@@ -1,9 +1,11 @@
 package com.aposiamp.smartliving.presentation.ui.activity.main.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -249,6 +251,22 @@ fun AddANewDeviceScreen(
                                 ) {
                                     ErrorSupportingTextComponent(value = state.deviceExistenceError)
                                 }
+                            }
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.add_device),
+                                    contentDescription = stringResource(id = R.string.add_a_new_device_image),
+                                    modifier = Modifier
+                                        .fillMaxWidth(0.5f)
+                                        .aspectRatio(1f)
+                                )
                             }
                         }
                     }
