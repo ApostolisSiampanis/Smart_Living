@@ -29,6 +29,7 @@ class NavigationViewModel(
 
     fun getNavigationDrawerItems(context: Context): List<NavigationItemUiModel> {
         val domainItems = getNavigationDrawerItemsUseCase.execute(
+            homeTitle = context.getString(R.string.home),
             settingsTitle = context.getString(R.string.settings),
             aboutTitle = context.getString(R.string.about),
             logoutTitle = context.getString(R.string.logout)
