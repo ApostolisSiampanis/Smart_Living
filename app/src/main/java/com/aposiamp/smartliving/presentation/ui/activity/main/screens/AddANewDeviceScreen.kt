@@ -39,6 +39,7 @@ import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
 import com.aposiamp.smartliving.presentation.ui.component.ErrorSupportingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.FormTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
+import com.aposiamp.smartliving.presentation.ui.component.GeneralNormalBlackText
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
 import com.aposiamp.smartliving.presentation.ui.event.main.AddDeviceFormEvent
 import com.aposiamp.smartliving.presentation.ui.state.main.AddDeviceFormState
@@ -183,7 +184,7 @@ fun AddANewDeviceScreen(
                                 ) {
                                     uiDeviceTypes.forEach { deviceType ->
                                         DropdownMenuItem(
-                                            text = { Text(text = stringResource(id = deviceType.text)) },
+                                            text = { GeneralNormalBlackText(value = stringResource(id = deviceType.text)) },
                                             onClick = {
                                                 viewModel.viewModelScope.launch {
                                                     viewModel.onEvent(AddDeviceFormEvent.DeviceTypeChanged(deviceType.type))
@@ -209,7 +210,7 @@ fun AddANewDeviceScreen(
                                     },
                                     onValueChange = {},
                                     readOnly = true,
-                                    label = { Text(stringResource(id = R.string.select_room)) },
+                                    label = { GeneralNormalBlackText(value = stringResource(id = R.string.select_room)) },
                                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = roomsExpanded) },
                                     modifier = Modifier
                                         .menuAnchor()
