@@ -9,12 +9,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.aposiamp.smartliving.presentation.ui.activity.LoadingScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AboutScreen
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AddANewDeviceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.CreateANewRoomScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.DevicesScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.UserNotInSpaceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.AirConditionScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.DehumidifierScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.ThermostatScreen
+import com.aposiamp.smartliving.presentation.viewmodel.main.AddANewDeviceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
@@ -30,7 +32,8 @@ internal fun MainNavigation(
     navigationViewModel: NavigationViewModel,
     mainNavigationViewModel: MainNavigationViewModel,
     userNotInSpaceViewModel: UserNotInSpaceViewModel,
-    createANewRoomViewModel: CreateANewRoomViewModel
+    createANewRoomViewModel: CreateANewRoomViewModel,
+    addANewDeviceViewModel: AddANewDeviceViewModel
 ) {
     val navController = rememberNavController()
     val startDestination by mainNavigationViewModel.startDestination.collectAsState()
@@ -62,6 +65,13 @@ internal fun MainNavigation(
                 CreateANewRoomScreen(
                     navController = navController,
                     viewModel = createANewRoomViewModel,
+                    mainSharedViewModel = mainSharedViewModel
+                )
+            }
+            composable("addANewDevice"){
+                AddANewDeviceScreen(
+                    navController = navController,
+                    viewModel = addANewDeviceViewModel,
                     mainSharedViewModel = mainSharedViewModel
                 )
             }
