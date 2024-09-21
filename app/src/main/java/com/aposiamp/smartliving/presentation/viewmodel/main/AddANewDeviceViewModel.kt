@@ -17,6 +17,7 @@ import com.aposiamp.smartliving.domain.usecase.device.ValidateDeviceExistence
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceName
+import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomId
 import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.presentation.mapper.RoomDataUiMapper
 import com.aposiamp.smartliving.presentation.model.CreateFormResult
@@ -31,6 +32,7 @@ import kotlinx.coroutines.launch
 class AddANewDeviceViewModel(
     private val validateDeviceName: ValidateDeviceName,
     private val validateDeviceId: ValidateDeviceId,
+    private val validateRoomId: ValidateRoomId,
     private val validateDeviceExistence: ValidateDeviceExistence,
     private val checkIfDeviceExistsUseCase: CheckIfDeviceExistsUseCase,
     private val getRoomListUseCase: GetRoomListUseCase,
@@ -72,12 +74,14 @@ class AddANewDeviceViewModel(
     private suspend fun submitData(placeId: String) {
         val deviceNameResult = validateDeviceName.execute(_formState.deviceName)
         val deviceIdResult = validateDeviceId.execute(_formState.deviceId)
+        val roomIdResult = validateRoomId.execute(_formState.roomId)
         val deviceExists = checkIfDeviceExistsUseCase.execute(DeviceIdAndTypeData(_formState.deviceId, _formState.deviceType))
         val deviceExistResult = validateDeviceExistence.execute(deviceExists)
 
         val hasError = listOf(
             deviceNameResult,
             deviceIdResult,
+            roomIdResult,
             deviceExistResult
         ).any { it.errorMessage != null }
 
@@ -85,6 +89,7 @@ class AddANewDeviceViewModel(
             _formState = _formState.copy(
                 deviceNameError = deviceNameResult.errorMessage,
                 deviceIdError = deviceIdResult.errorMessage,
+                roomIdError = roomIdResult.errorMessage,
                 deviceExistenceError = deviceExistResult.errorMessage
             )
             return
