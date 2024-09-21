@@ -14,7 +14,6 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.aposiamp.smartliving.domain.utils.Result
 import androidx.compose.runtime.LaunchedEffect
@@ -38,6 +37,7 @@ import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextCompone
 import com.aposiamp.smartliving.presentation.ui.component.FormTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.ErrorSupportingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
+import com.aposiamp.smartliving.presentation.ui.component.GeneralNormalBlackText
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
 import com.aposiamp.smartliving.presentation.ui.event.welcome.CreateSpaceFormEvent
 import com.aposiamp.smartliving.presentation.ui.state.welcome.CreateSpaceFormState
@@ -144,7 +144,7 @@ fun CreateANewSpaceScreen(
                                 ) {
                                     addressPredictions.forEach { prediction ->
                                         DropdownMenuItem(
-                                            text = { Text(text = prediction.fullAddress) },
+                                            text = { GeneralNormalBlackText(value = prediction.fullAddress) },
                                             onClick = {
                                                 viewModel.viewModelScope.launch {
                                                     viewModel.onEvent(CreateSpaceFormEvent.SpaceAddressChanged(prediction.fullAddress))
