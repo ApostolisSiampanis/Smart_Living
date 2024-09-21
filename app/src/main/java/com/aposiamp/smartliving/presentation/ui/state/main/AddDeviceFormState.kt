@@ -9,5 +9,6 @@ data class AddDeviceFormState(
     val deviceName: String = "",
     val deviceNameError: String? = null,
     val roomId: String = "",
+    val roomIdError: String? = null,
     val deviceExistenceError: String? = null
 )
