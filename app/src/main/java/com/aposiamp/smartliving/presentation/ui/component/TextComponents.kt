@@ -20,7 +20,7 @@ import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.ui.theme.GrayColor
 
 @Composable
-fun AuthHeadingTextComponent(value: String) {
+fun HeadingTextComponent(value: String) {
     Text(
         text = value,
         modifier = Modifier
