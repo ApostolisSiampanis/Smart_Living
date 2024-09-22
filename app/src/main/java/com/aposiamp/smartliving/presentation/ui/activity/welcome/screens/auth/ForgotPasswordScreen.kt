@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -28,10 +27,10 @@ import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.presentation.ui.component.HeadingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
+import com.aposiamp.smartliving.presentation.ui.component.EmailSentDialog
 import com.aposiamp.smartliving.presentation.ui.component.FormTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.event.welcome.auth.ForgotPasswordFormEvent
-import com.aposiamp.smartliving.presentation.ui.event.welcome.auth.LoginFormEvent
 import com.aposiamp.smartliving.presentation.ui.state.welcome.auth.ForgotPasswordFormState
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.ForgotPasswordViewModel
 
@@ -43,6 +42,7 @@ fun ForgotPasswordScreen(
 ) {
     val forgotPasswordFlowState by viewModel.forgotPasswordFlow.collectAsState()
     var loadingState by remember { mutableStateOf(false) }
+    var showDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(forgotPasswordFlowState) {
         when(forgotPasswordFlowState) {
@@ -56,11 +56,25 @@ fun ForgotPasswordScreen(
 
             is Result.Success -> {
                 loadingState = false
-                // TODO: Show Alert Dialog with success message and an ok button to navigate back to login screen
+                showDialog = true
             }
 
             null -> {}
         }
+    }
+
+    if (showDialog) {
+        EmailSentDialog(
+            title = stringResource(id = R.string.password_reset_email_sent),
+            message = stringResource(id = R.string.check_your_email_for_instructions),
+            onDismiss = {
+                showDialog = false
+            },
+            onConfirm = {
+                showDialog = false
+                navController.navigateUp()
+            }
+        )
     }
 
     Scaffold(
