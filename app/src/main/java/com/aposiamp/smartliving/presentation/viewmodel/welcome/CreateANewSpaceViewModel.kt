@@ -14,7 +14,7 @@ import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePlaceData
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceAddress
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateSpaceName
-import com.aposiamp.smartliving.presentation.model.CreateFormResult
+import com.aposiamp.smartliving.presentation.model.FormResult
 import com.aposiamp.smartliving.presentation.ui.event.welcome.CreateSpaceFormEvent
 import com.aposiamp.smartliving.presentation.ui.state.welcome.CreateSpaceFormState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,8 +32,8 @@ class CreateANewSpaceViewModel(
     private var _formState by mutableStateOf(CreateSpaceFormState())
     val formState: CreateSpaceFormState get() = _formState
 
-    private val _createSpaceFlow = MutableStateFlow<Result<CreateFormResult>?>(null)
-    val createSpaceFlow: StateFlow<Result<CreateFormResult>?> = _createSpaceFlow
+    private val _createSpaceFlow = MutableStateFlow<Result<FormResult>?>(null)
+    val createSpaceFlow: StateFlow<Result<FormResult>?> = _createSpaceFlow
 
     private var _addressPredictions by mutableStateOf(emptyList<AutoCompletePrediction>())
     val addressPredictions: List<AutoCompletePrediction> get() = _addressPredictions
@@ -91,7 +91,7 @@ class CreateANewSpaceViewModel(
                 location = placeData.location
             )
             setSpaceDataUseCase.execute(spaceData)
-            _createSpaceFlow.value = Result.Success(CreateFormResult(success = true))
+            _createSpaceFlow.value = Result.Success(FormResult(success = true))
         } catch (e: Exception) {
             _formState = _formState.copy(spaceNameError = e.message)
             _createSpaceFlow.value = Result.Error(e)
