@@ -169,12 +169,14 @@ fun SignUpScreen(
                     )
                 }
                 Spacer(modifier = Modifier.height(20.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    ErrorTextComponent(errorMessage = state.errorMessage)
+                if (state.errorMessage != null) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        ErrorTextComponent(errorMessage = state.errorMessage)
+                    }
                 }
             }
         }
