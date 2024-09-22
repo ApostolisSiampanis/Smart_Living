@@ -18,4 +18,6 @@ interface AuthRepository {
     ): FirebaseUser
 
     fun logout()
+
+    suspend fun forgotPassword(email: String)
 }
