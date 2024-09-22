@@ -86,6 +86,9 @@
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="forgot_password_header">Forgot Password</string>
     <string name="send_email">Send Email</string>
+    <string name="email_image">Email Image</string>
+    <string name="password_reset_email_sent">Password reset email sent!</string>
+    <string name="check_your_email_for_instructions">Check your email for instructions on how to reset your password.</string>
     <string name="settings">Settings</string>
     <string name="home">Home</string>
     <string name="location">Location</string>
