@@ -31,7 +31,7 @@ import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.presentation.ui.activity.main.MainActivity
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
-import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextComponent
+import com.aposiamp.smartliving.presentation.ui.component.HeadingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.DividerTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.HaveAnAccountOrNotClickableTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.PasswordTextFieldComponent
@@ -95,7 +95,7 @@ fun LoginScreen(
                 .fillMaxSize()
         ) {
             item {
-                AuthHeadingTextComponent(value = stringResource(id = R.string.welcome_to_smart_living_app))
+                HeadingTextComponent(value = stringResource(id = R.string.welcome_to_smart_living_app))
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),

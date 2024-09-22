@@ -29,7 +29,7 @@ import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
-import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextComponent
+import com.aposiamp.smartliving.presentation.ui.component.HeadingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.TermsCheckboxComponent
 import com.aposiamp.smartliving.presentation.ui.component.DividerTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.HaveAnAccountOrNotClickableTextComponent
@@ -86,7 +86,7 @@ fun SignUpScreen(
                 .fillMaxSize()
         ) {
             item {
-                AuthHeadingTextComponent(value = stringResource(id = R.string.create_an_account))
+                HeadingTextComponent(value = stringResource(id = R.string.create_an_account))
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),

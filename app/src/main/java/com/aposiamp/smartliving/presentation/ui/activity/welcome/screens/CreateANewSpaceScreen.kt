@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.ui.activity.main.MainActivity
-import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextComponent
+import com.aposiamp.smartliving.presentation.ui.component.HeadingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.FormTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.ErrorSupportingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
@@ -108,7 +108,7 @@ fun CreateANewSpaceScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 item {
-                    AuthHeadingTextComponent(value = stringResource(id = R.string.create_a_new_space))
+                    HeadingTextComponent(value = stringResource(id = R.string.create_a_new_space))
 
                     Row(
                         modifier = Modifier
