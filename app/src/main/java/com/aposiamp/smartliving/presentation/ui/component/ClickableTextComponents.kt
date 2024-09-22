@@ -177,7 +177,8 @@ fun UseDifferentAccountLogoutAndLoginAgain(
         text = annotatedString,
         style = TextStyle(
             fontSize = 16.sp,
-            fontFamily = FontFamily(Font(R.font.carlito_regular))
+            fontFamily = FontFamily(Font(R.font.carlito_regular)),
+            textAlign = TextAlign.Center
         ),
         onClick = {offset ->
             annotatedString.getStringAnnotations(
