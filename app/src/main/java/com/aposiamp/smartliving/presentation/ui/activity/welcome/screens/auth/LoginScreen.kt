@@ -38,6 +38,7 @@ import com.aposiamp.smartliving.presentation.ui.component.PasswordTextFieldCompo
 import com.aposiamp.smartliving.presentation.ui.component.FormTextFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.ErrorTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
+import com.aposiamp.smartliving.presentation.ui.component.UnderlinedClickableTextComponent
 import com.aposiamp.smartliving.presentation.ui.event.welcome.auth.LoginFormEvent
 import com.aposiamp.smartliving.presentation.ui.state.welcome.auth.LoginFormState
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.LoginViewModel
@@ -125,13 +126,28 @@ fun LoginScreen(
                         errorStatus = state.passwordError != null
                     )
                 }
-                Spacer(modifier = Modifier.height(20.dp))
-                Row(
+                Spacer(modifier = Modifier.height(12.dp))
+                Row (
                     modifier = Modifier
                         .fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    ErrorTextComponent(errorMessage = state.errorMessage)
+                    UnderlinedClickableTextComponent(
+                        value = stringResource(id = R.string.forgot_your_password),
+                        onTextSelected = {
+                            navController.navigate("forgotPassword")
+                        }
+                    )
+                }
+                if (state.errorMessage != null) {
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        ErrorTextComponent(errorMessage = state.errorMessage)
+                    }
                 }
             }
         }
