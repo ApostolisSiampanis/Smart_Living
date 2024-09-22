@@ -33,6 +33,7 @@ import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
+import com.aposiamp.smartliving.domain.usecase.user.ForgotPasswordUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
@@ -120,6 +121,7 @@ interface AppModule {
     val loginUseCase: LoginUseCase
     val signUpUseCase: SignUpUseCase
     val logoutUseCase: LogoutUseCase
+    val forgotPasswordUseCase: ForgotPasswordUseCase
     val getCurrentUserUseCase: GetCurrentUserUseCase
 
     // For SignIn and SignUp screens
