@@ -13,6 +13,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -188,5 +189,26 @@ fun UseDifferentAccountLogoutAndLoginAgain(
                 }
             }
         }
+    )
+}
+
+@Composable
+fun UnderlinedClickableTextComponent(
+    value: String,
+    onTextSelected: () -> Unit
+) {
+    val annotatedString = buildAnnotatedString {
+        append(value)
+    }
+
+    ClickableText(
+        text = annotatedString,
+        style = TextStyle(
+            fontSize = 18.sp,
+            color = SkyBlue,
+            fontFamily = FontFamily(Font(R.font.carlito_regular)),
+            textDecoration = TextDecoration.Underline
+        ),
+        onClick = { onTextSelected() }
     )
 }
