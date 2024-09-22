@@ -15,6 +15,7 @@ import com.aposiamp.smartliving.presentation.utils.viewModelFactory
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.CreateANewSpaceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.PermissionsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.WelcomeNavigationViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.ForgotPasswordViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.LoginViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.SignUpViewModel
 
@@ -51,6 +52,15 @@ class WelcomeActivity : ComponentActivity() {
                         }
                     )
 
+                    val forgotPasswordViewModel = viewModel<ForgotPasswordViewModel>(
+                        factory = viewModelFactory {
+                            ForgotPasswordViewModel(
+                                forgotPasswordUseCase = SmartLiving.appModule.forgotPasswordUseCase,
+                                validateEmail = SmartLiving.appModule.validateEmail
+                            )
+                        }
+                    )
+
                     val permissionsViewModel = viewModel<PermissionsViewModel>()
 
                     val createANewSpaceViewModel = viewModel<CreateANewSpaceViewModel>(
@@ -80,6 +90,7 @@ class WelcomeActivity : ComponentActivity() {
                         welcomeNavigationViewModel = welcomeNavigationViewModel,
                         loginViewModel = loginViewModel,
                         signUpViewModel = signUpViewModel,
+                        forgotPasswordViewModel = forgotPasswordViewModel,
                         permissionsViewModel = permissionsViewModel,
                         createANewSpaceViewModel = createANewSpaceViewModel
                     )
