@@ -38,4 +38,8 @@ class AuthRepositoryImpl(
     override fun logout() {
         firebaseDataSource.logout()
     }
+
+    override suspend fun forgotPassword(email: String) {
+        firebaseDataSource.forgotPassword(email)
+    }
 }
