@@ -181,4 +181,10 @@
     <string name="dehumidifier">Dehumidifier</string>
     <string name="profile">Profile</string>
     <string name="account">Account</string>
+    <string name="account_image">Account Image</string>
+    <string name="close_edit_email">Close Edit Email</string>
+    <string name="complete_edit_email">Complete Edit Email</string>
+    <string name="edit_email">Edit Email</string>
+    <string name="email_with_dots">Email:</string>
+    <string name="full_name_with_dots">Full Name:</string>
 </resources>
