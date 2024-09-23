@@ -10,6 +10,7 @@ import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.repository.LocationRepository
 import com.aposiamp.smartliving.domain.repository.PlacesRepository
 import com.aposiamp.smartliving.domain.repository.RoomRepository
+import com.aposiamp.smartliving.domain.repository.UserAccountRepository
 import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSpaceUseCase
@@ -35,6 +36,7 @@ import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
 import com.aposiamp.smartliving.domain.usecase.user.ForgotPasswordUseCase
+import com.aposiamp.smartliving.domain.usecase.user.GetAccountDetailsUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
@@ -62,6 +64,7 @@ interface AppModule {
     val roomRepository: RoomRepository
     val deviceRepository: DeviceRepository
     val placesRepository: PlacesRepository
+    val userAccountRepository: UserAccountRepository
 
     // Firebase
     fun getFirebaseAuth(): FirebaseAuth
@@ -127,6 +130,7 @@ interface AppModule {
     val logoutUseCase: LogoutUseCase
     val forgotPasswordUseCase: ForgotPasswordUseCase
     val getCurrentUserUseCase: GetCurrentUserUseCase
+    val getAccountDetailsUseCase: GetAccountDetailsUseCase
 
     // For SignIn and SignUp screens
     val validateFirstName: ValidateFirstName
