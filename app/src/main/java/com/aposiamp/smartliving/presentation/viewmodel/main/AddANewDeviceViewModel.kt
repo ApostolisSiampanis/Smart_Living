@@ -11,9 +11,9 @@ import com.aposiamp.smartliving.domain.model.DeviceData
 import com.aposiamp.smartliving.domain.model.DeviceIdAndTypeData
 import com.aposiamp.smartliving.domain.model.DeviceType
 import com.aposiamp.smartliving.domain.model.DeviceTypeItem
-import com.aposiamp.smartliving.domain.usecase.device.CheckIfDeviceExistsUseCase
-import com.aposiamp.smartliving.domain.usecase.device.SetDeviceDataUseCase
-import com.aposiamp.smartliving.domain.usecase.device.ValidateDeviceExistence
+import com.aposiamp.smartliving.domain.usecase.devices.CheckIfDeviceExistsUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceDataUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceName

@@ -4,7 +4,7 @@ import com.aposiamp.smartliving.data.model.UserFirestore
 import com.aposiamp.smartliving.domain.model.UserAccount
 import com.google.firebase.auth.FirebaseUser
 
-object UserAccountMapper {
+object AccountProfileMapper {
     fun fromFirestore(userFirestore: UserFirestore, firebaseUser: FirebaseUser): UserAccount {
         return UserAccount(
             email = firebaseUser.email,

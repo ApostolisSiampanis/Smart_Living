@@ -11,7 +11,7 @@ import com.aposiamp.smartliving.data.repository.EnvironmentalSensorRepositoryImp
 import com.aposiamp.smartliving.data.repository.LocationRepositoryImpl
 import com.aposiamp.smartliving.data.repository.PlacesRepositoryImpl
 import com.aposiamp.smartliving.data.repository.RoomRepositoryImpl
-import com.aposiamp.smartliving.data.repository.UserAccountRepositoryImpl
+import com.aposiamp.smartliving.data.repository.AccountProfileRepositoryImpl
 import com.aposiamp.smartliving.data.source.local.EnvironmentalSensorDataSource
 import com.aposiamp.smartliving.data.source.local.LocationDataSource
 import com.aposiamp.smartliving.data.source.remote.DeviceApiService
@@ -44,16 +44,16 @@ import com.aposiamp.smartliving.domain.usecase.user.SignUpUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
-import com.aposiamp.smartliving.domain.usecase.device.CheckIfDeviceExistsUseCase
-import com.aposiamp.smartliving.domain.usecase.device.SetDeviceDataUseCase
-import com.aposiamp.smartliving.domain.usecase.device.ValidateDeviceExistence
+import com.aposiamp.smartliving.domain.usecase.devices.CheckIfDeviceExistsUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceDataUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
 import com.aposiamp.smartliving.domain.usecase.user.ForgotPasswordUseCase
-import com.aposiamp.smartliving.domain.usecase.user.GetAccountDetailsUseCase
+import com.aposiamp.smartliving.domain.usecase.user.GetAccountProfileDetailsUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
@@ -113,7 +113,7 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     }
 
     override val userAccountRepository: UserAccountRepository by lazy {
-        UserAccountRepositoryImpl(firestoreDataSource)
+        AccountProfileRepositoryImpl(firestoreDataSource)
     }
 
 
@@ -266,8 +266,8 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         GetCurrentUserUseCase(authRepository)
     }
 
-    override val getAccountDetailsUseCase: GetAccountDetailsUseCase by lazy {
-        GetAccountDetailsUseCase(userAccountRepository, getCurrentUserUseCase)
+    override val getAccountProfileDetailsUseCase: GetAccountProfileDetailsUseCase by lazy {
+        GetAccountProfileDetailsUseCase(userAccountRepository, getCurrentUserUseCase)
     }
 
 

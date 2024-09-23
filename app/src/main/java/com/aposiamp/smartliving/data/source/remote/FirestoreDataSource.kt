@@ -22,7 +22,7 @@ class FirestoreDataSource(private val db: FirebaseFirestore) {
         )).await()
     }
 
-    suspend fun getUserProfile(uid: String): UserFirestore {
+    suspend fun getUserAccountProfile(uid: String): UserFirestore {
         val result = db.collection("users").document(uid).get().await()
         return result.toObject(UserFirestore::class.java)!!
     }

@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.domain.usecase.device
+package com.aposiamp.smartliving.domain.usecase.devices
 
 import android.content.Context
 import com.aposiamp.smartliving.R

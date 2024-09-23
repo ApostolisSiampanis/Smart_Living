@@ -112,7 +112,7 @@ class MainActivity : ComponentActivity() {
                     val accountViewModel = viewModel<AccountViewModel>(
                         factory = viewModelFactory {
                             AccountViewModel(
-                                getAccountDetailsUseCase = SmartLiving.appModule.getAccountDetailsUseCase
+                                getAccountProfileDetailsUseCase = SmartLiving.appModule.getAccountProfileDetailsUseCase
                             )
                         }
                     )
