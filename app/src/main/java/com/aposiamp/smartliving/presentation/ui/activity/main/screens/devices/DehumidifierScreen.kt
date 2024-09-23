@@ -1,7 +1,6 @@
 package com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices
 
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -27,7 +26,7 @@ import com.aposiamp.smartliving.presentation.ui.component.DeviceModeButtonsRowCo
 import com.aposiamp.smartliving.presentation.ui.component.DeviceOnOffButton
 import com.aposiamp.smartliving.presentation.ui.component.FanSpeedControl
 import com.aposiamp.smartliving.presentation.ui.component.IndoorEnvironmentalDataCard
-import com.aposiamp.smartliving.presentation.viewmodel.main.DehumidifierViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.devices.DehumidifierViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 
 @Composable

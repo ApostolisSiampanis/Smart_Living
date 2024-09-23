@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.presentation.viewmodel.main
+package com.aposiamp.smartliving.presentation.viewmodel.main.settings
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.presentation.viewmodel.main
+package com.aposiamp.smartliving.presentation.viewmodel.main.devices
 
 import androidx.lifecycle.ViewModel
 import com.aposiamp.smartliving.R

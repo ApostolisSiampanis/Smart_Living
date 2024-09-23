@@ -18,7 +18,7 @@ import com.aposiamp.smartliving.presentation.utils.viewModelFactory
 import com.aposiamp.smartliving.presentation.viewmodel.main.AddANewDeviceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
-import com.aposiamp.smartliving.presentation.viewmodel.main.SettingsViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
 
 class MainActivity : ComponentActivity() {
