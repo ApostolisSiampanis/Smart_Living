@@ -20,6 +20,7 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewMo
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,10 +109,19 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
+                    val accountViewModel = viewModel<AccountViewModel>(
+                        factory = viewModelFactory {
+                            AccountViewModel(
+                                getAccountDetailsUseCase = SmartLiving.appModule.getAccountDetailsUseCase
+                            )
+                        }
+                    )
+
                     MainNavigation(
                         context = context,
                         devicesViewModel = devicesViewModel,
                         settingsViewModel = settingsViewModel,
+                        accountViewModel = accountViewModel,
                         mainSharedViewModel = mainSharedViewModel,
                         navigationViewModel = navigationViewModel,
                         mainNavigationViewModel = mainNavigationViewModel,
