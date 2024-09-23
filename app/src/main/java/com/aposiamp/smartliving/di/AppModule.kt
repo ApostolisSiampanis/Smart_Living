@@ -32,6 +32,7 @@ import com.aposiamp.smartliving.domain.usecase.device.ValidateDeviceExistence
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
 import com.aposiamp.smartliving.domain.usecase.user.ForgotPasswordUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
@@ -89,6 +90,9 @@ interface AppModule {
 
     // DropDownMenu UseCase
     val getDropdownMenuItemsUseCase: GetDropdownMenuItemsUseCase
+
+    // Settings UseCases
+    val getSettingsScreenItemsUseCase: GetSettingsScreenItemsUseCase
 
     // Sensor UseCases
     val getEnvironmentalDataUseCase: GetEnvironmentalDataUseCase
