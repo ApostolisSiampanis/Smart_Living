@@ -22,6 +22,7 @@ val WhiteColor = Color(0xFFFFFFFF)
 
 val PrussianBlue = Color(0xFF023047)
 val SkyBlue = Color(0xFF8BD3E6)
+val BlueGreen = Color(0xFF219EBC)
 val BgColor = Color(0xFFF7F8F8)
 
 // Devices' Colors
