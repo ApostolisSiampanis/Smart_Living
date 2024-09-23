@@ -179,4 +179,6 @@
     <string name="air_conditioner">Air Conditioner</string>
     <string name="thermostat">Thermostat</string>
     <string name="dehumidifier">Dehumidifier</string>
+    <string name="profile">Profile</string>
+    <string name="account">Account</string>
 </resources>
