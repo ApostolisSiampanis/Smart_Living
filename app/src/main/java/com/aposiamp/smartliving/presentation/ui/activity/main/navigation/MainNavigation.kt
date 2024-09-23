@@ -12,7 +12,7 @@ import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AboutScree
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AddANewDeviceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.CreateANewRoomScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.DevicesScreen
-import com.aposiamp.smartliving.presentation.ui.activity.main.screens.SettingsScreen
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings.SettingsScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.UserNotInSpaceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.AirConditionScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.DehumidifierScreen

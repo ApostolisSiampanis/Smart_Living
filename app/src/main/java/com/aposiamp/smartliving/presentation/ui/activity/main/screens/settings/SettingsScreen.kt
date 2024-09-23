@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.presentation.ui.activity.main.screens
+package com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings
 
 import android.content.Context
 import androidx.compose.foundation.layout.fillMaxSize
