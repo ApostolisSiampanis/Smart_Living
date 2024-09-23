@@ -21,4 +21,9 @@ class FirestoreDataSource(private val db: FirebaseFirestore) {
                 "humidity" to environmentalDataDTO.humidity
         )).await()
     }
+
+    suspend fun getUserProfile(uid: String): UserFirestore {
+        val result = db.collection("users").document(uid).get().await()
+        return result.toObject(UserFirestore::class.java)!!
+    }
 }
