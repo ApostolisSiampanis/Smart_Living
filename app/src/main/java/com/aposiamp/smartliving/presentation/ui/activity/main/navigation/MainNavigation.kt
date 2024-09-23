@@ -12,6 +12,7 @@ import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AboutScree
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AddANewDeviceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.CreateANewRoomScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.DevicesScreen
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.SettingsScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.UserNotInSpaceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.AirConditionScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.DehumidifierScreen
@@ -22,12 +23,14 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
 
 @Composable
 internal fun MainNavigation(
     context: Context,
     devicesViewModel: DevicesViewModel,
+    settingsViewModel: SettingsViewModel,
     mainSharedViewModel: MainSharedViewModel,
     navigationViewModel: NavigationViewModel,
     mainNavigationViewModel: MainNavigationViewModel,
@@ -76,6 +79,14 @@ internal fun MainNavigation(
                 )
             }
 
+            composable("settings"){
+                SettingsScreen(
+                    navController = navController,
+                    settingsViewModel = settingsViewModel,
+                    navigationViewModel = navigationViewModel,
+                    context = context
+                )
+            }
             composable("about"){
                 AboutScreen(
                     navController = navController,
