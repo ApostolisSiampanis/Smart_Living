@@ -177,7 +177,7 @@ fun HeaderText(value: String) {
 }
 
 @Composable
-fun DrawerItemTextComponent(
+fun ItemTextComponent(
     text: String,
     color: Color
 ) {
