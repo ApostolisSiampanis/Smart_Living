@@ -18,6 +18,7 @@ import com.aposiamp.smartliving.presentation.utils.viewModelFactory
 import com.aposiamp.smartliving.presentation.viewmodel.main.AddANewDeviceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
 
 class MainActivity : ComponentActivity() {
@@ -99,9 +100,18 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
+                    val settingsViewModel = viewModel<SettingsViewModel>(
+                        factory = viewModelFactory {
+                            SettingsViewModel(
+                                getSettingsScreenItemsUseCase = SmartLiving.appModule.getSettingsScreenItemsUseCase
+                            )
+                        }
+                    )
+
                     MainNavigation(
                         context = context,
                         devicesViewModel = devicesViewModel,
+                        settingsViewModel = settingsViewModel,
                         mainSharedViewModel = mainSharedViewModel,
                         navigationViewModel = navigationViewModel,
                         mainNavigationViewModel = mainNavigationViewModel,
