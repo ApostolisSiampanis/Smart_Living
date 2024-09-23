@@ -17,6 +17,7 @@ import com.aposiamp.smartliving.presentation.ui.activity.main.screens.UserNotInS
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.AirConditionScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.DehumidifierScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.ThermostatScreen
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings.AccountScreen
 import com.aposiamp.smartliving.presentation.viewmodel.main.AddANewDeviceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
@@ -25,12 +26,14 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountViewModel
 
 @Composable
 internal fun MainNavigation(
     context: Context,
     devicesViewModel: DevicesViewModel,
     settingsViewModel: SettingsViewModel,
+    accountViewModel: AccountViewModel,
     mainSharedViewModel: MainSharedViewModel,
     navigationViewModel: NavigationViewModel,
     mainNavigationViewModel: MainNavigationViewModel,
@@ -85,6 +88,12 @@ internal fun MainNavigation(
                     settingsViewModel = settingsViewModel,
                     navigationViewModel = navigationViewModel,
                     context = context
+                )
+            }
+            composable("account"){
+                AccountScreen(
+                    navController = navController,
+                    viewModel = accountViewModel
                 )
             }
             composable("about"){
