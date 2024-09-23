@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.SmartLiving
@@ -24,7 +25,7 @@ import com.aposiamp.smartliving.presentation.ui.component.MenuAppTopBar
 import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
 import com.aposiamp.smartliving.presentation.ui.component.SettingCard
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
-import com.aposiamp.smartliving.presentation.viewmodel.main.SettingsViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -81,7 +82,8 @@ fun SettingsScreen(
                 ) {
                     LazyColumn(
                         modifier = Modifier
-                            .fillMaxSize(),
+                            .fillMaxSize()
+                            .padding(top = 18.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         items(settingsItems) { item ->
