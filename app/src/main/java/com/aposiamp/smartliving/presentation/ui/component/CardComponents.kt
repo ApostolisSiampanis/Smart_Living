@@ -203,6 +203,10 @@ fun SettingCard(
         modifier = Modifier
             .fillMaxWidth(0.9f)
             .padding(8.dp)
+            .background(
+                shape = componentShapes.large,
+                color = Color.White
+            )
             .clickable {
                 item.route?.let { navController.navigate(it) }
             },
