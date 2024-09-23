@@ -11,6 +11,7 @@ import com.aposiamp.smartliving.data.repository.EnvironmentalSensorRepositoryImp
 import com.aposiamp.smartliving.data.repository.LocationRepositoryImpl
 import com.aposiamp.smartliving.data.repository.PlacesRepositoryImpl
 import com.aposiamp.smartliving.data.repository.RoomRepositoryImpl
+import com.aposiamp.smartliving.data.repository.UserAccountRepositoryImpl
 import com.aposiamp.smartliving.data.source.local.EnvironmentalSensorDataSource
 import com.aposiamp.smartliving.data.source.local.LocationDataSource
 import com.aposiamp.smartliving.data.source.remote.DeviceApiService
@@ -26,6 +27,7 @@ import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.repository.LocationRepository
 import com.aposiamp.smartliving.domain.repository.PlacesRepository
 import com.aposiamp.smartliving.domain.repository.RoomRepository
+import com.aposiamp.smartliving.domain.repository.UserAccountRepository
 import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSpaceUseCase
@@ -51,6 +53,7 @@ import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
 import com.aposiamp.smartliving.domain.usecase.user.ForgotPasswordUseCase
+import com.aposiamp.smartliving.domain.usecase.user.GetAccountDetailsUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
@@ -108,6 +111,11 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     override val placesRepository: PlacesRepository by lazy {
         PlacesRepositoryImpl(placesDataSource)
     }
+
+    override val userAccountRepository: UserAccountRepository by lazy {
+        UserAccountRepositoryImpl(firestoreDataSource)
+    }
+
 
     // Firebase
     override fun getFirebaseAuth(): FirebaseAuth {
@@ -257,6 +265,11 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     override val getCurrentUserUseCase: GetCurrentUserUseCase by lazy {
         GetCurrentUserUseCase(authRepository)
     }
+
+    override val getAccountDetailsUseCase: GetAccountDetailsUseCase by lazy {
+        GetAccountDetailsUseCase(userAccountRepository, getCurrentUserUseCase)
+    }
+
 
     // For SignIn and SignUp screens
     override val validateFirstName: ValidateFirstName by lazy {
