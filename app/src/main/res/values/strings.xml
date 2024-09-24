@@ -196,4 +196,6 @@
     <string name="change_password">Change Password</string>
     <string name="new_password">New Password</string>
     <string name="password_updated_successfully">Password updated successfully!</string>
+    <string name="error_deleting_account">Error deleting account</string>
+    <string name="delete_account">Delete Account</string>
 </resources>
