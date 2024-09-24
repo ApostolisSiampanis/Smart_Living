@@ -124,7 +124,11 @@ class MainActivity : ComponentActivity() {
                     val profileViewModel = viewModel<ProfileViewModel>(
                         factory = viewModelFactory {
                             ProfileViewModel(
+                                validateFirstName = SmartLiving.appModule.validateFirstName,
+                                validateLastName = SmartLiving.appModule.validateLastName,
                                 validateEmail = SmartLiving.appModule.validateEmail,
+                                updateFirstNameUseCase = SmartLiving.appModule.updateFirstNameUseCase,
+                                updateLastNameUseCase = SmartLiving.appModule.updateLastNameUseCase,
                                 updateEmailUseCase = SmartLiving.appModule.updateEmailUseCase
                             )
                         }
