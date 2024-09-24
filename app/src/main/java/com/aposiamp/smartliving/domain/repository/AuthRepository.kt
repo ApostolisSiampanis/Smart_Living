@@ -28,4 +28,6 @@ interface AuthRepository {
     suspend fun updateLastName(uid: String, lastName: String)
 
     suspend fun updatePassword(password: String)
+
+    suspend fun deleteUser()
 }
