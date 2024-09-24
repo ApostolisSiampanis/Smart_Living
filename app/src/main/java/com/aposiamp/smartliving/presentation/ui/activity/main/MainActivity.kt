@@ -119,7 +119,14 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
-                    val accountViewModel = viewModel<AccountViewModel>()
+                    val accountViewModel = viewModel<AccountViewModel>(
+                        factory = viewModelFactory {
+                            AccountViewModel(
+                                validatePassword = SmartLiving.appModule.validatePassword,
+                                updatePasswordUseCase = SmartLiving.appModule.updatePasswordUseCase
+                            )
+                        }
+                    )
 
                     val profileViewModel = viewModel<ProfileViewModel>(
                         factory = viewModelFactory {
