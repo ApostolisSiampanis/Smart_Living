@@ -118,7 +118,6 @@ fun ProfileScreen(
                                 emailError = emailError,
                                 onUpdateEmail = { newEmail ->
                                     viewModel.validateAndUpdateEmail(newEmail)
-                                    //TODO: fix this
                                 }
                             )
                         }
