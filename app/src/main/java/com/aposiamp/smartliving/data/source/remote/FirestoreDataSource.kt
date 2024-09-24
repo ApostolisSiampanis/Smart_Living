@@ -26,4 +26,14 @@ class FirestoreDataSource(private val db: FirebaseFirestore) {
         val result = db.collection("users").document(uid).get().await()
         return result.toObject(UserFirestore::class.java)!!
     }
+
+    suspend fun updateFirstName(uid: String, firstName: String) {
+        val userRef = db.collection("users").document(uid)
+        userRef.update("first_name", firstName).await()
+    }
+
+    suspend fun updateLastName(uid: String, lastName: String) {
+        val userRef = db.collection("users").document(uid)
+        userRef.update("last_name", lastName).await()
+    }
 }
