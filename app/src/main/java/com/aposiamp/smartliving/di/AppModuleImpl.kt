@@ -54,6 +54,7 @@ import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCas
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
 import com.aposiamp.smartliving.domain.usecase.user.ForgotPasswordUseCase
 import com.aposiamp.smartliving.domain.usecase.user.GetAccountProfileDetailsUseCase
+import com.aposiamp.smartliving.domain.usecase.user.UpdateEmailUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
@@ -268,6 +269,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val getAccountProfileDetailsUseCase: GetAccountProfileDetailsUseCase by lazy {
         GetAccountProfileDetailsUseCase(userAccountRepository, getCurrentUserUseCase)
+    }
+
+    override val updateEmailUseCase: UpdateEmailUseCase by lazy {
+        UpdateEmailUseCase(authRepository)
     }
 
 
