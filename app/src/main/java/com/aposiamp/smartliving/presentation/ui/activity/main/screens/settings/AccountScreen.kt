@@ -115,9 +115,10 @@ fun AccountScreen(
                                 value = stringResource(id = R.string.email_with_dots),
                                 color = Color.Black
                             )
-                            NameFieldComponent(
-                                firstName = accountDetails?.firstName,
-                                lastName = accountDetails?.lastName
+                            GeneralBoldText(
+                                value = accountDetails?.email ?: "",
+                                fontSize = 22,
+                                color = Color.Black
                             )
 
                             Spacer(modifier = Modifier.height(10.dp))
@@ -126,10 +127,9 @@ fun AccountScreen(
                                 value = stringResource(id = R.string.full_name_with_dots),
                                 color = Color.Black
                             )
-                            GeneralBoldText(
-                                value = accountDetails?.email ?: "",
-                                fontSize = 22,
-                                color = Color.Black
+                            NameFieldComponent(
+                                firstName = accountDetails?.firstName,
+                                lastName = accountDetails?.lastName
                             )
 
                             Spacer(modifier = Modifier.height(10.dp))
