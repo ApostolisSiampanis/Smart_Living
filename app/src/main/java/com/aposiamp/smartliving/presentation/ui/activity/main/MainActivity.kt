@@ -123,7 +123,8 @@ class MainActivity : ComponentActivity() {
                         factory = viewModelFactory {
                             AccountViewModel(
                                 validatePassword = SmartLiving.appModule.validatePassword,
-                                updatePasswordUseCase = SmartLiving.appModule.updatePasswordUseCase
+                                updatePasswordUseCase = SmartLiving.appModule.updatePasswordUseCase,
+                                deleteUserUseCase = SmartLiving.appModule.deleteUserUseCase
                             )
                         }
                     )
