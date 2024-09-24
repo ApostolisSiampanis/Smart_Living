@@ -81,9 +81,7 @@ fun PasswordTextFieldComponent(
     supportedTextValue: String,
     errorStatus: Boolean = false
 ) {
-    val passwordVisible = remember {
-        mutableStateOf(false)
-    }
+    val passwordVisible = remember { mutableStateOf(false) }
 
     OutlinedTextField(
         modifier = Modifier
@@ -225,3 +223,96 @@ fun EditableField(
     }
 }
 
+@Composable
+fun EditablePasswordField(
+    value: String,
+    error: String?,
+    labelValue: String,
+    onUpdate: (String) -> Unit,
+    onClose: () -> Unit
+) {
+    val passwordVisible = remember { mutableStateOf(false) }
+    var password by remember { mutableStateOf(value) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                value = password,
+                onValueChange = { password = it },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done
+                ),
+                label = { TextFieldComponentText(value = labelValue) },
+                isError = error != null,
+                trailingIcon = {
+                    val iconImage = if (passwordVisible.value) {
+                        painterResource(id = R.drawable.visibility)
+                    } else {
+                        painterResource(id = R.drawable.visibility_off)
+                    }
+
+                    val contentDescription = if (passwordVisible.value) {
+                        stringResource(id = R.string.hide_password)
+                    } else {
+                        stringResource(id = R.string.show_password)
+                    }
+
+                    IconButton(onClick = { passwordVisible.value = !passwordVisible.value }) {
+                        Icon(
+                            painter = iconImage,
+                            contentDescription = contentDescription
+                        )
+                    }
+                },
+                visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
+                supportingText = {
+                    if (error != null) {
+                        ErrorSupportingTextComponent(
+                            value = error
+                        )
+                    } else {
+                        Text(
+                            text = ""
+                        )
+                    }
+                }
+            )
+        }
+        Row(
+            modifier = Modifier
+                .align(Alignment.End)
+        ) {
+            IconButton(
+                onClick = {
+                    password = value
+                    onClose()
+                }
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.close),
+                    contentDescription = stringResource(id = R.string.close_edit)
+                )
+            }
+            IconButton(
+                onClick = {
+                    onUpdate(password)
+                }
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.check),
+                    contentDescription = stringResource(id = R.string.complete_edit)
+                )
+            }
+        }
+    }
+}
