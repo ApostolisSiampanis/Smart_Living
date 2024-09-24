@@ -52,6 +52,7 @@ import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
+import com.aposiamp.smartliving.domain.usecase.user.DeleteUserUseCase
 import com.aposiamp.smartliving.domain.usecase.user.ForgotPasswordUseCase
 import com.aposiamp.smartliving.domain.usecase.user.GetAccountProfileDetailsUseCase
 import com.aposiamp.smartliving.domain.usecase.user.UpdateEmailUseCase
@@ -288,6 +289,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val updatePasswordUseCase: UpdatePasswordUseCase by lazy {
         UpdatePasswordUseCase(authRepository)
+    }
+
+    override val deleteUserUseCase: DeleteUserUseCase by lazy {
+        DeleteUserUseCase(authRepository)
     }
 
     // For SignIn and SignUp screens
