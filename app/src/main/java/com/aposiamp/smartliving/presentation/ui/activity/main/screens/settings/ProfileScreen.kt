@@ -124,7 +124,7 @@ fun ProfileScreen(
                                 value = accountDetails?.firstName ?: "",
                                 error = firstNameError,
                                 keyboardType = KeyboardType.Text,
-                                onUpdateEmail = { newFirstName ->
+                                onUpdate = { newFirstName ->
                                     viewModel.validateAndUpdateFirstName(context, newFirstName)
                                 }
                             )
@@ -139,7 +139,7 @@ fun ProfileScreen(
                                 value = accountDetails?.lastName ?: "",
                                 error = lastNameError,
                                 keyboardType = KeyboardType.Text,
-                                onUpdateEmail = { newLastName ->
+                                onUpdate = { newLastName ->
                                     viewModel.validateAndUpdateLastName(context, newLastName)
                                 }
                             )
@@ -154,7 +154,7 @@ fun ProfileScreen(
                                 value = accountDetails?.email ?: "",
                                 error = emailError,
                                 keyboardType = KeyboardType.Email,
-                                onUpdateEmail = { newEmail ->
+                                onUpdate = { newEmail ->
                                     viewModel.validateAndUpdateEmail(newEmail)
                                 }
                             )

@@ -144,7 +144,7 @@ fun EditableField(
     value: String,
     error: String?,
     keyboardType: KeyboardType,
-    onUpdateEmail: (String) -> Unit
+    onUpdate: (String) -> Unit
 ) {
     var isEditing by remember { mutableStateOf(false) }
     var text by remember { mutableStateOf(value) }
@@ -200,7 +200,7 @@ fun EditableField(
                 IconButton(
                     onClick = {
                         isEditing = false
-                        onUpdateEmail(text)
+                        onUpdate(text)
                     }
                 ) {
                     Icon(
@@ -224,3 +224,4 @@ fun EditableField(
         }
     }
 }
+
