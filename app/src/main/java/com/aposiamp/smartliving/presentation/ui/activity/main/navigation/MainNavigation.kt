@@ -18,6 +18,7 @@ import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.Ai
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.DehumidifierScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.ThermostatScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings.AccountScreen
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings.ProfileScreen
 import com.aposiamp.smartliving.presentation.viewmodel.main.AddANewDeviceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
@@ -26,7 +27,9 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountProfileViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.ProfileViewModel
 
 @Composable
 internal fun MainNavigation(
@@ -34,12 +37,14 @@ internal fun MainNavigation(
     devicesViewModel: DevicesViewModel,
     settingsViewModel: SettingsViewModel,
     accountViewModel: AccountViewModel,
+    profileViewModel: ProfileViewModel,
     mainSharedViewModel: MainSharedViewModel,
     navigationViewModel: NavigationViewModel,
     mainNavigationViewModel: MainNavigationViewModel,
     userNotInSpaceViewModel: UserNotInSpaceViewModel,
     createANewRoomViewModel: CreateANewRoomViewModel,
-    addANewDeviceViewModel: AddANewDeviceViewModel
+    addANewDeviceViewModel: AddANewDeviceViewModel,
+    accountProfileViewModel: AccountProfileViewModel
 ) {
     val navController = rememberNavController()
     val startDestination by mainNavigationViewModel.startDestination.collectAsState()
@@ -90,10 +95,18 @@ internal fun MainNavigation(
                     context = context
                 )
             }
+            composable("profile"){
+                ProfileScreen(
+                    navController = navController,
+                    viewModel = profileViewModel,
+                    accountProfileViewModel = accountProfileViewModel
+                )
+            }
             composable("account"){
                 AccountScreen(
                     navController = navController,
-                    viewModel = accountViewModel
+                    viewModel = accountViewModel,
+                    accountProfileViewModel = accountProfileViewModel
                 )
             }
             composable("about"){
