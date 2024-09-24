@@ -143,6 +143,7 @@ fun PasswordTextFieldComponent(
 fun EditableField(
     value: String,
     error: String?,
+    keyboardType: KeyboardType,
     onUpdateEmail: (String) -> Unit
 ) {
     var isEditing by remember { mutableStateOf(false) }
@@ -162,6 +163,9 @@ fun EditableField(
                     .fillMaxWidth(),
                 value = text,
                 onValueChange = { text = it },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = keyboardType
+                ),
                 enabled = isEditing,
                 isError = error != null,
                 supportingText = {
