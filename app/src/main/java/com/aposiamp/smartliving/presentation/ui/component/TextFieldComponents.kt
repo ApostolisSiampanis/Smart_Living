@@ -1,14 +1,21 @@
 package com.aposiamp.smartliving.presentation.ui.component
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
@@ -18,6 +25,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.unit.dp
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
 
@@ -130,4 +138,86 @@ fun PasswordTextFieldComponent(
         },
         isError = errorStatus
     )
+}
+
+@Composable
+fun EditableEmailField(
+    email: String,
+    emailError: String?,
+    onUpdateEmail: (String) -> Unit
+) {
+    var isEditing by remember { mutableStateOf(false) }
+    var emailText by remember { mutableStateOf(email) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            OutlinedTextField(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                value = emailText,
+                onValueChange = { emailText = it },
+                enabled = isEditing,
+                isError = emailError != null,
+                supportingText = {
+                    if (emailError != null) {
+                        ErrorSupportingTextComponent(
+                            value = emailError
+                        )
+                    } else {
+                        Text(
+                            text = ""
+                        )
+                    }
+                }
+            )
+        }
+        if (isEditing) {
+            Row(
+                modifier = Modifier
+                    .align(Alignment.End)
+            ) {
+                IconButton(
+                    onClick = {
+                        isEditing = false
+                        emailText = email
+                    }
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.close),
+                        contentDescription = stringResource(id = R.string.close_edit_email)
+                    )
+                }
+                IconButton(
+                    onClick = {
+                        isEditing = false
+                        onUpdateEmail(emailText)
+                    }
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.check),
+                        contentDescription = stringResource(id = R.string.complete_edit_email)
+                    )
+                }
+            }
+        } else {
+            IconButton(
+                onClick = {
+                    isEditing = true
+                },
+                modifier = Modifier.align(Alignment.End)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.edit),
+                    contentDescription = stringResource(id = R.string.edit_email)
+                )
+            }
+        }
+    }
 }
