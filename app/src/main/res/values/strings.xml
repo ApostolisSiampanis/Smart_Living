@@ -191,6 +191,9 @@
     <string name="full_name_with_dots">Full Name:</string>
     <string name="first_name_with_dots">First Name:</string>
     <string name="last_name_with_dots">Last Name:</string>
-    <string name="first_name_updated_successfully">First name updated successfully</string>
-    <string name="last_name_updated_successfully">Last name updated successfully</string>
+    <string name="first_name_updated_successfully">First name updated successfully!</string>
+    <string name="last_name_updated_successfully">Last name updated successfully!</string>
+    <string name="change_password">Change Password</string>
+    <string name="new_password">New Password</string>
+    <string name="password_updated_successfully">Password updated successfully!</string>
 </resources>
