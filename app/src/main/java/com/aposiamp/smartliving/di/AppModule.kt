@@ -40,6 +40,7 @@ import com.aposiamp.smartliving.domain.usecase.user.GetAccountProfileDetailsUseC
 import com.aposiamp.smartliving.domain.usecase.user.UpdateEmailUseCase
 import com.aposiamp.smartliving.domain.usecase.user.UpdateFirstNameUseCase
 import com.aposiamp.smartliving.domain.usecase.user.UpdateLastNameUseCase
+import com.aposiamp.smartliving.domain.usecase.user.UpdatePasswordUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
@@ -137,6 +138,7 @@ interface AppModule {
     val updateFirstNameUseCase: UpdateFirstNameUseCase
     val updateLastNameUseCase: UpdateLastNameUseCase
     val updateEmailUseCase: UpdateEmailUseCase
+    val updatePasswordUseCase: UpdatePasswordUseCase
 
     // For SignIn and SignUp screens
     val validateFirstName: ValidateFirstName
