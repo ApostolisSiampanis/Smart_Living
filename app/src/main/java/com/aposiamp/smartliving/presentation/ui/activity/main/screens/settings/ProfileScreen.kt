@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -17,23 +18,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
-import com.aposiamp.smartliving.presentation.ui.component.EditableEmailField
+import com.aposiamp.smartliving.presentation.ui.component.EditableField
 import com.aposiamp.smartliving.presentation.ui.component.EmailSentDialog
 import com.aposiamp.smartliving.presentation.ui.component.GeneralNormalText
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountProfileViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.ProfileViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun ProfileScreen(
@@ -41,13 +41,22 @@ fun ProfileScreen(
     viewModel: ProfileViewModel,
     accountProfileViewModel: AccountProfileViewModel
 ) {
+    val context = LocalContext.current
     val accountDetails by accountProfileViewModel.detailsState.collectAsState()
     val isLoading by accountProfileViewModel.isLoading.collectAsState()
+    val firstNameError by viewModel.firstNameError.collectAsState()
+    val lastNameError by viewModel.lastNameError.collectAsState()
     val emailError by viewModel.emailError.collectAsState()
     val showDialog by viewModel.showDialog.collectAsState()
 
     LaunchedEffect(Unit) {
         accountProfileViewModel.fetchAccountDetails()
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.toastMessage.collectLatest { message ->
+            Toast.makeText(navController.context, message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     if (showDialog) {
@@ -104,8 +113,33 @@ fun ProfileScreen(
 
                             Spacer(modifier = Modifier.height(10.dp))
 
-                            // TODO: update firstName
-                            // TODO: update lastName
+                            GeneralNormalText(
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp),
+                                value = stringResource(id = R.string.first_name_with_dots),
+                                color = Color.Black
+                            )
+                            EditableField(
+                                value = accountDetails?.firstName ?: "",
+                                error = firstNameError,
+                                onUpdateEmail = { newFirstName ->
+                                    viewModel.validateAndUpdateFirstName(context, newFirstName)
+                                }
+                            )
+
+                            GeneralNormalText(
+                                modifier = Modifier
+                                    .padding(horizontal = 16.dp),
+                                value = stringResource(id = R.string.last_name_with_dots),
+                                color = Color.Black
+                            )
+                            EditableField(
+                                value = accountDetails?.lastName ?: "",
+                                error = lastNameError,
+                                onUpdateEmail = { newLastName ->
+                                    viewModel.validateAndUpdateLastName(context, newLastName)
+                                }
+                            )
 
                             GeneralNormalText(
                                 modifier = Modifier
@@ -113,9 +147,9 @@ fun ProfileScreen(
                                 value = stringResource(id = R.string.email_with_dots),
                                 color = Color.Black
                             )
-                            EditableEmailField(
-                                email = accountDetails?.email ?: "",
-                                emailError = emailError,
+                            EditableField(
+                                value = accountDetails?.email ?: "",
+                                error = emailError,
                                 onUpdateEmail = { newEmail ->
                                     viewModel.validateAndUpdateEmail(newEmail)
                                 }
