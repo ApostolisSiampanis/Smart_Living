@@ -26,4 +26,6 @@ interface AuthRepository {
     suspend fun updateFirstName(uid: String, firstName: String)
 
     suspend fun updateLastName(uid: String, lastName: String)
+
+    suspend fun updatePassword(password: String)
 }
