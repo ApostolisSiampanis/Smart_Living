@@ -54,4 +54,8 @@ class AuthRepositoryImpl(
     override suspend fun updateLastName(uid: String, lastName: String) {
         firestoreDataSource.updateLastName(uid, lastName)
     }
+
+    override suspend fun updatePassword(password: String) {
+        firebaseDataSource.updatePassword(password)
+    }
 }
