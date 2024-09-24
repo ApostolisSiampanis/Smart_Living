@@ -29,18 +29,20 @@ import com.aposiamp.smartliving.presentation.ui.component.GeneralBoldText
 import com.aposiamp.smartliving.presentation.ui.component.GeneralNormalText
 import com.aposiamp.smartliving.presentation.ui.component.NameFieldComponent
 import com.aposiamp.smartliving.presentation.ui.component.ProgressIndicatorComponent
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountProfileViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountViewModel
 
 @Composable
 fun AccountScreen(
     navController: NavController,
-    viewModel: AccountViewModel
+    viewModel: AccountViewModel,
+    accountProfileViewModel: AccountProfileViewModel
 ) {
-    val accountDetails by viewModel.accountDetailsState.collectAsState()
-    val isLoading by viewModel.isLoading.collectAsState()
+    val accountDetails by accountProfileViewModel.detailsState.collectAsState()
+    val isLoading by accountProfileViewModel.isLoading.collectAsState()
 
     LaunchedEffect(Unit) {
-        viewModel.fetchAccountDetails()
+        accountProfileViewModel.fetchAccountDetails()
     }
 
     Scaffold(
