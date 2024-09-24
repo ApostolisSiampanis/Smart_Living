@@ -1,8 +1,10 @@
 package com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -29,6 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
+import com.aposiamp.smartliving.presentation.ui.activity.welcome.WelcomeActivity
 import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
 import com.aposiamp.smartliving.presentation.ui.component.GeneralClickableCard
 import com.aposiamp.smartliving.presentation.ui.component.EditablePasswordField
@@ -149,9 +152,26 @@ fun AccountScreen(
                                     onClose = { showPasswordField = false }
                                 )
                             }
-
-                            // TODO: Delete account
                         }
+                    }
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(bottom = 28.dp, start = 16.dp, end = 16.dp),
+                        verticalArrangement = Arrangement.Bottom
+                    ) {
+                        GeneralClickableCard(
+                            value = stringResource(id = R.string.delete_account),
+                            textColor = Color.Red,
+                            onClick = {
+                                viewModel.deleteUserAndLogout(context) {
+                                    val intent = Intent(context, WelcomeActivity::class.java).apply {
+                                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    }
+                                    context.startActivity(intent)
+                                }
+                            }
+                        )
                     }
                 }
             }
