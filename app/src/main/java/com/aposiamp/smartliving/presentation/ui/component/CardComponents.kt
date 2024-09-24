@@ -239,6 +239,7 @@ fun SettingCard(
 @Composable
 fun GeneralClickableCard(
     value: String,
+    textColor: Color = Color.Black,
     onClick: () -> Unit
 ) {
     Card(
@@ -255,11 +256,17 @@ fun GeneralClickableCard(
         ),
         elevation = cardElevation(defaultElevation = 4.dp)
     ) {
-        GeneralBoldText(
-            modifier = Modifier.padding(16.dp),
-            value = value,
-            fontSize = 20,
-            color = Color.Black
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            GeneralBoldText(
+                modifier = Modifier.padding(16.dp),
+                value = value,
+                fontSize = 20,
+                color = textColor
+            )
+        }
     }
 }
