@@ -33,6 +33,10 @@ class FirebaseDataSource(
         firebaseAuth.sendPasswordResetEmail(email).await()
     }
 
+    suspend fun updateEmail(email: String) {
+        firebaseAuth.currentUser?.verifyBeforeUpdateEmail(email)?.await()
+    }
+
     suspend fun setSpaceData(userId: String, spaceDataDTO: SpaceDataDTO) {
         firebase.getReference("spaces").child(userId).setValue(spaceDataDTO).await()
     }
