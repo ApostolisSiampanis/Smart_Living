@@ -20,7 +20,9 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewMo
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountProfileViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.ProfileViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,10 +111,21 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
-                    val accountViewModel = viewModel<AccountViewModel>(
+                    val accountProfileViewModel = viewModel<AccountProfileViewModel>(
                         factory = viewModelFactory {
-                            AccountViewModel(
+                            AccountProfileViewModel(
                                 getAccountProfileDetailsUseCase = SmartLiving.appModule.getAccountProfileDetailsUseCase
+                            )
+                        }
+                    )
+
+                    val accountViewModel = viewModel<AccountViewModel>()
+
+                    val profileViewModel = viewModel<ProfileViewModel>(
+                        factory = viewModelFactory {
+                            ProfileViewModel(
+                                validateEmail = SmartLiving.appModule.validateEmail,
+                                updateEmailUseCase = SmartLiving.appModule.updateEmailUseCase
                             )
                         }
                     )
@@ -122,12 +135,14 @@ class MainActivity : ComponentActivity() {
                         devicesViewModel = devicesViewModel,
                         settingsViewModel = settingsViewModel,
                         accountViewModel = accountViewModel,
+                        profileViewModel = profileViewModel,
                         mainSharedViewModel = mainSharedViewModel,
                         navigationViewModel = navigationViewModel,
                         mainNavigationViewModel = mainNavigationViewModel,
                         userNotInSpaceViewModel = userNotInSpaceViewModel,
                         createANewRoomViewModel = createANewRoomViewModel,
-                        addANewDeviceViewModel = addANewDeviceViewModel
+                        addANewDeviceViewModel = addANewDeviceViewModel,
+                        accountProfileViewModel =accountProfileViewModel
                     )
                 }
             }
