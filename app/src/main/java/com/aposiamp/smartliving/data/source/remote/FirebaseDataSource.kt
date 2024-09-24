@@ -41,6 +41,10 @@ class FirebaseDataSource(
         firebaseAuth.currentUser?.updatePassword(password)?.await()
     }
 
+    suspend fun deleteUser() {
+        firebaseAuth.currentUser?.delete()?.await()
+    }
+
     suspend fun setSpaceData(userId: String, spaceDataDTO: SpaceDataDTO) {
         firebase.getReference("spaces").child(userId).setValue(spaceDataDTO).await()
     }
