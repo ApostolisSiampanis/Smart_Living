@@ -235,3 +235,31 @@ fun SettingCard(
         }
     }
 }
+
+@Composable
+fun GeneralClickableCard(
+    value: String,
+    onClick: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .clickable { onClick() }
+            .background(
+                shape = componentShapes.medium,
+                color = Color.White
+            ),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        elevation = cardElevation(defaultElevation = 4.dp)
+    ) {
+        GeneralBoldText(
+            modifier = Modifier.padding(16.dp),
+            value = value,
+            fontSize = 20,
+            color = Color.Black
+        )
+    }
+}
