@@ -35,6 +35,7 @@ import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
+import com.aposiamp.smartliving.domain.usecase.user.DeleteUserUseCase
 import com.aposiamp.smartliving.domain.usecase.user.ForgotPasswordUseCase
 import com.aposiamp.smartliving.domain.usecase.user.GetAccountProfileDetailsUseCase
 import com.aposiamp.smartliving.domain.usecase.user.UpdateEmailUseCase
@@ -139,6 +140,7 @@ interface AppModule {
     val updateLastNameUseCase: UpdateLastNameUseCase
     val updateEmailUseCase: UpdateEmailUseCase
     val updatePasswordUseCase: UpdatePasswordUseCase
+    val deleteUserUseCase: DeleteUserUseCase
 
     // For SignIn and SignUp screens
     val validateFirstName: ValidateFirstName
