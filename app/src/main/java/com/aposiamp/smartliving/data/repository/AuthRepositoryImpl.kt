@@ -42,4 +42,8 @@ class AuthRepositoryImpl(
     override suspend fun forgotPassword(email: String) {
         firebaseDataSource.forgotPassword(email)
     }
+
+    override suspend fun updateEmail(email: String) {
+        firebaseDataSource.updateEmail(email)
+    }
 }
