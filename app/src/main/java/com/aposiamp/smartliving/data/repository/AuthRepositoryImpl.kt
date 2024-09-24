@@ -58,4 +58,8 @@ class AuthRepositoryImpl(
     override suspend fun updatePassword(password: String) {
         firebaseDataSource.updatePassword(password)
     }
+
+    override suspend fun deleteUser() {
+        firebaseDataSource.deleteUser()
+    }
 }
