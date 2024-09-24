@@ -184,9 +184,13 @@
     <string name="profile">Profile</string>
     <string name="account">Account</string>
     <string name="account_image">Account Image</string>
-    <string name="close_edit_email">Close Edit Email</string>
-    <string name="complete_edit_email">Complete Edit Email</string>
-    <string name="edit_email">Edit Email</string>
+    <string name="close_edit">Close Edit</string>
+    <string name="complete_edit">Complete Edit</string>
+    <string name="edit">Edit </string>
     <string name="email_with_dots">Email:</string>
     <string name="full_name_with_dots">Full Name:</string>
+    <string name="first_name_with_dots">First Name:</string>
+    <string name="last_name_with_dots">Last Name:</string>
+    <string name="first_name_updated_successfully">First name updated successfully</string>
+    <string name="last_name_updated_successfully">Last name updated successfully</string>
 </resources>
