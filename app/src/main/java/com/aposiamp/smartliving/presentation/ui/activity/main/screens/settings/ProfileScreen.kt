@@ -55,7 +55,7 @@ fun ProfileScreen(
 
     LaunchedEffect(Unit) {
         viewModel.toastMessage.collectLatest { message ->
-            Toast.makeText(navController.context, message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
     }
 
