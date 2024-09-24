@@ -1,6 +1,5 @@
 package com.aposiamp.smartliving.presentation.ui.component
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -141,18 +140,18 @@ fun PasswordTextFieldComponent(
 }
 
 @Composable
-fun EditableEmailField(
-    email: String,
-    emailError: String?,
+fun EditableField(
+    value: String,
+    error: String?,
     onUpdateEmail: (String) -> Unit
 ) {
     var isEditing by remember { mutableStateOf(false) }
-    var emailText by remember { mutableStateOf(email) }
+    var text by remember { mutableStateOf(value) }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
+            .padding(horizontal = 16.dp)
     ) {
         Row(
             modifier = Modifier
@@ -161,14 +160,14 @@ fun EditableEmailField(
             OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth(),
-                value = emailText,
-                onValueChange = { emailText = it },
+                value = text,
+                onValueChange = { text = it },
                 enabled = isEditing,
-                isError = emailError != null,
+                isError = error != null,
                 supportingText = {
-                    if (emailError != null) {
+                    if (error != null) {
                         ErrorSupportingTextComponent(
-                            value = emailError
+                            value = error
                         )
                     } else {
                         Text(
@@ -186,23 +185,23 @@ fun EditableEmailField(
                 IconButton(
                     onClick = {
                         isEditing = false
-                        emailText = email
+                        text = value
                     }
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.close),
-                        contentDescription = stringResource(id = R.string.close_edit_email)
+                        contentDescription = stringResource(id = R.string.close_edit)
                     )
                 }
                 IconButton(
                     onClick = {
                         isEditing = false
-                        onUpdateEmail(emailText)
+                        onUpdateEmail(text)
                     }
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.check),
-                        contentDescription = stringResource(id = R.string.complete_edit_email)
+                        contentDescription = stringResource(id = R.string.complete_edit)
                     )
                 }
             }
@@ -215,7 +214,7 @@ fun EditableEmailField(
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.edit),
-                    contentDescription = stringResource(id = R.string.edit_email)
+                    contentDescription = stringResource(id = R.string.edit)
                 )
             }
         }
