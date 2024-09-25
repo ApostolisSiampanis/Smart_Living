@@ -11,16 +11,16 @@ import com.aposiamp.smartliving.domain.model.DeviceData
 import com.aposiamp.smartliving.domain.model.DeviceIdAndTypeData
 import com.aposiamp.smartliving.domain.model.DeviceType
 import com.aposiamp.smartliving.domain.model.DeviceTypeItem
-import com.aposiamp.smartliving.domain.usecase.device.CheckIfDeviceExistsUseCase
-import com.aposiamp.smartliving.domain.usecase.device.SetDeviceDataUseCase
-import com.aposiamp.smartliving.domain.usecase.device.ValidateDeviceExistence
+import com.aposiamp.smartliving.domain.usecase.devices.CheckIfDeviceExistsUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceDataUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomId
 import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.presentation.mapper.RoomDataUiMapper
-import com.aposiamp.smartliving.presentation.model.CreateFormResult
+import com.aposiamp.smartliving.presentation.model.FormResult
 import com.aposiamp.smartliving.presentation.model.DeviceTypeUiItem
 import com.aposiamp.smartliving.presentation.model.RoomDataUiModel
 import com.aposiamp.smartliving.presentation.ui.event.main.AddDeviceFormEvent
@@ -41,8 +41,8 @@ class AddANewDeviceViewModel(
     private var _formState by mutableStateOf(AddDeviceFormState())
     val formState: AddDeviceFormState get() = _formState
 
-    private val _addDeviceFlow = MutableStateFlow<Result<CreateFormResult>?>(null)
-    val addDeviceFlow: StateFlow<Result<CreateFormResult>?> = _addDeviceFlow
+    private val _addDeviceFlow = MutableStateFlow<Result<FormResult>?>(null)
+    val addDeviceFlow: StateFlow<Result<FormResult>?> = _addDeviceFlow
 
     private val _roomListFlow = MutableStateFlow<List<RoomDataUiModel>>(emptyList())
     val roomListFlow: StateFlow<List<RoomDataUiModel>> = _roomListFlow
@@ -105,7 +105,7 @@ class AddANewDeviceViewModel(
                 deviceName = _formState.deviceName
             )
             setDeviceDataUseCase.execute(placeId, _formState.roomId, deviceData)
-            _addDeviceFlow.value = Result.Success(CreateFormResult(success = true))
+            _addDeviceFlow.value = Result.Success(FormResult(success = true))
         } catch (e: Exception) {
             _formState = _formState.copy(deviceExistenceError = e.message)
             _addDeviceFlow.value = Result.Error(e)

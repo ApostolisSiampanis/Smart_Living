@@ -38,4 +38,28 @@ class AuthRepositoryImpl(
     override fun logout() {
         firebaseDataSource.logout()
     }
+
+    override suspend fun forgotPassword(email: String) {
+        firebaseDataSource.forgotPassword(email)
+    }
+
+    override suspend fun updateEmail(email: String) {
+        firebaseDataSource.updateEmail(email)
+    }
+
+    override suspend fun updateFirstName(uid: String, firstName: String) {
+        firestoreDataSource.updateFirstName(uid, firstName)
+    }
+
+    override suspend fun updateLastName(uid: String, lastName: String) {
+        firestoreDataSource.updateLastName(uid, lastName)
+    }
+
+    override suspend fun updatePassword(password: String) {
+        firebaseDataSource.updatePassword(password)
+    }
+
+    override suspend fun deleteUser() {
+        firebaseDataSource.deleteUser()
+    }
 }

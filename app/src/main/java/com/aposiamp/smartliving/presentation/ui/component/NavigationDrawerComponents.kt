@@ -141,7 +141,7 @@ fun DrawerItem(
             }
         },
         label = {
-            DrawerItemTextComponent(
+            ItemTextComponent(
                 text = stringResource(id = item.titleResId),
                 color = textColor.copy(alpha = if (isSelected) 1f else 0.6f)
             )

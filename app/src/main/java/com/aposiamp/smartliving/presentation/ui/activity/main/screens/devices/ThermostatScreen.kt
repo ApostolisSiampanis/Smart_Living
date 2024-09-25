@@ -30,7 +30,7 @@ import com.aposiamp.smartliving.presentation.ui.component.IndoorEnvironmentalDat
 import com.aposiamp.smartliving.presentation.ui.component.DeviceModeButtonsRowComponent
 import com.aposiamp.smartliving.presentation.ui.component.DeviceOnOffButton
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
-import com.aposiamp.smartliving.presentation.viewmodel.main.ThermostatViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.devices.ThermostatViewModel
 
 @Composable
 fun ThermostatScreen(

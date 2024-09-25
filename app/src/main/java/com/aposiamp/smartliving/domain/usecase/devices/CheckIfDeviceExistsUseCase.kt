@@ -1,4 +1,4 @@
-package com.aposiamp.smartliving.domain.usecase.device
+package com.aposiamp.smartliving.domain.usecase.devices
 
 import com.aposiamp.smartliving.domain.mapper.DeviceIdAndTypeMapper
 import com.aposiamp.smartliving.domain.model.DeviceIdAndTypeData

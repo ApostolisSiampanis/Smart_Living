@@ -12,11 +12,13 @@ import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.Permiss
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.PrivacyPolicyScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.TermsAndConditionsScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.WelcomeScreen
+import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.auth.ForgotPasswordScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.auth.LoginScreen
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.screens.auth.SignUpScreen
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.CreateANewSpaceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.PermissionsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.WelcomeNavigationViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.ForgotPasswordViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.LoginViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.welcome.auth.SignUpViewModel
 
@@ -25,6 +27,7 @@ internal fun WelcomeNavigation(
     welcomeNavigationViewModel: WelcomeNavigationViewModel,
     loginViewModel: LoginViewModel,
     signUpViewModel: SignUpViewModel,
+    forgotPasswordViewModel: ForgotPasswordViewModel,
     permissionsViewModel: PermissionsViewModel,
     createANewSpaceViewModel: CreateANewSpaceViewModel
 ) {
@@ -63,6 +66,12 @@ internal fun WelcomeNavigation(
             composable("privacyPolicy") {
                 PrivacyPolicyScreen(
                     navController = navController
+                )
+            }
+            composable("forgotPassword"){
+                ForgotPasswordScreen(
+                    navController = navController,
+                    viewModel = forgotPasswordViewModel
                 )
             }
             composable("permissions") {

@@ -9,7 +9,7 @@ import com.aposiamp.smartliving.domain.model.RoomData
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
 import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateRoomName
-import com.aposiamp.smartliving.presentation.model.CreateFormResult
+import com.aposiamp.smartliving.presentation.model.FormResult
 import com.aposiamp.smartliving.presentation.ui.event.main.CreateRoomFormEvent
 import com.aposiamp.smartliving.presentation.ui.state.main.CreateRoomFormState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,8 +23,8 @@ class CreateANewRoomViewModel(
     private var _formState by mutableStateOf(CreateRoomFormState())
     val formState: CreateRoomFormState get() = _formState
 
-    private val _createRoomFlow = MutableStateFlow<Result<CreateFormResult>?>(null)
-    val createRoomFlow: StateFlow<Result<CreateFormResult>?> = _createRoomFlow
+    private val _createRoomFlow = MutableStateFlow<Result<FormResult>?>(null)
+    val createRoomFlow: StateFlow<Result<FormResult>?> = _createRoomFlow
 
     fun onEvent(event: CreateRoomFormEvent) {
         when (event) {
@@ -58,7 +58,7 @@ class CreateANewRoomViewModel(
                 roomName = _formState.roomName
             )
             setRoomDataUseCase.execute(placeId, roomData)
-            _createRoomFlow.value = Result.Success(CreateFormResult(success = true))
+            _createRoomFlow.value = Result.Success(FormResult(success = true))
         } catch (e: Exception) {
             _formState = _formState.copy(roomNameError = e.message)
             _createRoomFlow.value = Result.Error(e)

@@ -2,12 +2,15 @@ package com.aposiamp.smartliving.presentation.ui.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardDefaults.cardElevation
@@ -22,7 +25,9 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
+import com.aposiamp.smartliving.presentation.model.SettingsItemUiModel
 import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
 
 @Composable
@@ -185,6 +190,83 @@ fun IndoorEnvironmentalDataCard(
         ) {
             GeneralNormalText(value = stringResource(id = R.string.indoor_humidity))
             GeneralNormalText(value = "$indoorHumidity " + stringResource(id = R.string.percentage))
+        }
+    }
+}
+
+@Composable
+fun SettingCard(
+    item: SettingsItemUiModel,
+    navController: NavController
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(0.9f)
+            .padding(8.dp)
+            .background(
+                shape = componentShapes.large,
+                color = Color.White
+            )
+            .clickable {
+                item.route?.let { navController.navigate(it) }
+            },
+        elevation = cardElevation(defaultElevation = 4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        )
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            item.icon?.let { icon ->
+                Image(
+                    painter = painterResource(id = icon),
+                    contentDescription = stringResource(id = item.titleResId),
+                    modifier = Modifier.size(40.dp)
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                ItemTextComponent(
+                    text = stringResource(id = item.titleResId),
+                    color = Color.Black
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun GeneralClickableCard(
+    value: String,
+    textColor: Color = Color.Black,
+    onClick: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .clickable { onClick() }
+            .background(
+                shape = componentShapes.medium,
+                color = Color.White
+            ),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        elevation = cardElevation(defaultElevation = 4.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            GeneralBoldText(
+                modifier = Modifier.padding(16.dp),
+                value = value,
+                fontSize = 20,
+                color = textColor
+            )
         }
     }
 }

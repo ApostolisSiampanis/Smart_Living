@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.presentation.ui.component.AuthHeadingTextComponent
+import com.aposiamp.smartliving.presentation.ui.component.HeadingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.TextFieldComponentText
 import com.aposiamp.smartliving.presentation.ui.component.UseDifferentAccountLogoutAndLoginAgain
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
@@ -39,7 +39,7 @@ fun UserNotInSpaceScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             item {
-                AuthHeadingTextComponent(value = stringResource(id = R.string.you_are_not_in_your_space))
+                HeadingTextComponent(value = stringResource(id = R.string.you_are_not_in_your_space))
                 Image(
                     painter = painterResource(id = R.drawable.user_not_in_space),
                     contentDescription = stringResource(id = R.string.user_not_in_space)

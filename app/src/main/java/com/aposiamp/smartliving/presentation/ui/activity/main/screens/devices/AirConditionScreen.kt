@@ -31,7 +31,7 @@ import com.aposiamp.smartliving.presentation.ui.component.DeviceModeButtonsRowCo
 import com.aposiamp.smartliving.presentation.ui.component.DeviceOnOffButton
 import com.aposiamp.smartliving.presentation.ui.component.FanSpeedControl
 import com.aposiamp.smartliving.presentation.ui.component.IndoorEnvironmentalDataCard
-import com.aposiamp.smartliving.presentation.viewmodel.main.AirConditionViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.devices.AirConditionViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 
 @Composable

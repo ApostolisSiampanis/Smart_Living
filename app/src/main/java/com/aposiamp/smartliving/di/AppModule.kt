@@ -2,14 +2,17 @@ package com.aposiamp.smartliving.di
 
 import android.hardware.Sensor
 import android.hardware.SensorManager
+import com.aposiamp.smartliving.data.source.remote.CleanUpApiService
 import com.aposiamp.smartliving.data.source.remote.DeviceApiService
 import com.aposiamp.smartliving.domain.repository.AuthRepository
+import com.aposiamp.smartliving.domain.repository.CleanupRepository
 import com.aposiamp.smartliving.domain.repository.DeviceRepository
 import com.aposiamp.smartliving.domain.repository.SpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.repository.LocationRepository
 import com.aposiamp.smartliving.domain.repository.PlacesRepository
 import com.aposiamp.smartliving.domain.repository.RoomRepository
+import com.aposiamp.smartliving.domain.repository.UserAccountRepository
 import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSpaceUseCase
@@ -26,13 +29,22 @@ import com.aposiamp.smartliving.domain.usecase.user.SignUpUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
-import com.aposiamp.smartliving.domain.usecase.device.CheckIfDeviceExistsUseCase
-import com.aposiamp.smartliving.domain.usecase.device.SetDeviceDataUseCase
-import com.aposiamp.smartliving.domain.usecase.device.ValidateDeviceExistence
+import com.aposiamp.smartliving.domain.usecase.devices.CheckIfDeviceExistsUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceDataUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
+import com.aposiamp.smartliving.domain.usecase.user.CleanupUserDataUseCase
+import com.aposiamp.smartliving.domain.usecase.user.DeleteUserUseCase
+import com.aposiamp.smartliving.domain.usecase.user.ForgotPasswordUseCase
+import com.aposiamp.smartliving.domain.usecase.user.GetAccountProfileDetailsUseCase
+import com.aposiamp.smartliving.domain.usecase.user.UpdateEmailUseCase
+import com.aposiamp.smartliving.domain.usecase.user.UpdateFirstNameUseCase
+import com.aposiamp.smartliving.domain.usecase.user.UpdateLastNameUseCase
+import com.aposiamp.smartliving.domain.usecase.user.UpdatePasswordUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceId
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateDeviceName
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
@@ -60,6 +72,8 @@ interface AppModule {
     val roomRepository: RoomRepository
     val deviceRepository: DeviceRepository
     val placesRepository: PlacesRepository
+    val userAccountRepository: UserAccountRepository
+    val cleanupRepository: CleanupRepository
 
     // Firebase
     fun getFirebaseAuth(): FirebaseAuth
@@ -70,7 +84,8 @@ interface AppModule {
     fun getPlacesClient(): PlacesClient
 
     // Retrofit API
-    fun getRetrofitApi(): DeviceApiService
+    fun getDeviceRetrofitApi(): DeviceApiService
+    fun getCleanUpRetrofitApi(): CleanUpApiService
 
     // SensorManager and Sensors
     fun getSensorManager(): SensorManager
@@ -88,6 +103,9 @@ interface AppModule {
 
     // DropDownMenu UseCase
     val getDropdownMenuItemsUseCase: GetDropdownMenuItemsUseCase
+
+    // Settings UseCases
+    val getSettingsScreenItemsUseCase: GetSettingsScreenItemsUseCase
 
     // Sensor UseCases
     val getEnvironmentalDataUseCase: GetEnvironmentalDataUseCase
@@ -120,7 +138,15 @@ interface AppModule {
     val loginUseCase: LoginUseCase
     val signUpUseCase: SignUpUseCase
     val logoutUseCase: LogoutUseCase
+    val forgotPasswordUseCase: ForgotPasswordUseCase
     val getCurrentUserUseCase: GetCurrentUserUseCase
+    val getAccountProfileDetailsUseCase: GetAccountProfileDetailsUseCase
+    val updateFirstNameUseCase: UpdateFirstNameUseCase
+    val updateLastNameUseCase: UpdateLastNameUseCase
+    val updateEmailUseCase: UpdateEmailUseCase
+    val updatePasswordUseCase: UpdatePasswordUseCase
+    val deleteUserUseCase: DeleteUserUseCase
+    val cleanupUserDataUseCase: CleanupUserDataUseCase
 
     // For SignIn and SignUp screens
     val validateFirstName: ValidateFirstName

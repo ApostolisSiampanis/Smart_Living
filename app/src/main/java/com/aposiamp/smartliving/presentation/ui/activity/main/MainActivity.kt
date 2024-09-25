@@ -18,7 +18,11 @@ import com.aposiamp.smartliving.presentation.utils.viewModelFactory
 import com.aposiamp.smartliving.presentation.viewmodel.main.AddANewDeviceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountProfileViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.ProfileViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,15 +103,59 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
+                    val settingsViewModel = viewModel<SettingsViewModel>(
+                        factory = viewModelFactory {
+                            SettingsViewModel(
+                                getSettingsScreenItemsUseCase = SmartLiving.appModule.getSettingsScreenItemsUseCase
+                            )
+                        }
+                    )
+
+                    val accountProfileViewModel = viewModel<AccountProfileViewModel>(
+                        factory = viewModelFactory {
+                            AccountProfileViewModel(
+                                getAccountProfileDetailsUseCase = SmartLiving.appModule.getAccountProfileDetailsUseCase
+                            )
+                        }
+                    )
+
+                    val accountViewModel = viewModel<AccountViewModel>(
+                        factory = viewModelFactory {
+                            AccountViewModel(
+                                validatePassword = SmartLiving.appModule.validatePassword,
+                                updatePasswordUseCase = SmartLiving.appModule.updatePasswordUseCase,
+                                deleteUserUseCase = SmartLiving.appModule.deleteUserUseCase,
+                                cleanupUserDataUseCase = SmartLiving.appModule.cleanupUserDataUseCase
+                            )
+                        }
+                    )
+
+                    val profileViewModel = viewModel<ProfileViewModel>(
+                        factory = viewModelFactory {
+                            ProfileViewModel(
+                                validateFirstName = SmartLiving.appModule.validateFirstName,
+                                validateLastName = SmartLiving.appModule.validateLastName,
+                                validateEmail = SmartLiving.appModule.validateEmail,
+                                updateFirstNameUseCase = SmartLiving.appModule.updateFirstNameUseCase,
+                                updateLastNameUseCase = SmartLiving.appModule.updateLastNameUseCase,
+                                updateEmailUseCase = SmartLiving.appModule.updateEmailUseCase
+                            )
+                        }
+                    )
+
                     MainNavigation(
                         context = context,
                         devicesViewModel = devicesViewModel,
+                        settingsViewModel = settingsViewModel,
+                        accountViewModel = accountViewModel,
+                        profileViewModel = profileViewModel,
                         mainSharedViewModel = mainSharedViewModel,
                         navigationViewModel = navigationViewModel,
                         mainNavigationViewModel = mainNavigationViewModel,
                         userNotInSpaceViewModel = userNotInSpaceViewModel,
                         createANewRoomViewModel = createANewRoomViewModel,
-                        addANewDeviceViewModel = addANewDeviceViewModel
+                        addANewDeviceViewModel = addANewDeviceViewModel,
+                        accountProfileViewModel =accountProfileViewModel
                     )
                 }
             }

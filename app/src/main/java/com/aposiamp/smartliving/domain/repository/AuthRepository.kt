@@ -18,4 +18,16 @@ interface AuthRepository {
     ): FirebaseUser
 
     fun logout()
+
+    suspend fun forgotPassword(email: String)
+
+    suspend fun updateEmail(email: String)
+
+    suspend fun updateFirstName(uid: String, firstName: String)
+
+    suspend fun updateLastName(uid: String, lastName: String)
+
+    suspend fun updatePassword(password: String)
+
+    suspend fun deleteUser()
 }

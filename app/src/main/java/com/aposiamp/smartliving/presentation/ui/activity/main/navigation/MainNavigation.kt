@@ -12,28 +12,39 @@ import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AboutScree
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AddANewDeviceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.CreateANewRoomScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.DevicesScreen
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings.SettingsScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.UserNotInSpaceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.AirConditionScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.DehumidifierScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.ThermostatScreen
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings.AccountScreen
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings.ProfileScreen
 import com.aposiamp.smartliving.presentation.viewmodel.main.AddANewDeviceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountProfileViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.settings.ProfileViewModel
 
 @Composable
 internal fun MainNavigation(
     context: Context,
     devicesViewModel: DevicesViewModel,
+    settingsViewModel: SettingsViewModel,
+    accountViewModel: AccountViewModel,
+    profileViewModel: ProfileViewModel,
     mainSharedViewModel: MainSharedViewModel,
     navigationViewModel: NavigationViewModel,
     mainNavigationViewModel: MainNavigationViewModel,
     userNotInSpaceViewModel: UserNotInSpaceViewModel,
     createANewRoomViewModel: CreateANewRoomViewModel,
-    addANewDeviceViewModel: AddANewDeviceViewModel
+    addANewDeviceViewModel: AddANewDeviceViewModel,
+    accountProfileViewModel: AccountProfileViewModel
 ) {
     val navController = rememberNavController()
     val startDestination by mainNavigationViewModel.startDestination.collectAsState()
@@ -76,6 +87,28 @@ internal fun MainNavigation(
                 )
             }
 
+            composable("settings"){
+                SettingsScreen(
+                    navController = navController,
+                    settingsViewModel = settingsViewModel,
+                    navigationViewModel = navigationViewModel,
+                    context = context
+                )
+            }
+            composable("profile"){
+                ProfileScreen(
+                    navController = navController,
+                    viewModel = profileViewModel,
+                    accountProfileViewModel = accountProfileViewModel
+                )
+            }
+            composable("account"){
+                AccountScreen(
+                    navController = navController,
+                    viewModel = accountViewModel,
+                    accountProfileViewModel = accountProfileViewModel
+                )
+            }
             composable("about"){
                 AboutScreen(
                     navController = navController,
