@@ -7,19 +7,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -49,11 +42,9 @@ import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.SmartLiving
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardDefaults.cardElevation
 import com.aposiamp.smartliving.domain.model.DeviceType
 import com.aposiamp.smartliving.presentation.ui.component.BottomBar
+import com.aposiamp.smartliving.presentation.ui.component.DeviceCard
 import com.aposiamp.smartliving.presentation.ui.component.DividerComponent
 import com.aposiamp.smartliving.presentation.ui.component.MenuMediumTopAppBar
 import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
@@ -208,57 +199,31 @@ fun DevicesScreen(
                                                 .padding(top = 8.dp, start = 8.dp)
                                         ) {
                                             items(devices) { device ->
-                                                Card(
-                                                    modifier = Modifier
-                                                        .weight(1f)
-                                                        .padding(8.dp)
-                                                        .clickable {
-                                                            when (device.deviceType) {
-                                                                DeviceType.AIR_CONDITIONER -> navController.navigate(
-                                                                    "airCondition"
-                                                                )
-
-                                                                DeviceType.THERMOSTAT -> navController.navigate(
-                                                                    "thermostat"
-                                                                )
-
-                                                                DeviceType.DEHUMIDIFIER -> navController.navigate(
-                                                                    "dehumidifier"
-                                                                )
-
-                                                                else -> navController.navigate("airCondition")
-                                                            }
-                                                        },
-                                                    elevation = cardElevation(defaultElevation = 4.dp),
-                                                    colors = CardDefaults.cardColors(
-                                                        containerColor = Color.White
-                                                    )
-                                                ) {
-                                                    Column(
-                                                        modifier = Modifier
-                                                            .fillMaxSize()
-                                                            .padding(8.dp),
-                                                        verticalArrangement = Arrangement.Center,
-                                                        horizontalAlignment = Alignment.CenterHorizontally
-                                                    ) {
-                                                        Image(
-                                                            painter = painterResource(
-                                                                id = when (device.deviceType) {
-                                                                    DeviceType.AIR_CONDITIONER -> R.drawable.air_condition
-                                                                    DeviceType.THERMOSTAT -> R.drawable.thermostat
-                                                                    DeviceType.DEHUMIDIFIER -> R.drawable.dehumidifier
-                                                                    else -> R.drawable.air_condition
-                                                                }
-                                                            ),
-                                                            contentDescription = null,
-                                                            modifier = Modifier
-                                                                .size(64.dp)
-                                                        )
-                                                        Text(
-                                                            text = device.deviceName ?: ""
-                                                        )
-                                                    }
+                                                val painter = when (device.deviceType) {
+                                                    DeviceType.AIR_CONDITIONER -> painterResource(R.drawable.air_condition)
+                                                    DeviceType.THERMOSTAT -> painterResource(R.drawable.thermostat)
+                                                    DeviceType.DEHUMIDIFIER -> painterResource(R.drawable.dehumidifier)
+                                                    else -> painterResource(R.drawable.air_condition)
                                                 }
+                                                val contentDescription = when (device.deviceType) {
+                                                    DeviceType.AIR_CONDITIONER -> stringResource(R.string.air_conditioner)
+                                                    DeviceType.THERMOSTAT -> stringResource(R.string.thermostat)
+                                                    DeviceType.DEHUMIDIFIER -> stringResource(R.string.dehumidifier)
+                                                    else -> stringResource(R.string.air_conditioner)
+                                                }
+                                                DeviceCard(
+                                                    deviceName = device.deviceName ?: "",
+                                                    painter = painter,
+                                                    contentDescription = contentDescription,
+                                                    onClick = {
+                                                        when (device.deviceType) {
+                                                            DeviceType.AIR_CONDITIONER -> navController.navigate("airCondition")
+                                                            DeviceType.THERMOSTAT -> navController.navigate("thermostat")
+                                                            DeviceType.DEHUMIDIFIER -> navController.navigate("dehumidifier")
+                                                            else -> navController.navigate("airCondition")
+                                                        }
+                                                    }
+                                                )
                                             }
 
                                         }
