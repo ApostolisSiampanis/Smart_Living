@@ -4,6 +4,7 @@ import com.aposiamp.smartliving.data.model.DeviceDataDTO
 import com.aposiamp.smartliving.data.model.RoomDataDTO
 import com.aposiamp.smartliving.data.model.SpaceDataDTO
 import com.aposiamp.smartliving.data.utils.await
+import com.aposiamp.smartliving.domain.model.DeviceType
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
@@ -81,6 +82,25 @@ class FirebaseDataSource(
             }
         }
         return roomList
+    }
+
+    suspend fun getDeviceList(userId: String, spaceId: String, roomId: String): List<DeviceDataDTO>? {
+        val snapshot = firebase.getReference("devices").child(userId).child(spaceId).child(roomId).get().await()
+
+        if (!snapshot.exists() || !snapshot.hasChildren()) {
+            return null
+        }
+
+        val deviceList = mutableListOf<DeviceDataDTO>()
+        for (deviceSnapshot in snapshot.children) {
+            val deviceId = deviceSnapshot.key
+            val deviceName = deviceSnapshot.child("device_name").getValue(String::class.java)
+            val deviceType = deviceSnapshot.child("device_type").getValue(DeviceType::class.java)
+            if (deviceId != null && deviceName != null && deviceType != null) {
+                deviceList.add(DeviceDataDTO(deviceId, deviceType, deviceName))
+            }
+        }
+        return deviceList
     }
 
     suspend fun checkIfAnyRoomExists(userId: String, spaceId: String): Boolean {
