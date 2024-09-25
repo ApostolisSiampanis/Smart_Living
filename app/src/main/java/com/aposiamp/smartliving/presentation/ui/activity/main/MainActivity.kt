@@ -39,7 +39,8 @@ class MainActivity : ComponentActivity() {
                         factory = viewModelFactory {
                             DevicesViewModel(
                                 checkIfAnyRoomExistsUseCase = SmartLiving.appModule.checkIfAnyRoomExistsUseCase,
-                                getRoomListUseCase = SmartLiving.appModule.getRoomListUseCase
+                                getRoomListUseCase = SmartLiving.appModule.getRoomListUseCase,
+                                getDeviceListUseCase = SmartLiving.appModule.getDeviceListUseCase
                             )
                         }
                     )
