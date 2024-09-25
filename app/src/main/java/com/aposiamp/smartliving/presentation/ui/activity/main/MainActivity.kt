@@ -124,7 +124,8 @@ class MainActivity : ComponentActivity() {
                             AccountViewModel(
                                 validatePassword = SmartLiving.appModule.validatePassword,
                                 updatePasswordUseCase = SmartLiving.appModule.updatePasswordUseCase,
-                                deleteUserUseCase = SmartLiving.appModule.deleteUserUseCase
+                                deleteUserUseCase = SmartLiving.appModule.deleteUserUseCase,
+                                cleanupUserDataUseCase = SmartLiving.appModule.cleanupUserDataUseCase
                             )
                         }
                     )
