@@ -12,8 +12,11 @@ import com.aposiamp.smartliving.data.repository.LocationRepositoryImpl
 import com.aposiamp.smartliving.data.repository.PlacesRepositoryImpl
 import com.aposiamp.smartliving.data.repository.RoomRepositoryImpl
 import com.aposiamp.smartliving.data.repository.AccountProfileRepositoryImpl
+import com.aposiamp.smartliving.data.repository.CleanupRepositoryImpl
 import com.aposiamp.smartliving.data.source.local.EnvironmentalSensorDataSource
 import com.aposiamp.smartliving.data.source.local.LocationDataSource
+import com.aposiamp.smartliving.data.source.remote.CleanUpApiService
+import com.aposiamp.smartliving.data.source.remote.CleanUpDataSource
 import com.aposiamp.smartliving.data.source.remote.DeviceApiService
 import com.aposiamp.smartliving.data.source.remote.DeviceDataSource
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
@@ -21,6 +24,7 @@ import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
 import com.aposiamp.smartliving.data.source.remote.PlacesDataSource
 import com.aposiamp.smartliving.data.utils.RetrofitClient
 import com.aposiamp.smartliving.domain.repository.AuthRepository
+import com.aposiamp.smartliving.domain.repository.CleanupRepository
 import com.aposiamp.smartliving.domain.repository.DeviceRepository
 import com.aposiamp.smartliving.domain.repository.SpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
@@ -52,6 +56,7 @@ import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
+import com.aposiamp.smartliving.domain.usecase.user.CleanupUserDataUseCase
 import com.aposiamp.smartliving.domain.usecase.user.DeleteUserUseCase
 import com.aposiamp.smartliving.domain.usecase.user.ForgotPasswordUseCase
 import com.aposiamp.smartliving.domain.usecase.user.GetAccountProfileDetailsUseCase
@@ -85,8 +90,9 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     private val firestoreDataSource = FirestoreDataSource(getFirestoreDatabase())
     private val environmentalSensorDataSource = EnvironmentalSensorDataSource(getSensorManager(), getTemperatureSensor(), getHumiditySensor())
     private val locationDataSource = LocationDataSource(appContext, getFusedLocationProviderClient())
-    private val deviceDataSource = DeviceDataSource(getRetrofitApi())
+    private val deviceDataSource = DeviceDataSource(getDeviceRetrofitApi())
     private val placesDataSource = PlacesDataSource(getPlacesClient())
+    private val cleanUpDataSource = CleanUpDataSource(getCleanUpRetrofitApi())
 
     // Repositories
     override val authRepository: AuthRepository by lazy {
@@ -121,6 +127,9 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         AccountProfileRepositoryImpl(firestoreDataSource)
     }
 
+    override val cleanupRepository: CleanupRepository by lazy {
+        CleanupRepositoryImpl(cleanUpDataSource)
+    }
 
     // Firebase
     override fun getFirebaseAuth(): FirebaseAuth {
@@ -142,8 +151,12 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     }
 
     // Retrofit API
-    override fun getRetrofitApi(): DeviceApiService {
-        return RetrofitClient.create()
+    override fun getDeviceRetrofitApi(): DeviceApiService {
+        return RetrofitClient.createDeviceService()
+    }
+
+    override fun getCleanUpRetrofitApi(): CleanUpApiService {
+        return RetrofitClient.createCleanUpService()
     }
 
     // SensorManager and Sensors
@@ -293,6 +306,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val deleteUserUseCase: DeleteUserUseCase by lazy {
         DeleteUserUseCase(authRepository)
+    }
+
+    override val cleanupUserDataUseCase: CleanupUserDataUseCase by lazy {
+        CleanupUserDataUseCase(getCurrentUserUseCase, cleanupRepository)
     }
 
     // For SignIn and SignUp screens
