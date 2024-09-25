@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aposiamp.smartliving.R
+import com.aposiamp.smartliving.domain.usecase.user.CleanupUserDataUseCase
 import com.aposiamp.smartliving.domain.usecase.user.DeleteUserUseCase
 import com.aposiamp.smartliving.domain.usecase.user.UpdatePasswordUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 class AccountViewModel(
     private val validatePassword: ValidatePassword,
     private val updatePasswordUseCase: UpdatePasswordUseCase,
+    private val cleanupUserDataUseCase: CleanupUserDataUseCase,
     private val deleteUserUseCase: DeleteUserUseCase
 ): ViewModel() {
     private val _passwordError = MutableStateFlow<String?>(null)
@@ -45,6 +47,9 @@ class AccountViewModel(
     fun deleteUserAndLogout(context: Context, onSuccess: () -> Unit) {
         viewModelScope.launch {
             try {
+                // Delete user's data
+                cleanupUserDataUseCase.execute()
+                // Delete user account
                 deleteUserUseCase.execute()
                 onSuccess()
             } catch (e: Exception) {
