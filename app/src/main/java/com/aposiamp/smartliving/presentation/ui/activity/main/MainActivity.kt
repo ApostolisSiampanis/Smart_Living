@@ -38,7 +38,8 @@ class MainActivity : ComponentActivity() {
                     val devicesViewModel = viewModel<DevicesViewModel>(
                         factory = viewModelFactory {
                             DevicesViewModel(
-                                checkIfAnyRoomExistsUseCase = SmartLiving.appModule.checkIfAnyRoomExistsUseCase
+                                checkIfAnyRoomExistsUseCase = SmartLiving.appModule.checkIfAnyRoomExistsUseCase,
+                                getRoomListUseCase = SmartLiving.appModule.getRoomListUseCase
                             )
                         }
                     )
@@ -155,7 +156,7 @@ class MainActivity : ComponentActivity() {
                         userNotInSpaceViewModel = userNotInSpaceViewModel,
                         createANewRoomViewModel = createANewRoomViewModel,
                         addANewDeviceViewModel = addANewDeviceViewModel,
-                        accountProfileViewModel =accountProfileViewModel
+                        accountProfileViewModel = accountProfileViewModel
                     )
                 }
             }
