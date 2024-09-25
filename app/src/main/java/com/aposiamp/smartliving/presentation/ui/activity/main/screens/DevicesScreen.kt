@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
@@ -27,7 +28,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,6 +43,7 @@ import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.SmartLiving
 import com.aposiamp.smartliving.presentation.ui.component.BottomBar
+import com.aposiamp.smartliving.presentation.ui.component.DividerComponent
 import com.aposiamp.smartliving.presentation.ui.component.MenuMediumTopAppBar
 import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
@@ -152,75 +157,93 @@ fun DevicesScreen(
                                 }
                             }
                         } else {
-                            // TODO: Add the devices here, remove the buttons
                             roomList.forEach { room ->
-                                Column {
-                                    Text(
-                                        text = room.roomName ?: "",
-                                        modifier = Modifier.padding(8.dp)
-                                    )
-                                    LazyRow(
-                                        modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        item {
-                                            Button(
-                                                onClick = {
-                                                    navController.navigate("thermostat")
-                                                }
-                                            ) {
-                                                Text(text = "Thermostat")
-                                            }
-                                        }
-                                        item {
-                                            Button(
-                                                onClick = {
-                                                    navController.navigate("airCondition")
-                                                }
-                                            ) {
-                                                Text(text = "Air Condition")
-                                            }
-                                        }
-                                        item {
-                                            Button(
-                                                onClick = {
-                                                    navController.navigate("dehumidifier")
-                                                }
-                                            ) {
-                                                Text(text = "Dehumidifier")
-                                            }
-                                        }
-                                        item {
-                                            Button(
-                                                onClick = {
-                                                    navController.navigate("thermostat")
-                                                }
-                                            ) {
-                                                Text(text = "Thermostat")
-                                            }
-                                        }
-                                        item {
-                                            Button(
-                                                onClick = {
-                                                    navController.navigate("airCondition")
-                                                }
-                                            ) {
-                                                Text(text = "Air Condition")
-                                            }
-                                        }
-                                        item {
-                                            Button(
-                                                onClick = {
-                                                    navController.navigate("dehumidifier")
-                                                }
-                                            ) {
-                                                Text(text = "Dehumidifier")
-                                            }
-                                        }
+                                var isExpanded by remember { mutableStateOf(true) }
 
+                                Column {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .clickable { isExpanded = !isExpanded }
+                                            .padding(8.dp),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(
+                                            text = room.roomName ?: "",
+                                            modifier = Modifier.weight(1f)
+                                        )
+                                        Icon(
+                                            painter = painterResource(
+                                                id = if (isExpanded) R.drawable.arrow_up else R.drawable.arrow_down
+                                            ),
+                                            contentDescription = stringResource(id = if (isExpanded) R.string.expand else R.string.collapse)
+                                        )
+                                    }
+                                    DividerComponent()
+                                    if (isExpanded) {
+                                        LazyRow(
+                                            modifier = Modifier.fillMaxWidth()
+                                        ) {
+                                            // TODO: Add the devices here, remove the buttons
+                                            item {
+                                                Button(
+                                                    onClick = {
+                                                        navController.navigate("thermostat")
+                                                    }
+                                                ) {
+                                                    Text(text = "Thermostat")
+                                                }
+                                            }
+                                            item {
+                                                Button(
+                                                    onClick = {
+                                                        navController.navigate("airCondition")
+                                                    }
+                                                ) {
+                                                    Text(text = "Air Condition")
+                                                }
+                                            }
+                                            item {
+                                                Button(
+                                                    onClick = {
+                                                        navController.navigate("dehumidifier")
+                                                    }
+                                                ) {
+                                                    Text(text = "Dehumidifier")
+                                                }
+                                            }
+                                            item {
+                                                Button(
+                                                    onClick = {
+                                                        navController.navigate("thermostat")
+                                                    }
+                                                ) {
+                                                    Text(text = "Thermostat")
+                                                }
+                                            }
+                                            item {
+                                                Button(
+                                                    onClick = {
+                                                        navController.navigate("airCondition")
+                                                    }
+                                                ) {
+                                                    Text(text = "Air Condition")
+                                                }
+                                            }
+                                            item {
+                                                Button(
+                                                    onClick = {
+                                                        navController.navigate("dehumidifier")
+                                                    }
+                                                ) {
+                                                    Text(text = "Dehumidifier")
+                                                }
+                                            }
+
+                                        }
                                     }
                                 }
                             }
-
                         }
                     }
                 }
