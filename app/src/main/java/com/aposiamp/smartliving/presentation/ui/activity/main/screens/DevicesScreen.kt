@@ -5,12 +5,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.SmartLiving
@@ -56,7 +59,9 @@ fun DevicesScreen(
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val space by mainSharedViewModel.space.collectAsState()
+
     val isAnyRoomExists by viewModel.isAnyRoomExists.collectAsState()
+    val roomList by viewModel.roomListFlow.collectAsState()
 
     // Retrieve the Navigation Drawer Items
     val navigationDrawerItems = navigationViewModel.getNavigationDrawerItems(context = context)
@@ -67,6 +72,12 @@ fun DevicesScreen(
 
     LaunchedEffect(space?.placeId) {
         space?.placeId?.let { viewModel.checkIfAnyRoomExists(it) }
+    }
+
+    LaunchedEffect(isAnyRoomExists) {
+        if (isAnyRoomExists == true) {
+            space?.placeId?.let { viewModel.fetchRoomList(it) }
+        }
     }
 
     ModalNavigationDrawer(
@@ -142,27 +153,74 @@ fun DevicesScreen(
                             }
                         } else {
                             // TODO: Add the devices here, remove the buttons
-                            Button(
-                                onClick = {
-                                    navController.navigate("thermostat")
+                            roomList.forEach { room ->
+                                Column {
+                                    Text(
+                                        text = room.roomName ?: "",
+                                        modifier = Modifier.padding(8.dp)
+                                    )
+                                    LazyRow(
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        item {
+                                            Button(
+                                                onClick = {
+                                                    navController.navigate("thermostat")
+                                                }
+                                            ) {
+                                                Text(text = "Thermostat")
+                                            }
+                                        }
+                                        item {
+                                            Button(
+                                                onClick = {
+                                                    navController.navigate("airCondition")
+                                                }
+                                            ) {
+                                                Text(text = "Air Condition")
+                                            }
+                                        }
+                                        item {
+                                            Button(
+                                                onClick = {
+                                                    navController.navigate("dehumidifier")
+                                                }
+                                            ) {
+                                                Text(text = "Dehumidifier")
+                                            }
+                                        }
+                                        item {
+                                            Button(
+                                                onClick = {
+                                                    navController.navigate("thermostat")
+                                                }
+                                            ) {
+                                                Text(text = "Thermostat")
+                                            }
+                                        }
+                                        item {
+                                            Button(
+                                                onClick = {
+                                                    navController.navigate("airCondition")
+                                                }
+                                            ) {
+                                                Text(text = "Air Condition")
+                                            }
+                                        }
+                                        item {
+                                            Button(
+                                                onClick = {
+                                                    navController.navigate("dehumidifier")
+                                                }
+                                            ) {
+                                                Text(text = "Dehumidifier")
+                                            }
+                                        }
+
+                                    }
                                 }
-                            ) {
-                                Text(text = "Thermostat")
                             }
-                            Button(
-                                onClick = {
-                                    navController.navigate("airCondition")
-                                }
-                            ) {
-                                Text(text = "Air Condition")
-                            }
-                            Button(
-                                onClick = {
-                                    navController.navigate("dehumidifier")
-                                }
-                            ) {
-                                Text(text = "Dehumidifier")
-                            }
+
                         }
                     }
                 }
