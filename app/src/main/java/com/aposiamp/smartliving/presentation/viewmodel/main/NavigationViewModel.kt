@@ -20,7 +20,6 @@ class NavigationViewModel(
     fun getBottomNavigationItems(context: Context): List<NavigationItemUiModel> {
         val domainItems = getBottomNavigationItemsUseCase.execute(
             devicesTitle = context.getString(R.string.devices),
-            routinesTitle = context.getString(R.string.routines),
             energyTitle = context.getString(R.string.energy)
         )
 
