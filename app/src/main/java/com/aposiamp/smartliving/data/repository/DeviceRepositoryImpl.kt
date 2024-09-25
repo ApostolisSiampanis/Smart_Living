@@ -17,4 +17,8 @@ class DeviceRepositoryImpl(
     override suspend fun setDeviceData(userId: String, spaceId: String, roomId: String, deviceDataDTO: DeviceDataDTO) {
         firebaseDataSource.setDeviceData(userId, spaceId, roomId, deviceDataDTO)
     }
+
+    override suspend fun getDeviceList(userId: String, spaceId: String, roomId: String): List<DeviceDataDTO>? {
+        return firebaseDataSource.getDeviceList(userId, spaceId, roomId)
+    }
 }
