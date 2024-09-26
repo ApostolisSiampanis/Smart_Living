@@ -13,6 +13,7 @@ import com.aposiamp.smartliving.data.repository.PlacesRepositoryImpl
 import com.aposiamp.smartliving.data.repository.RoomRepositoryImpl
 import com.aposiamp.smartliving.data.repository.AccountProfileRepositoryImpl
 import com.aposiamp.smartliving.data.repository.CleanupRepositoryImpl
+import com.aposiamp.smartliving.data.repository.ThermostatRepositoryImpl
 import com.aposiamp.smartliving.data.source.local.EnvironmentalSensorDataSource
 import com.aposiamp.smartliving.data.source.local.LocationDataSource
 import com.aposiamp.smartliving.data.source.remote.CleanUpApiService
@@ -22,6 +23,8 @@ import com.aposiamp.smartliving.data.source.remote.DeviceDataSource
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
 import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
 import com.aposiamp.smartliving.data.source.remote.PlacesDataSource
+import com.aposiamp.smartliving.data.source.remote.ThermostatApiService
+import com.aposiamp.smartliving.data.source.remote.ThermostatDataSource
 import com.aposiamp.smartliving.data.utils.RetrofitClient
 import com.aposiamp.smartliving.domain.repository.AuthRepository
 import com.aposiamp.smartliving.domain.repository.CleanupRepository
@@ -31,6 +34,7 @@ import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.repository.LocationRepository
 import com.aposiamp.smartliving.domain.repository.PlacesRepository
 import com.aposiamp.smartliving.domain.repository.RoomRepository
+import com.aposiamp.smartliving.domain.repository.ThermostatRepository
 import com.aposiamp.smartliving.domain.repository.UserAccountRepository
 import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
@@ -57,6 +61,7 @@ import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
 import com.aposiamp.smartliving.domain.usecase.devices.airCondition.GetAirConditionStatusUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.GetDehumidifierStatusUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatStatusUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.thermostat.UpdateThermostatTemperatureUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
@@ -99,6 +104,7 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     private val deviceDataSource = DeviceDataSource(getDeviceRetrofitApi())
     private val placesDataSource = PlacesDataSource(getPlacesClient())
     private val cleanUpDataSource = CleanUpDataSource(getCleanUpRetrofitApi())
+    private val thermostatDataSource = ThermostatDataSource(getThermostatRetrofitApi())
 
     // Repositories
     override val authRepository: AuthRepository by lazy {
@@ -137,6 +143,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         CleanupRepositoryImpl(cleanUpDataSource)
     }
 
+    override val thermostatRepository: ThermostatRepository by lazy {
+        ThermostatRepositoryImpl(thermostatDataSource)
+    }
+
     // Firebase
     override fun getFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
@@ -159,6 +169,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     // Retrofit API
     override fun getDeviceRetrofitApi(): DeviceApiService {
         return RetrofitClient.createDeviceService()
+    }
+
+    override fun getThermostatRetrofitApi(): ThermostatApiService {
+        return RetrofitClient.createThermostatService()
     }
 
     override fun getCleanUpRetrofitApi(): CleanUpApiService {
@@ -291,6 +305,11 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val updateDeviceModeUseCase: UpdateDeviceModeUseCase by lazy {
         UpdateDeviceModeUseCase(deviceRepository)
+    }
+
+    // Thermostat UseCases
+    override val updateThermostatTemperatureUseCase: UpdateThermostatTemperatureUseCase by lazy {
+        UpdateThermostatTemperatureUseCase(thermostatRepository)
     }
 
     // Profile UseCases
