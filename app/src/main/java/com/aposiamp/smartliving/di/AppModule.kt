@@ -41,6 +41,7 @@ import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
 import com.aposiamp.smartliving.domain.usecase.devices.airCondition.GetAirConditionStatusUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.GetDehumidifierStatusUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.UpdateDehumidifierFanSpeedUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.UpdateDehumidifierHumidityLevelUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatStatusUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.thermostat.UpdateThermostatTemperatureUseCase
@@ -161,6 +162,7 @@ interface AppModule {
 
     // Dehumidifier UseCases
     val updateDehumidifierHumidityLevelUseCase: UpdateDehumidifierHumidityLevelUseCase
+    val updateDehumidifierFanSpeedUseCase: UpdateDehumidifierFanSpeedUseCase
 
     // Profile UseCases
     val loginUseCase: LoginUseCase
