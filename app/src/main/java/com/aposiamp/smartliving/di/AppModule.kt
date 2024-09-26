@@ -2,10 +2,12 @@ package com.aposiamp.smartliving.di
 
 import android.hardware.Sensor
 import android.hardware.SensorManager
+import com.aposiamp.smartliving.data.source.remote.AirConditionApiService
 import com.aposiamp.smartliving.data.source.remote.CleanUpApiService
 import com.aposiamp.smartliving.data.source.remote.DehumidifierApiService
 import com.aposiamp.smartliving.data.source.remote.DeviceApiService
 import com.aposiamp.smartliving.data.source.remote.ThermostatApiService
+import com.aposiamp.smartliving.domain.repository.AirConditionRepository
 import com.aposiamp.smartliving.domain.repository.AuthRepository
 import com.aposiamp.smartliving.domain.repository.CleanupRepository
 import com.aposiamp.smartliving.domain.repository.DehumidifierRepository
@@ -40,6 +42,7 @@ import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceModeUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
 import com.aposiamp.smartliving.domain.usecase.devices.airCondition.GetAirConditionStatusUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.airCondition.UpdateAirDirectionUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.GetDehumidifierStatusUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.UpdateDehumidifierFanSpeedUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.UpdateDehumidifierHumidityLevelUseCase
@@ -89,6 +92,7 @@ interface AppModule {
     val cleanupRepository: CleanupRepository
     val thermostatRepository: ThermostatRepository
     val dehumidifierRepository: DehumidifierRepository
+    val airConditionRepository: AirConditionRepository
 
     // Firebase
     fun getFirebaseAuth(): FirebaseAuth
@@ -102,6 +106,7 @@ interface AppModule {
     fun getDeviceRetrofitApi(): DeviceApiService
     fun getThermostatRetrofitApi(): ThermostatApiService
     fun getDehumidifierRetrofitApi(): DehumidifierApiService
+    fun getAirConditionRetrofitApi(): AirConditionApiService
     fun getCleanUpRetrofitApi(): CleanUpApiService
 
     // SensorManager and Sensors
@@ -163,6 +168,9 @@ interface AppModule {
     // Dehumidifier UseCases
     val updateDehumidifierHumidityLevelUseCase: UpdateDehumidifierHumidityLevelUseCase
     val updateDehumidifierFanSpeedUseCase: UpdateDehumidifierFanSpeedUseCase
+
+    // AirCondition UseCases
+    val updateAirDirectionUseCase: UpdateAirDirectionUseCase
 
     // Profile UseCases
     val loginUseCase: LoginUseCase
