@@ -1,6 +1,7 @@
 package com.aposiamp.smartliving.data.source.remote
 
 import com.aposiamp.smartliving.data.model.AirConditionStatusDTO
+import com.aposiamp.smartliving.data.model.DehumidifierStatusDTO
 import com.aposiamp.smartliving.data.model.ThermostatStatusDTO
 import retrofit2.Response
 import retrofit2.http.GET
@@ -22,4 +23,9 @@ interface DeviceApiService {
     suspend fun getAirConditionStatus(
         @Path("id") deviceId: String
     ): Response<AirConditionStatusDTO>
+
+    @GET("/devices/{id}")
+    suspend fun getDehumidifierStatus(
+        @Path("id") deviceId: String
+    ): Response<DehumidifierStatusDTO>
 }
