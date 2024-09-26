@@ -8,6 +8,7 @@ import com.aposiamp.smartliving.domain.model.DeviceMode
 import com.aposiamp.smartliving.domain.model.DeviceModeItem
 import com.aposiamp.smartliving.domain.model.DeviceState
 import com.aposiamp.smartliving.domain.model.DeviceStateItem
+import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.airCondition.GetAirConditionStatusUseCase
 import com.aposiamp.smartliving.presentation.model.DeviceModeUiItem
 import com.aposiamp.smartliving.presentation.model.DeviceStateUiItem
@@ -22,7 +23,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class AirConditionViewModel(
-    private val getAirConditionStatusUseCase: GetAirConditionStatusUseCase
+    private val getAirConditionStatusUseCase: GetAirConditionStatusUseCase,
+    private val updateDeviceStateUseCase: UpdateDeviceStateUseCase
 ) : ViewModel() {
     private val deviceStates = listOf(
         DeviceStateItem(DeviceState.OFF),
@@ -91,6 +93,12 @@ class AirConditionViewModel(
     fun fetchDeviceStatus(deviceId: String) {
         viewModelScope.launch {
             _deviceStatus.value = getAirConditionStatusUseCase.execute(deviceId)
+        }
+    }
+
+    fun updateDeviceState(deviceId: String, deviceState: DeviceState) {
+        viewModelScope.launch {
+            updateDeviceStateUseCase.execute(deviceId, deviceState)
         }
     }
 }
