@@ -51,6 +51,7 @@ import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.CheckIfDeviceExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.GetDeviceListUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceDataUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceModeUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
 import com.aposiamp.smartliving.domain.usecase.devices.airCondition.GetAirConditionStatusUseCase
@@ -286,6 +287,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val updateDeviceStateUseCase: UpdateDeviceStateUseCase by lazy {
         UpdateDeviceStateUseCase(deviceRepository)
+    }
+
+    override val updateDeviceModeUseCase: UpdateDeviceModeUseCase by lazy {
+        UpdateDeviceModeUseCase(deviceRepository)
     }
 
     // Profile UseCases
