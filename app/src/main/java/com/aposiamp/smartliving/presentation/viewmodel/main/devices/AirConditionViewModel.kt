@@ -11,6 +11,7 @@ import com.aposiamp.smartliving.domain.model.DeviceStateItem
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceModeUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.airCondition.GetAirConditionStatusUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.airCondition.UpdateAirDirectionUseCase
 import com.aposiamp.smartliving.presentation.model.DeviceModeUiItem
 import com.aposiamp.smartliving.presentation.model.DeviceStateUiItem
 import com.aposiamp.smartliving.presentation.ui.theme.Blue
@@ -26,7 +27,8 @@ import kotlinx.coroutines.launch
 class AirConditionViewModel(
     private val getAirConditionStatusUseCase: GetAirConditionStatusUseCase,
     private val updateDeviceStateUseCase: UpdateDeviceStateUseCase,
-    private val updateDeviceModeUseCase: UpdateDeviceModeUseCase
+    private val updateDeviceModeUseCase: UpdateDeviceModeUseCase,
+    private val updateAirDirectionUseCase: UpdateAirDirectionUseCase
 ) : ViewModel() {
     private val deviceStates = listOf(
         DeviceStateItem(DeviceState.OFF),
@@ -107,6 +109,12 @@ class AirConditionViewModel(
     fun updateDeviceMode(deviceId: String, deviceMode: DeviceMode) {
         viewModelScope.launch {
             updateDeviceModeUseCase.execute(deviceId, deviceMode)
+        }
+    }
+
+    fun updateAirDirection(deviceId: String, direction: Int) {
+        viewModelScope.launch {
+            updateAirDirectionUseCase.execute(deviceId, direction)
         }
     }
 }
