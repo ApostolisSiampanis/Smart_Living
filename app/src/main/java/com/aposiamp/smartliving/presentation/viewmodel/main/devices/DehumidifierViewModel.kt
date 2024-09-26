@@ -11,6 +11,7 @@ import com.aposiamp.smartliving.domain.model.DeviceStateItem
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceModeUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.GetDehumidifierStatusUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.UpdateDehumidifierFanSpeedUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.UpdateDehumidifierHumidityLevelUseCase
 import com.aposiamp.smartliving.presentation.model.DeviceModeUiItem
 import com.aposiamp.smartliving.presentation.model.DeviceStateUiItem
@@ -26,7 +27,8 @@ class DehumidifierViewModel(
     private val getDehumidifierStatusUseCase: GetDehumidifierStatusUseCase,
     private val updateDeviceStateUseCase: UpdateDeviceStateUseCase,
     private val updateDeviceModeUseCase: UpdateDeviceModeUseCase,
-    private val updateDehumidifierHumidityLevelUseCase: UpdateDehumidifierHumidityLevelUseCase
+    private val updateDehumidifierHumidityLevelUseCase: UpdateDehumidifierHumidityLevelUseCase,
+    private val updateDehumidifierFanSpeedUseCase: UpdateDehumidifierFanSpeedUseCase
 ) : ViewModel() {
     private val deviceStates = listOf(
         DeviceStateItem(DeviceState.OFF),
@@ -113,6 +115,12 @@ class DehumidifierViewModel(
     fun updateDehumidifierHumidityLevel(deviceId: String, humidityLevel: Int) {
         viewModelScope.launch {
             updateDehumidifierHumidityLevelUseCase.execute(deviceId, humidityLevel)
+        }
+    }
+
+    fun updateDehumidifierFanSpeed(deviceId: String, fanSpeed: Int) {
+        viewModelScope.launch {
+            updateDehumidifierFanSpeedUseCase.execute(deviceId, fanSpeed)
         }
     }
 }
