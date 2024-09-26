@@ -33,6 +33,7 @@ import com.aposiamp.smartliving.domain.usecase.devices.CheckIfDeviceExistsUseCas
 import com.aposiamp.smartliving.domain.usecase.devices.GetDeviceListUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
+import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatStatusUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
@@ -135,6 +136,7 @@ interface AppModule {
     val checkIfDeviceExistsUseCase: CheckIfDeviceExistsUseCase
     val setDeviceDataUseCase: SetDeviceDataUseCase
     val getDeviceListUseCase: GetDeviceListUseCase
+    val getThermostatStatusUseCase: GetThermostatStatusUseCase
 
     // Profile UseCases
     val loginUseCase: LoginUseCase
