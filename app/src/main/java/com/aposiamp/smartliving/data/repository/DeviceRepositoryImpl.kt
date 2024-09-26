@@ -1,6 +1,7 @@
 package com.aposiamp.smartliving.data.repository
 
 import com.aposiamp.smartliving.data.model.AirConditionStatusDTO
+import com.aposiamp.smartliving.data.model.DehumidifierStatusDTO
 import com.aposiamp.smartliving.data.model.DeviceDataDTO
 import com.aposiamp.smartliving.data.model.DeviceIdAndTypeDTO
 import com.aposiamp.smartliving.data.model.ThermostatStatusDTO
@@ -30,5 +31,9 @@ class DeviceRepositoryImpl(
 
     override suspend fun getAirConditionStatus(deviceId: String): AirConditionStatusDTO? {
         return deviceDataSource.getAirConditionStatus(deviceId)
+    }
+
+    override suspend fun getDehumidifierStatus(deviceId: String): DehumidifierStatusDTO? {
+        return deviceDataSource.getDehumidifierStatus(deviceId)
     }
 }
