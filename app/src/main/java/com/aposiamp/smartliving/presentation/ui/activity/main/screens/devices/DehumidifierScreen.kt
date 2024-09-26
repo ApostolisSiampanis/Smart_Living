@@ -119,7 +119,7 @@ fun DehumidifierScreen(
                                 selectedState = selectedState.value,
                                 selectedMode = selectedMode.value,
                                 onSpeedChange = { speed ->
-                                    //TODO: Update device status fan speed
+                                    viewModel.updateDehumidifierFanSpeed(selectedDevice!!.deviceId!!, speed)
                                 }
                             )
                             Spacer(modifier = Modifier.height(16.dp))
