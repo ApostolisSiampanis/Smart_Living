@@ -107,7 +107,7 @@ fun AirConditionScreen(
                                         selectedMode = selectedMode.value,
                                         initialValue = deviceStatus!!.temperature,
                                         onPositionChange = { position ->
-                                            //TODO: Update device status temperature
+                                            viewModel.updateTemperature(selectedDevice!!.deviceId!!, position)
                                         }
                                     )
                                 }
