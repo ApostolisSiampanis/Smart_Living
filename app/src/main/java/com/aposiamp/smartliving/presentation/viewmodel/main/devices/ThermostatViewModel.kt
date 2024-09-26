@@ -7,7 +7,7 @@ import com.aposiamp.smartliving.domain.model.DeviceMode
 import com.aposiamp.smartliving.domain.model.DeviceModeItem
 import com.aposiamp.smartliving.domain.model.DeviceState
 import com.aposiamp.smartliving.domain.model.DeviceStateItem
-import com.aposiamp.smartliving.domain.model.ThermostatStatus
+import com.aposiamp.smartliving.domain.model.ThermostatStatusData
 import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatStatusUseCase
 import com.aposiamp.smartliving.presentation.model.DeviceModeUiItem
 import com.aposiamp.smartliving.presentation.model.DeviceStateUiItem
@@ -76,8 +76,8 @@ class ThermostatViewModel(
         }
     }
 
-    private val _deviceStatus = MutableStateFlow<ThermostatStatus?>(null)
-    val deviceStatus: StateFlow<ThermostatStatus?> = _deviceStatus
+    private val _deviceStatus = MutableStateFlow<ThermostatStatusData?>(null)
+    val deviceStatus: StateFlow<ThermostatStatusData?> = _deviceStatus
 
     fun fetchDeviceStatus(deviceId: String) {
         viewModelScope.launch {
