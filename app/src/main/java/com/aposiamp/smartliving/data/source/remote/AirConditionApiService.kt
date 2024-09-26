@@ -1,6 +1,7 @@
 package com.aposiamp.smartliving.data.source.remote
 
 import com.aposiamp.smartliving.data.model.AirDirectionDTO
+import com.aposiamp.smartliving.data.model.FanSpeedDTO
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.PATCH
@@ -11,5 +12,11 @@ interface AirConditionApiService {
     suspend fun updateAirDirection(
         @Path("id") airConditionId: String,
         @Body airDirection: AirDirectionDTO
+    ): Response<Unit>
+
+    @PATCH("/air-conditions/{id}/fan-speed")
+    suspend fun updateFanSpeed(
+        @Path("id") airConditionId: String,
+        @Body fanSpeed: FanSpeedDTO
     ): Response<Unit>
 }
