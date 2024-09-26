@@ -42,7 +42,8 @@ import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceModeUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
 import com.aposiamp.smartliving.domain.usecase.devices.airCondition.GetAirConditionStatusUseCase
-import com.aposiamp.smartliving.domain.usecase.devices.airCondition.UpdateAirDirectionUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.airCondition.UpdateAirConditionAirDirectionUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.airCondition.UpdateAirConditionFanSpeedUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.GetDehumidifierStatusUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.UpdateDehumidifierFanSpeedUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.UpdateDehumidifierHumidityLevelUseCase
@@ -170,7 +171,8 @@ interface AppModule {
     val updateDehumidifierFanSpeedUseCase: UpdateDehumidifierFanSpeedUseCase
 
     // AirCondition UseCases
-    val updateAirDirectionUseCase: UpdateAirDirectionUseCase
+    val updateAirConditionAirDirectionUseCase: UpdateAirConditionAirDirectionUseCase
+    val updateAirConditionFanSpeedUseCase: UpdateAirConditionFanSpeedUseCase
 
     // Profile UseCases
     val loginUseCase: LoginUseCase
