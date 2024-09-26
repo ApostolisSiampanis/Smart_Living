@@ -147,7 +147,7 @@ fun AirConditionScreen(
                                 selectedState = selectedState.value,
                                 selectedMode = selectedMode.value,
                                 onSpeedChange = { speed ->
-                                    //TODO: Update device status fan speed
+                                    viewModel.updateFanSpeed(selectedDevice!!.deviceId!!, speed)
                                 }
                             )
                             Spacer(modifier = Modifier.height(16.dp))
