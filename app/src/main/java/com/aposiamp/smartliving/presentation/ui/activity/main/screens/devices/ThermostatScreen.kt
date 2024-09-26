@@ -105,7 +105,7 @@ fun ThermostatScreen(
                                         selectedMode = selectedMode.value,
                                         initialValue = deviceStatus!!.temperature,
                                         onPositionChange = { position ->
-                                            //TODO: Update device status temperature
+                                            viewModel.updateThermostatTemperature(selectedDevice!!.deviceId!!, position)
                                         }
                                     )
                                 }
