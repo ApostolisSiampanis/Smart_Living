@@ -92,7 +92,7 @@ fun DehumidifierScreen(
                                     selectedMode = selectedMode.value,
                                     initialValue = deviceStatus!!.humidityLevel,
                                     onSetValue = { value ->
-                                        // TODO: Update device set humidity level
+                                        viewModel.updateDehumidifierHumidityLevel(selectedDevice!!.deviceId!!, value)
                                     }
                                 )
                             }
