@@ -21,6 +21,7 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewMo
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.devices.AirConditionViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.devices.DehumidifierViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.devices.ThermostatViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountProfileViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountViewModel
@@ -163,6 +164,14 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
+                    val dehumidifierViewModel = viewModel<DehumidifierViewModel>(
+                        factory = viewModelFactory {
+                            DehumidifierViewModel(
+                                getDehumidifierStatusUseCase = SmartLiving.appModule.getDehumidifierStatusUseCase
+                            )
+                        }
+                    )
+
                     MainNavigation(
                         context = context,
                         devicesViewModel = devicesViewModel,
@@ -177,7 +186,8 @@ class MainActivity : ComponentActivity() {
                         addANewDeviceViewModel = addANewDeviceViewModel,
                         accountProfileViewModel = accountProfileViewModel,
                         thermostatViewModel = thermostatViewModel,
-                        airConditionViewModel = airConditionViewModel
+                        airConditionViewModel = airConditionViewModel,
+                        dehumidifierViewModel = dehumidifierViewModel
                     )
                 }
             }
