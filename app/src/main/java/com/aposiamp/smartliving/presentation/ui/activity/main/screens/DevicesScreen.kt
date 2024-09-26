@@ -216,6 +216,7 @@ fun DevicesScreen(
                                                     painter = painter,
                                                     contentDescription = contentDescription,
                                                     onClick = {
+                                                        mainSharedViewModel.setSelectedDevice(device)
                                                         when (device.deviceType) {
                                                             DeviceType.AIR_CONDITIONER -> navController.navigate("airCondition")
                                                             DeviceType.THERMOSTAT -> navController.navigate("thermostat")
