@@ -4,6 +4,7 @@ import android.hardware.Sensor
 import android.hardware.SensorManager
 import com.aposiamp.smartliving.data.source.remote.CleanUpApiService
 import com.aposiamp.smartliving.data.source.remote.DeviceApiService
+import com.aposiamp.smartliving.data.source.remote.ThermostatApiService
 import com.aposiamp.smartliving.domain.repository.AuthRepository
 import com.aposiamp.smartliving.domain.repository.CleanupRepository
 import com.aposiamp.smartliving.domain.repository.DeviceRepository
@@ -12,6 +13,7 @@ import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.repository.LocationRepository
 import com.aposiamp.smartliving.domain.repository.PlacesRepository
 import com.aposiamp.smartliving.domain.repository.RoomRepository
+import com.aposiamp.smartliving.domain.repository.ThermostatRepository
 import com.aposiamp.smartliving.domain.repository.UserAccountRepository
 import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
@@ -38,6 +40,7 @@ import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
 import com.aposiamp.smartliving.domain.usecase.devices.airCondition.GetAirConditionStatusUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.GetDehumidifierStatusUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatStatusUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.thermostat.UpdateThermostatTemperatureUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
@@ -80,6 +83,7 @@ interface AppModule {
     val placesRepository: PlacesRepository
     val userAccountRepository: UserAccountRepository
     val cleanupRepository: CleanupRepository
+    val thermostatRepository: ThermostatRepository
 
     // Firebase
     fun getFirebaseAuth(): FirebaseAuth
@@ -91,6 +95,7 @@ interface AppModule {
 
     // Retrofit API
     fun getDeviceRetrofitApi(): DeviceApiService
+    fun getThermostatRetrofitApi(): ThermostatApiService
     fun getCleanUpRetrofitApi(): CleanUpApiService
 
     // SensorManager and Sensors
@@ -145,6 +150,9 @@ interface AppModule {
     val getDehumidifierStatusUseCase: GetDehumidifierStatusUseCase
     val updateDeviceStateUseCase: UpdateDeviceStateUseCase
     val updateDeviceModeUseCase: UpdateDeviceModeUseCase
+
+    // Thermostat UseCases
+    val updateThermostatTemperatureUseCase: UpdateThermostatTemperatureUseCase
 
     // Profile UseCases
     val loginUseCase: LoginUseCase
