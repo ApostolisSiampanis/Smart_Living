@@ -170,7 +170,8 @@ class MainActivity : ComponentActivity() {
                         factory = viewModelFactory {
                             DehumidifierViewModel(
                                 getDehumidifierStatusUseCase = SmartLiving.appModule.getDehumidifierStatusUseCase,
-                                updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase
+                                updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase,
+                                updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase
                             )
                         }
                     )
