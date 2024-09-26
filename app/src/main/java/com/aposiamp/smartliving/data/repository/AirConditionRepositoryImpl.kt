@@ -1,6 +1,7 @@
 package com.aposiamp.smartliving.data.repository
 
 import com.aposiamp.smartliving.data.model.AirDirectionDTO
+import com.aposiamp.smartliving.data.model.FanSpeedDTO
 import com.aposiamp.smartliving.data.source.remote.AirConditionDataSource
 import com.aposiamp.smartliving.domain.repository.AirConditionRepository
 
@@ -9,5 +10,9 @@ class AirConditionRepositoryImpl(
 ) : AirConditionRepository {
     override suspend fun updateAirDirection(airConditionId: String, airDirectionDTO: AirDirectionDTO): Boolean {
         return airConditionDataSource.updateAirDirection(airConditionId, airDirectionDTO)
+    }
+
+    override suspend fun updateFanSpeed(airConditionId: String, fanSpeedDTO: FanSpeedDTO): Boolean {
+        return airConditionDataSource.updateFanSpeed(airConditionId, fanSpeedDTO)
     }
 }
