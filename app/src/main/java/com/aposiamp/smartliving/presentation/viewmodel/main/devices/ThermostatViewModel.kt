@@ -1,11 +1,14 @@
 package com.aposiamp.smartliving.presentation.viewmodel.main.devices
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.domain.model.DeviceMode
 import com.aposiamp.smartliving.domain.model.DeviceModeItem
 import com.aposiamp.smartliving.domain.model.DeviceState
 import com.aposiamp.smartliving.domain.model.DeviceStateItem
+import com.aposiamp.smartliving.domain.model.ThermostatStatus
+import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatStatusUseCase
 import com.aposiamp.smartliving.presentation.model.DeviceModeUiItem
 import com.aposiamp.smartliving.presentation.model.DeviceStateUiItem
 import com.aposiamp.smartliving.presentation.ui.theme.Blue
@@ -13,8 +16,13 @@ import com.aposiamp.smartliving.presentation.ui.theme.BrightBlue
 import com.aposiamp.smartliving.presentation.ui.theme.LightOrange
 import com.aposiamp.smartliving.presentation.ui.theme.Orange
 import com.aposiamp.smartliving.presentation.ui.theme.RedOrange
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
-class ThermostatViewModel : ViewModel() {
+class ThermostatViewModel(
+    private val getThermostatStatusUseCase: GetThermostatStatusUseCase
+) : ViewModel() {
     private val deviceStates = listOf(
         DeviceStateItem(DeviceState.OFF),
         DeviceStateItem(DeviceState.ON)
@@ -65,6 +73,15 @@ class ThermostatViewModel : ViewModel() {
                 secondaryColor = RedOrange
             )
             else -> null
+        }
+    }
+
+    private val _deviceStatus = MutableStateFlow<ThermostatStatus?>(null)
+    val deviceStatus: StateFlow<ThermostatStatus?> = _deviceStatus
+
+    fun fetchDeviceStatus(deviceId: String) {
+        viewModelScope.launch {
+            _deviceStatus.value = getThermostatStatusUseCase.execute(deviceId)
         }
     }
 }
