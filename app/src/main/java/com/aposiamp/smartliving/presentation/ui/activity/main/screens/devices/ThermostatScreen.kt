@@ -56,7 +56,7 @@ fun ThermostatScreen(
         LoadingScreen()
     } else {
         val selectedState = remember { mutableStateOf(uiDeviceStates.first { it.state == deviceStatus!!.state }) }
-        val selectedMode = uiDeviceModes.first { it.mode == deviceStatus!!.mode }
+        val selectedMode = remember { mutableStateOf(uiDeviceModes.first { it.mode == deviceStatus!!.mode }) }
 
         Scaffold(
             modifier = Modifier
@@ -102,7 +102,7 @@ fun ThermostatScreen(
                                         maxValue = 30,
                                         circleRadius = 230f,
                                         selectedState = selectedState.value,
-                                        selectedMode = selectedMode,
+                                        selectedMode = selectedMode.value,
                                         initialValue = deviceStatus!!.temperature,
                                         onPositionChange = { position ->
                                             //TODO: Update device status temperature
@@ -118,7 +118,7 @@ fun ThermostatScreen(
                             Spacer(modifier = Modifier.height(16.dp))
                             DeviceOnOffButton(
                                 initialState = selectedState.value,
-                                color = selectedMode.secondaryColor,
+                                color = selectedMode.value.secondaryColor,
                                 onButtonClicked = { state ->
                                     selectedState.value = uiDeviceStates.first { it.state == state }
                                     viewModel.updateDeviceState(selectedDevice!!.deviceId!!, state)
@@ -127,10 +127,10 @@ fun ThermostatScreen(
                             Spacer(modifier = Modifier.height(16.dp))
                             DeviceModeButtonsRowComponent(
                                 modes = uiDeviceModes,
-                                selectedMode = selectedMode,
+                                selectedMode = selectedMode.value,
                                 onButtonClicked = { mode ->
-                                    //selectedMode = mode
-                                    // TODO: Update device status mode
+                                    selectedMode.value = mode
+                                    viewModel.updateDeviceMode(selectedDevice!!.deviceId!!, mode.mode)
                                 }
                             )
                         }
