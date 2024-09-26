@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.data.source.remote
 
+import com.aposiamp.smartliving.data.model.ThermostatStatusDTO
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -10,4 +11,9 @@ interface DeviceApiService {
         @Path("id") deviceId: String,
         @Path("type") deviceType: String
     ): Response<Unit>
+
+    @GET("/devices/{id}")
+    suspend fun getThermostatStatus(
+        @Path("id") deviceId: String
+    ): Response<ThermostatStatusDTO>
 }
