@@ -152,7 +152,8 @@ class MainActivity : ComponentActivity() {
                         factory = viewModelFactory {
                             ThermostatViewModel(
                                 getThermostatStatusUseCase = SmartLiving.appModule.getThermostatStatusUseCase,
-                                updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase
+                                updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase,
+                                updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase
                             )
                         }
                     )
