@@ -165,7 +165,8 @@ class MainActivity : ComponentActivity() {
                                 getAirConditionStatusUseCase = SmartLiving.appModule.getAirConditionStatusUseCase,
                                 updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase,
                                 updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase,
-                                updateAirDirectionUseCase = SmartLiving.appModule.updateAirDirectionUseCase
+                                updateAirConditionAirDirectionUseCase = SmartLiving.appModule.updateAirConditionAirDirectionUseCase,
+                                updateAirConditionFanSpeedUseCase = SmartLiving.appModule.updateAirConditionFanSpeedUseCase
                             )
                         }
                     )
