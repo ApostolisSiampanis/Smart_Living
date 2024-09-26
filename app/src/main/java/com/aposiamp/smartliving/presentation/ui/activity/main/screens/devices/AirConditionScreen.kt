@@ -19,7 +19,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -58,7 +57,7 @@ fun AirConditionScreen(
     if (deviceStatus == null) {
         LoadingScreen()
     } else {
-        val selectedState = uiDeviceStates.first { it.state == deviceStatus!!.state }
+        val selectedState = remember { mutableStateOf(uiDeviceStates.first { it.state == deviceStatus!!.state }) }
         val selectedMode = uiDeviceModes.first { it.mode == deviceStatus!!.mode }
 
         Scaffold(
@@ -104,7 +103,7 @@ fun AirConditionScreen(
                                         minValue = 16,
                                         maxValue = 30,
                                         circleRadius = 230f,
-                                        selectedState = selectedState,
+                                        selectedState = selectedState.value,
                                         selectedMode = selectedMode,
                                         initialValue = deviceStatus!!.temperature,
                                         onPositionChange = { position ->
@@ -125,11 +124,11 @@ fun AirConditionScreen(
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
                                 DeviceOnOffButton(
-                                    initialState = selectedState,
+                                    initialState = selectedState.value,
                                     color = selectedMode.secondaryColor,
                                     onButtonClicked = { state ->
-                                        //selectedState = uiDeviceStates.first { it.state == state }
-                                        //TODO: Update device status state
+                                        selectedState.value = uiDeviceStates.first { it.state == state }
+                                        viewModel.updateDeviceState(selectedDevice!!.deviceId!!, state)
                                     }
                                 )
                                 AirDirectionControl(
@@ -145,7 +144,7 @@ fun AirConditionScreen(
                                 initialSpeed = deviceStatus!!.fanSpeed,
                                 maxSpeed = 5,
                                 color = selectedMode.secondaryColor,
-                                selectedState = selectedState,
+                                selectedState = selectedState.value,
                                 selectedMode = selectedMode,
                                 onSpeedChange = { speed ->
                                     //TODO: Update device status fan speed
