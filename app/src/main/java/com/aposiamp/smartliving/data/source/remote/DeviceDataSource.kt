@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.data.source.remote
 
+import com.aposiamp.smartliving.data.model.AirConditionStatusDTO
 import com.aposiamp.smartliving.data.model.DeviceIdAndTypeDTO
 import com.aposiamp.smartliving.data.model.ThermostatStatusDTO
 
@@ -18,6 +19,19 @@ class DeviceDataSource(
     suspend fun getThermostatStatus(deviceId: String): ThermostatStatusDTO? {
         return try {
             val response = apiService.getThermostatStatus(deviceId)
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    suspend fun getAirConditionStatus(deviceId: String): AirConditionStatusDTO? {
+        return try {
+            val response = apiService.getAirConditionStatus(deviceId)
             if (response.isSuccessful) {
                 response.body()
             } else {
