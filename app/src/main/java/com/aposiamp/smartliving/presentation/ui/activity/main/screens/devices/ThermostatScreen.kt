@@ -17,6 +17,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -53,7 +55,7 @@ fun ThermostatScreen(
     if (deviceStatus == null) {
         LoadingScreen()
     } else {
-        val selectedState = uiDeviceStates.first { it.state == deviceStatus!!.state }
+        val selectedState = remember { mutableStateOf(uiDeviceStates.first { it.state == deviceStatus!!.state }) }
         val selectedMode = uiDeviceModes.first { it.mode == deviceStatus!!.mode }
 
         Scaffold(
@@ -99,7 +101,7 @@ fun ThermostatScreen(
                                         minValue = 10,
                                         maxValue = 30,
                                         circleRadius = 230f,
-                                        selectedState = selectedState,
+                                        selectedState = selectedState.value,
                                         selectedMode = selectedMode,
                                         initialValue = deviceStatus!!.temperature,
                                         onPositionChange = { position ->
@@ -115,11 +117,11 @@ fun ThermostatScreen(
                             )
                             Spacer(modifier = Modifier.height(16.dp))
                             DeviceOnOffButton(
-                                initialState = selectedState,
+                                initialState = selectedState.value,
                                 color = selectedMode.secondaryColor,
                                 onButtonClicked = { state ->
-                                    //selectedState = uiDeviceStates.first { it.state == state }
-                                    //TODO: Update device status state
+                                    selectedState.value = uiDeviceStates.first { it.state == state }
+                                    viewModel.updateDeviceState(selectedDevice!!.deviceId!!, state)
                                 }
                             )
                             Spacer(modifier = Modifier.height(16.dp))
