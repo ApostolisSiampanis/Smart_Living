@@ -2,6 +2,7 @@ package com.aposiamp.smartliving.data.source.remote
 
 import com.aposiamp.smartliving.data.model.AirConditionStatusDTO
 import com.aposiamp.smartliving.data.model.DehumidifierStatusDTO
+import com.aposiamp.smartliving.data.model.DeviceModeDTO
 import com.aposiamp.smartliving.data.model.DeviceStateDTO
 import com.aposiamp.smartliving.data.model.ThermostatStatusDTO
 import retrofit2.Response
@@ -36,5 +37,11 @@ interface DeviceApiService {
     suspend fun updateDeviceState(
         @Path("id") deviceId: String,
         @Body deviceState: DeviceStateDTO
+    ): Response<Unit>
+
+    @PATCH("/devices/{id}/mode")
+    suspend fun updateDeviceMode(
+        @Path("id") deviceId: String,
+        @Body deviceMode: DeviceModeDTO
     ): Response<Unit>
 }
