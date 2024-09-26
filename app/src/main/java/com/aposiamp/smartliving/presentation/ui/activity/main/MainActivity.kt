@@ -175,7 +175,8 @@ class MainActivity : ComponentActivity() {
                                 getDehumidifierStatusUseCase = SmartLiving.appModule.getDehumidifierStatusUseCase,
                                 updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase,
                                 updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase,
-                                updateDehumidifierHumidityLevelUseCase = SmartLiving.appModule.updateDehumidifierHumidityLevelUseCase
+                                updateDehumidifierHumidityLevelUseCase = SmartLiving.appModule.updateDehumidifierHumidityLevelUseCase,
+                                updateDehumidifierFanSpeedUseCase = SmartLiving.appModule.updateDehumidifierFanSpeedUseCase
                             )
                         }
                     )
