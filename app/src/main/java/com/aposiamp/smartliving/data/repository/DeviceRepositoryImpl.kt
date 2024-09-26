@@ -2,6 +2,7 @@ package com.aposiamp.smartliving.data.repository
 
 import com.aposiamp.smartliving.data.model.DeviceDataDTO
 import com.aposiamp.smartliving.data.model.DeviceIdAndTypeDTO
+import com.aposiamp.smartliving.data.model.ThermostatStatusDTO
 import com.aposiamp.smartliving.data.source.remote.DeviceDataSource
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
 import com.aposiamp.smartliving.domain.repository.DeviceRepository
@@ -20,5 +21,9 @@ class DeviceRepositoryImpl(
 
     override suspend fun getDeviceList(userId: String, spaceId: String, roomId: String): List<DeviceDataDTO>? {
         return firebaseDataSource.getDeviceList(userId, spaceId, roomId)
+    }
+
+    override suspend fun getThermostatStatus(deviceId: String): ThermostatStatusDTO? {
+        return deviceDataSource.getThermostatStatus(deviceId)
     }
 }
