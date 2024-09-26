@@ -13,6 +13,7 @@ import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.airCondition.GetAirConditionStatusUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.airCondition.UpdateAirConditionAirDirectionUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.airCondition.UpdateAirConditionFanSpeedUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.airCondition.UpdateAirConditionTemperatureUseCase
 import com.aposiamp.smartliving.presentation.model.DeviceModeUiItem
 import com.aposiamp.smartliving.presentation.model.DeviceStateUiItem
 import com.aposiamp.smartliving.presentation.ui.theme.Blue
@@ -30,7 +31,8 @@ class AirConditionViewModel(
     private val updateDeviceStateUseCase: UpdateDeviceStateUseCase,
     private val updateDeviceModeUseCase: UpdateDeviceModeUseCase,
     private val updateAirConditionAirDirectionUseCase: UpdateAirConditionAirDirectionUseCase,
-    private val updateAirConditionFanSpeedUseCase: UpdateAirConditionFanSpeedUseCase
+    private val updateAirConditionFanSpeedUseCase: UpdateAirConditionFanSpeedUseCase,
+    private val updateAirConditionTemperatureUseCase: UpdateAirConditionTemperatureUseCase
 ) : ViewModel() {
     private val deviceStates = listOf(
         DeviceStateItem(DeviceState.OFF),
@@ -123,6 +125,12 @@ class AirConditionViewModel(
     fun updateFanSpeed(deviceId: String, fanSpeed: Int) {
         viewModelScope.launch {
             updateAirConditionFanSpeedUseCase.execute(deviceId, fanSpeed)
+        }
+    }
+
+    fun updateTemperature(deviceId: String, temperature: Int) {
+        viewModelScope.launch {
+            updateAirConditionTemperatureUseCase.execute(deviceId, temperature)
         }
     }
 }
