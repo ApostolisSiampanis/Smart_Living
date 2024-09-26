@@ -8,6 +8,7 @@ import com.aposiamp.smartliving.domain.model.DeviceMode
 import com.aposiamp.smartliving.domain.model.DeviceModeItem
 import com.aposiamp.smartliving.domain.model.DeviceState
 import com.aposiamp.smartliving.domain.model.DeviceStateItem
+import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.GetDehumidifierStatusUseCase
 import com.aposiamp.smartliving.presentation.model.DeviceModeUiItem
 import com.aposiamp.smartliving.presentation.model.DeviceStateUiItem
@@ -20,7 +21,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class DehumidifierViewModel(
-    private val getDehumidifierStatusUseCase: GetDehumidifierStatusUseCase
+    private val getDehumidifierStatusUseCase: GetDehumidifierStatusUseCase,
+    private val updateDeviceStateUseCase: UpdateDeviceStateUseCase
 ) : ViewModel() {
     private val deviceStates = listOf(
         DeviceStateItem(DeviceState.OFF),
@@ -89,6 +91,12 @@ class DehumidifierViewModel(
     fun fetchDeviceStatus(deviceId: String) {
         viewModelScope.launch {
             _deviceStatus.value = getDehumidifierStatusUseCase.execute(deviceId)
+        }
+    }
+
+    fun updateDeviceState(deviceId: String, deviceState: DeviceState) {
+        viewModelScope.launch {
+            updateDeviceStateUseCase.execute(deviceId, deviceState)
         }
     }
 }
