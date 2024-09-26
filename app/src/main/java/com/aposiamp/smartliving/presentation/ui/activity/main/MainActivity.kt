@@ -160,7 +160,8 @@ class MainActivity : ComponentActivity() {
                     val airConditionViewModel = viewModel<AirConditionViewModel>(
                         factory = viewModelFactory {
                             AirConditionViewModel(
-                                getAirConditionStatusUseCase = SmartLiving.appModule.getAirConditionStatusUseCase
+                                getAirConditionStatusUseCase = SmartLiving.appModule.getAirConditionStatusUseCase,
+                                updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase
                             )
                         }
                     )
@@ -168,7 +169,8 @@ class MainActivity : ComponentActivity() {
                     val dehumidifierViewModel = viewModel<DehumidifierViewModel>(
                         factory = viewModelFactory {
                             DehumidifierViewModel(
-                                getDehumidifierStatusUseCase = SmartLiving.appModule.getDehumidifierStatusUseCase
+                                getDehumidifierStatusUseCase = SmartLiving.appModule.getDehumidifierStatusUseCase,
+                                updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase
                             )
                         }
                     )
