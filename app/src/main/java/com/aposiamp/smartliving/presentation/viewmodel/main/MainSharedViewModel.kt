@@ -9,6 +9,7 @@ import com.aposiamp.smartliving.domain.usecase.sensor.GetEnvironmentalDataUseCas
 import com.aposiamp.smartliving.domain.usecase.sensor.SetEnvironmentalDataUseCase
 import com.aposiamp.smartliving.presentation.mapper.EnvironmentalDataUiMapper
 import com.aposiamp.smartliving.presentation.mapper.SpaceDataUiMapper
+import com.aposiamp.smartliving.presentation.model.DeviceDataUiModel
 import com.aposiamp.smartliving.presentation.model.EnvironmentalDataUiModel
 import com.aposiamp.smartliving.presentation.model.SpaceDataUiModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,6 +27,9 @@ class MainSharedViewModel(
     private val _space = MutableStateFlow<SpaceDataUiModel?>(null)
     val space: StateFlow<SpaceDataUiModel?> = _space
 
+    private val _selectedDevice = MutableStateFlow<DeviceDataUiModel?>(null)
+    val selectedDevice: StateFlow<DeviceDataUiModel?> = _selectedDevice
+
     init {
         viewModelScope.launch {
             val spaceData = getSpaceUseCase.execute()
@@ -34,5 +38,9 @@ class MainSharedViewModel(
             _space.value!!.placeId?.let { setEnvironmentalDataUseCase.execute(it, environmentalData) }
             _environmentalData.value = EnvironmentalDataUiMapper.fromDomain(environmentalData)
         }
+    }
+
+    fun setSelectedDevice(device: DeviceDataUiModel) {
+        _selectedDevice.value = device
     }
 }

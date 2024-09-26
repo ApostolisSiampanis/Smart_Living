@@ -25,7 +25,7 @@ fun AirDirectionControl(
     onDirectionChange: (Int) -> Unit
 ) {
     var selectedDirection by remember { mutableIntStateOf(initialDirection) }
-    var showDrawable by remember { mutableStateOf(false) }
+    var showDrawable by remember { mutableStateOf(initialDirection == 0) }
 
     Row(
         modifier = Modifier
@@ -68,6 +68,7 @@ fun AirDirectionControl(
             onClick = {
                 if (selectedDirection == 4) {
                     selectedDirection = 0
+                    onDirectionChange(selectedDirection)
                     showDrawable = true
                 } else {
                     selectedDirection++

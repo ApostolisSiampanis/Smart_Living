@@ -11,4 +11,16 @@ object DeviceDataMapper {
             deviceType = domain.deviceType
         )
     }
+
+    private fun fromDto(dto: DeviceDataDTO): DeviceData {
+        return DeviceData(
+            deviceId = dto.deviceId,
+            deviceName = dto.deviceName,
+            deviceType = dto.deviceType
+        )
+    }
+
+    fun fromDtoList(dtoList: List<DeviceDataDTO>): List<DeviceData> {
+        return dtoList.map { fromDto(it) }
+    }
 }

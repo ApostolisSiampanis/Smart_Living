@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
+import com.aposiamp.smartliving.domain.model.DeviceType
 import com.aposiamp.smartliving.presentation.model.SettingsItemUiModel
 import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
 
@@ -267,6 +269,40 @@ fun GeneralClickableCard(
                 fontSize = 20,
                 color = textColor
             )
+        }
+    }
+}
+
+@Composable
+fun DeviceCard(
+    deviceName: String,
+    painter: Painter,
+    contentDescription: String,
+    onClick: () -> Unit
+) {
+    Card(
+        modifier = Modifier
+            .padding(8.dp)
+            .clickable (onClick = onClick),
+        elevation = cardElevation(defaultElevation = 4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painter,
+                contentDescription = contentDescription,
+                modifier = Modifier
+                    .size(64.dp)
+            )
+            GeneralNormalBlackText(value = deviceName)
         }
     }
 }

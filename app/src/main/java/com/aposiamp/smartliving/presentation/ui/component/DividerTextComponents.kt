@@ -35,3 +35,19 @@ fun DividerTextComponent() {
         )
     }
 }
+
+@Composable
+fun DividerComponent() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth(),
+            thickness = 1.dp,
+            color = GrayColor
+        )
+    }
+}

@@ -20,6 +20,9 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewMo
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.devices.AirConditionViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.devices.DehumidifierViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.devices.ThermostatViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountProfileViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.ProfileViewModel
@@ -38,7 +41,9 @@ class MainActivity : ComponentActivity() {
                     val devicesViewModel = viewModel<DevicesViewModel>(
                         factory = viewModelFactory {
                             DevicesViewModel(
-                                checkIfAnyRoomExistsUseCase = SmartLiving.appModule.checkIfAnyRoomExistsUseCase
+                                checkIfAnyRoomExistsUseCase = SmartLiving.appModule.checkIfAnyRoomExistsUseCase,
+                                getRoomListUseCase = SmartLiving.appModule.getRoomListUseCase,
+                                getDeviceListUseCase = SmartLiving.appModule.getDeviceListUseCase
                             )
                         }
                     )
@@ -143,6 +148,42 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
+                    val thermostatViewModel = viewModel<ThermostatViewModel>(
+                        factory = viewModelFactory {
+                            ThermostatViewModel(
+                                getThermostatStatusUseCase = SmartLiving.appModule.getThermostatStatusUseCase,
+                                updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase,
+                                updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase,
+                                updateThermostatTemperatureUseCase = SmartLiving.appModule.updateThermostatTemperatureUseCase
+                            )
+                        }
+                    )
+
+                    val airConditionViewModel = viewModel<AirConditionViewModel>(
+                        factory = viewModelFactory {
+                            AirConditionViewModel(
+                                getAirConditionStatusUseCase = SmartLiving.appModule.getAirConditionStatusUseCase,
+                                updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase,
+                                updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase,
+                                updateAirConditionAirDirectionUseCase = SmartLiving.appModule.updateAirConditionAirDirectionUseCase,
+                                updateAirConditionFanSpeedUseCase = SmartLiving.appModule.updateAirConditionFanSpeedUseCase,
+                                updateAirConditionTemperatureUseCase = SmartLiving.appModule.updateAirConditionTemperatureUseCase
+                            )
+                        }
+                    )
+
+                    val dehumidifierViewModel = viewModel<DehumidifierViewModel>(
+                        factory = viewModelFactory {
+                            DehumidifierViewModel(
+                                getDehumidifierStatusUseCase = SmartLiving.appModule.getDehumidifierStatusUseCase,
+                                updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase,
+                                updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase,
+                                updateDehumidifierHumidityLevelUseCase = SmartLiving.appModule.updateDehumidifierHumidityLevelUseCase,
+                                updateDehumidifierFanSpeedUseCase = SmartLiving.appModule.updateDehumidifierFanSpeedUseCase
+                            )
+                        }
+                    )
+
                     MainNavigation(
                         context = context,
                         devicesViewModel = devicesViewModel,
@@ -155,7 +196,10 @@ class MainActivity : ComponentActivity() {
                         userNotInSpaceViewModel = userNotInSpaceViewModel,
                         createANewRoomViewModel = createANewRoomViewModel,
                         addANewDeviceViewModel = addANewDeviceViewModel,
-                        accountProfileViewModel =accountProfileViewModel
+                        accountProfileViewModel = accountProfileViewModel,
+                        thermostatViewModel = thermostatViewModel,
+                        airConditionViewModel = airConditionViewModel,
+                        dehumidifierViewModel = dehumidifierViewModel
                     )
                 }
             }

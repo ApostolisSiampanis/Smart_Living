@@ -41,7 +41,7 @@ fun FanSpeedControl(
     onSpeedChange: (Int) -> Unit
 ) {
     var selectedSpeed by remember { mutableIntStateOf(initialSpeed) }
-    var isAuto by remember { mutableStateOf(false) }
+    var isAuto by remember { mutableStateOf(initialSpeed == 0) }
     val areButtonsDisabled = isDehumidifier && selectedState.state == DeviceState.ON && selectedMode.mode == DeviceMode.DRY
 
     if (areButtonsDisabled) {
@@ -119,7 +119,7 @@ fun FanSpeedControl(
                 stringResource(id = R.string.auto)
             },
             color = color,
-            enabled = !areButtonsDisabled,
+            enabled = !isAuto,
             onClick = {
                 selectedSpeed = 0
                 isAuto = true

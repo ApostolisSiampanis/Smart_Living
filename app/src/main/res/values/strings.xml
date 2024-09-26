@@ -130,7 +130,6 @@
     <string name="device_type">Device Type</string>
     <string name="logout">Logout</string>
     <string name="devices">Devices</string>
-    <string name="routines">Routines</string>
     <string name="energy">Energy</string>
     <string name="indoor_temperature">Indoor Temperature</string>
     <string name="indoor_humidity">Indoor Humidity</string>

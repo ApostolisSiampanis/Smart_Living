@@ -27,6 +27,9 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.devices.AirConditionViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.devices.DehumidifierViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.devices.ThermostatViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountProfileViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.AccountViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.ProfileViewModel
@@ -44,7 +47,10 @@ internal fun MainNavigation(
     userNotInSpaceViewModel: UserNotInSpaceViewModel,
     createANewRoomViewModel: CreateANewRoomViewModel,
     addANewDeviceViewModel: AddANewDeviceViewModel,
-    accountProfileViewModel: AccountProfileViewModel
+    accountProfileViewModel: AccountProfileViewModel,
+    thermostatViewModel: ThermostatViewModel,
+    airConditionViewModel: AirConditionViewModel,
+    dehumidifierViewModel: DehumidifierViewModel
 ) {
     val navController = rememberNavController()
     val startDestination by mainNavigationViewModel.startDestination.collectAsState()
@@ -119,18 +125,21 @@ internal fun MainNavigation(
             composable("thermostat"){
                 ThermostatScreen(
                     navController = navController,
+                    viewModel = thermostatViewModel,
                     sharedViewModel = mainSharedViewModel
                 )
             }
             composable("airCondition"){
                 AirConditionScreen(
                     navController = navController,
+                    viewModel = airConditionViewModel,
                     sharedViewModel = mainSharedViewModel
                 )
             }
             composable("dehumidifier"){
                 DehumidifierScreen(
                     navController = navController,
+                    viewModel = dehumidifierViewModel,
                     sharedViewModel = mainSharedViewModel
                 )
             }

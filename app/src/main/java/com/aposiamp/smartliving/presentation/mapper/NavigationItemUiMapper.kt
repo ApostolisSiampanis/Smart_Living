@@ -9,7 +9,6 @@ object NavigationItemUiMapper {
         val titleResId = when (domain.title) {
             // Bottom Menu
             "Devices" -> R.string.devices
-            "Routines" -> R.string.routines
             "Energy" -> R.string.energy
             // Navigation Drawer
             "Home" -> R.string.home
@@ -22,7 +21,6 @@ object NavigationItemUiMapper {
         val selectedIcon = when (domain.title) {
             // Bottom Menu
             "Devices" -> R.drawable.devices_filled
-            "Routines" -> R.drawable.routines_filled
             "Energy" -> R.drawable.energy_filled
             // Navigation Drawer
             "Home" -> R.drawable.home_filled
@@ -35,7 +33,6 @@ object NavigationItemUiMapper {
         val unSelectedIcon = when (domain.title) {
             // Bottom Menu
             "Devices" -> R.drawable.devices_outlined
-            "Routines" -> R.drawable.routines_outlined
             "Energy" -> R.drawable.energy_outlined
             // Navigation Drawer
             "Home" -> R.drawable.home_outlined
@@ -48,7 +45,6 @@ object NavigationItemUiMapper {
         val route = when (domain.title) {
             // Bottom Menu
             "Devices" -> "devices"
-            "Routines" -> "routines"
             "Energy" -> "energy"
             // Navigation Drawer
             "Home" -> "devices"

@@ -12,25 +12,37 @@ import com.aposiamp.smartliving.data.repository.LocationRepositoryImpl
 import com.aposiamp.smartliving.data.repository.PlacesRepositoryImpl
 import com.aposiamp.smartliving.data.repository.RoomRepositoryImpl
 import com.aposiamp.smartliving.data.repository.AccountProfileRepositoryImpl
+import com.aposiamp.smartliving.data.repository.AirConditionRepositoryImpl
 import com.aposiamp.smartliving.data.repository.CleanupRepositoryImpl
+import com.aposiamp.smartliving.data.repository.DehumidifierRepositoryImpl
+import com.aposiamp.smartliving.data.repository.ThermostatRepositoryImpl
 import com.aposiamp.smartliving.data.source.local.EnvironmentalSensorDataSource
 import com.aposiamp.smartliving.data.source.local.LocationDataSource
+import com.aposiamp.smartliving.data.source.remote.AirConditionApiService
+import com.aposiamp.smartliving.data.source.remote.AirConditionDataSource
 import com.aposiamp.smartliving.data.source.remote.CleanUpApiService
 import com.aposiamp.smartliving.data.source.remote.CleanUpDataSource
+import com.aposiamp.smartliving.data.source.remote.DehumidifierApiService
+import com.aposiamp.smartliving.data.source.remote.DehumidifierDataSource
 import com.aposiamp.smartliving.data.source.remote.DeviceApiService
 import com.aposiamp.smartliving.data.source.remote.DeviceDataSource
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
 import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
 import com.aposiamp.smartliving.data.source.remote.PlacesDataSource
+import com.aposiamp.smartliving.data.source.remote.ThermostatApiService
+import com.aposiamp.smartliving.data.source.remote.ThermostatDataSource
 import com.aposiamp.smartliving.data.utils.RetrofitClient
+import com.aposiamp.smartliving.domain.repository.AirConditionRepository
 import com.aposiamp.smartliving.domain.repository.AuthRepository
 import com.aposiamp.smartliving.domain.repository.CleanupRepository
+import com.aposiamp.smartliving.domain.repository.DehumidifierRepository
 import com.aposiamp.smartliving.domain.repository.DeviceRepository
 import com.aposiamp.smartliving.domain.repository.SpaceRepository
 import com.aposiamp.smartliving.domain.repository.EnvironmentalSensorRepository
 import com.aposiamp.smartliving.domain.repository.LocationRepository
 import com.aposiamp.smartliving.domain.repository.PlacesRepository
 import com.aposiamp.smartliving.domain.repository.RoomRepository
+import com.aposiamp.smartliving.domain.repository.ThermostatRepository
 import com.aposiamp.smartliving.domain.repository.UserAccountRepository
 import com.aposiamp.smartliving.domain.usecase.location.GetLocationDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
@@ -49,8 +61,20 @@ import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUse
 import com.aposiamp.smartliving.domain.usecase.welcome.SetSpaceDataUseCase
 import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.CheckIfDeviceExistsUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.GetDeviceListUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceDataUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceModeUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
+import com.aposiamp.smartliving.domain.usecase.devices.airCondition.GetAirConditionStatusUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.airCondition.UpdateAirConditionAirDirectionUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.airCondition.UpdateAirConditionFanSpeedUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.airCondition.UpdateAirConditionTemperatureUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.GetDehumidifierStatusUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.UpdateDehumidifierFanSpeedUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.dehumidifier.UpdateDehumidifierHumidityLevelUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatStatusUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.thermostat.UpdateThermostatTemperatureUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
@@ -93,6 +117,9 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     private val deviceDataSource = DeviceDataSource(getDeviceRetrofitApi())
     private val placesDataSource = PlacesDataSource(getPlacesClient())
     private val cleanUpDataSource = CleanUpDataSource(getCleanUpRetrofitApi())
+    private val thermostatDataSource = ThermostatDataSource(getThermostatRetrofitApi())
+    private val dehumidifierDataSource = DehumidifierDataSource(getDehumidifierRetrofitApi())
+    private val airConditionDataSource = AirConditionDataSource(getAirConditionRetrofitApi())
 
     // Repositories
     override val authRepository: AuthRepository by lazy {
@@ -131,6 +158,18 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         CleanupRepositoryImpl(cleanUpDataSource)
     }
 
+    override val thermostatRepository: ThermostatRepository by lazy {
+        ThermostatRepositoryImpl(thermostatDataSource)
+    }
+
+    override val dehumidifierRepository: DehumidifierRepository by lazy {
+        DehumidifierRepositoryImpl(dehumidifierDataSource)
+    }
+
+    override val airConditionRepository: AirConditionRepository by lazy {
+        AirConditionRepositoryImpl(airConditionDataSource)
+    }
+
     // Firebase
     override fun getFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
@@ -153,6 +192,18 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     // Retrofit API
     override fun getDeviceRetrofitApi(): DeviceApiService {
         return RetrofitClient.createDeviceService()
+    }
+
+    override fun getThermostatRetrofitApi(): ThermostatApiService {
+        return RetrofitClient.createThermostatService()
+    }
+
+    override fun getDehumidifierRetrofitApi(): DehumidifierApiService {
+        return RetrofitClient.createDehumidifierService()
+    }
+
+    override fun getAirConditionRetrofitApi(): AirConditionApiService {
+        return RetrofitClient.createAirConditionService()
     }
 
     override fun getCleanUpRetrofitApi(): CleanUpApiService {
@@ -261,6 +312,57 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val setDeviceDataUseCase: SetDeviceDataUseCase by lazy {
         SetDeviceDataUseCase(deviceRepository, getCurrentUserUseCase)
+    }
+
+    override val getDeviceListUseCase: GetDeviceListUseCase by lazy {
+        GetDeviceListUseCase(deviceRepository, getCurrentUserUseCase)
+    }
+
+    override val getThermostatStatusUseCase: GetThermostatStatusUseCase by lazy {
+        GetThermostatStatusUseCase(deviceRepository)
+    }
+
+    override val getAirConditionStatusUseCase: GetAirConditionStatusUseCase by lazy {
+        GetAirConditionStatusUseCase(deviceRepository)
+    }
+
+    override val getDehumidifierStatusUseCase: GetDehumidifierStatusUseCase by lazy {
+        GetDehumidifierStatusUseCase(deviceRepository)
+    }
+
+    override val updateDeviceStateUseCase: UpdateDeviceStateUseCase by lazy {
+        UpdateDeviceStateUseCase(deviceRepository)
+    }
+
+    override val updateDeviceModeUseCase: UpdateDeviceModeUseCase by lazy {
+        UpdateDeviceModeUseCase(deviceRepository)
+    }
+
+    // Thermostat UseCases
+    override val updateThermostatTemperatureUseCase: UpdateThermostatTemperatureUseCase by lazy {
+        UpdateThermostatTemperatureUseCase(thermostatRepository)
+    }
+
+    // Dehumidifier UseCases
+    override val updateDehumidifierHumidityLevelUseCase: UpdateDehumidifierHumidityLevelUseCase by lazy {
+        UpdateDehumidifierHumidityLevelUseCase(dehumidifierRepository)
+    }
+
+    override val updateDehumidifierFanSpeedUseCase: UpdateDehumidifierFanSpeedUseCase by lazy {
+        UpdateDehumidifierFanSpeedUseCase(dehumidifierRepository)
+    }
+
+    // AirCondition UseCases
+    override val updateAirConditionAirDirectionUseCase: UpdateAirConditionAirDirectionUseCase by lazy {
+        UpdateAirConditionAirDirectionUseCase(airConditionRepository)
+    }
+
+    override val updateAirConditionFanSpeedUseCase: UpdateAirConditionFanSpeedUseCase by lazy {
+        UpdateAirConditionFanSpeedUseCase(airConditionRepository)
+    }
+
+    override val updateAirConditionTemperatureUseCase: UpdateAirConditionTemperatureUseCase by lazy {
+        UpdateAirConditionTemperatureUseCase(airConditionRepository)
     }
 
     // Profile UseCases
