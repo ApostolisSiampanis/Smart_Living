@@ -135,7 +135,7 @@ fun AirConditionScreen(
                                     color = selectedMode.value.secondaryColor,
                                     initialDirection = deviceStatus!!.airDirection,
                                     onDirectionChange = { direction ->
-                                        //TODO: Update device status air direction
+                                        viewModel.updateAirDirection(selectedDevice!!.deviceId!!, direction)
                                     }
                                 )
                             }
