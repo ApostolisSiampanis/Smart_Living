@@ -17,6 +17,7 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import com.aposiamp.smartliving.presentation.utils.viewModelFactory
 import com.aposiamp.smartliving.presentation.viewmodel.main.AddANewDeviceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.EnergyViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
@@ -184,6 +185,14 @@ class MainActivity : ComponentActivity() {
                         }
                     )
 
+                    val energyViewModel = viewModel<EnergyViewModel>(
+                        factory = viewModelFactory {
+                            EnergyViewModel(
+                                getPeriodItemsUseCase = SmartLiving.appModule.getPeriodItemsUseCase
+                            )
+                        }
+                    )
+
                     MainNavigation(
                         context = context,
                         devicesViewModel = devicesViewModel,
@@ -199,7 +208,8 @@ class MainActivity : ComponentActivity() {
                         accountProfileViewModel = accountProfileViewModel,
                         thermostatViewModel = thermostatViewModel,
                         airConditionViewModel = airConditionViewModel,
-                        dehumidifierViewModel = dehumidifierViewModel
+                        dehumidifierViewModel = dehumidifierViewModel,
+                        energyViewModel = energyViewModel
                     )
                 }
             }
