@@ -65,9 +65,9 @@ fun LoginScreen(
 
             is Result.Success -> {
                 loadingState = false
-                Toast.makeText(context, "Successfully Logged In", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.successfully_logged_in), Toast.LENGTH_SHORT).show()
                 val destination = viewModel.determineDestination()
-                if (destination == "permissions") {
+                if (destination == context.getString(R.string.permissions_lower_case)) {
                     navController.navigate("permissions")
                 } else {
                     val intent = Intent(context, MainActivity::class.java).apply {
@@ -173,7 +173,7 @@ fun LoginScreen(
             HaveAnAccountOrNotClickableTextComponent(
                 alreadyHaveAnAccount = false,
                 onTextSelected = {
-                    if (it == "Register") {
+                    if (it == context.getString(R.string.register)) {
                         navController.navigate("signUp")
                     }
                 }

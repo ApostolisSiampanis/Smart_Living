@@ -23,6 +23,8 @@
     <string name="space_address">Space Address</string>
     <string name="space_address_hint">Enter the address of your space</string>
     <string name="login">Login</string>
+    <string name="successfully_logged_in">Successfully logged in!</string>
+    <string name="sign_up_successful">Sign up successful!</string>
     <string name="welcome_to_smart_living_app">Welcome to \nSmart Living!</string>
     <string name="welcome_text">Welcome to Smart Living – Your ultimate smart home companion! Seamlessly control your connected devices, create personalized routines, and receive smart suggestions for energy-saving practices. Whether you\'re optimizing your lighting, adjusting your devices, or your thermostat, Smart Living empowers you to manage your home effortlessly while reducing energy consumption. Experience the future of home automation today!</string>
     <string name="the_email_can_not_be_blank">The email can\'t be blank</string>
@@ -106,6 +108,7 @@
     <string name="next">Next</string>
     <string name="permission_screen_image">Permission Screen Image</string>
     <string name="please_grant_all_permissions">Please grant all permissions</string>
+    <string name="permissions_lower_case">permissions</string>
     <string name="user_not_in_space">User not in space</string>
     <string name="you_are_not_in_your_space">You are not in your space.</string>
     <string name="you_need_to_be_in_your_space_to_use_the_app">You need to be in your space to use the app.</string>
