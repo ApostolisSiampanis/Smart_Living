@@ -12,6 +12,7 @@ import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AboutScree
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AddANewDeviceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.CreateANewRoomScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.DevicesScreen
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.EnergyScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings.SettingsScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.UserNotInSpaceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.AirConditionScreen
@@ -72,6 +73,14 @@ internal fun MainNavigation(
                 DevicesScreen(
                     navController = navController,
                     viewModel = devicesViewModel,
+                    mainSharedViewModel = mainSharedViewModel,
+                    navigationViewModel = navigationViewModel,
+                    context = context
+                )
+            }
+            composable("energy"){
+                EnergyScreen(
+                    navController = navController,
                     mainSharedViewModel = mainSharedViewModel,
                     navigationViewModel = navigationViewModel,
                     context = context
