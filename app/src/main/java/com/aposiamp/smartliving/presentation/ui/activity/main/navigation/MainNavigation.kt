@@ -23,6 +23,7 @@ import com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings.P
 import com.aposiamp.smartliving.presentation.viewmodel.main.AddANewDeviceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.EnergyViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
@@ -51,7 +52,8 @@ internal fun MainNavigation(
     accountProfileViewModel: AccountProfileViewModel,
     thermostatViewModel: ThermostatViewModel,
     airConditionViewModel: AirConditionViewModel,
-    dehumidifierViewModel: DehumidifierViewModel
+    dehumidifierViewModel: DehumidifierViewModel,
+    energyViewModel: EnergyViewModel
 ) {
     val navController = rememberNavController()
     val startDestination by mainNavigationViewModel.startDestination.collectAsState()
@@ -81,6 +83,7 @@ internal fun MainNavigation(
             composable("energy"){
                 EnergyScreen(
                     navController = navController,
+                    viewModel = energyViewModel,
                     mainSharedViewModel = mainSharedViewModel,
                     navigationViewModel = navigationViewModel,
                     context = context
