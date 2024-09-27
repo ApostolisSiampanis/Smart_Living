@@ -201,4 +201,7 @@
     <string name="password_updated_successfully">Password updated successfully!</string>
     <string name="error_deleting_account">Error deleting account</string>
     <string name="delete_account">Delete Account</string>
+    <string name="last_week">Last Week</string>
+    <string name="last_month">Last Month</string>
+    <string name="last_year">Last Year</string>
 </resources>
