@@ -87,6 +87,7 @@
     <string name="go_back">Go back</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="forgot_password_header">Forgot Password</string>
+    <string name="github_link">https://github.com/ApostolisSiampanis</string>
     <string name="send_email">Send Email</string>
     <string name="email_image">Email Image</string>
     <string name="password_reset_email_sent">Password reset email sent!</string>

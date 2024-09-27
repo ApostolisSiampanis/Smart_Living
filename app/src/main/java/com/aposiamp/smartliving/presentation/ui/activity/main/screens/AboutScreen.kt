@@ -103,7 +103,7 @@ fun AboutScreen(
                             GeneralBoldText(value = stringResource(id = R.string.about_our_vision))
                             GeneralNormalText(value = stringResource(id = R.string.about_our_vision_text))
 
-                            val githubLink = Uri.parse("https://github.com/ApostolisSiampanis")
+                            val githubLink = Uri.parse(context.getString(R.string.github_link))
                             Box(
                                 modifier = Modifier.fillMaxWidth(),
                                 contentAlignment = Alignment.Center
