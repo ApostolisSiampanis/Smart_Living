@@ -9,19 +9,28 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.SmartLiving
+import com.aposiamp.smartliving.presentation.model.PeriodItemUiModel
 import com.aposiamp.smartliving.presentation.ui.component.BottomBar
 import com.aposiamp.smartliving.presentation.ui.component.MenuMediumTopAppBar
 import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
+import com.aposiamp.smartliving.presentation.ui.component.PeriodDropdownMenu
+import com.aposiamp.smartliving.presentation.viewmodel.main.EnergyViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import kotlinx.coroutines.launch
@@ -30,6 +39,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun EnergyScreen(
     navController: NavController,
+    viewModel: EnergyViewModel,
     mainSharedViewModel: MainSharedViewModel,
     navigationViewModel: NavigationViewModel,
     context: Context
@@ -45,6 +55,9 @@ fun EnergyScreen(
     val bottomNavigationItems = navigationViewModel.getBottomNavigationItems(context = context)
     // Retrieve the dropdown menu items
     val dropdownMenuItems = navigationViewModel.getDropdownMenuItems(context = context, navController = navController)
+    // Retrieve the Energy Screen Items
+    val energyItems = viewModel.getPeriodItems()
+    var selectedPeriod by remember { mutableStateOf<PeriodItemUiModel?>(null) }
 
     ModalNavigationDrawer(
         drawerContent = {
@@ -87,13 +100,24 @@ fun EnergyScreen(
                 )
             },
             content = { padding ->
-                LazyColumn(
+                Surface(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(padding)
+                        .padding(padding),
+                    color = Color.White
                 ) {
-                    item {
-
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(start = 18.dp, end = 18.dp, top = 18.dp)
+                    ) {
+                        item {
+                            PeriodDropdownMenu(
+                                items = energyItems,
+                                selectedItem = selectedPeriod,
+                                onItemSelected = { selectedPeriod = it }
+                            )
+                        }
                     }
                 }
             }
