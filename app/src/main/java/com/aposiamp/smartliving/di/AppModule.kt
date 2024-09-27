@@ -52,6 +52,7 @@ import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatS
 import com.aposiamp.smartliving.domain.usecase.devices.thermostat.UpdateThermostatTemperatureUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetPeriodItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
@@ -125,8 +126,9 @@ interface AppModule {
     // BottomMenu UseCase
     val getBottomMenuItemsUseCase: GetBottomNavigationItemsUseCase
 
-    // DropDownMenu UseCase
+    // DropDownMenu UseCases
     val getDropdownMenuItemsUseCase: GetDropdownMenuItemsUseCase
+    val getPeriodItemsUseCase: GetPeriodItemsUseCase
 
     // Settings UseCases
     val getSettingsScreenItemsUseCase: GetSettingsScreenItemsUseCase
