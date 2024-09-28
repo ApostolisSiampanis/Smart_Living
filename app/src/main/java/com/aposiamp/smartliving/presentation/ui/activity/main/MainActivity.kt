@@ -39,22 +39,23 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val context = this
 
-                    val devicesViewModel = viewModel<DevicesViewModel>(
-                        factory = viewModelFactory {
-                            DevicesViewModel(
-                                checkIfAnyRoomExistsUseCase = SmartLiving.appModule.checkIfAnyRoomExistsUseCase,
-                                getRoomListUseCase = SmartLiving.appModule.getRoomListUseCase,
-                                getDeviceListUseCase = SmartLiving.appModule.getDeviceListUseCase
-                            )
-                        }
-                    )
-
                     val mainSharedViewModel = viewModel<MainSharedViewModel>(
                         factory = viewModelFactory {
                             MainSharedViewModel(
                                 getSpaceUseCase = SmartLiving.appModule.getSpaceUseCase,
                                 getEnvironmentalDataUseCase = SmartLiving.appModule.getEnvironmentalDataUseCase,
                                 setEnvironmentalDataUseCase = SmartLiving.appModule.setEnvironmentalDataUseCase
+                            )
+                        }
+                    )
+
+                    val devicesViewModel = viewModel<DevicesViewModel>(
+                        factory = viewModelFactory {
+                            DevicesViewModel(
+                                checkIfAnyRoomExistsUseCase = SmartLiving.appModule.checkIfAnyRoomExistsUseCase,
+                                getRoomListUseCase = SmartLiving.appModule.getRoomListUseCase,
+                                getDeviceListUseCase = SmartLiving.appModule.getDeviceListUseCase,
+                                mainSharedViewModel = mainSharedViewModel
                             )
                         }
                     )
