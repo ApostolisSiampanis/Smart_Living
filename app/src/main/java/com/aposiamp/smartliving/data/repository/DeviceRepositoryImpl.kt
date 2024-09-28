@@ -10,11 +10,13 @@ import com.aposiamp.smartliving.data.model.DeviceStateDTO
 import com.aposiamp.smartliving.data.model.ThermostatStatusDTO
 import com.aposiamp.smartliving.data.source.remote.DeviceDataSource
 import com.aposiamp.smartliving.data.source.remote.FirebaseDataSource
+import com.aposiamp.smartliving.data.source.remote.FirestoreDataSource
 import com.aposiamp.smartliving.domain.repository.DeviceRepository
 
 class DeviceRepositoryImpl(
     private val deviceDataSource: DeviceDataSource,
-    private val firebaseDataSource: FirebaseDataSource
+    private val firebaseDataSource: FirebaseDataSource,
+    private val firestoreDataSource: FirestoreDataSource
 ) : DeviceRepository {
     override suspend fun checkIfDeviceExists(deviceIdAndTypeDTO: DeviceIdAndTypeDTO): Boolean {
         return deviceDataSource.checkIfDeviceExists(deviceIdAndTypeDTO)
@@ -46,5 +48,9 @@ class DeviceRepositoryImpl(
 
     override suspend fun updateDeviceMode(deviceId: String, deviceModeDTO: DeviceModeDTO): Boolean {
         return deviceDataSource.updateDeviceMode(deviceId, deviceModeDTO)
+    }
+
+    override suspend fun setDeviceHistory(deviceId: String, deviceHistoryDTO: DeviceHistoryDTO) {
+        firestoreDataSource.setDeviceHistory(deviceId, deviceHistoryDTO)
     }
 }
