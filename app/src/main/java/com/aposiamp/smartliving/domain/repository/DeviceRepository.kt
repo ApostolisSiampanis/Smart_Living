@@ -18,4 +18,5 @@ interface DeviceRepository {
     suspend fun getDehumidifierStatus(deviceId: String): DehumidifierStatusDTO?
     suspend fun updateDeviceState(deviceId: String, deviceStateDTO: DeviceStateDTO): DeviceHistoryDTO?
     suspend fun updateDeviceMode(deviceId: String, deviceModeDTO: DeviceModeDTO): Boolean
+    suspend fun setDeviceHistory(deviceId: String, deviceHistoryDTO: DeviceHistoryDTO)
 }
