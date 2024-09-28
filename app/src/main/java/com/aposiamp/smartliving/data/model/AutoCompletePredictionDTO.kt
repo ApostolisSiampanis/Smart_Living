@@ -1,6 +1,6 @@
 package com.aposiamp.smartliving.data.model
 
-data class AutoCompletePredictionData(
+data class AutoCompletePredictionDTO(
     val placeId: String,
     val fullAddress: String
 )
