@@ -2,6 +2,7 @@ package com.aposiamp.smartliving.data.source.remote
 
 import com.aposiamp.smartliving.data.model.AirConditionStatusDTO
 import com.aposiamp.smartliving.data.model.DehumidifierStatusDTO
+import com.aposiamp.smartliving.data.model.DeviceHistoryDTO
 import com.aposiamp.smartliving.data.model.DeviceIdAndTypeDTO
 import com.aposiamp.smartliving.data.model.DeviceModeDTO
 import com.aposiamp.smartliving.data.model.DeviceStateDTO
@@ -58,12 +59,16 @@ class DeviceDataSource(
         }
     }
 
-    suspend fun updateDeviceState(deviceId: String, deviceStateDTO: DeviceStateDTO): Boolean {
+    suspend fun updateDeviceState(deviceId: String, deviceStateDTO: DeviceStateDTO): DeviceHistoryDTO? {
         return try {
             val response = apiService.updateDeviceState(deviceId, deviceStateDTO)
-            response.isSuccessful
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
         } catch (e: Exception) {
-            false
+            null
         }
     }
 
