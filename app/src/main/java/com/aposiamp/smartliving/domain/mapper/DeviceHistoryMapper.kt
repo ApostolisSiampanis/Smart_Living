@@ -11,4 +11,12 @@ object DeviceHistoryMapper {
             powerConsumption = dto.powerConsumption
         )
     }
+
+    fun toDTO(domain: DeviceHistoryData): DeviceHistoryDTO {
+        return DeviceHistoryDTO(
+            startTime = domain.startTime,
+            endTime = domain.endTime,
+            powerConsumption = domain.powerConsumption
+        )
+    }
 }
