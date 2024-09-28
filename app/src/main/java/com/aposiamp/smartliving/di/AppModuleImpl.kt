@@ -63,6 +63,7 @@ import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.CheckIfDeviceExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.GetDeviceListUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceDataUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceHistoryUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceModeUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
@@ -144,7 +145,7 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     }
 
     override val deviceRepository: DeviceRepository by lazy {
-        DeviceRepositoryImpl(deviceDataSource, firebaseDataSource)
+        DeviceRepositoryImpl(deviceDataSource, firebaseDataSource, firestoreDataSource)
     }
 
     override val placesRepository: PlacesRepository by lazy {
@@ -341,6 +342,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val updateDeviceModeUseCase: UpdateDeviceModeUseCase by lazy {
         UpdateDeviceModeUseCase(deviceRepository)
+    }
+
+    override val setDeviceHistoryUseCase: SetDeviceHistoryUseCase by lazy {
+        SetDeviceHistoryUseCase(deviceRepository)
     }
 
     // Thermostat UseCases
