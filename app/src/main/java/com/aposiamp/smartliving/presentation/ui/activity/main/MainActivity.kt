@@ -155,7 +155,8 @@ class MainActivity : ComponentActivity() {
                                 getThermostatStatusUseCase = SmartLiving.appModule.getThermostatStatusUseCase,
                                 updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase,
                                 updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase,
-                                updateThermostatTemperatureUseCase = SmartLiving.appModule.updateThermostatTemperatureUseCase
+                                updateThermostatTemperatureUseCase = SmartLiving.appModule.updateThermostatTemperatureUseCase,
+                                setDeviceHistoryUseCase = SmartLiving.appModule.setDeviceHistoryUseCase
                             )
                         }
                     )
@@ -168,7 +169,8 @@ class MainActivity : ComponentActivity() {
                                 updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase,
                                 updateAirConditionAirDirectionUseCase = SmartLiving.appModule.updateAirConditionAirDirectionUseCase,
                                 updateAirConditionFanSpeedUseCase = SmartLiving.appModule.updateAirConditionFanSpeedUseCase,
-                                updateAirConditionTemperatureUseCase = SmartLiving.appModule.updateAirConditionTemperatureUseCase
+                                updateAirConditionTemperatureUseCase = SmartLiving.appModule.updateAirConditionTemperatureUseCase,
+                                setDeviceHistoryUseCase = SmartLiving.appModule.setDeviceHistoryUseCase
                             )
                         }
                     )
@@ -180,7 +182,8 @@ class MainActivity : ComponentActivity() {
                                 updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase,
                                 updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase,
                                 updateDehumidifierHumidityLevelUseCase = SmartLiving.appModule.updateDehumidifierHumidityLevelUseCase,
-                                updateDehumidifierFanSpeedUseCase = SmartLiving.appModule.updateDehumidifierFanSpeedUseCase
+                                updateDehumidifierFanSpeedUseCase = SmartLiving.appModule.updateDehumidifierFanSpeedUseCase,
+                                setDeviceHistoryUseCase = SmartLiving.appModule.setDeviceHistoryUseCase
                             )
                         }
                     )
