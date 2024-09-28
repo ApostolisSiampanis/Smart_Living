@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.data.source.remote
 
+import com.aposiamp.smartliving.data.model.DeviceHistoryDTO
 import com.aposiamp.smartliving.data.utils.await
 import com.aposiamp.smartliving.data.model.EnvironmentalDataDTO
 import com.aposiamp.smartliving.data.model.UserFirestore
@@ -35,5 +36,17 @@ class FirestoreDataSource(private val db: FirebaseFirestore) {
     suspend fun updateLastName(uid: String, lastName: String) {
         val userRef = db.collection("users").document(uid)
         userRef.update("last_name", lastName).await()
+    }
+
+    suspend fun setDeviceHistory(deviceId: String, deviceHistoryDTO: DeviceHistoryDTO) {
+        db.collection("device_history")
+            .document(deviceId)
+            .collection("history")
+            .document(deviceHistoryDTO.startTime)
+            .set(mapOf(
+                "end_time" to deviceHistoryDTO.endTime,
+                "power_consumption" to deviceHistoryDTO.powerConsumption
+            ))
+            .await()
     }
 }
