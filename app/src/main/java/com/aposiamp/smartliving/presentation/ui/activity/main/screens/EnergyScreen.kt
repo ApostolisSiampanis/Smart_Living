@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.SmartLiving
 import com.aposiamp.smartliving.presentation.model.PeriodItemUiModel
+import com.aposiamp.smartliving.presentation.ui.activity.LoadingScreen
 import com.aposiamp.smartliving.presentation.ui.component.BottomBar
 import com.aposiamp.smartliving.presentation.ui.component.MenuMediumTopAppBar
 import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
@@ -51,6 +52,8 @@ fun EnergyScreen(
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val space by mainSharedViewModel.space.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    val simpleDeviceList by mainSharedViewModel.simpleDeviceList.collectAsState()
 
     // Retrieve the Navigation Drawer Items
     val navigationDrawerItems = navigationViewModel.getNavigationDrawerItems(context = context)
@@ -61,6 +64,8 @@ fun EnergyScreen(
     // Retrieve the Energy Screen Items
     val energyItems = viewModel.getPeriodItems()
     var selectedPeriod by remember { mutableStateOf<PeriodItemUiModel?>(null) }
+
+    val pieChartData = simpleDeviceList.associate { (it.deviceName ?: "Unknown") to (100.0) }
 
     ModalNavigationDrawer(
         drawerContent = {
@@ -109,30 +114,28 @@ fun EnergyScreen(
                         .padding(padding),
                     color = Color.White
                 ) {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(start = 18.dp, end = 18.dp, top = 18.dp)
-                    ) {
-                        item {
-                            PeriodDropdownMenu(
-                                items = energyItems,
-                                selectedItem = selectedPeriod,
-                                onItemSelected = { selectedPeriod = it }
-                            )
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                            ) {
-                                PieChart(
-                                    data = mapOf(
-                                        Pair("Sample 1", 100.0),
-                                        Pair("Sample 2", 200.0),
-                                        Pair("Sample 3", 150.0),
-                                        Pair("Sample 4", 250.0),
-                                        Pair("Sample 5", 300.0)
-                                    )
+                    if (isLoading) {
+                        LoadingScreen()
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(start = 18.dp, end = 18.dp, top = 18.dp)
+                        ) {
+                            item {
+                                PeriodDropdownMenu(
+                                    items = energyItems,
+                                    selectedItem = selectedPeriod,
+                                    onItemSelected = { selectedPeriod = it }
                                 )
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                ) {
+                                    PieChart(
+                                        data = pieChartData
+                                    )
+                                }
                             }
                         }
                     }
