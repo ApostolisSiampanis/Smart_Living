@@ -1,7 +1,9 @@
 package com.aposiamp.smartliving.presentation.ui.activity.main.screens
 
 import android.content.Context
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.DrawerValue
@@ -30,6 +32,7 @@ import com.aposiamp.smartliving.presentation.ui.component.BottomBar
 import com.aposiamp.smartliving.presentation.ui.component.MenuMediumTopAppBar
 import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
 import com.aposiamp.smartliving.presentation.ui.component.PeriodDropdownMenu
+import com.aposiamp.smartliving.presentation.ui.component.PieChart
 import com.aposiamp.smartliving.presentation.viewmodel.main.EnergyViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
@@ -117,6 +120,20 @@ fun EnergyScreen(
                                 selectedItem = selectedPeriod,
                                 onItemSelected = { selectedPeriod = it }
                             )
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                            ) {
+                                PieChart(
+                                    data = mapOf(
+                                        Pair("Sample 1", 100.0),
+                                        Pair("Sample 2", 200.0),
+                                        Pair("Sample 3", 150.0),
+                                        Pair("Sample 4", 250.0),
+                                        Pair("Sample 5", 300.0)
+                                    )
+                                )
+                            }
                         }
                     }
                 }
