@@ -7,10 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.aposiamp.smartliving.domain.usecase.main.GetSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.sensor.GetEnvironmentalDataUseCase
 import com.aposiamp.smartliving.domain.usecase.sensor.SetEnvironmentalDataUseCase
+import com.aposiamp.smartliving.presentation.mapper.DeviceDataUiMapper
 import com.aposiamp.smartliving.presentation.mapper.EnvironmentalDataUiMapper
 import com.aposiamp.smartliving.presentation.mapper.SpaceDataUiMapper
 import com.aposiamp.smartliving.presentation.model.DeviceDataUiModel
 import com.aposiamp.smartliving.presentation.model.EnvironmentalDataUiModel
+import com.aposiamp.smartliving.presentation.model.SimpleDeviceDataUiModel
 import com.aposiamp.smartliving.presentation.model.SpaceDataUiModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,6 +32,9 @@ class MainSharedViewModel(
     private val _selectedDevice = MutableStateFlow<DeviceDataUiModel?>(null)
     val selectedDevice: StateFlow<DeviceDataUiModel?> = _selectedDevice
 
+    private val _simpleDeviceList = MutableStateFlow<List<SimpleDeviceDataUiModel>>(emptyList())
+    val simpleDeviceList: StateFlow<List<SimpleDeviceDataUiModel>> = _simpleDeviceList
+
     init {
         viewModelScope.launch {
             val spaceData = getSpaceUseCase.execute()
@@ -42,5 +47,11 @@ class MainSharedViewModel(
 
     fun setSelectedDevice(device: DeviceDataUiModel) {
         _selectedDevice.value = device
+    }
+
+    fun updateSimpleDeviceList(deviceList: List<DeviceDataUiModel>) {
+        val currentList = _simpleDeviceList.value.toMutableList()
+        currentList.addAll(DeviceDataUiMapper.toSimpleDeviceDataUiModelList(deviceList))
+        _simpleDeviceList.value = currentList
     }
 }
