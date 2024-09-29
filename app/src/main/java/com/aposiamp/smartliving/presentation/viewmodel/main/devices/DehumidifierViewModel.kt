@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.presentation.viewmodel.main.devices
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aposiamp.smartliving.R
@@ -96,9 +97,19 @@ class DehumidifierViewModel(
     private val _deviceStatus = MutableStateFlow<DehumidifierStatusData?>(null)
     val deviceStatus: StateFlow<DehumidifierStatusData?> = _deviceStatus
 
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> get() = _isLoading
+
     fun fetchDeviceStatus(deviceId: String) {
         viewModelScope.launch {
-            _deviceStatus.value = getDehumidifierStatusUseCase.execute(deviceId)
+            _isLoading.value = true
+            try {
+                _deviceStatus.value = getDehumidifierStatusUseCase.execute(deviceId)
+            } catch (e: Exception) {
+                Log.e("DehumidifierViewModel", "Error fetching device status", e)
+            } finally {
+                _isLoading.value = false
+            }
         }
     }
 
