@@ -1,5 +1,6 @@
 package com.aposiamp.smartliving.presentation.viewmodel.main.devices
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aposiamp.smartliving.R
@@ -87,9 +88,19 @@ class ThermostatViewModel(
     private val _deviceStatus = MutableStateFlow<ThermostatStatusData?>(null)
     val deviceStatus: StateFlow<ThermostatStatusData?> = _deviceStatus
 
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> get() = _isLoading
+
     fun fetchDeviceStatus(deviceId: String) {
         viewModelScope.launch {
-            _deviceStatus.value = getThermostatStatusUseCase.execute(deviceId)
+            _isLoading.value = true
+            try {
+                _deviceStatus.value = getThermostatStatusUseCase.execute(deviceId)
+            } catch (e: Exception) {
+                Log.e("ThermostatViewModel", "Error fetching device status", e)
+            } finally {
+                _isLoading.value = false
+            }
         }
     }
 
