@@ -78,6 +78,7 @@ import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatS
 import com.aposiamp.smartliving.domain.usecase.devices.thermostat.UpdateThermostatTemperatureUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetPeriodDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetPeriodItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
@@ -346,6 +347,10 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val setDeviceHistoryUseCase: SetDeviceHistoryUseCase by lazy {
         SetDeviceHistoryUseCase(deviceRepository)
+    }
+
+    override val getPeriodDataUseCase: GetPeriodDataUseCase by lazy {
+        GetPeriodDataUseCase(deviceRepository)
     }
 
     // Thermostat UseCases
