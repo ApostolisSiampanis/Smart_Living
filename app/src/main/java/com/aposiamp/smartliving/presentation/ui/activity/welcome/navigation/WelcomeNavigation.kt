@@ -41,46 +41,46 @@ internal fun WelcomeNavigation(
             navController = navController,
             startDestination = startDestination!!
         ) {
-            composable("welcome") {
+            composable(WelcomeDestination.Welcome.route) {
                 WelcomeScreen(
                     navController = navController
                 )
             }
-            composable("login") {
+            composable(WelcomeDestination.Login.route) {
                 LoginScreen(
                     navController = navController,
                     viewModel = loginViewModel
                 )
             }
-            composable("signUp") {
+            composable(WelcomeDestination.SignUp.route) {
                 SignUpScreen(
                     navController = navController,
                     viewModel = signUpViewModel
                 )
             }
-            composable("termsAndConditions") {
+            composable(WelcomeDestination.TermsAndConditions.route) {
                 TermsAndConditionsScreen(
                     navController = navController
                 )
             }
-            composable("privacyPolicy") {
+            composable(WelcomeDestination.PrivacyPolicy.route) {
                 PrivacyPolicyScreen(
                     navController = navController
                 )
             }
-            composable("forgotPassword"){
+            composable(WelcomeDestination.ForgotPassword.route) {
                 ForgotPasswordScreen(
                     navController = navController,
                     viewModel = forgotPasswordViewModel
                 )
             }
-            composable("permissions") {
+            composable(WelcomeDestination.Permissions.route) {
                 PermissionsScreen(
                     navController = navController,
                     viewModel = permissionsViewModel
                 )
             }
-            composable("createANewSpace") {
+            composable(WelcomeDestination.CreateANewSpace.route) {
                 CreateANewSpaceScreen(
                     viewModel = createANewSpaceViewModel
                 )

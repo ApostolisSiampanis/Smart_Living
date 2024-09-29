@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSpaceUseCase
+import com.aposiamp.smartliving.presentation.ui.activity.main.navigation.MainDestination
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -24,9 +25,9 @@ class MainNavigationViewModel(
             val spaceData = getSpaceUseCase.execute()
             val isUserInSpace = spaceData.placeId?.let { checkIfUserIsInSpaceUseCase.execute(it) }
             if (isUserInSpace == true) {
-                _startDestination.value = "devices"
+                _startDestination.value = MainDestination.Devices.route
             } else {
-                _startDestination.value = "notInSpace"
+                _startDestination.value = MainDestination.NotInSpace.route
             }
         }
     }

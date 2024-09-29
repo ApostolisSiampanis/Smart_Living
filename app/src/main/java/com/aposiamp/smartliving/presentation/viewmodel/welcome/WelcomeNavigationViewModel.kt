@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.aposiamp.smartliving.domain.usecase.user.GetCurrentUserUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUseCase
 import com.aposiamp.smartliving.presentation.ui.activity.main.MainActivity
+import com.aposiamp.smartliving.presentation.ui.activity.welcome.navigation.WelcomeDestination
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -27,12 +28,12 @@ class WelcomeNavigationViewModel(
         viewModelScope.launch {
             val user = getCurrentUserUseCase.execute()
             if (user == null) {
-                _startDestination.value = "welcome"
+                _startDestination.value = WelcomeDestination.Welcome.route
             } else {
                 if (determineActivity(context, checkIfSpaceDataExistsUseCase)) {
-                    _startDestination.value = "welcome"
+                    _startDestination.value = WelcomeDestination.Welcome.route
                 } else {
-                    _startDestination.value = "permissions"
+                    _startDestination.value = WelcomeDestination.Permissions.route
                 }
             }
         }

@@ -32,6 +32,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.permissions.LocationPermissionTextProvider
+import com.aposiamp.smartliving.presentation.ui.activity.welcome.navigation.WelcomeDestination
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.PermissionCard
 import com.aposiamp.smartliving.presentation.ui.component.PermissionDialog
@@ -121,7 +122,7 @@ fun PermissionsScreen(
                         value = stringResource(id = R.string.next),
                         onButtonClicked = {
                             if (areAllPermissionsGranted(context, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION))) {
-                                navController.navigate("createANewSpace")
+                                navController.navigate(WelcomeDestination.CreateANewSpace.route)
                             } else {
                                 Toast.makeText(context, context.getString(R.string.please_grant_all_permissions), Toast.LENGTH_SHORT).show()
                             }

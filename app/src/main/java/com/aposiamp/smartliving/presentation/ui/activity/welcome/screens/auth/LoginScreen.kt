@@ -30,6 +30,7 @@ import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.presentation.ui.activity.main.MainActivity
+import com.aposiamp.smartliving.presentation.ui.activity.welcome.navigation.WelcomeDestination
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.HeadingTextComponent
 import com.aposiamp.smartliving.presentation.ui.component.DividerTextComponent
@@ -68,7 +69,7 @@ fun LoginScreen(
                 Toast.makeText(context, context.getString(R.string.successfully_logged_in), Toast.LENGTH_SHORT).show()
                 val destination = viewModel.determineDestination()
                 if (destination == context.getString(R.string.permissions_lower_case)) {
-                    navController.navigate("permissions")
+                    navController.navigate(WelcomeDestination.Permissions.route)
                 } else {
                     val intent = Intent(context, MainActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -135,7 +136,7 @@ fun LoginScreen(
                     UnderlinedClickableTextComponent(
                         value = stringResource(id = R.string.forgot_your_password),
                         onTextSelected = {
-                            navController.navigate("forgotPassword")
+                            navController.navigate(WelcomeDestination.ForgotPassword.route)
                         }
                     )
                 }
@@ -174,7 +175,7 @@ fun LoginScreen(
                 alreadyHaveAnAccount = false,
                 onTextSelected = {
                     if (it == context.getString(R.string.register)) {
-                        navController.navigate("signUp")
+                        navController.navigate(WelcomeDestination.SignUp.route)
                     }
                 }
             )

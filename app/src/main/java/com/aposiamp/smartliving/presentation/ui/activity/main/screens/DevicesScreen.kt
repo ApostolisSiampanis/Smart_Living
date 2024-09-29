@@ -43,6 +43,7 @@ import com.aposiamp.smartliving.SmartLiving
 import androidx.compose.foundation.lazy.items
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.aposiamp.smartliving.domain.model.DeviceType
+import com.aposiamp.smartliving.presentation.ui.activity.main.navigation.MainDestination
 import com.aposiamp.smartliving.presentation.ui.component.BottomBar
 import com.aposiamp.smartliving.presentation.ui.component.DeviceCard
 import com.aposiamp.smartliving.presentation.ui.component.DividerComponent
@@ -146,7 +147,7 @@ fun DevicesScreen(
                                         .fillMaxSize(0.8f)
                                         .aspectRatio(1f)
                                         .clickable{
-                                            navController.navigate("createANewRoom")
+                                            navController.navigate(MainDestination.CreateANewRoom.route)
                                         },
                                     contentAlignment = Alignment.Center
                                 ) {
@@ -219,10 +220,10 @@ fun DevicesScreen(
                                                     onClick = {
                                                         mainSharedViewModel.setSelectedDevice(device)
                                                         when (device.deviceType) {
-                                                            DeviceType.AIR_CONDITIONER -> navController.navigate("airCondition")
-                                                            DeviceType.THERMOSTAT -> navController.navigate("thermostat")
-                                                            DeviceType.DEHUMIDIFIER -> navController.navigate("dehumidifier")
-                                                            else -> navController.navigate("airCondition")
+                                                            DeviceType.AIR_CONDITIONER -> navController.navigate(MainDestination.AirCondition.route)
+                                                            DeviceType.THERMOSTAT -> navController.navigate(MainDestination.Thermostat.route)
+                                                            DeviceType.DEHUMIDIFIER -> navController.navigate(MainDestination.Dehumidifier.route)
+                                                            else -> navController.navigate(MainDestination.AirCondition.route)
                                                         }
                                                     }
                                                 )
