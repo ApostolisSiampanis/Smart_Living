@@ -53,4 +53,8 @@ class DeviceRepositoryImpl(
     override suspend fun setDeviceHistory(deviceId: String, deviceHistoryDTO: DeviceHistoryDTO) {
         firestoreDataSource.setDeviceHistory(deviceId, deviceHistoryDTO)
     }
+
+    override suspend fun getPeriodData(deviceId: String, period: String): Double {
+        return firestoreDataSource.getPeriodData(deviceId, period)
+    }
 }
