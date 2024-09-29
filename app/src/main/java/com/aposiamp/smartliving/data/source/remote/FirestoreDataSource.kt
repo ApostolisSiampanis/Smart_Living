@@ -49,4 +49,9 @@ class FirestoreDataSource(private val db: FirebaseFirestore) {
             ))
             .await()
     }
+
+    suspend fun getPeriodData(deviceId: String, period: String): Double {
+        val document = db.collection(period).document(deviceId).get().await()
+        return document.getDouble("total_power_consumption") ?: 0.0
+    }
 }
