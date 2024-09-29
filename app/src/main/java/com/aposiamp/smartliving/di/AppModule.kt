@@ -53,6 +53,7 @@ import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatS
 import com.aposiamp.smartliving.domain.usecase.devices.thermostat.UpdateThermostatTemperatureUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetPeriodDataUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetPeriodItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
@@ -167,6 +168,7 @@ interface AppModule {
     val updateDeviceStateUseCase: UpdateDeviceStateUseCase
     val updateDeviceModeUseCase: UpdateDeviceModeUseCase
     val setDeviceHistoryUseCase: SetDeviceHistoryUseCase
+    val getPeriodDataUseCase: GetPeriodDataUseCase
 
     // Thermostat UseCases
     val updateThermostatTemperatureUseCase: UpdateThermostatTemperatureUseCase
