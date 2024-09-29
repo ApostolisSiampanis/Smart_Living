@@ -34,6 +34,7 @@ import com.aposiamp.smartliving.presentation.ui.component.MenuMediumTopAppBar
 import com.aposiamp.smartliving.presentation.ui.component.NavigationDrawer
 import com.aposiamp.smartliving.presentation.ui.component.PeriodDropdownMenu
 import com.aposiamp.smartliving.presentation.ui.component.PieChart
+import com.aposiamp.smartliving.presentation.utils.ColorUtils
 import com.aposiamp.smartliving.presentation.viewmodel.main.EnergyViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
@@ -73,6 +74,7 @@ fun EnergyScreen(
     }
 
     val pieChartData = periodData
+    val colors = List(pieChartData.size) { ColorUtils.generateRandomColor() }
 
     ModalNavigationDrawer(
         drawerContent = {
@@ -140,7 +142,8 @@ fun EnergyScreen(
                                         .fillMaxWidth()
                                 ) {
                                     PieChart(
-                                        data = pieChartData
+                                        data = pieChartData,
+                                        colors = colors
                                     )
                                 }
                             }
