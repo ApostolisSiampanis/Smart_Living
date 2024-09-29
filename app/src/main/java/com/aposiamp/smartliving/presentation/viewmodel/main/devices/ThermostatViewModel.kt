@@ -8,6 +8,7 @@ import com.aposiamp.smartliving.domain.model.DeviceModeItem
 import com.aposiamp.smartliving.domain.model.DeviceState
 import com.aposiamp.smartliving.domain.model.DeviceStateItem
 import com.aposiamp.smartliving.domain.model.ThermostatStatusData
+import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceHistoryUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceModeUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatStatusUseCase
@@ -27,7 +28,8 @@ class ThermostatViewModel(
     private val getThermostatStatusUseCase: GetThermostatStatusUseCase,
     private val updateDeviceStateUseCase: UpdateDeviceStateUseCase,
     private val updateDeviceModeUseCase: UpdateDeviceModeUseCase,
-    private val updateThermostatTemperatureUseCase: UpdateThermostatTemperatureUseCase
+    private val updateThermostatTemperatureUseCase: UpdateThermostatTemperatureUseCase,
+    private val setDeviceHistoryUseCase: SetDeviceHistoryUseCase
 ) : ViewModel() {
     private val deviceStates = listOf(
         DeviceStateItem(DeviceState.OFF),
@@ -93,7 +95,10 @@ class ThermostatViewModel(
 
     fun updateDeviceState(deviceId: String, deviceState: DeviceState) {
         viewModelScope.launch {
-            updateDeviceStateUseCase.execute(deviceId, deviceState)
+            val deviceHistoryData = updateDeviceStateUseCase.execute(deviceId, deviceState)
+            if (deviceHistoryData != null) {
+                setDeviceHistoryUseCase.execute(deviceId, deviceHistoryData)
+            }
         }
     }
 

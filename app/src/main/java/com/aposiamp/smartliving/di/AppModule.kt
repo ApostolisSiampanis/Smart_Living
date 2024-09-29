@@ -38,6 +38,7 @@ import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.CheckIfDeviceExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.GetDeviceListUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceDataUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceHistoryUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceModeUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
@@ -52,6 +53,8 @@ import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatS
 import com.aposiamp.smartliving.domain.usecase.devices.thermostat.UpdateThermostatTemperatureUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetPeriodDataUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetPeriodItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
@@ -125,8 +128,9 @@ interface AppModule {
     // BottomMenu UseCase
     val getBottomMenuItemsUseCase: GetBottomNavigationItemsUseCase
 
-    // DropDownMenu UseCase
+    // DropDownMenu UseCases
     val getDropdownMenuItemsUseCase: GetDropdownMenuItemsUseCase
+    val getPeriodItemsUseCase: GetPeriodItemsUseCase
 
     // Settings UseCases
     val getSettingsScreenItemsUseCase: GetSettingsScreenItemsUseCase
@@ -163,6 +167,8 @@ interface AppModule {
     val getDehumidifierStatusUseCase: GetDehumidifierStatusUseCase
     val updateDeviceStateUseCase: UpdateDeviceStateUseCase
     val updateDeviceModeUseCase: UpdateDeviceModeUseCase
+    val setDeviceHistoryUseCase: SetDeviceHistoryUseCase
+    val getPeriodDataUseCase: GetPeriodDataUseCase
 
     // Thermostat UseCases
     val updateThermostatTemperatureUseCase: UpdateThermostatTemperatureUseCase

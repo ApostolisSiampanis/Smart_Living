@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aposiamp.smartliving.domain.model.AutoCompletePrediction
+import com.aposiamp.smartliving.domain.model.AutoCompletePredictionData
 import com.aposiamp.smartliving.domain.utils.Result
 import com.aposiamp.smartliving.domain.model.SpaceData
 import com.aposiamp.smartliving.domain.usecase.places.GetAutoCompleteSuggestionsUseCase
@@ -35,8 +35,8 @@ class CreateANewSpaceViewModel(
     private val _createSpaceFlow = MutableStateFlow<Result<FormResult>?>(null)
     val createSpaceFlow: StateFlow<Result<FormResult>?> = _createSpaceFlow
 
-    private var _addressPredictions by mutableStateOf(emptyList<AutoCompletePrediction>())
-    val addressPredictions: List<AutoCompletePrediction> get() = _addressPredictions
+    private var _addressPredictions by mutableStateOf(emptyList<AutoCompletePredictionData>())
+    val addressPredictions: List<AutoCompletePredictionData> get() = _addressPredictions
 
     suspend fun onEvent(event: CreateSpaceFormEvent) {
         when (event) {

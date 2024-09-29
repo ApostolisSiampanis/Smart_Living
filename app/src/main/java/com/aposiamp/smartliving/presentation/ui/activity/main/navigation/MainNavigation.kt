@@ -12,6 +12,7 @@ import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AboutScree
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.AddANewDeviceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.CreateANewRoomScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.DevicesScreen
+import com.aposiamp.smartliving.presentation.ui.activity.main.screens.EnergyScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings.SettingsScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.UserNotInSpaceScreen
 import com.aposiamp.smartliving.presentation.ui.activity.main.screens.devices.AirConditionScreen
@@ -22,6 +23,7 @@ import com.aposiamp.smartliving.presentation.ui.activity.main.screens.settings.P
 import com.aposiamp.smartliving.presentation.viewmodel.main.AddANewDeviceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.DevicesViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.EnergyViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainSharedViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
@@ -50,7 +52,8 @@ internal fun MainNavigation(
     accountProfileViewModel: AccountProfileViewModel,
     thermostatViewModel: ThermostatViewModel,
     airConditionViewModel: AirConditionViewModel,
-    dehumidifierViewModel: DehumidifierViewModel
+    dehumidifierViewModel: DehumidifierViewModel,
+    energyViewModel: EnergyViewModel
 ) {
     val navController = rememberNavController()
     val startDestination by mainNavigationViewModel.startDestination.collectAsState()
@@ -72,6 +75,15 @@ internal fun MainNavigation(
                 DevicesScreen(
                     navController = navController,
                     viewModel = devicesViewModel,
+                    mainSharedViewModel = mainSharedViewModel,
+                    navigationViewModel = navigationViewModel,
+                    context = context
+                )
+            }
+            composable("energy"){
+                EnergyScreen(
+                    navController = navController,
+                    viewModel = energyViewModel,
                     mainSharedViewModel = mainSharedViewModel,
                     navigationViewModel = navigationViewModel,
                     context = context

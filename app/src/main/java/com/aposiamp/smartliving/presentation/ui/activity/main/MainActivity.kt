@@ -17,6 +17,7 @@ import com.aposiamp.smartliving.presentation.viewmodel.main.NavigationViewModel
 import com.aposiamp.smartliving.presentation.utils.viewModelFactory
 import com.aposiamp.smartliving.presentation.viewmodel.main.AddANewDeviceViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.CreateANewRoomViewModel
+import com.aposiamp.smartliving.presentation.viewmodel.main.EnergyViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.MainNavigationViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.settings.SettingsViewModel
 import com.aposiamp.smartliving.presentation.viewmodel.main.UserNotInSpaceViewModel
@@ -38,22 +39,23 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val context = this
 
-                    val devicesViewModel = viewModel<DevicesViewModel>(
-                        factory = viewModelFactory {
-                            DevicesViewModel(
-                                checkIfAnyRoomExistsUseCase = SmartLiving.appModule.checkIfAnyRoomExistsUseCase,
-                                getRoomListUseCase = SmartLiving.appModule.getRoomListUseCase,
-                                getDeviceListUseCase = SmartLiving.appModule.getDeviceListUseCase
-                            )
-                        }
-                    )
-
                     val mainSharedViewModel = viewModel<MainSharedViewModel>(
                         factory = viewModelFactory {
                             MainSharedViewModel(
                                 getSpaceUseCase = SmartLiving.appModule.getSpaceUseCase,
                                 getEnvironmentalDataUseCase = SmartLiving.appModule.getEnvironmentalDataUseCase,
                                 setEnvironmentalDataUseCase = SmartLiving.appModule.setEnvironmentalDataUseCase
+                            )
+                        }
+                    )
+
+                    val devicesViewModel = viewModel<DevicesViewModel>(
+                        factory = viewModelFactory {
+                            DevicesViewModel(
+                                checkIfAnyRoomExistsUseCase = SmartLiving.appModule.checkIfAnyRoomExistsUseCase,
+                                getRoomListUseCase = SmartLiving.appModule.getRoomListUseCase,
+                                getDeviceListUseCase = SmartLiving.appModule.getDeviceListUseCase,
+                                mainSharedViewModel = mainSharedViewModel
                             )
                         }
                     )
@@ -154,7 +156,8 @@ class MainActivity : ComponentActivity() {
                                 getThermostatStatusUseCase = SmartLiving.appModule.getThermostatStatusUseCase,
                                 updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase,
                                 updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase,
-                                updateThermostatTemperatureUseCase = SmartLiving.appModule.updateThermostatTemperatureUseCase
+                                updateThermostatTemperatureUseCase = SmartLiving.appModule.updateThermostatTemperatureUseCase,
+                                setDeviceHistoryUseCase = SmartLiving.appModule.setDeviceHistoryUseCase
                             )
                         }
                     )
@@ -167,7 +170,8 @@ class MainActivity : ComponentActivity() {
                                 updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase,
                                 updateAirConditionAirDirectionUseCase = SmartLiving.appModule.updateAirConditionAirDirectionUseCase,
                                 updateAirConditionFanSpeedUseCase = SmartLiving.appModule.updateAirConditionFanSpeedUseCase,
-                                updateAirConditionTemperatureUseCase = SmartLiving.appModule.updateAirConditionTemperatureUseCase
+                                updateAirConditionTemperatureUseCase = SmartLiving.appModule.updateAirConditionTemperatureUseCase,
+                                setDeviceHistoryUseCase = SmartLiving.appModule.setDeviceHistoryUseCase
                             )
                         }
                     )
@@ -179,7 +183,17 @@ class MainActivity : ComponentActivity() {
                                 updateDeviceStateUseCase = SmartLiving.appModule.updateDeviceStateUseCase,
                                 updateDeviceModeUseCase = SmartLiving.appModule.updateDeviceModeUseCase,
                                 updateDehumidifierHumidityLevelUseCase = SmartLiving.appModule.updateDehumidifierHumidityLevelUseCase,
-                                updateDehumidifierFanSpeedUseCase = SmartLiving.appModule.updateDehumidifierFanSpeedUseCase
+                                updateDehumidifierFanSpeedUseCase = SmartLiving.appModule.updateDehumidifierFanSpeedUseCase,
+                                setDeviceHistoryUseCase = SmartLiving.appModule.setDeviceHistoryUseCase
+                            )
+                        }
+                    )
+
+                    val energyViewModel = viewModel<EnergyViewModel>(
+                        factory = viewModelFactory {
+                            EnergyViewModel(
+                                getPeriodItemsUseCase = SmartLiving.appModule.getPeriodItemsUseCase,
+                                getPeriodDataUseCase = SmartLiving.appModule.getPeriodDataUseCase
                             )
                         }
                     )
@@ -199,7 +213,8 @@ class MainActivity : ComponentActivity() {
                         accountProfileViewModel = accountProfileViewModel,
                         thermostatViewModel = thermostatViewModel,
                         airConditionViewModel = airConditionViewModel,
-                        dehumidifierViewModel = dehumidifierViewModel
+                        dehumidifierViewModel = dehumidifierViewModel,
+                        energyViewModel = energyViewModel
                     )
                 }
             }

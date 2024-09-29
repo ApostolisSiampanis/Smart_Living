@@ -63,6 +63,7 @@ import com.aposiamp.smartliving.domain.usecase.ValidateAddressProximityUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.CheckIfDeviceExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.GetDeviceListUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceDataUseCase
+import com.aposiamp.smartliving.domain.usecase.devices.SetDeviceHistoryUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceModeUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.UpdateDeviceStateUseCase
 import com.aposiamp.smartliving.domain.usecase.devices.ValidateDeviceExistence
@@ -77,6 +78,8 @@ import com.aposiamp.smartliving.domain.usecase.devices.thermostat.GetThermostatS
 import com.aposiamp.smartliving.domain.usecase.devices.thermostat.UpdateThermostatTemperatureUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfAnyRoomExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.CheckIfUserIsInSpaceUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetPeriodDataUseCase
+import com.aposiamp.smartliving.domain.usecase.main.GetPeriodItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetRoomListUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetSettingsScreenItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.SetRoomDataUseCase
@@ -143,7 +146,7 @@ class AppModuleImpl(private val appContext: Context): AppModule {
     }
 
     override val deviceRepository: DeviceRepository by lazy {
-        DeviceRepositoryImpl(deviceDataSource, firebaseDataSource)
+        DeviceRepositoryImpl(deviceDataSource, firebaseDataSource, firestoreDataSource)
     }
 
     override val placesRepository: PlacesRepository by lazy {
@@ -238,9 +241,13 @@ class AppModuleImpl(private val appContext: Context): AppModule {
         GetBottomNavigationItemsUseCase()
     }
 
-    // DropDownMenu UseCase
+    // DropDownMenu UseCases
     override val getDropdownMenuItemsUseCase: GetDropdownMenuItemsUseCase by lazy {
         GetDropdownMenuItemsUseCase()
+    }
+
+    override val getPeriodItemsUseCase: GetPeriodItemsUseCase by lazy {
+        GetPeriodItemsUseCase()
     }
 
     // Settings UseCases
@@ -336,6 +343,14 @@ class AppModuleImpl(private val appContext: Context): AppModule {
 
     override val updateDeviceModeUseCase: UpdateDeviceModeUseCase by lazy {
         UpdateDeviceModeUseCase(deviceRepository)
+    }
+
+    override val setDeviceHistoryUseCase: SetDeviceHistoryUseCase by lazy {
+        SetDeviceHistoryUseCase(deviceRepository)
+    }
+
+    override val getPeriodDataUseCase: GetPeriodDataUseCase by lazy {
+        GetPeriodDataUseCase(deviceRepository)
     }
 
     // Thermostat UseCases

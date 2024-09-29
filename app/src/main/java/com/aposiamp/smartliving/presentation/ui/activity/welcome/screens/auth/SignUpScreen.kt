@@ -63,7 +63,7 @@ fun SignUpScreen(
 
             is Result.Success -> {
                 loadingState = false
-                Toast.makeText(context, "Sign Up Successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.sign_up_successful), Toast.LENGTH_SHORT).show()
                 navController.navigate("permissions")
             }
 
@@ -158,9 +158,9 @@ fun SignUpScreen(
                         checkedValue = state.acceptedTerms,
                         onCheckedChange = { viewModel.onEvent(SignUpFormEvent.AcceptTerms(it)) },
                         onTextSelected = {
-                            if (it == "Privacy Policy") {
+                            if (it == context.getString(R.string.privacy_policy)) {
                                 navController.navigate("privacyPolicy")
-                            } else if (it == "Terms of Use.") {
+                            } else if (it == context.getString(R.string.terms_of_use)) {
                                 navController.navigate("termsAndConditions")
                             }
                         },
@@ -202,7 +202,7 @@ fun SignUpScreen(
             HaveAnAccountOrNotClickableTextComponent(
                 alreadyHaveAnAccount = true,
                 onTextSelected = {
-                    if (it == "Login") {
+                    if (it == context.getString(R.string.login)) {
                         navController.navigate("login")
                     }
                 }

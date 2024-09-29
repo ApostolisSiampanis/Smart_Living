@@ -118,7 +118,8 @@ fun DevicesScreen(
                     },
                     drawerState = drawerState,
                     scrollBehavior = scrollBehavior,
-                    dropdownMenuItems = dropdownMenuItems
+                    dropdownMenuItems = dropdownMenuItems,
+                    isDevicesScreen = true
                 )
             },
             bottomBar = {

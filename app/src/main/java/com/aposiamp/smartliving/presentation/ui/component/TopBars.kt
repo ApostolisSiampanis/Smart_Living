@@ -28,7 +28,8 @@ fun MenuMediumTopAppBar(
     onMenuClick: () -> Unit,
     drawerState: DrawerState,
     scrollBehavior: TopAppBarScrollBehavior,
-    dropdownMenuItems: List<DropdownMenuItemUiModel>
+    dropdownMenuItems: List<DropdownMenuItemUiModel>,
+    isDevicesScreen: Boolean = false
 ) {
     var isContextMenuVisible by rememberSaveable {
         mutableStateOf(false)
@@ -55,24 +56,26 @@ fun MenuMediumTopAppBar(
             containerColor = color
         ),
         actions = {
-            Box {
-                IconButton(
-                    onClick = {
-                        isContextMenuVisible = true
-                    },
-                    content = {
-                        Icon(
-                            painter = painterResource(id = R.drawable.add),
-                            contentDescription = stringResource(id = R.string.add)
-                        )
-                    }
-                )
+            if (isDevicesScreen) {
+                Box {
+                    IconButton(
+                        onClick = {
+                            isContextMenuVisible = true
+                        },
+                        content = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.add),
+                                contentDescription = stringResource(id = R.string.add)
+                            )
+                        }
+                    )
 
-                DropdownMenuComponent(
-                    isContextMenuVisible = isContextMenuVisible,
-                    onDismissRequest = { isContextMenuVisible = false },
-                    items = dropdownMenuItems
-                )
+                    DropdownMenuComponent(
+                        isContextMenuVisible = isContextMenuVisible,
+                        onDismissRequest = { isContextMenuVisible = false },
+                        items = dropdownMenuItems
+                    )
+                }
             }
         },
         scrollBehavior = scrollBehavior

@@ -17,7 +17,8 @@ import kotlinx.coroutines.launch
 class DevicesViewModel(
     private val checkIfAnyRoomExistsUseCase: CheckIfAnyRoomExistsUseCase,
     private val getRoomListUseCase: GetRoomListUseCase,
-    private val getDeviceListUseCase: GetDeviceListUseCase
+    private val getDeviceListUseCase: GetDeviceListUseCase,
+    private val mainSharedViewModel: MainSharedViewModel
 ) : ViewModel() {
     private val _isAnyRoomExists = MutableStateFlow<Boolean?>(null)
     val isAnyRoomExists: StateFlow<Boolean?> get() = _isAnyRoomExists
@@ -52,6 +53,7 @@ class DevicesViewModel(
                 _deviceListsFlow.value = _deviceListsFlow.value.toMutableMap().apply {
                     put(roomId, deviceList)
                 }
+                mainSharedViewModel.updateSimpleDeviceList(deviceList)
             } catch (e: Exception) {
                 Log.e("DevicesViewModel", "Error fetching device list" , e)
             }
