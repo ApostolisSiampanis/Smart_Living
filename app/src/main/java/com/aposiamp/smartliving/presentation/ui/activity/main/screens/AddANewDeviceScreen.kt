@@ -22,7 +22,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,6 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
@@ -57,7 +57,7 @@ fun AddANewDeviceScreen(
     mainSharedViewModel: MainSharedViewModel,
     state: AddDeviceFormState = viewModel.formState
 ) {
-    val place by mainSharedViewModel.space.collectAsState()
+    val place by mainSharedViewModel.space.collectAsStateWithLifecycle()
     val placeId = place?.placeId ?: ""
 
     val uiDeviceTypes = viewModel.uiDeviceTypes
@@ -66,10 +66,10 @@ fun AddANewDeviceScreen(
     LaunchedEffect(placeId) {
         viewModel.fetchRoomList(placeId)
     }
-    val roomList by viewModel.roomListFlow.collectAsState()
+    val roomList by viewModel.roomListFlow.collectAsStateWithLifecycle()
     var roomsExpanded by remember { mutableStateOf(false) }
 
-    val addDeviceFlowState by viewModel.addDeviceFlow.collectAsState()
+    val addDeviceFlowState by viewModel.addDeviceFlow.collectAsStateWithLifecycle()
     var loadingState by remember { mutableStateOf(false) }
 
     LaunchedEffect(addDeviceFlowState) {

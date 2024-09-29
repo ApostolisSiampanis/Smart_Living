@@ -1,8 +1,8 @@
 package com.aposiamp.smartliving.presentation.ui.activity.welcome.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -32,7 +32,7 @@ internal fun WelcomeNavigation(
     createANewSpaceViewModel: CreateANewSpaceViewModel
 ) {
     val navController = rememberNavController()
-    val startDestination by welcomeNavigationViewModel.startDestination.collectAsState()
+    val startDestination by welcomeNavigationViewModel.startDestination.collectAsStateWithLifecycle()
 
     if (startDestination == null) {
         LoadingScreen()

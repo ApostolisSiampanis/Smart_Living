@@ -2,8 +2,8 @@ package com.aposiamp.smartliving.presentation.ui.activity.main.navigation
 
 import android.content.Context
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -56,7 +56,7 @@ internal fun MainNavigation(
     energyViewModel: EnergyViewModel
 ) {
     val navController = rememberNavController()
-    val startDestination by mainNavigationViewModel.startDestination.collectAsState()
+    val startDestination by mainNavigationViewModel.startDestination.collectAsStateWithLifecycle()
 
     if (startDestination == null) {
         LoadingScreen()

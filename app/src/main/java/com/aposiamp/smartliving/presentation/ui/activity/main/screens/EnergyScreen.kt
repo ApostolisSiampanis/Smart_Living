@@ -16,7 +16,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.SmartLiving
 import com.aposiamp.smartliving.presentation.ui.activity.LoadingScreen
@@ -51,10 +51,10 @@ fun EnergyScreen(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    val space by mainSharedViewModel.space.collectAsState()
-    val isLoading by viewModel.isLoading.collectAsState()
-    val simpleDeviceList by mainSharedViewModel.simpleDeviceList.collectAsState()
-    val periodData by viewModel.periodData.collectAsState()
+    val space by mainSharedViewModel.space.collectAsStateWithLifecycle()
+    val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
+    val simpleDeviceList by mainSharedViewModel.simpleDeviceList.collectAsStateWithLifecycle()
+    val periodData by viewModel.periodData.collectAsStateWithLifecycle()
 
     // Retrieve the Navigation Drawer Items
     val navigationDrawerItems = navigationViewModel.getNavigationDrawerItems(context = context)
