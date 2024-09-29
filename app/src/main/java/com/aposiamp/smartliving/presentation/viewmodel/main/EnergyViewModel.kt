@@ -31,7 +31,9 @@ class EnergyViewModel(
         viewModelScope.launch {
             _isLoading.value = true
             val data = deviceList.associate { device ->
-                device.deviceId!! to getPeriodDataUseCase.execute(device.deviceId, period)
+                val deviceName = device.deviceName ?: "Unknown Device"
+                val powerConsumption = getPeriodDataUseCase.execute(device.deviceId!!, period)
+                deviceName to powerConsumption
             }
             _periodData.value = data
             _isLoading.value = false
