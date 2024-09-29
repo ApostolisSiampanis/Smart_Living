@@ -45,6 +45,7 @@ fun AirConditionScreen(
     val uiDeviceStates = viewModel.uiDeviceStates
     val uiDeviceModes = viewModel.uiDeviceModes
 
+    val isLoading by viewModel.isLoading.collectAsState()
     val selectedDevice by sharedViewModel.selectedDevice.collectAsState()
     val deviceStatus by viewModel.deviceStatus.collectAsState()
 
@@ -54,115 +55,118 @@ fun AirConditionScreen(
         }
     }
 
-    if (deviceStatus == null) {
+    if (isLoading) {
         LoadingScreen()
     } else {
-        val selectedState = remember { mutableStateOf(uiDeviceStates.first { it.state == deviceStatus!!.state }) }
-        val selectedMode = remember { mutableStateOf(uiDeviceModes.first { it.mode == deviceStatus!!.mode }) }
+        deviceStatus?.let { status ->
+            val selectedState = remember { mutableStateOf(uiDeviceStates.first { it.state == deviceStatus!!.state }) }
+            val selectedMode = remember { mutableStateOf(uiDeviceModes.first { it.mode == deviceStatus!!.mode }) }
 
-        Scaffold(
-            modifier = Modifier
-                .fillMaxSize(),
-            topBar = {
-                BackAppTopBar(
-                    title = selectedDevice?.deviceName ?: "",
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    onBackClick = {
-                        navController.navigateUp()
-                    }
-                )
-            },
-            content = { padding ->
-                Surface(
-                    color = Color.White,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding)
-                ) {
-                    LazyColumn(
+            Scaffold(
+                modifier = Modifier
+                    .fillMaxSize(),
+                topBar = {
+                    BackAppTopBar(
+                        title = selectedDevice?.deviceName ?: "",
+                        color = MaterialTheme.colorScheme.primaryContainer,
+                        onBackClick = {
+                            navController.navigateUp()
+                        }
+                    )
+                },
+                content = { padding ->
+                    Surface(
+                        color = Color.White,
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(top = 18.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                            .padding(padding)
                     ) {
-                        item {
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                horizontalArrangement = Arrangement.Center
-                            ) {
-                                DeviceIndicatorCard(
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(top = 18.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            item {
+                                Row(
                                     modifier = Modifier
-                                        .fillMaxWidth(0.8f)
-                                        .aspectRatio(1f)
+                                        .fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.Center
                                 ) {
-                                    DeviceCircularIndicator(
+                                    DeviceIndicatorCard(
                                         modifier = Modifier
-                                            .fillMaxSize()
-                                            .background(Color.White),
-                                        minValue = 16,
-                                        maxValue = 30,
-                                        circleRadius = 230f,
-                                        selectedState = selectedState.value,
-                                        selectedMode = selectedMode.value,
-                                        initialValue = deviceStatus!!.temperature,
-                                        onPositionChange = { position ->
-                                            viewModel.updateTemperature(selectedDevice!!.deviceId!!, position)
+                                            .fillMaxWidth(0.8f)
+                                            .aspectRatio(1f)
+                                    ) {
+                                        DeviceCircularIndicator(
+                                            modifier = Modifier
+                                                .fillMaxSize()
+                                                .background(Color.White),
+                                            minValue = 16,
+                                            maxValue = 30,
+                                            circleRadius = 230f,
+                                            selectedState = selectedState.value,
+                                            selectedMode = selectedMode.value,
+                                            initialValue = deviceStatus!!.temperature,
+                                            onPositionChange = { position ->
+                                                viewModel.updateTemperature(selectedDevice!!.deviceId!!, position)
+                                            }
+                                        )
+                                    }
+                                }
+                                Spacer(modifier = Modifier.height(16.dp))
+                                IndoorEnvironmentalDataCard(
+                                    indoorTemperature = sharedViewModel.environmentalData.value?.temperature,
+                                    indoorHumidity = sharedViewModel.environmentalData.value?.humidity
+                                )
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceEvenly
+                                ) {
+                                    DeviceOnOffButton(
+                                        initialState = selectedState.value,
+                                        color = selectedMode.value.secondaryColor,
+                                        onButtonClicked = { state ->
+                                            selectedState.value = uiDeviceStates.first { it.state == state }
+                                            viewModel.updateDeviceState(selectedDevice!!.deviceId!!, state)
+                                        }
+                                    )
+                                    AirDirectionControl(
+                                        color = selectedMode.value.secondaryColor,
+                                        initialDirection = deviceStatus!!.airDirection,
+                                        onDirectionChange = { direction ->
+                                            viewModel.updateAirDirection(selectedDevice!!.deviceId!!, direction)
                                         }
                                     )
                                 }
-                            }
-                            Spacer(modifier = Modifier.height(16.dp))
-                            IndoorEnvironmentalDataCard(
-                                indoorTemperature = sharedViewModel.environmentalData.value?.temperature,
-                                indoorHumidity = sharedViewModel.environmentalData.value?.humidity
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceEvenly
-                            ) {
-                                DeviceOnOffButton(
-                                    initialState = selectedState.value,
+                                Spacer(modifier = Modifier.height(16.dp))
+                                FanSpeedControl(
+                                    initialSpeed = deviceStatus!!.fanSpeed,
+                                    maxSpeed = 5,
                                     color = selectedMode.value.secondaryColor,
-                                    onButtonClicked = { state ->
-                                        selectedState.value = uiDeviceStates.first { it.state == state }
-                                        viewModel.updateDeviceState(selectedDevice!!.deviceId!!, state)
+                                    selectedState = selectedState.value,
+                                    selectedMode = selectedMode.value,
+                                    onSpeedChange = { speed ->
+                                        viewModel.updateFanSpeed(selectedDevice!!.deviceId!!, speed)
                                     }
                                 )
-                                AirDirectionControl(
-                                    color = selectedMode.value.secondaryColor,
-                                    initialDirection = deviceStatus!!.airDirection,
-                                    onDirectionChange = { direction ->
-                                        viewModel.updateAirDirection(selectedDevice!!.deviceId!!, direction)
+                                Spacer(modifier = Modifier.height(16.dp))
+                                DeviceModeButtonsRowComponent(
+                                    modes = uiDeviceModes,
+                                    selectedMode = selectedMode.value,
+                                    onButtonClicked = { mode ->
+                                        selectedMode.value = mode
+                                        viewModel.updateDeviceMode(selectedDevice!!.deviceId!!, mode.mode)
                                     }
                                 )
                             }
-                            Spacer(modifier = Modifier.height(16.dp))
-                            FanSpeedControl(
-                                initialSpeed = deviceStatus!!.fanSpeed,
-                                maxSpeed = 5,
-                                color = selectedMode.value.secondaryColor,
-                                selectedState = selectedState.value,
-                                selectedMode = selectedMode.value,
-                                onSpeedChange = { speed ->
-                                    viewModel.updateFanSpeed(selectedDevice!!.deviceId!!, speed)
-                                }
-                            )
-                            Spacer(modifier = Modifier.height(16.dp))
-                            DeviceModeButtonsRowComponent(
-                                modes = uiDeviceModes,
-                                selectedMode = selectedMode.value,
-                                onButtonClicked = { mode ->
-                                    selectedMode.value = mode
-                                    viewModel.updateDeviceMode(selectedDevice!!.deviceId!!, mode.mode)
-                                }
-                            )
                         }
                     }
                 }
-            }
-        )
+            )
+        }
+
     }
 }
