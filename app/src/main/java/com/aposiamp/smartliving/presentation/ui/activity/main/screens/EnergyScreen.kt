@@ -15,6 +15,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,7 +28,6 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.SmartLiving
-import com.aposiamp.smartliving.presentation.model.PeriodItemUiModel
 import com.aposiamp.smartliving.presentation.ui.activity.LoadingScreen
 import com.aposiamp.smartliving.presentation.ui.component.BottomBar
 import com.aposiamp.smartliving.presentation.ui.component.MenuMediumTopAppBar
@@ -54,6 +54,7 @@ fun EnergyScreen(
     val space by mainSharedViewModel.space.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val simpleDeviceList by mainSharedViewModel.simpleDeviceList.collectAsState()
+    val periodData by viewModel.periodData.collectAsState()
 
     // Retrieve the Navigation Drawer Items
     val navigationDrawerItems = navigationViewModel.getNavigationDrawerItems(context = context)
@@ -63,9 +64,15 @@ fun EnergyScreen(
     val dropdownMenuItems = navigationViewModel.getDropdownMenuItems(context = context, navController = navController)
     // Retrieve the Energy Screen Items
     val energyItems = viewModel.getPeriodItems()
-    var selectedPeriod by remember { mutableStateOf<PeriodItemUiModel?>(null) }
+    var selectedPeriod by remember { mutableStateOf(energyItems.firstOrNull()) }
 
-    val pieChartData = simpleDeviceList.associate { (it.deviceName ?: "Unknown") to (100.0) }
+    LaunchedEffect(selectedPeriod) {
+        selectedPeriod?.let {
+            viewModel.fetchPeriodData(simpleDeviceList, it.period)
+        }
+    }
+
+    val pieChartData = periodData
 
     ModalNavigationDrawer(
         drawerContent = {
