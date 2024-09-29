@@ -192,7 +192,8 @@ class MainActivity : ComponentActivity() {
                     val energyViewModel = viewModel<EnergyViewModel>(
                         factory = viewModelFactory {
                             EnergyViewModel(
-                                getPeriodItemsUseCase = SmartLiving.appModule.getPeriodItemsUseCase
+                                getPeriodItemsUseCase = SmartLiving.appModule.getPeriodItemsUseCase,
+                                getPeriodDataUseCase = SmartLiving.appModule.getPeriodDataUseCase
                             )
                         }
                     )
