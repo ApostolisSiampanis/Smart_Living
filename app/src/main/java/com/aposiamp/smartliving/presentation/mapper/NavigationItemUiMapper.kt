@@ -3,6 +3,7 @@ package com.aposiamp.smartliving.presentation.mapper
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.domain.model.NavigationItemData
 import com.aposiamp.smartliving.presentation.model.NavigationItemUiModel
+import com.aposiamp.smartliving.presentation.ui.activity.main.navigation.MainDestination
 
 object NavigationItemUiMapper {
     private fun toUiModel(domain: NavigationItemData): NavigationItemUiModel {
@@ -44,12 +45,12 @@ object NavigationItemUiMapper {
 
         val route = when (domain.title) {
             // Bottom Menu
-            "Devices" -> "devices"
-            "Energy" -> "energy"
+            "Devices" -> MainDestination.Devices.route
+            "Energy" -> MainDestination.Energy.route
             // Navigation Drawer
-            "Home" -> "devices"
-            "Settings" -> "settings"
-            "About" -> "about"
+            "Home" -> MainDestination.Devices.route
+            "Settings" -> MainDestination.Settings.route
+            "About" -> MainDestination.About.route
             "Logout" -> null
             else -> null
         }
