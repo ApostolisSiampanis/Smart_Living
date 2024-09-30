@@ -28,7 +28,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
-import com.aposiamp.smartliving.domain.model.DeviceType
 import com.aposiamp.smartliving.presentation.model.SettingsItemUiModel
 import com.aposiamp.smartliving.presentation.ui.theme.componentShapes
 
