@@ -30,6 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.aposiamp.smartliving.R
+import kotlin.math.round
 
 @Composable
 fun PieChart(
@@ -39,7 +40,7 @@ fun PieChart(
     chartBarWidth: Dp = 20.dp,
     animDuration: Int = 1000
 ) {
-    val totalSum = data.values.sum()
+    val totalSum = round(data.values.sum() * 1000) / 1000
     val floatArcValue = mutableListOf<Float>()
 
     data.values.forEachIndexed { index, values ->
@@ -95,6 +96,20 @@ fun PieChart(
                         style = Stroke(chartBarWidth.toPx(), cap = StrokeCap.Butt)
                     )
                     lastValue += value
+                }
+            }
+            if (animationPlayed) {
+                Column{
+                    GeneralBoldText(
+                        value = totalSum.toString(),
+                        fontSize = 24,
+                        color = Color.Gray
+                    )
+                    GeneralBoldText(
+                        value = stringResource(id = R.string.kWh),
+                        fontSize = 20,
+                        color = Color.Gray
+                    )
                 }
             }
         }
