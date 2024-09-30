@@ -2,8 +2,8 @@ package com.aposiamp.smartliving.presentation.ui.activity.main.navigation
 
 import android.content.Context
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -56,7 +56,7 @@ internal fun MainNavigation(
     energyViewModel: EnergyViewModel
 ) {
     val navController = rememberNavController()
-    val startDestination by mainNavigationViewModel.startDestination.collectAsState()
+    val startDestination by mainNavigationViewModel.startDestination.collectAsStateWithLifecycle()
 
     if (startDestination == null) {
         LoadingScreen()
@@ -65,13 +65,13 @@ internal fun MainNavigation(
             navController = navController,
             startDestination = startDestination!!
         ) {
-            composable("notInSpace"){
+            composable(MainDestination.NotInSpace.route){
                 UserNotInSpaceScreen(
                     userNotInSpaceViewModel = userNotInSpaceViewModel
                 )
             }
 
-            composable("devices"){
+            composable(MainDestination.Devices.route){
                 DevicesScreen(
                     navController = navController,
                     viewModel = devicesViewModel,
@@ -80,7 +80,7 @@ internal fun MainNavigation(
                     context = context
                 )
             }
-            composable("energy"){
+            composable(MainDestination.Energy.route){
                 EnergyScreen(
                     navController = navController,
                     viewModel = energyViewModel,
@@ -90,14 +90,14 @@ internal fun MainNavigation(
                 )
             }
 
-            composable("createANewRoom"){
+            composable(MainDestination.CreateANewRoom.route){
                 CreateANewRoomScreen(
                     navController = navController,
                     viewModel = createANewRoomViewModel,
                     mainSharedViewModel = mainSharedViewModel
                 )
             }
-            composable("addANewDevice"){
+            composable(MainDestination.AddANewDevice.route){
                 AddANewDeviceScreen(
                     navController = navController,
                     viewModel = addANewDeviceViewModel,
@@ -105,7 +105,7 @@ internal fun MainNavigation(
                 )
             }
 
-            composable("settings"){
+            composable(MainDestination.Settings.route){
                 SettingsScreen(
                     navController = navController,
                     settingsViewModel = settingsViewModel,
@@ -113,42 +113,42 @@ internal fun MainNavigation(
                     context = context
                 )
             }
-            composable("profile"){
+            composable(MainDestination.Profile.route){
                 ProfileScreen(
                     navController = navController,
                     viewModel = profileViewModel,
                     accountProfileViewModel = accountProfileViewModel
                 )
             }
-            composable("account"){
+            composable(MainDestination.Account.route){
                 AccountScreen(
                     navController = navController,
                     viewModel = accountViewModel,
                     accountProfileViewModel = accountProfileViewModel
                 )
             }
-            composable("about"){
+            composable(MainDestination.About.route){
                 AboutScreen(
                     navController = navController,
                     navigationViewModel = navigationViewModel
                 )
             }
 
-            composable("thermostat"){
+            composable(MainDestination.Thermostat.route){
                 ThermostatScreen(
                     navController = navController,
                     viewModel = thermostatViewModel,
                     sharedViewModel = mainSharedViewModel
                 )
             }
-            composable("airCondition"){
+            composable(MainDestination.AirCondition.route){
                 AirConditionScreen(
                     navController = navController,
                     viewModel = airConditionViewModel,
                     sharedViewModel = mainSharedViewModel
                 )
             }
-            composable("dehumidifier"){
+            composable(MainDestination.Dehumidifier.route){
                 DehumidifierScreen(
                     navController = navController,
                     viewModel = dehumidifierViewModel,

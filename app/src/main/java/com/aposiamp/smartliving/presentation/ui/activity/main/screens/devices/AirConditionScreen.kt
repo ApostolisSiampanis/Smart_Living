@@ -15,7 +15,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.presentation.ui.activity.LoadingScreen
 import com.aposiamp.smartliving.presentation.ui.component.AirDirectionControl
@@ -45,9 +45,9 @@ fun AirConditionScreen(
     val uiDeviceStates = viewModel.uiDeviceStates
     val uiDeviceModes = viewModel.uiDeviceModes
 
-    val isLoading by viewModel.isLoading.collectAsState()
-    val selectedDevice by sharedViewModel.selectedDevice.collectAsState()
-    val deviceStatus by viewModel.deviceStatus.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
+    val selectedDevice by sharedViewModel.selectedDevice.collectAsStateWithLifecycle()
+    val deviceStatus by viewModel.deviceStatus.collectAsStateWithLifecycle()
 
     LaunchedEffect(selectedDevice) {
         selectedDevice?.let {

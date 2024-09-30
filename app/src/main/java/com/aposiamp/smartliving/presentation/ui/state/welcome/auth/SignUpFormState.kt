@@ -11,6 +11,5 @@ data class SignUpFormState(
     val passwordError: String? = null,
     val acceptedTerms: Boolean = false,
     val termsError: String? = null,
-    //val submitStatus: Result<FirebaseUser>? = null,
     val errorMessage: String? = null
 )

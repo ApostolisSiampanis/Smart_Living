@@ -13,17 +13,10 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 // Added Colors
-val Primary = Color(0xFF92A3FD)
-val Secondary = Color(0xFF9DCEFF)
-val TextColor = Color(0xFF1D1617)
-val AccentColor = Color(0xFFC58BF2)
 val GrayColor = Color(0xFF7B6F72)
-val WhiteColor = Color(0xFFFFFFFF)
-
 val PrussianBlue = Color(0xFF023047)
 val SkyBlue = Color(0xFF8BD3E6)
 val BlueGreen = Color(0xFF219EBC)
-val BgColor = Color(0xFFF7F8F8)
 
 // Devices' Colors
 val Orange = Color(0xFFdb660d)

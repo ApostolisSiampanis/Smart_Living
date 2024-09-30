@@ -3,6 +3,7 @@ package com.aposiamp.smartliving.presentation.mapper
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.domain.model.SettingsItemData
 import com.aposiamp.smartliving.presentation.model.SettingsItemUiModel
+import com.aposiamp.smartliving.presentation.ui.activity.main.navigation.MainDestination
 
 object SettingsItemUiMapper {
     private fun toUiModel(domain: SettingsItemData): SettingsItemUiModel {
@@ -19,8 +20,8 @@ object SettingsItemUiMapper {
         }
 
         val route = when (domain.title) {
-            "Profile" -> "profile"
-            "Account" -> "account"
+            "Profile" -> MainDestination.Profile.route
+            "Account" -> MainDestination.Account.route
             else -> null
         }
 

@@ -1,8 +1,8 @@
 package com.aposiamp.smartliving.presentation.ui.activity.welcome.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -32,7 +32,7 @@ internal fun WelcomeNavigation(
     createANewSpaceViewModel: CreateANewSpaceViewModel
 ) {
     val navController = rememberNavController()
-    val startDestination by welcomeNavigationViewModel.startDestination.collectAsState()
+    val startDestination by welcomeNavigationViewModel.startDestination.collectAsStateWithLifecycle()
 
     if (startDestination == null) {
         LoadingScreen()
@@ -41,46 +41,46 @@ internal fun WelcomeNavigation(
             navController = navController,
             startDestination = startDestination!!
         ) {
-            composable("welcome") {
+            composable(WelcomeDestination.Welcome.route) {
                 WelcomeScreen(
                     navController = navController
                 )
             }
-            composable("login") {
+            composable(WelcomeDestination.Login.route) {
                 LoginScreen(
                     navController = navController,
                     viewModel = loginViewModel
                 )
             }
-            composable("signUp") {
+            composable(WelcomeDestination.SignUp.route) {
                 SignUpScreen(
                     navController = navController,
                     viewModel = signUpViewModel
                 )
             }
-            composable("termsAndConditions") {
+            composable(WelcomeDestination.TermsAndConditions.route) {
                 TermsAndConditionsScreen(
                     navController = navController
                 )
             }
-            composable("privacyPolicy") {
+            composable(WelcomeDestination.PrivacyPolicy.route) {
                 PrivacyPolicyScreen(
                     navController = navController
                 )
             }
-            composable("forgotPassword"){
+            composable(WelcomeDestination.ForgotPassword.route) {
                 ForgotPasswordScreen(
                     navController = navController,
                     viewModel = forgotPasswordViewModel
                 )
             }
-            composable("permissions") {
+            composable(WelcomeDestination.Permissions.route) {
                 PermissionsScreen(
                     navController = navController,
                     viewModel = permissionsViewModel
                 )
             }
-            composable("createANewSpace") {
+            composable(WelcomeDestination.CreateANewSpace.route) {
                 CreateANewSpaceScreen(
                     viewModel = createANewSpaceViewModel
                 )

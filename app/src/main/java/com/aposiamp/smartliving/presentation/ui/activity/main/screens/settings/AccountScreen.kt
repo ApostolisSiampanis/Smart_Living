@@ -18,7 +18,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,6 +28,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.ui.activity.welcome.WelcomeActivity
@@ -50,9 +50,9 @@ fun AccountScreen(
     accountProfileViewModel: AccountProfileViewModel
 ) {
     val context = LocalContext.current
-    val accountDetails by accountProfileViewModel.detailsState.collectAsState()
-    val isLoading by accountProfileViewModel.isLoading.collectAsState()
-    val passwordError by viewModel.passwordError.collectAsState()
+    val accountDetails by accountProfileViewModel.detailsState.collectAsStateWithLifecycle()
+    val isLoading by accountProfileViewModel.isLoading.collectAsStateWithLifecycle()
+    val passwordError by viewModel.passwordError.collectAsStateWithLifecycle()
     var showPasswordField by remember { mutableStateOf(false) }
     val newPassword by remember { mutableStateOf("") }
 

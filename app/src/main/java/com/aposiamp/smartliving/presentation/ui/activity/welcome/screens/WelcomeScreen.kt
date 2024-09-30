@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
+import com.aposiamp.smartliving.presentation.ui.activity.welcome.navigation.WelcomeDestination
 import com.aposiamp.smartliving.presentation.ui.component.GeneralButtonComponent
 import com.aposiamp.smartliving.presentation.ui.component.GeneralTextComponent
 
@@ -70,7 +71,7 @@ fun WelcomeScreen(
                         GeneralButtonComponent(
                             value = stringResource(id = R.string.login),
                             onButtonClicked = {
-                                navController.navigate("login")
+                                navController.navigate(WelcomeDestination.Login.route)
                             }
                         )
                     }

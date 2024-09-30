@@ -16,7 +16,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.ui.component.BackAppTopBar
@@ -43,12 +43,12 @@ fun ProfileScreen(
     accountProfileViewModel: AccountProfileViewModel
 ) {
     val context = LocalContext.current
-    val accountDetails by accountProfileViewModel.detailsState.collectAsState()
-    val isLoading by accountProfileViewModel.isLoading.collectAsState()
-    val firstNameError by viewModel.firstNameError.collectAsState()
-    val lastNameError by viewModel.lastNameError.collectAsState()
-    val emailError by viewModel.emailError.collectAsState()
-    val showDialog by viewModel.showDialog.collectAsState()
+    val accountDetails by accountProfileViewModel.detailsState.collectAsStateWithLifecycle()
+    val isLoading by accountProfileViewModel.isLoading.collectAsStateWithLifecycle()
+    val firstNameError by viewModel.firstNameError.collectAsStateWithLifecycle()
+    val lastNameError by viewModel.lastNameError.collectAsStateWithLifecycle()
+    val emailError by viewModel.emailError.collectAsStateWithLifecycle()
+    val showDialog by viewModel.showDialog.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         accountProfileViewModel.fetchAccountDetails()

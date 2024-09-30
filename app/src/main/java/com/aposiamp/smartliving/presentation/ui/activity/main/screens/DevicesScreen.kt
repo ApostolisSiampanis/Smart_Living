@@ -25,7 +25,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,7 +41,9 @@ import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.SmartLiving
 import androidx.compose.foundation.lazy.items
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.aposiamp.smartliving.domain.model.DeviceType
+import com.aposiamp.smartliving.presentation.ui.activity.main.navigation.MainDestination
 import com.aposiamp.smartliving.presentation.ui.component.BottomBar
 import com.aposiamp.smartliving.presentation.ui.component.DeviceCard
 import com.aposiamp.smartliving.presentation.ui.component.DividerComponent
@@ -65,11 +66,11 @@ fun DevicesScreen(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    val space by mainSharedViewModel.space.collectAsState()
+    val space by mainSharedViewModel.space.collectAsStateWithLifecycle()
 
-    val isAnyRoomExists by viewModel.isAnyRoomExists.collectAsState()
-    val roomList by viewModel.roomListFlow.collectAsState()
-    val devicesLists by viewModel.deviceListsFlow.collectAsState()
+    val isAnyRoomExists by viewModel.isAnyRoomExists.collectAsStateWithLifecycle()
+    val roomList by viewModel.roomListFlow.collectAsStateWithLifecycle()
+    val devicesLists by viewModel.deviceListsFlow.collectAsStateWithLifecycle()
 
     // Retrieve the Navigation Drawer Items
     val navigationDrawerItems = navigationViewModel.getNavigationDrawerItems(context = context)
@@ -146,7 +147,7 @@ fun DevicesScreen(
                                         .fillMaxSize(0.8f)
                                         .aspectRatio(1f)
                                         .clickable{
-                                            navController.navigate("createANewRoom")
+                                            navController.navigate(MainDestination.CreateANewRoom.route)
                                         },
                                     contentAlignment = Alignment.Center
                                 ) {
@@ -219,10 +220,10 @@ fun DevicesScreen(
                                                     onClick = {
                                                         mainSharedViewModel.setSelectedDevice(device)
                                                         when (device.deviceType) {
-                                                            DeviceType.AIR_CONDITIONER -> navController.navigate("airCondition")
-                                                            DeviceType.THERMOSTAT -> navController.navigate("thermostat")
-                                                            DeviceType.DEHUMIDIFIER -> navController.navigate("dehumidifier")
-                                                            else -> navController.navigate("airCondition")
+                                                            DeviceType.AIR_CONDITIONER -> navController.navigate(MainDestination.AirCondition.route)
+                                                            DeviceType.THERMOSTAT -> navController.navigate(MainDestination.Thermostat.route)
+                                                            DeviceType.DEHUMIDIFIER -> navController.navigate(MainDestination.Dehumidifier.route)
+                                                            else -> navController.navigate(MainDestination.AirCondition.route)
                                                         }
                                                     }
                                                 )
