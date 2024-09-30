@@ -10,6 +10,7 @@ import com.aposiamp.smartliving.domain.usecase.user.LoginUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.CheckIfSpaceDataExistsUseCase
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidateEmail
 import com.aposiamp.smartliving.domain.usecase.welcome.validateregex.ValidatePassword
+import com.aposiamp.smartliving.presentation.ui.activity.welcome.navigation.WelcomeDestination
 import com.aposiamp.smartliving.presentation.ui.event.welcome.auth.LoginFormEvent
 import com.aposiamp.smartliving.presentation.ui.state.welcome.auth.LoginFormState
 import com.google.firebase.auth.FirebaseUser
@@ -76,9 +77,9 @@ class LoginViewModel(
 
     suspend fun determineDestination(): String {
         return try {
-            if (checkIfSpaceDataExistsUseCase.execute()) "mainActivity" else "permissions"
+            if (checkIfSpaceDataExistsUseCase.execute()) "mainActivity" else WelcomeDestination.Permissions.route
         } catch (e: Exception) {
-            "permissions"
+            WelcomeDestination.Permissions.route
         }
     }
 }
