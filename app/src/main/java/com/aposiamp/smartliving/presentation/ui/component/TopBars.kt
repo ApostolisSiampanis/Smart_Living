@@ -17,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.presentation.model.DropdownMenuItemUiModel
 
@@ -29,7 +30,8 @@ fun MenuMediumTopAppBar(
     drawerState: DrawerState,
     scrollBehavior: TopAppBarScrollBehavior,
     dropdownMenuItems: List<DropdownMenuItemUiModel>,
-    isDevicesScreen: Boolean = false
+    isDevicesScreen: Boolean = false,
+    navController: NavController
 ) {
     var isContextMenuVisible by rememberSaveable {
         mutableStateOf(false)
@@ -73,7 +75,8 @@ fun MenuMediumTopAppBar(
                     DropdownMenuComponent(
                         isContextMenuVisible = isContextMenuVisible,
                         onDismissRequest = { isContextMenuVisible = false },
-                        items = dropdownMenuItems
+                        items = dropdownMenuItems,
+                        navController = navController
                     )
                 }
             }

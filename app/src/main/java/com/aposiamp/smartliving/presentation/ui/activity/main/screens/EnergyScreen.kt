@@ -67,7 +67,7 @@ fun EnergyScreen(
     // Retrieve the Bottom Navigation Items
     val bottomNavigationItems = navigationViewModel.getBottomNavigationItems(context = context)
     // Retrieve the dropdown menu items
-    val dropdownMenuItems = navigationViewModel.getDropdownMenuItems(context = context, navController = navController)
+    val dropdownMenuItems = navigationViewModel.getDropdownMenuItems(context = context)
     // Retrieve the Energy Screen Items
     val energyItems = viewModel.getPeriodItems()
     var selectedPeriod by remember { mutableStateOf(energyItems.firstOrNull()) }
@@ -112,7 +112,8 @@ fun EnergyScreen(
                     drawerState = drawerState,
                     scrollBehavior = scrollBehavior,
                     dropdownMenuItems = dropdownMenuItems,
-                    isDevicesScreen = false
+                    isDevicesScreen = false,
+                    navController = navController
                 )
             },
             bottomBar = {

@@ -2,7 +2,6 @@ package com.aposiamp.smartliving.presentation.viewmodel.main
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import androidx.navigation.NavController
 import com.aposiamp.smartliving.R
 import com.aposiamp.smartliving.domain.usecase.main.GetBottomNavigationItemsUseCase
 import com.aposiamp.smartliving.domain.usecase.main.GetDropdownMenuItemsUseCase
@@ -37,12 +36,12 @@ class NavigationViewModel(
         return domainItems.toUiModelList()
     }
 
-    fun getDropdownMenuItems(context: Context, navController: NavController): List<DropdownMenuItemUiModel> {
+    fun getDropdownMenuItems(context: Context): List<DropdownMenuItemUiModel> {
         val domainItems = getDropdownMenuItemsUseCase.execute(
             addANewRoomText = context.getString(R.string.add_a_new_room),
             addANewDeviceText = context.getString(R.string.add_a_new_device)
         )
 
-        return domainItems.toUiModelList(navController)
+        return domainItems.toUiModelList()
     }
 }

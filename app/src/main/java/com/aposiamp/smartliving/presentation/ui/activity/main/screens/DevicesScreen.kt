@@ -77,7 +77,7 @@ fun DevicesScreen(
     // Retrieve the Bottom Navigation Items
     val bottomNavigationItems = navigationViewModel.getBottomNavigationItems(context = context)
     // Retrieve the dropdown menu items
-    val dropdownMenuItems = navigationViewModel.getDropdownMenuItems(context = context, navController = navController)
+    val dropdownMenuItems = navigationViewModel.getDropdownMenuItems(context = context)
 
     LaunchedEffect(space?.placeId) {
         space?.placeId?.let { viewModel.checkIfAnyRoomExists(it) }
@@ -120,7 +120,8 @@ fun DevicesScreen(
                     drawerState = drawerState,
                     scrollBehavior = scrollBehavior,
                     dropdownMenuItems = dropdownMenuItems,
-                    isDevicesScreen = true
+                    isDevicesScreen = true,
+                    navController = navController
                 )
             },
             bottomBar = {
