@@ -1,6 +1,5 @@
 package com.aposiamp.smartliving.presentation.ui.component
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -35,7 +34,6 @@ fun DropdownMenuComponent(
                 text = { GeneralNormalBlackText(value = item.text) },
                 onClick = {
                     item.route?.let { route ->
-                        Log.d("Navigation", "Navigating to $route")
                         navController.navigate(route) {
                             popUpTo(route) { inclusive = true }
                         }
