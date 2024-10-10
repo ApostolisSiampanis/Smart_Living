@@ -13,7 +13,12 @@ The application aims to enhance energy efficiency, simplify device management an
 - **Location Detection:** The app uses Location Permission to detect if the user is within their own space.
 - **User Authentication & Personalization:** Secure login and registration through Firebase Authentication, allowing users to manage their smart home devices and receive tailored experiences.
 
+## Related Repositories
 
+This project is part of a larger system, consisting of multiple repositories that work together to provide a complete smart energy management solution:
+
+1. **[Smart Living Server:](https://github.com/ApostolisSiampanis/Smart_Living_Server)** This repository contains the server-side logic for managing backend operations in the Smart Living system. It integrates with Firebase services, including Firestore, Realtime Database, Firebase Authentication and implements various HTTP and scheduled functions to facilitate user data management, device power consumption monitoring and historical data handling. The server functions are designed to support real-time interactions and periodic maintenance of smart device data, enhancing system reliability and user experience.
+2. **[Smart Living Smart Hub (Quarkus):](https://github.com/ApostolisSiampanis/Smart_Living_Hub)** This repository contains a simulated hub designed for managing smart devices and handling API requests. It is built using the Quarkus framework, which provides a lightweight, reactive and cloud-native platform for developing Java applications. The hub interfaces with a PostgreSQL database to store device data and logs, effectively acting as a bridge between smart devices and the Android application.
 
 ## License
 
