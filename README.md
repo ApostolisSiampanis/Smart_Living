@@ -13,6 +13,35 @@ The application aims to enhance energy efficiency, simplify device management an
 - **Location Detection:** The app uses Location Permission to detect if the user is within their own space.
 - **User Authentication & Personalization:** Secure login and registration through Firebase Authentication, allowing users to manage their smart home devices and receive tailored experiences.
 
+## Technologies Used
+
+### Firebase
+
+- **Firebase Authentication:** Handles user sign-in and registration securely, including options for email/password and third-party authentication.
+- **Firebase Firestore:** A cloud-based NoSQL database used for storing and syncing user and device data in real time.
+- **Firebase Realtime Database:** Another real-time database solution used for live data synchronization, enabling instant updates.
+
+### Location Services
+
+- **Google Play Services (Location):** Provides location-based services such as GPS, allowing the app to determine if the user is within their designated space.
+- **Google Places API:** Allows the app to fetch detailed location data, enhancing location-based functionalities.
+
+### Retrofit
+
+- A type-safe HTTP client for Android used for making API requests, enabling communication between the mobile app and external services like the simulated smart devices.
+
+### OkHttp
+
+- A powerful HTTP client that works alongside Retrofit to log requests and responses, aiding in the debugging and tracking of network calls.
+
+### Gson
+
+- A library for serializing and deserializing JSON data, used in conjunction with Retrofit to handle API responses.
+
+### Android Sensors
+
+- **Environmental Sensors:** The app accesses the device’s built-in sensors to capture environmental data such as temperature and humidity, providing real-time monitoring for the user.
+
 ## Related Repositories
 
 This project is part of a larger system, consisting of multiple repositories that work together to provide a complete smart energy management solution:
