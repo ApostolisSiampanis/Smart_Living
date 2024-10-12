@@ -42,6 +42,10 @@ The application aims to enhance energy efficiency, simplify device management an
 
 - **Environmental Sensors:** The app accesses the device’s built-in sensors to capture environmental data such as temperature and humidity, providing real-time monitoring for the user.
 
+## Application Diagram
+
+![Application Diagram](./images/program_diagram.png)
+
 ## Related Repositories
 
 This project is part of a larger system, consisting of multiple repositories that work together to provide a complete smart energy management solution:
