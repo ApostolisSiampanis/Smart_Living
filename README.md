@@ -42,6 +42,18 @@ The application aims to enhance energy efficiency, simplify device management an
 
 - **Environmental Sensors:** The app accesses the device’s built-in sensors to capture environmental data such as temperature and humidity, providing real-time monitoring for the user.
 
+## Setup Instructions
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/ApostolisSiampanis/Smart_Living.git
+    ```
+
+2. Open the project in Android Studio.
+3. Configure Firebase by adding the necessary credentials (Firebase configuration JSON).
+4. Build and run the app on an Android device or emulator.
+
 ## Application Diagram
 
 ![Application Diagram](./images/program_diagram.png)
