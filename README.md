@@ -4,7 +4,7 @@
 
 The Smart_Living repository containts an Android application developed to manage and monitor smart devices within a connected living environment. Built using Kotlin and following the Clean Architecture approach, the application leverages Jetpack Compose for a modern, intuitive user interface. It integrates with Firebase for real-time data synchronization, backend management and user authentication.
 
-The application aims to enhance energy efficiency, simplify device management and improve user comfort. Key features include location-based detection, which ensures the user is in their designated space and environmental monitoring through the use of temperature and humidity sensors. This holistic approach allows users to stay connected with their samrt devices and environment from anywhere.
+The application aims to enhance energy efficiency, simplify device management and improve user comfort. Key features include location-based detection, which ensures the user is in their designated space and environmental monitoring through the use of temperature and humidity sensors. This holistic approach allows users to stay connected with their smart devices and environment from anywhere.
 
 ## Key Features
 
@@ -42,12 +42,28 @@ The application aims to enhance energy efficiency, simplify device management an
 
 - **Environmental Sensors:** The app accesses the device’s built-in sensors to capture environmental data such as temperature and humidity, providing real-time monitoring for the user.
 
+## Setup Instructions
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/ApostolisSiampanis/Smart_Living.git
+    ```
+
+2. Open the project in Android Studio.
+3. Configure Firebase by adding the necessary credentials (Firebase configuration JSON).
+4. Build and run the app on an Android device or emulator.
+
+## Application Diagram
+
+![Application Diagram](./images/program_diagram.png)
+
 ## Related Repositories
 
 This project is part of a larger system, consisting of multiple repositories that work together to provide a complete smart energy management solution:
 
 1. **[Smart Living Server:](https://github.com/ApostolisSiampanis/Smart_Living_Server)** This repository contains the server-side logic for managing backend operations in the Smart Living system. It integrates with Firebase services, including Firestore, Realtime Database, Firebase Authentication and implements various HTTP and scheduled functions to facilitate user data management, device power consumption monitoring and historical data handling. The server functions are designed to support real-time interactions and periodic maintenance of smart device data, enhancing system reliability and user experience.
-2. **[Smart Living Smart Hub (Quarkus):](https://github.com/ApostolisSiampanis/Smart_Living_Hub)** This repository contains a simulated hub designed for managing smart devices and handling API requests. It is built using the Quarkus framework, which provides a lightweight, reactive and cloud-native platform for developing Java applications. The hub interfaces with a PostgreSQL database to store device data and logs, effectively acting as a bridge between smart devices and the Android application.
+2. **[Smart Living Hub (Quarkus):](https://github.com/ApostolisSiampanis/Smart_Living_Hub)** This repository contains a simulated hub designed for managing smart devices and handling API requests. It is built using the Quarkus framework, which provides a lightweight, reactive and cloud-native platform for developing Java applications. The hub interfaces with a PostgreSQL database to store device data and logs, effectively acting as a bridge between smart devices and the Android application.
 
 ## License
 
