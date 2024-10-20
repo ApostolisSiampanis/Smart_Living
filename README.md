@@ -54,6 +54,11 @@ The application aims to enhance energy efficiency, simplify device management an
 3. Configure Firebase by adding the necessary credentials (Firebase configuration JSON).
 4. Build and run the app on an Android device or emulator.
 
+## Documentation and Resources
+
+- Complete project details are available in the Project Documentation.
+- A detailed walkthrough video is available: [Project-video.mp4](./video/Video-presentation.mp4)
+
 ## Application Diagram
 
 ![Application Diagram](./images/program_diagram.png)
