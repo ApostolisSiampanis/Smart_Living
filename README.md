@@ -63,6 +63,40 @@ The application aims to enhance energy efficiency, simplify device management an
 
 ![Application Diagram](./images/program_diagram.png)
 
+## Screenshots
+
+<table>
+    <tr>
+        <td align="center">
+            <img src="./images/screenshots/login_screen.png" alt="Login Screen"/>
+            <br/>
+            <sub><b>Login Screen</b></sub>
+        </td>
+        <td align="center">
+            <img src="./images/screenshots/devices_screen.png" alt="Devices Screen"/>
+            <br/>
+            <sub><b>Devices Screen</b></sub>
+        </td>
+        <td align="center">
+            <img src="./images/screenshots/add_a_new_device_screen.png" alt="Add a New Device Screen"/>
+            <br/>
+            <sub><b>Add a New Device Screen</b></sub>
+        </td>
+    </tr>
+    <tr>
+        <td align="center">
+            <img src="./images/screenshots/air_condition_on_screen.png" alt="Air Condition Screen"/>
+            <br/>
+            <sub><b>Air Condition Screen</b></sub>
+        </td>
+        <td align="center">
+            <img src="./images/screenshots/energy_screen.png" alt="Energy Screen"/>
+            <br/>
+            <sub><b>Energy Screen</b></sub>
+        </td>
+    </tr>
+</table>
+
 ## Related Repositories
 
 This project is part of a larger system, consisting of multiple repositories that work together to provide a complete smart energy management solution:
