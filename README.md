@@ -56,7 +56,7 @@ The application aims to enhance energy efficiency, simplify device management an
 
 ## Documentation and Resources
 
-- Complete project details are available in the Project Documentation.
+- Complete project details are available in the [Project Documentation](https://dione.lib.unipi.gr/xmlui/handle/unipi/16913).
 - A detailed walkthrough video is available: [Project-video.mp4](./video/Video-presentation.mp4)
 
 ## Application Diagram
